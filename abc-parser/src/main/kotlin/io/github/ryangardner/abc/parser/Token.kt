@@ -7,6 +7,7 @@ enum class TokenType {
 
     // Body
     NOTE,           // C, d, etc.
+    REST,           // z, Z, x, X
     ACCIDENTAL,     // ^, _, =
     DURATION,       // 2, /2, 3/4
     BAR_LINE,       // |, ||, |], :|, |:

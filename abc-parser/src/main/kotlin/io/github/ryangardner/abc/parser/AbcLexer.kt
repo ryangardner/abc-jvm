@@ -186,19 +186,7 @@ class AbcLexer(private val input: String) : Iterator<Token> {
 
         // Rest 'z' or 'Z' or 'x' or 'X'
         if (char in "zZxX") {
-             // Treat rests as notes for now? Or separate token?
-             // TokenType doesn't have REST. I'll use NOTE for now or add REST?
-             // Architecture doc says "Represents a playable note or rest".
-             // I'll add REST to TokenType later if needed, for now NOTE is fine or UNKNOWN?
-             // Actually, 'z' is a rest. 'x' is invisible rest.
-             // I'll add REST to TokenType? The enum I created earlier has NOTE but no REST.
-             // I'll treat them as NOTE for now, since `NoteElement` likely handles pitch/rest distinction or `RestElement` exists?
-             // `MusicElement` had `NoteElement` and `ChordElement`. No `RestElement`.
-             // Maybe `NoteElement` with specific Pitch means rest?
-             // Or `MusicElement` sealed class needs `RestElement`.
-             // But for Lexer, a token is a token.
-             // I'll map z/Z/x/X to NOTE for now.
-             buffer.add(Token(TokenType.NOTE, consume().toString(), line, startCol))
+             buffer.add(Token(TokenType.REST, consume().toString(), line, startCol))
              return
         }
 

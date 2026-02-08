@@ -1,7 +1,7 @@
 package io.github.ryangardner.abc.core.model
 
-sealed class MusicElement {
-    abstract val duration: NoteDuration
+sealed interface MusicElement {
+    val duration: NoteDuration
 }
 
 data class NoteElement @JvmOverloads constructor(
@@ -10,7 +10,7 @@ data class NoteElement @JvmOverloads constructor(
     val ties: TieType = TieType.NONE,
     val decorations: List<Decoration> = emptyList(),
     val accidental: Accidental? = null
-) : MusicElement() {
+) : MusicElement {
     override val duration: NoteDuration get() = length
 }
 
@@ -18,18 +18,23 @@ data class ChordElement @JvmOverloads constructor(
     val notes: List<NoteElement>,
     override val duration: NoteDuration,
     val annotation: String? = null
-) : MusicElement()
+) : MusicElement
 
 data class BarLineElement @JvmOverloads constructor(
     val type: BarLineType,
     val repeatCount: Int = 0
-) : MusicElement() {
+) : MusicElement {
     override val duration: NoteDuration = NoteDuration(0, 1)
 }
 
 data class InlineFieldElement(
     val fieldType: HeaderType,
     val value: String
-) : MusicElement() {
+) : MusicElement {
     override val duration: NoteDuration = NoteDuration(0, 1)
 }
+
+data class RestElement @JvmOverloads constructor(
+    override val duration: NoteDuration,
+    val isInvisible: Boolean = false // x or X
+) : MusicElement

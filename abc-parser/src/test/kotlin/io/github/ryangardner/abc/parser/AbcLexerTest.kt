@@ -36,7 +36,7 @@ class AbcLexerTest {
 
     @Test
     fun `test body transition and parsing`() {
-        val input = "K:C\nC D E |"
+        val input = "K:C\nC D z |"
         val lexer = AbcLexer(input)
         val tokens = lexer.asSequence().toList()
 
@@ -47,13 +47,13 @@ class AbcLexerTest {
         assertEquals("C", tokens[1].text)
         assertEquals(TokenType.NEWLINE, tokens[2].type) // Transitions to BODY here
 
-        // Body C D E |
+        // Body C D z |
         assertEquals(TokenType.NOTE, tokens[3].type)
         assertEquals("C", tokens[3].text)
         assertEquals(TokenType.NOTE, tokens[4].type) // Space skipped
         assertEquals("D", tokens[4].text)
-        assertEquals(TokenType.NOTE, tokens[5].type)
-        assertEquals("E", tokens[5].text)
+        assertEquals(TokenType.REST, tokens[5].type)
+        assertEquals("z", tokens[5].text)
         assertEquals(TokenType.BAR_LINE, tokens[6].type)
         assertEquals("|", tokens[6].text)
         assertEquals(TokenType.EOF, tokens[7].type)
