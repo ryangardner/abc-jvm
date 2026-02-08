@@ -279,7 +279,7 @@ XML
         \<dependencies\>  
             \<dependency\>  
                 \<groupId\>org.jetbrains.kotlin\</groupId\>  
-                \<artifactId\>kotlin-stdlib-jdk8\</artifactId\>  
+                \<artifactId\>kotlin-stdlib\</artifactId\>
                 \<version\>${kotlin.version}\</version\>  
             \</dependency\>  
             \<dependency\>  
