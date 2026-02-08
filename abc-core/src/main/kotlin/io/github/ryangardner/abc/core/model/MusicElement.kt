@@ -17,7 +17,8 @@ data class NoteElement @JvmOverloads constructor(
 data class ChordElement @JvmOverloads constructor(
     val notes: List<NoteElement>,
     override val duration: NoteDuration,
-    val annotation: String? = null
+    val annotation: String? = null,
+    val decorations: List<Decoration> = emptyList()
 ) : MusicElement
 
 data class BarLineElement @JvmOverloads constructor(
@@ -38,3 +39,9 @@ data class RestElement @JvmOverloads constructor(
     override val duration: NoteDuration,
     val isInvisible: Boolean = false // x or X
 ) : MusicElement
+
+data class DirectiveElement(
+    val content: String
+) : MusicElement {
+    override val duration: NoteDuration = NoteDuration(0, 1)
+}

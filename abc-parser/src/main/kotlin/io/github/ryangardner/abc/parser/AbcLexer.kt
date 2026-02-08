@@ -36,6 +36,16 @@ class AbcLexer(private val input: String) : Iterator<Token> {
         return token
     }
 
+    fun peekToken(): Token {
+        if (buffer.isEmpty()) {
+            fillBuffer()
+        }
+        if (buffer.isEmpty()) {
+            throw NoSuchElementException()
+        }
+        return buffer.first
+    }
+
     private fun fillBuffer() {
         if (position >= input.length) {
             if (buffer.isEmpty() && !eofEmitted) {
@@ -180,7 +190,17 @@ class AbcLexer(private val input: String) : Iterator<Token> {
 
         // Notes
         if (char in "abcdefgABCDEFG") {
-            buffer.add(Token(TokenType.NOTE, consume().toString(), line, startCol))
+            val noteStart = consume().toString()
+            var noteText = noteStart
+            while (position < input.length) {
+                val next = peek()
+                if (next == ',' || next == '\'') {
+                    noteText += consume()
+                } else {
+                    break
+                }
+            }
+            buffer.add(Token(TokenType.NOTE, noteText, line, startCol))
             return
         }
 
@@ -273,7 +293,7 @@ class AbcLexer(private val input: String) : Iterator<Token> {
     private fun scanCommentOrDirective() {
         val startCol = column
         consume() // %
-        if (peek() == '%') {
+        if (peek() == '%')
              consume() // %
              val content = readUntilNewline()
              buffer.add(Token(TokenType.DIRECTIVE, content, line, startCol))

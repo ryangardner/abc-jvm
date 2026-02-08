@@ -16,5 +16,6 @@ data class TuneHeader @JvmOverloads constructor(
     val key: KeySignature,
     val meter: TimeSignature,
     val length: NoteDuration,
-    val tempo: Tempo? = null
+    val tempo: Tempo? = null,
+    val unknownHeaders: Map<String, String> = emptyMap()
 )
