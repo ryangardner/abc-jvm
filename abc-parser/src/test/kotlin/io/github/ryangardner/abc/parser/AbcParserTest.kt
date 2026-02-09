@@ -22,7 +22,7 @@ class AbcParserTest {
         assertEquals(1, tune.header.reference)
         assertEquals("Full Tune", tune.header.title.first())
         assertEquals(TimeSignature(4, 4), tune.header.meter)
-        assertEquals(KeySignature("C"), tune.header.key)
+        assertEquals(KeySignature(KeyRoot(NoteStep.C), KeyMode.IONIAN), tune.header.key)
 
         val elements = tune.body.elements
         // C D E F | G A B c |

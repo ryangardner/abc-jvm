@@ -37,7 +37,7 @@ class HeaderParser(private val lexer: Iterator<Token>) {
                                 "L" -> length = parseLength(valueText)
                                 "Q" -> tempo = parseTempo(valueText)
                                 "K" -> {
-                                    key = parseKey(valueText)
+                                    key = io.github.ryangardner.abc.parser.util.KeyParserUtil.parse(valueText)
                                     // K is the last header. We are done with header parsing.
                                     return HeaderResult(
                                         TuneHeader(
@@ -71,18 +71,6 @@ class HeaderParser(private val lexer: Iterator<Token>) {
             }
         }
         return null
-    }
-
-    private fun parseKey(text: String): KeySignature {
-        val parts = text.split("\\s+".toRegex())
-        var tonic = parts.getOrElse(0) { "C" }
-        var mode = if (parts.size > 1) parts[1] else "Major"
-
-        if (parts.size == 1 && tonic.length > 1 && tonic.endsWith("m")) {
-            mode = "minor"
-            tonic = tonic.substring(0, tonic.length - 1)
-        }
-        return KeySignature(tonic, mode)
     }
 
     private fun parseMeter(text: String): TimeSignature {
