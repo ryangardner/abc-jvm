@@ -279,14 +279,6 @@ class BodyParser(
     }
 
     private fun parseKey(text: String): KeySignature {
-        val parts = text.split("\\s+".toRegex())
-        var tonic = parts.getOrElse(0) { "C" }
-        var mode = if (parts.size > 1) parts[1] else "Major"
-
-        if (parts.size == 1 && tonic.length > 1 && tonic.endsWith("m")) {
-            mode = "minor"
-            tonic = tonic.substring(0, tonic.length - 1)
-        }
-        return KeySignature(tonic, mode)
+        return io.github.ryangardner.abc.parser.util.KeyParserUtil.parse(text)
     }
 }

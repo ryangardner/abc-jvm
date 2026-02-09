@@ -10,7 +10,7 @@ class BodyParserTest {
     fun `test simple notes`() {
         val input = "C D E"
         // L defaults to 1/8 from header
-        val header = TuneHeader(1, emptyList(), KeySignature("C"), TimeSignature(4, 4), NoteDuration(1, 8))
+        val header = TuneHeader(1, emptyList(), KeySignature(KeyRoot(NoteStep.C), KeyMode.IONIAN), TimeSignature(4, 4), NoteDuration(1, 8))
         val lexer = AbcLexer(input)
         val parser = BodyParser(lexer, header)
 
@@ -28,7 +28,7 @@ class BodyParserTest {
     @Test
     fun `test note duration`() {
         val input = "C2 D/2"
-        val header = TuneHeader(1, emptyList(), KeySignature("C"), TimeSignature(4, 4), NoteDuration(1, 8))
+        val header = TuneHeader(1, emptyList(), KeySignature(KeyRoot(NoteStep.C), KeyMode.IONIAN), TimeSignature(4, 4), NoteDuration(1, 8))
         val lexer = AbcLexer(input)
         val parser = BodyParser(lexer, header)
 
@@ -47,7 +47,7 @@ class BodyParserTest {
     @Test
     fun `test accidentals and octaves`() {
         val input = "^C, _D'"
-        val header = TuneHeader(1, emptyList(), KeySignature("C"), TimeSignature(4, 4), NoteDuration(1, 8))
+        val header = TuneHeader(1, emptyList(), KeySignature(KeyRoot(NoteStep.C), KeyMode.IONIAN), TimeSignature(4, 4), NoteDuration(1, 8))
         val lexer = AbcLexer(input)
         val parser = BodyParser(lexer, header)
 
@@ -67,7 +67,7 @@ class BodyParserTest {
     @Test
     fun `test chord`() {
         val input = "[CEG]2"
-        val header = TuneHeader(1, emptyList(), KeySignature("C"), TimeSignature(4, 4), NoteDuration(1, 8))
+        val header = TuneHeader(1, emptyList(), KeySignature(KeyRoot(NoteStep.C), KeyMode.IONIAN), TimeSignature(4, 4), NoteDuration(1, 8))
         val lexer = AbcLexer(input)
         val parser = BodyParser(lexer, header)
 
@@ -85,7 +85,7 @@ class BodyParserTest {
     @Test
     fun `test inline field L`() {
         val input = "C [L:1/4] C"
-        val header = TuneHeader(1, emptyList(), KeySignature("C"), TimeSignature(4, 4), NoteDuration(1, 8))
+        val header = TuneHeader(1, emptyList(), KeySignature(KeyRoot(NoteStep.C), KeyMode.IONIAN), TimeSignature(4, 4), NoteDuration(1, 8))
         val lexer = AbcLexer(input)
         val parser = BodyParser(lexer, header)
 

@@ -2,13 +2,23 @@ package io.github.ryangardner.abc.core.model
 
 /**
  * Represents a musical key signature.
- *
- * @property tonic The tonic note of the key.
- * @property mode The mode of the key (e.g., Major, Minor).
- * @property accidentals List of explicit accidentals.
  */
 data class KeySignature @JvmOverloads constructor(
-    val tonic: String, // Placeholder, will be Pitch later
-    val mode: String = "Major", // Placeholder
-    val accidentals: List<String> = emptyList() // Placeholder
-)
+    val root: KeyRoot,
+    val mode: KeyMode = KeyMode.IONIAN,
+    val extraAccidentals: List<Pitch> = emptyList()
+) {
+    /**
+     * String representation of the tonic, e.g., "C", "F#", "Bb".
+     */
+    val tonicName: String get() = buildString {
+        append(root.step.name)
+        when (root.accidental) {
+            Accidental.SHARP -> append("#")
+            Accidental.FLAT -> append("b")
+            Accidental.DOUBLE_SHARP -> append("##")
+            Accidental.DOUBLE_FLAT -> append("bb")
+            else -> {}
+        }
+    }
+}

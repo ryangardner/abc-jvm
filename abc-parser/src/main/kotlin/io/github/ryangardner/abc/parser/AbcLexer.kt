@@ -293,7 +293,7 @@ class AbcLexer(private val input: String) : Iterator<Token> {
     private fun scanCommentOrDirective() {
         val startCol = column
         consume() // %
-        if (peek() == '%')
+        if (peek() == '%') {
              consume() // %
              val content = readUntilNewline()
              buffer.add(Token(TokenType.DIRECTIVE, content, line, startCol))

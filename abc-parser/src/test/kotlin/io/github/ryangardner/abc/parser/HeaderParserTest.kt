@@ -29,7 +29,7 @@ class HeaderParserTest {
         assertEquals(TimeSignature(4, 4), header.meter)
         assertEquals(NoteDuration(1, 8), header.length)
         assertEquals(Tempo(120, NoteDuration(1, 4)), header.tempo)
-        assertEquals(KeySignature("C", "Major"), header.key)
+        assertEquals(KeySignature(KeyRoot(NoteStep.C), KeyMode.IONIAN), header.key)
         assertEquals(emptyMap<String, String>(), header.unknownHeaders)
     }
 
@@ -50,7 +50,7 @@ class HeaderParserTest {
         val header = result!!.header
 
         assertEquals(listOf("Title 1", "Title 2"), header.title)
-        assertEquals(KeySignature("G", "Major"), header.key)
+        assertEquals(KeySignature(KeyRoot(NoteStep.G), KeyMode.IONIAN), header.key)
     }
 
     @Test
@@ -71,19 +71,7 @@ class HeaderParserTest {
 
         assertEquals("Composer Name", header.unknownHeaders["C"])
         assertEquals("Transcriber", header.unknownHeaders["Z"])
-        assertEquals(KeySignature("D", "minor"), header.key) // Assuming simple parsing logic in HeaderParser
-        // But HeaderParser uses split by space. "Dm" -> "Dm" "Major" if split fails?
-        // Let's check parseKey implementation.
-        // val parts = text.split("\\s+".toRegex())
-        // val tonic = parts[0]
-        // val mode = parts[1] else "Major"
-        // If text is "Dm", split is ["Dm"]. Tonic="Dm", Mode="Major".
-        // My test expectation "D", "minor" assumes smarter parsing.
-        // I should probably fix parseKey or adjust test expectation.
-        // For now, I'll adjust expectation to what implemented logic does: Tonic="Dm", Mode="Major"
-        // Wait, "Dm" usually means D minor.
-        // But for Task 2.1 I just need basic support. I'll update parseKey later or now?
-        // Let's update test to expect "Dm", "Major" for now, as I haven't implemented complex key parsing.
+        assertEquals(KeySignature(KeyRoot(NoteStep.D), KeyMode.AEOLIAN), header.key)
     }
 
     @Test
@@ -94,8 +82,8 @@ class HeaderParserTest {
         val parser = HeaderParser(lexer)
         val result = parser.parse()
 
-        assertEquals("D", result!!.header.key.tonic)
-        assertEquals("minor", result.header.key.mode)
+        assertEquals(NoteStep.D, result!!.header.key.root.step)
+        assertEquals(KeyMode.AEOLIAN, result.header.key.mode)
     }
 
     @Test
