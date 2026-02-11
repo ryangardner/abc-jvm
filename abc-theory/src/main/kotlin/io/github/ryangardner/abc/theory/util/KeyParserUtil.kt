@@ -14,13 +14,24 @@ public object KeyParserUtil {
         "loc", "locrian"
     )
 
+    private val RESERVED_CLEF_NAMES = setOf(
+        "treble", "bass", "alto", "tenor", "perc", "none", "mezzosoprano", "soprano", "baritone", "subbass"
+    )
+
     public fun parse(keyText: String): KeySignature {
-        val trimmed = keyText.trim()
+        val trimmed = keyText.substringBefore("%").trim()
         if (trimmed.isEmpty()) {
             return KeySignature(KeyRoot(NoteStep.C, Accidental.NATURAL), KeyMode.IONIAN)
         }
         val parts = trimmed.split("\\s+".toRegex())
-        val firstWord = parts[0]
+        var firstWord = parts[0]
+        
+        // If the first word is a known clef name, the key is implicitly C Major
+        val lowerFirst = firstWord.lowercase()
+        if (RESERVED_CLEF_NAMES.any { lowerFirst.startsWith(it) }) {
+             return KeySignature(KeyRoot(NoteStep.C, Accidental.NATURAL), KeyMode.IONIAN)
+        }
+
         if (firstWord.isEmpty()) {
              return KeySignature(KeyRoot(NoteStep.C, Accidental.NATURAL), KeyMode.IONIAN)
         }

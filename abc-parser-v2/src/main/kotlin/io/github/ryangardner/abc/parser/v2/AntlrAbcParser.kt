@@ -131,22 +131,25 @@ private class AbcTunebookVisitor : ABCParserBaseVisitor<List<AbcTune>>() {
 }
 
 private fun parseMeter(text: String): TimeSignature {
-    return when (text) {
+    val cleanText = text.substringBefore("%").trim()
+    return when (cleanText) {
         "C" -> TimeSignature(4, 4, "C")
         "C|" -> TimeSignature(2, 2, "C|")
+        "none" -> TimeSignature(4, 4) // Common in some ABCs
         else -> {
-            val parts = text.split("/")
-            if (parts.size == 2) {
-                TimeSignature(parts[0].toIntOrNull() ?: 4, parts[1].toIntOrNull() ?: 4)
+            val parts = cleanText.split("/")
+            if (parts.size >= 2) {
+                TimeSignature(parts[0].trim().toIntOrNull() ?: 4, parts[1].trim().toIntOrNull() ?: 4)
             } else TimeSignature(4, 4)
         }
     }
 }
 
 private fun parseLength(text: String): NoteDuration {
-    val parts = text.split("/")
+    val cleanText = text.substringBefore("%").trim()
+    val parts = cleanText.split("/")
     return if (parts.size == 2) {
-        NoteDuration(parts[0].toIntOrNull() ?: 1, parts[1].toIntOrNull() ?: 8)
+        NoteDuration(parts[0].trim().toIntOrNull() ?: 1, parts[1].trim().toIntOrNull() ?: 8)
     } else NoteDuration(1, 8)
 }
 
@@ -163,6 +166,7 @@ private fun parseLength(text: String): NoteDuration {
     private var lastNoteStep: NoteStep? = null
     private var lastNoteOctave: Int? = null
     private var pendingAnnotation: String? = null
+    private val pendingDecorations = mutableListOf<Decoration>()
     private var pendingBrokenRhythmMultiplier: Double? = null
 
     override fun visitMeasure(ctx: ABCParser.MeasureContext): Unit {
@@ -216,6 +220,14 @@ private fun parseLength(text: String): NoteDuration {
         if (pendingBrokenRhythmMultiplier != null) {
             note = note.copy(length = note.length.scale(pendingBrokenRhythmMultiplier!!))
             pendingBrokenRhythmMultiplier = null
+        }
+        if (pendingAnnotation != null) {
+            note = note.copy(annotation = pendingAnnotation)
+            pendingAnnotation = null
+        }
+        if (pendingDecorations.isNotEmpty()) {
+            note = note.copy(decorations = note.decorations + pendingDecorations)
+            pendingDecorations.clear()
         }
         elements.add(note)
     }
@@ -298,8 +310,7 @@ private fun parseLength(text: String): NoteDuration {
     }
 
     override fun visitDecoration(ctx: ABCParser.DecorationContext): Unit {
-        // Standalone decorations are ignored for now to avoid model mismatch, 
-        // as they are typically attached to notes/chords via buildNote
+        parseDecoration(ctx)?.let { pendingDecorations.add(it) }
     }
 
     private fun buildNote(ctx: ABCParser.Note_elementContext): NoteElement {
@@ -395,6 +406,14 @@ private fun parseLength(text: String): NoteDuration {
             rest = rest.copy(duration = rest.duration.scale(pendingBrokenRhythmMultiplier!!))
             pendingBrokenRhythmMultiplier = null
         }
+        if (pendingAnnotation != null) {
+            rest = rest.copy(annotation = pendingAnnotation)
+            pendingAnnotation = null
+        }
+        if (pendingDecorations.isNotEmpty()) {
+            rest = rest.copy(decorations = rest.decorations + pendingDecorations)
+            pendingDecorations.clear()
+        }
         elements.add(rest)
     }
 
@@ -459,7 +478,13 @@ private fun parseLength(text: String): NoteDuration {
         
         val decorations = ctx.decoration().mapNotNull { parseDecoration(it) }
         
-        elements.add(ChordElement(notes, duration, annotation = pendingAnnotation, decorations = decorations))
+        if (pendingDecorations.isNotEmpty()) {
+            val combinedDecos = decorations + pendingDecorations
+            elements.add(ChordElement(notes, duration, annotation = pendingAnnotation, decorations = combinedDecos))
+            pendingDecorations.clear()
+        } else {
+            elements.add(ChordElement(notes, duration, annotation = pendingAnnotation, decorations = decorations))
+        }
         pendingAnnotation = null
     }
 

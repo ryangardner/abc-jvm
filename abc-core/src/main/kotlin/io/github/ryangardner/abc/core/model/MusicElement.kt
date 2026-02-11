@@ -9,7 +9,8 @@ public data class NoteElement @JvmOverloads constructor(
     public val length: NoteDuration,
     public val ties: TieType = TieType.NONE,
     public val decorations: List<Decoration> = emptyList(),
-    public val accidental: Accidental? = null
+    public val accidental: Accidental? = null,
+    public val annotation: String? = null
 ) : MusicElement {
     override val duration: NoteDuration get() = length
 }
@@ -38,7 +39,8 @@ public data class InlineFieldElement(
 public data class RestElement @JvmOverloads constructor(
     override val duration: NoteDuration,
     public val isInvisible: Boolean = false, // x or X
-    public val decorations: List<Decoration> = emptyList()
+    public val decorations: List<Decoration> = emptyList(),
+    public val annotation: String? = null
 ) : MusicElement
 
 public data class DirectiveElement(
