@@ -1,0 +1,20 @@
+X: 1
+T: the 28th of January
+O: trad. Appalachia
+R: hornpipe
+Z: 2024 John Chambers <jc:trillian.mit.edu>
+D: the Fuzzy Mountain Stringband
+S: Cammy Kaynor on facebook 20040128
+M: 2/4
+L: 1/8
+K: Ador
+"^A"\
+|: [EA,]>[EA,] [EC]>[EC] | [AD]>[AD] [AF]>[AF] | [EA,]>[EA,] [EC]>[EC] | [A2D2] (3(DEF) \
+|| G>B c>B | A>G E>D | G>B c>B | A>G E>D ||
+|| [EA,]>[EA,] [EC]>[EC] | [AD]>[AD] [AF]>[AF] | [EA,]>[EA,] [EC]>[EC] | [A2D2] (3(DEF) \
+|| G>B e>a | f>d B>G | E>G A2 |[1 [A4E4] :|[2 [A2E2] |]
+"^B"
+|: (3(efg) | a2- a>b | a>g e>g | a>g a>b | g2 ([^f2_B2] \
+|| [g2B2] g)>a | b>a g>f | e>f g>a | b>a (3(gfe) ||
+|| a2- a>b | a>g e>g | a>g a>b | g2 f>e \
+|| d>f a>g | e>d B>G | E>G A2 |[1 [A2E2] :|[2 [A4E4] |]

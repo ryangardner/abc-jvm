@@ -1,0 +1,27 @@
+X:1
+T:14th of October, The
+M:C
+L:1/8
+Q:"Slow"
+B:Oswald – Caledonian Pocket Companion Book 3 (1760, p. 9)
+Z:AK/Fiddler’s Companion
+K:G
+G>A|B3 g (d<B) T(A>G)|{A}B2 d>e d2 A>B|c3 e (d<B) T(A>G)|
+TB2 (AB) TA2 (GA)|(Bd)(eg) (d<B) T(A>G)|{A}B2 g>a g2 (Bc)|
+d>edB (cB)T(AG)|E2 (GA)G2:: (d>e)|g>aba (ge)(dB)|
+d2 (ga) g2 (AB)|c>deg (d<B) T(A>G)|{GA}B2 (AB) A2 (GA)|
+(BA)BG (EGA)B|(cBc)d edef|(gfg)a (bab)d|e2 (g>a) g2:|
+L:1/16
+(G3A)|G3g T(g3f/g/) (dB3) T(A3G)|G3g T(g3f/g/) d3g T(g3f/g/)|c3g T(g3f/g/) (3B2g2e2 (3d2B2G2|{GA}B4 (A3B) A4 (G3A)|
+L:1/8
+(B/d/e/f/) (g/e/d/c/) d(c/B/) (c/B/)(A/G/)|{ga}(b>a)T(a>g) Tg3f|(3egf (3edc (d<B) T(A>G)|E2 G>A G2:|
+|:d>e|(3gdb g2 (3bag (3egB|(3dgb (3agf (3gec (3dBG|(3cBe (3edg (3gfa (3aAc|
+(3Bge (3dBA TA2 (G>A)|(B/A/B/c/) BG (EG)(AB)|
+(c/A/c/)f/ (d/B/d/)g/ (e/c/e/)a/ f/d/e/f/|(g/f/)e (c'/b/)a (bg) Ta>g|e2 (g>a) g2:|
+P:Giga
+M:6/8
+L:1/8
+"Brisk"G|(B/c/d)e dBG|Bdg dBG|(c/d/e)c Bdg|fAA TA2G|
+(B/c/d)e dBG|(g/a/b)a gfe|d(e/f/g) dBG|EGG G2:|
+|:(B/c/)|d(B/c/d/B/) dBg|d(B/c/d/B/) gdB|(c/d/e)c dBG|aAA A2c|
+(B/c/d)G ceA|(d/e/f)B egc|(f/g/a)d c'ad'|bgg g2:|]

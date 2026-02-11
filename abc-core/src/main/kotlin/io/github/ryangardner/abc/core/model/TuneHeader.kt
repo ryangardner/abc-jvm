@@ -10,12 +10,15 @@ package io.github.ryangardner.abc.core.model
  * @property length Default note length (L:).
  * @property tempo Tempo (Q:).
  */
-data class TuneHeader @JvmOverloads constructor(
-    val reference: Int,
-    val title: List<String>,
-    val key: KeySignature,
-    val meter: TimeSignature,
-    val length: NoteDuration,
-    val tempo: Tempo? = null,
-    val unknownHeaders: Map<String, String> = emptyMap()
+public data class TuneHeader @JvmOverloads constructor(
+    public val reference: Int,
+    public val title: List<String>,
+    public val key: KeySignature,
+    public val meter: TimeSignature,
+    public val length: NoteDuration,
+    public val tempo: Tempo? = null,
+    public val headers: List<Pair<String, String>> = emptyList(),
+    public val unknownHeaders: Map<String, String> = emptyMap(),
+    public val version: String = "2.0",
+    public val playingOrder: String? = null
 )

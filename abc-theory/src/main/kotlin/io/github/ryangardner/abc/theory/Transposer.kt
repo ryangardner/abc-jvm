@@ -2,14 +2,14 @@ package io.github.ryangardner.abc.theory
 
 import io.github.ryangardner.abc.core.model.*
 
-object Transposer {
+public object Transposer {
     /**
      * Transposes the given tune by the specified number of semitones.
      * Uses the Circle of Fifths to determine the new key signature.
      * Java usage: Transposer.transpose(tune, 2)
      */
     @JvmStatic
-    fun transpose(tune: AbcTune, semitones: Int): AbcTune {
+    public fun transpose(tune: AbcTune, semitones: Int): AbcTune {
         if (semitones == 0) return tune
 
         val newHeader = transposeHeader(tune.header, semitones)

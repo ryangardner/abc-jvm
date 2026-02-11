@@ -1,0 +1,32 @@
+X:9
+T:06 Polka
+R:Polka
+O:Källnatrion, Skåne
+T:(stenkaka CRG 77909)
+Z:Upptecknad av Åke Persson och inskriven i abc 2024-09-04
+N:Inspelad 1908 på stenkaka med gruppen [[Grupper/Källnatrion]]
+M:2/4
+L:1/8
+Q:120
+K:G
+V:1
+|: d>c B/c/d/e/ | dc cz/A/ | F/G/A/B/ c/d/e/f/ | g/b/b/a/ g/f/e/d/ |
+dB/B/ Bd/d/  | dc/c/ cz/A/ | F/G/A/B/ c/d/e/f/ |1 ggg z  :|2  ggg z/G/  |] 
+[K:C]|: GF Fd | d3 F | FE Ec | c3 c | cB B>B | BA A>a | ((3a/b/a/)g ((3g/a/g/f) | ((3f/g/f/)e e>g |
+((3g/a/g/)f d'>d' | d'3 f | fe c'>c' | c'3 c | cB B>d | dc e>d | Gf ed | c[g]//[cg]//[cg]//[cg]// [cg]>z :|
+[K:C]|: Gg g>a | gf f/e/f | Gf f>g | fe e/d/e | Ge e>f | ed d>c | B/A/G/g/ a/g/^f/g/ | a/g/^f/g/ ag |
+Gg g>a | gf f/e/f | Gf f>g | fe e/d/e | Ge e>f | ed d>c | B/c/d/g/ a/g/^f/g/ | c2 z2 :|
+V:2
+|: B>A GA/B/ | BA A2 | d2 c2 | G4 |
+B>A GA/B/ | BA A2 | d2 c2 |1 G3 d :|2 G3 d |]
+[K:C]|: d2 d>d | d3 d |  dc  g>g  | g3 g | gf f>f | fe e>e | ed d>d | cc c>c |
+d2 d>d | d3 d |  de g2 | g4 | a/g/^f/g/ a/g/^f/g/ | a/g/^f/g/ a/g/^f/g/ | gdcB | g g/g/ gz :|
+[K:C]|: Ge e>f | ed d/c/d | Gd d>e | dc c/B/c | Gc c>d | cB B>A | G2 F2 | E2 C2 |
+Ge e>f | ed d/c/d | Gd d>e | dc c/B/c | Gc c>d | cB B>A | G2 F2 | E2 z2 :|
+V:3
+|: [G,D]2 [B,D]2 | [B,D][CD][CD][CD] | [A,D][A,D][A,F][A,F] | [G,G][G,G][G,G][G,G] | 
+[G,D]2 [B,D]2 | [B,D][CD][CD][CD] | [A,D][A,D][A,F][A,F] |1 [G,G][G,G][G,G]z :|2 [G,G][G,G][G,G]z |] 
+[K:C]|: [G,G][G,F][G,F]>[G,F] | [G,F]3 [G,F] | [G,F][G,E][CE]>[CE] | [CE]3 [CE] | [CE][B,D][B,D]>[B,D] |  [B,D][A,D][A,D][A,D] |  [G,D][G,D][B,D][B,D] |  [B,D][CE][CE][CE] | 
+[CE][FA][FA]>[FA] | [FA]3[FA] | [FA][E][CE]>[CE] | [CE]3[CE] | [CE][B,D][B,D][B,D] | [G,D][G,D][CE][CE] | [G,D][G,D][A,D][B,D] | [CE][CE] [CE]z :|
+[K:C]|: [G,B][CB][CB][CB] | [CB][A,D][A,D][A,D] | [A,D][A,F][A,F][A,F] | [A,F][CE][CE][CE] | [G,E][CE][CE]>[CE] | [CE][A,F][A,F]>[A,F] | [G,D][G,D][B,D][B,D] | [CE][CE][CE][CE] | 
+[G,E][CE][CE]>[CE] | [CE][A,F][A,F][A,F] | [A,F][A,F][A,F]>[A,F] | [A,F][CE][CE][CE] | [G,E][CE][CE][CE] | [CE][A,F][A,F]>[A,F] [G,D][G,D][B,D][B,D] | [CE][CE] [CE]z :|

@@ -4,10 +4,10 @@ import io.github.ryangardner.abc.core.model.*
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
-class AbcParserTest {
+public class AbcParserTest {
 
     @Test
-    fun `test full tune parsing`() {
+    public fun `test full tune parsing`(): Unit {
         val input = """
             X: 1
             T: Full Tune

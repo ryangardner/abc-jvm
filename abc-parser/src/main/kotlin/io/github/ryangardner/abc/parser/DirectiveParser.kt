@@ -2,8 +2,8 @@ package io.github.ryangardner.abc.parser
 
 import io.github.ryangardner.abc.core.model.TuneMetadata
 
-object DirectiveParser {
-    fun parse(directiveText: String, currentMetadata: TuneMetadata): TuneMetadata {
+public object DirectiveParser {
+    public fun parse(directiveText: String, currentMetadata: TuneMetadata): TuneMetadata {
         val trimmed = directiveText.trim()
         if (trimmed.startsWith("visualTranspose")) {
             val value = trimmed.substringAfter("visualTranspose").trim().toIntOrNull()

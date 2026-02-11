@@ -4,10 +4,10 @@ import io.github.ryangardner.abc.core.model.*
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
-class BodyParserTest {
+public class BodyParserTest {
 
     @Test
-    fun `test simple notes`() {
+    public fun `test simple notes`(): Unit {
         val input = "C D E"
         // L defaults to 1/8 from header
         val header = TuneHeader(1, emptyList(), KeySignature(KeyRoot(NoteStep.C), KeyMode.IONIAN), TimeSignature(4, 4), NoteDuration(1, 8))
@@ -26,7 +26,7 @@ class BodyParserTest {
     }
 
     @Test
-    fun `test note duration`() {
+    public fun `test note duration`(): Unit {
         val input = "C2 D/2"
         val header = TuneHeader(1, emptyList(), KeySignature(KeyRoot(NoteStep.C), KeyMode.IONIAN), TimeSignature(4, 4), NoteDuration(1, 8))
         val lexer = AbcLexer(input)
@@ -35,9 +35,8 @@ class BodyParserTest {
         val body = parser.parse()
 
         val n1 = body.elements[0] as NoteElement
-        // C2 -> 2 * 1/8 = 2/8 = 1/4? My impl doesn't simplify yet.
-        // It returns 2 * 1, 1 * 8 = 2/8.
-        assertEquals(NoteDuration(2, 8), n1.length)
+        // C2 -> 2 * 1/8 = 2/8 = 1/4. Impl simplifies it.
+        assertEquals(NoteDuration(1, 4), n1.length)
 
         val n2 = body.elements[1] as NoteElement
         // D/2 -> (1/2) * (1/8) = 1/16
@@ -45,7 +44,7 @@ class BodyParserTest {
     }
 
     @Test
-    fun `test accidentals and octaves`() {
+    public fun `test accidentals and octaves`(): Unit {
         val input = "^C, _D'"
         val header = TuneHeader(1, emptyList(), KeySignature(KeyRoot(NoteStep.C), KeyMode.IONIAN), TimeSignature(4, 4), NoteDuration(1, 8))
         val lexer = AbcLexer(input)
@@ -65,7 +64,7 @@ class BodyParserTest {
     }
 
     @Test
-    fun `test chord`() {
+    public fun `test chord`(): Unit {
         val input = "[CEG]2"
         val header = TuneHeader(1, emptyList(), KeySignature(KeyRoot(NoteStep.C), KeyMode.IONIAN), TimeSignature(4, 4), NoteDuration(1, 8))
         val lexer = AbcLexer(input)
@@ -75,15 +74,15 @@ class BodyParserTest {
         val chord = body.elements[0] as ChordElement
 
         assertEquals(3, chord.notes.size)
-        // Chord duration 2 * 1/8 = 2/8
-        assertEquals(NoteDuration(2, 8), chord.duration)
+        // Chord duration 2 * 1/8 = 2/8 = 1/4
+        assertEquals(NoteDuration(1, 4), chord.duration)
 
         assertEquals(NoteStep.C, chord.notes[0].pitch.step)
         assertEquals(NoteDuration(1, 8), chord.notes[0].length) // Inner note uses default L
     }
 
     @Test
-    fun `test inline field L`() {
+    public fun `test inline field L`(): Unit {
         val input = "C [L:1/4] C"
         val header = TuneHeader(1, emptyList(), KeySignature(KeyRoot(NoteStep.C), KeyMode.IONIAN), TimeSignature(4, 4), NoteDuration(1, 8))
         val lexer = AbcLexer(input)

@@ -1,6 +1,6 @@
 package io.github.ryangardner.abc.parser
 
-enum class TokenType {
+public enum class TokenType {
     // Header
     HEADER_KEY,     // X, T, M, etc.
     HEADER_VALUE,   // The content of the header field
@@ -16,7 +16,11 @@ enum class TokenType {
     TIE,            // -
     SLUR_START,     // (
     SLUR_END,       // )
+    TUPLET,         // (2, (3, etc.
     DECORATION,     // !...! or symbol like . ~
+    BROKEN_RHYTHM,  // >, <, >>, <<, etc.
+    GRACE_START,    // {
+    GRACE_END,      // }
 
     // Inline field
     INLINE_FIELD_START, // [
@@ -34,9 +38,9 @@ enum class TokenType {
     UNKNOWN
 }
 
-data class Token(
-    val type: TokenType,
-    val text: String,
-    val line: Int,
-    val column: Int
+public data class Token(
+    public val type: TokenType,
+    public val text: String,
+    public val line: Int,
+    public val column: Int
 )

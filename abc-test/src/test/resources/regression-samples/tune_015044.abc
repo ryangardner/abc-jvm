@@ -1,0 +1,43 @@
+X:1
+T:Bairisch Polka
+C:traditionell
+R:bairisch polka
+A:Niedervintl/Vintl, Suedtirol
+F:http://simonwascher.info/
+Z:abc transcription: Simon Wascher
+Q:1/4=84 %im buch
+M:2/4
+L:1/16
+K:Eb
+P:A
+B2g2 A2f2 | G2eG edcB | ABdB dcBA | G2ee edcB |\
+B2g2 A2f2 | G2eG edcB | A2dc B2cd | e6 BB ||
+P:B
+BGcB BAcB | B2a2 d3B | BAcB BAad | egBe [G3E3]B |\
+BGcB BAcB | B2a2 d3B | B3a g2f2 "&"| e6 f2 ||
+K:Bb
+P:C
+f3B gfed | [a4f4] [g4e4] | [a3f3]g fedc | BdfB bBdf |\
+BdfB gfed | [a3f3]g fedc | [A3F3][AF] [A2F2]fA | BB,DF [B2F2D2] [cC][cC] ||
+P:D
+|:\
+[c2C2][cC][cC][c4C4] | [g2G2][gG][gG][g4G4] | [f2F2]e2 d2c2 |1 B6 [cC][cC] :|\
+                                                            [2 B6 FF ||
+P:B1
+FDGF FEGF | F2e2 A3F | FEGF FEeA | Bd[F2B,2] [F3D3]F |\
+FDGF FEGF | F2e2 A3F | F3e d2c2 | [B6F6D6B,6] c2 ||
+P:C1
+K:F
+c3F dcBA | [e4c4] [d4B4] | [e3c3]d cBAG | FAcF fFAc |\
+FAcF dcBA | [e3c3]d cBAG | E3D  E2DE |F2A,C F2 "folgt teil D dann teil A1"z2 ||
+P:A1
+K:Bb
+F2 |\
+F2d2 E2c2 | D2BBB BAGF | EAAA AGFE | D2BB BAGF |\
+F2d2 E2c2 | D2BD BAGF | E2AG F2GA | B6 "folgt teil B mit schluss"BB ||
+P:schluss
+K:Eb
+[e6B6G6][g2e2B2] | [e4B4G4] z4 |] 
+W:
+W:spiel-ablauf:A/B/C/DD/B1/C1/D/A1/B schluss
+W:aus Simon Waschers TradArchiv

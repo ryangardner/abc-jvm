@@ -1,0 +1,5225 @@
+[
+  {
+    "metaText": {
+      "title": "012 - Louvamos",
+      "unalignedWords": [
+        "",
+        "",
+        "1. Louvamos, louvamos, Senhor e adoramos",
+        "A ti, Ã³ Deus-Homem, no cÃ©u assentado;",
+        "Que em tempo devido, na terra humilhado,",
+        "Por nossos pecados morreste na cruz. (bis)",
+        "",
+        "2. Louvamos, louvamos, Senhor, e adoramos",
+        "A ti, que a justiÃ§a de Deus sustentaste,",
+        "A pena sofrendo por nÃ³s merecida,",
+        "A vida depondo pra assim nos remir. (bis)",
+        "",
+        "",
+        "",
+        "3. Louvamos, louvamos, Senhor, e adoramos",
+        "A glÃ³ria divina por ti revelada,",
+        "Que para nÃ³s brilha na luz esplendente,",
+        "Fazendo-nos ver a real perfeiÃ§Ã£o. (bis)",
+        "",
+        "4. Em ti concilia-se a santa justiÃ§a,",
+        "Que nÃ£o pode a culpa deixar sem castigo.",
+        "Com a compaixÃ£o que por graÃ§a recebe",
+        "E exime de culpas o rÃ©u pecador. (bis)",
+        ""
+      ]
+    },
+    "formatting": {
+      "composerfont": {
+        "face": "\"Times New Roman\"",
+        "size": 14,
+        "weight": "normal",
+        "style": "italic",
+        "decoration": "none"
+      },
+      "subtitlefont": {
+        "face": "\"Times New Roman\"",
+        "size": 16,
+        "weight": "normal",
+        "style": "normal",
+        "decoration": "none"
+      },
+      "tempofont": {
+        "face": "\"Times New Roman\"",
+        "size": 15,
+        "weight": "bold",
+        "style": "normal",
+        "decoration": "none"
+      },
+      "titlefont": {
+        "face": "\"Times New Roman\"",
+        "size": 20,
+        "weight": "normal",
+        "style": "normal",
+        "decoration": "none"
+      },
+      "footerfont": {
+        "face": "\"Times New Roman\"",
+        "size": 12,
+        "weight": "normal",
+        "style": "normal",
+        "decoration": "none"
+      },
+      "headerfont": {
+        "face": "\"Times New Roman\"",
+        "size": 12,
+        "weight": "normal",
+        "style": "normal",
+        "decoration": "none"
+      },
+      "voicefont": {
+        "face": "\"Times New Roman\"",
+        "size": 13,
+        "weight": "bold",
+        "style": "normal",
+        "decoration": "none"
+      },
+      "tablabelfont": {
+        "face": "\"Trebuchet MS\"",
+        "size": 16,
+        "weight": "normal",
+        "style": "normal",
+        "decoration": "none"
+      },
+      "tabnumberfont": {
+        "face": "\"Arial\"",
+        "size": 11,
+        "weight": "normal",
+        "style": "normal",
+        "decoration": "none"
+      },
+      "tabgracefont": {
+        "face": "\"Arial\"",
+        "size": 8,
+        "weight": "normal",
+        "style": "normal",
+        "decoration": "none"
+      },
+      "annotationfont": {
+        "face": "Helvetica",
+        "size": 12,
+        "weight": "normal",
+        "style": "normal",
+        "decoration": "none"
+      },
+      "gchordfont": {
+        "face": "Helvetica",
+        "size": 12,
+        "weight": "normal",
+        "style": "normal",
+        "decoration": "none"
+      },
+      "historyfont": {
+        "face": "\"Times New Roman\"",
+        "size": 16,
+        "weight": "normal",
+        "style": "normal",
+        "decoration": "none"
+      },
+      "infofont": {
+        "face": "\"Times New Roman\"",
+        "size": 14,
+        "weight": "normal",
+        "style": "italic",
+        "decoration": "none"
+      },
+      "measurefont": {
+        "face": "\"Times New Roman\"",
+        "size": 14,
+        "weight": "normal",
+        "style": "italic",
+        "decoration": "none"
+      },
+      "partsfont": {
+        "face": "\"Times New Roman\"",
+        "size": 15,
+        "weight": "normal",
+        "style": "normal",
+        "decoration": "none"
+      },
+      "repeatfont": {
+        "face": "\"Times New Roman\"",
+        "size": 13,
+        "weight": "normal",
+        "style": "normal",
+        "decoration": "none"
+      },
+      "textfont": {
+        "face": "\"Times New Roman\"",
+        "size": 16,
+        "weight": "normal",
+        "style": "normal",
+        "decoration": "none"
+      },
+      "tripletfont": {
+        "face": "Times",
+        "size": 11,
+        "weight": "normal",
+        "style": "italic",
+        "decoration": "none"
+      },
+      "vocalfont": {
+        "face": "\"Times New Roman\"",
+        "size": 13,
+        "weight": "bold",
+        "style": "normal",
+        "decoration": "none"
+      },
+      "wordsfont": {
+        "face": "\"Times New Roman\"",
+        "size": 16,
+        "weight": "normal",
+        "style": "normal",
+        "decoration": "none"
+      },
+      "pagewidth": 612,
+      "pageheight": 792
+    },
+    "lines": [
+      {
+        "subtitle": {
+          "text": "Letra: Richard Holden (1828-1886)",
+          "startChar": 21,
+          "endChar": 56
+        }
+      },
+      {
+        "subtitle": {
+          "text": "MÃºsica: John Francis Wade (1710-1786)",
+          "startChar": 57,
+          "endChar": 97
+        }
+      },
+      {
+        "staff": [
+          {
+            "voices": [
+              [
+                {
+                  "pitches": [
+                    {
+                      "pitch": 3,
+                      "name": "F",
+                      "verticalPos": 3
+                    }
+                  ],
+                  "duration": 0.25,
+                  "el_type": "note",
+                  "startChar": 121,
+                  "endChar": 123,
+                  "lyric": [
+                    {
+                      "syllable": "1. Lou",
+                      "divider": "-"
+                    },
+                    {
+                      "syllable": "2. Lou",
+                      "divider": "-"
+                    },
+                    {
+                      "syllable": "3. Lou",
+                      "divider": "-"
+                    },
+                    {
+                      "syllable": "4. Em",
+                      "divider": " "
+                    }
+                  ],
+                  "currentTrackMilliseconds": 0,
+                  "currentTrackWholeNotes": 0,
+                  "midiPitches": [
+                    {
+                      "cmd": "note",
+                      "pitch": 65,
+                      "volume": 85,
+                      "start": 0,
+                      "duration": 0.25,
+                      "instrument": 0,
+                      "startChar": 121,
+                      "endChar": 123,
+                      "gap": 0
+                    }
+                  ]
+                },
+                {
+                  "type": "bar_thin",
+                  "el_type": "bar",
+                  "startChar": 123,
+                  "endChar": 124
+                },
+                {
+                  "chord": [
+                    {
+                      "name": "F",
+                      "position": "default"
+                    }
+                  ],
+                  "pitches": [
+                    {
+                      "pitch": 3,
+                      "name": "F",
+                      "verticalPos": 3
+                    }
+                  ],
+                  "duration": 0.5,
+                  "el_type": "note",
+                  "startChar": 124,
+                  "endChar": 131,
+                  "lyric": [
+                    {
+                      "syllable": "va",
+                      "divider": "-"
+                    },
+                    {
+                      "syllable": "va",
+                      "divider": "-"
+                    },
+                    {
+                      "syllable": "va",
+                      "divider": "-"
+                    },
+                    {
+                      "syllable": "ti",
+                      "divider": " "
+                    }
+                  ],
+                  "currentTrackMilliseconds": 333.33333333333337,
+                  "currentTrackWholeNotes": 0.25,
+                  "midiPitches": [
+                    {
+                      "cmd": "note",
+                      "pitch": 65,
+                      "volume": 105,
+                      "start": 0.25,
+                      "duration": 0.5,
+                      "instrument": 0,
+                      "startChar": 124,
+                      "endChar": 131,
+                      "gap": 0
+                    }
+                  ]
+                },
+                {
+                  "pitches": [
+                    {
+                      "pitch": 0,
+                      "name": "C",
+                      "verticalPos": 0
+                    }
+                  ],
+                  "duration": 0.25,
+                  "el_type": "note",
+                  "startChar": 131,
+                  "endChar": 134,
+                  "lyric": [
+                    {
+                      "syllable": "mos,",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "mos,",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "mos,",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "con",
+                      "divider": "-"
+                    }
+                  ],
+                  "currentTrackMilliseconds": 1000,
+                  "currentTrackWholeNotes": 0.75,
+                  "midiPitches": [
+                    {
+                      "cmd": "note",
+                      "pitch": 60,
+                      "volume": 95,
+                      "start": 0.75,
+                      "duration": 0.25,
+                      "instrument": 0,
+                      "startChar": 131,
+                      "endChar": 134,
+                      "gap": 0
+                    }
+                  ]
+                },
+                {
+                  "pitches": [
+                    {
+                      "pitch": 3,
+                      "name": "F",
+                      "verticalPos": 3
+                    }
+                  ],
+                  "duration": 0.25,
+                  "el_type": "note",
+                  "startChar": 134,
+                  "endChar": 136,
+                  "lyric": [
+                    {
+                      "syllable": "lou",
+                      "divider": "-"
+                    },
+                    {
+                      "syllable": "lou",
+                      "divider": "-"
+                    },
+                    {
+                      "syllable": "lou",
+                      "divider": "-"
+                    },
+                    {
+                      "syllable": "ci",
+                      "divider": "-"
+                    }
+                  ],
+                  "currentTrackMilliseconds": 1333.3333333333335,
+                  "currentTrackWholeNotes": 1,
+                  "midiPitches": [
+                    {
+                      "cmd": "note",
+                      "pitch": 65,
+                      "volume": 95,
+                      "start": 1,
+                      "duration": 0.25,
+                      "instrument": 0,
+                      "startChar": 134,
+                      "endChar": 136,
+                      "gap": 0
+                    }
+                  ]
+                },
+                {
+                  "type": "bar_thin",
+                  "el_type": "bar",
+                  "startChar": 136,
+                  "endChar": 137
+                },
+                {
+                  "chord": [
+                    {
+                      "name": "C",
+                      "position": "default"
+                    }
+                  ],
+                  "pitches": [
+                    {
+                      "pitch": 4,
+                      "name": "G",
+                      "verticalPos": 4
+                    }
+                  ],
+                  "duration": 0.5,
+                  "el_type": "note",
+                  "startChar": 137,
+                  "endChar": 144,
+                  "lyric": [
+                    {
+                      "syllable": "va",
+                      "divider": "-"
+                    },
+                    {
+                      "syllable": "va",
+                      "divider": "-"
+                    },
+                    {
+                      "syllable": "va",
+                      "divider": "-"
+                    },
+                    {
+                      "syllable": "li",
+                      "divider": "-"
+                    }
+                  ],
+                  "currentTrackMilliseconds": 1666.6666666666665,
+                  "currentTrackWholeNotes": 1.25,
+                  "midiPitches": [
+                    {
+                      "cmd": "note",
+                      "pitch": 67,
+                      "volume": 105,
+                      "start": 1.25,
+                      "duration": 0.5,
+                      "instrument": 0,
+                      "startChar": 137,
+                      "endChar": 144,
+                      "gap": 0
+                    }
+                  ]
+                },
+                {
+                  "pitches": [
+                    {
+                      "pitch": 0,
+                      "name": "C",
+                      "verticalPos": 0
+                    }
+                  ],
+                  "duration": 0.25,
+                  "el_type": "note",
+                  "startChar": 144,
+                  "endChar": 147,
+                  "lyric": [
+                    {
+                      "syllable": "mos,",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "mos,",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "mos,",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "a",
+                      "divider": "-"
+                    }
+                  ],
+                  "currentTrackMilliseconds": 2333.3333333333335,
+                  "currentTrackWholeNotes": 1.75,
+                  "midiPitches": [
+                    {
+                      "cmd": "note",
+                      "pitch": 60,
+                      "volume": 95,
+                      "start": 1.75,
+                      "duration": 0.25,
+                      "instrument": 0,
+                      "startChar": 144,
+                      "endChar": 147,
+                      "gap": 0
+                    }
+                  ]
+                },
+                {
+                  "pitches": [
+                    {
+                      "pitch": 0,
+                      "name": "C",
+                      "verticalPos": 0
+                    }
+                  ],
+                  "duration": 0.25,
+                  "el_type": "note",
+                  "startChar": 147,
+                  "endChar": 149,
+                  "lyric": [
+                    {
+                      "syllable": "Se",
+                      "divider": "-"
+                    },
+                    {
+                      "syllable": "Se",
+                      "divider": "-"
+                    },
+                    {
+                      "syllable": "Se",
+                      "divider": "-"
+                    },
+                    {
+                      "syllable": "sea",
+                      "divider": " "
+                    }
+                  ],
+                  "currentTrackMilliseconds": 2666.666666666667,
+                  "currentTrackWholeNotes": 2,
+                  "midiPitches": [
+                    {
+                      "cmd": "note",
+                      "pitch": 60,
+                      "volume": 95,
+                      "start": 2,
+                      "duration": 0.25,
+                      "instrument": 0,
+                      "startChar": 147,
+                      "endChar": 149,
+                      "gap": 0
+                    }
+                  ]
+                },
+                {
+                  "type": "bar_thin",
+                  "el_type": "bar",
+                  "startChar": 149,
+                  "endChar": 150
+                },
+                {
+                  "chord": [
+                    {
+                      "name": "F",
+                      "position": "default"
+                    }
+                  ],
+                  "pitches": [
+                    {
+                      "pitch": 5,
+                      "name": "A",
+                      "startSlur": [
+                        {
+                          "label": 101
+                        }
+                      ],
+                      "verticalPos": 5
+                    }
+                  ],
+                  "duration": 0.25,
+                  "el_type": "note",
+                  "startChar": 150,
+                  "endChar": 158,
+                  "lyric": [
+                    {
+                      "syllable": "nhor",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "nhor,",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "nhor,",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "san",
+                      "divider": "_"
+                    }
+                  ],
+                  "currentTrackMilliseconds": 3000,
+                  "currentTrackWholeNotes": 2.25,
+                  "midiPitches": [
+                    {
+                      "cmd": "note",
+                      "pitch": 69,
+                      "volume": 105,
+                      "start": 2.25,
+                      "duration": 0.25,
+                      "instrument": 0,
+                      "startChar": 150,
+                      "endChar": 158,
+                      "endType": "tenuto",
+                      "gap": -0.001
+                    }
+                  ]
+                },
+                {
+                  "pitches": [
+                    {
+                      "pitch": 4,
+                      "name": "G",
+                      "endSlur": [
+                        101
+                      ],
+                      "verticalPos": 4
+                    }
+                  ],
+                  "duration": 0.25,
+                  "el_type": "note",
+                  "startChar": 158,
+                  "endChar": 162,
+                  "lyric": [
+                    {
+                      "syllable": "e",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "e",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "e",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "",
+                      "divider": " "
+                    }
+                  ],
+                  "currentTrackMilliseconds": 3333.333333333333,
+                  "currentTrackWholeNotes": 2.5,
+                  "midiPitches": [
+                    {
+                      "cmd": "note",
+                      "pitch": 67,
+                      "volume": 95,
+                      "start": 2.5,
+                      "duration": 0.25,
+                      "instrument": 0,
+                      "startChar": 158,
+                      "endChar": 162,
+                      "gap": 0
+                    }
+                  ]
+                },
+                {
+                  "pitches": [
+                    {
+                      "pitch": 5,
+                      "name": "A",
+                      "verticalPos": 5
+                    }
+                  ],
+                  "duration": 0.25,
+                  "el_type": "note",
+                  "startChar": 162,
+                  "endChar": 165,
+                  "lyric": [
+                    {
+                      "syllable": "a",
+                      "divider": "-"
+                    },
+                    {
+                      "syllable": "a",
+                      "divider": "-"
+                    },
+                    {
+                      "syllable": "a",
+                      "divider": "-"
+                    },
+                    {
+                      "syllable": "ta",
+                      "divider": " "
+                    }
+                  ],
+                  "currentTrackMilliseconds": 3666.6666666666665,
+                  "currentTrackWholeNotes": 2.75,
+                  "midiPitches": [
+                    {
+                      "cmd": "note",
+                      "pitch": 69,
+                      "volume": 95,
+                      "start": 2.75,
+                      "duration": 0.25,
+                      "instrument": 0,
+                      "startChar": 162,
+                      "endChar": 165,
+                      "gap": 0
+                    }
+                  ]
+                },
+                {
+                  "pitches": [
+                    {
+                      "pitch": 6,
+                      "name": "B",
+                      "verticalPos": 6
+                    }
+                  ],
+                  "duration": 0.25,
+                  "el_type": "note",
+                  "startChar": 165,
+                  "endChar": 167,
+                  "lyric": [
+                    {
+                      "syllable": "do",
+                      "divider": "-"
+                    },
+                    {
+                      "syllable": "do",
+                      "divider": "-"
+                    },
+                    {
+                      "syllable": "do",
+                      "divider": "-"
+                    },
+                    {
+                      "syllable": "jus",
+                      "divider": "-"
+                    }
+                  ],
+                  "currentTrackMilliseconds": 4000,
+                  "currentTrackWholeNotes": 3,
+                  "midiPitches": [
+                    {
+                      "cmd": "note",
+                      "pitch": 70,
+                      "volume": 95,
+                      "start": 3,
+                      "duration": 0.25,
+                      "instrument": 0,
+                      "startChar": 165,
+                      "endChar": 167,
+                      "gap": 0
+                    }
+                  ]
+                },
+                {
+                  "type": "bar_thin",
+                  "el_type": "bar",
+                  "startChar": 167,
+                  "endChar": 168
+                },
+                {
+                  "chord": [
+                    {
+                      "name": "C",
+                      "position": "default"
+                    }
+                  ],
+                  "pitches": [
+                    {
+                      "pitch": 5,
+                      "name": "A",
+                      "verticalPos": 5
+                    }
+                  ],
+                  "duration": 0.5,
+                  "el_type": "note",
+                  "startChar": 168,
+                  "endChar": 175,
+                  "lyric": [
+                    {
+                      "syllable": "ra",
+                      "divider": "-"
+                    },
+                    {
+                      "syllable": "ra",
+                      "divider": "-"
+                    },
+                    {
+                      "syllable": "ra",
+                      "divider": "-"
+                    },
+                    {
+                      "syllable": "ti",
+                      "divider": "-"
+                    }
+                  ],
+                  "currentTrackMilliseconds": 4333.333333333333,
+                  "currentTrackWholeNotes": 3.25,
+                  "midiPitches": [
+                    {
+                      "cmd": "note",
+                      "pitch": 69,
+                      "volume": 105,
+                      "start": 3.25,
+                      "duration": 0.5,
+                      "instrument": 0,
+                      "startChar": 168,
+                      "endChar": 175,
+                      "gap": 0
+                    }
+                  ]
+                },
+                {
+                  "pitches": [
+                    {
+                      "pitch": 4,
+                      "name": "G",
+                      "verticalPos": 4
+                    }
+                  ],
+                  "duration": 0.25,
+                  "el_type": "note",
+                  "startChar": 175,
+                  "endChar": 178,
+                  "lyric": [
+                    {
+                      "syllable": "mos",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "mos",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "mos",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "Ã§a,",
+                      "divider": " "
+                    }
+                  ],
+                  "currentTrackMilliseconds": 5000,
+                  "currentTrackWholeNotes": 3.75,
+                  "midiPitches": [
+                    {
+                      "cmd": "note",
+                      "pitch": 67,
+                      "volume": 95,
+                      "start": 3.75,
+                      "duration": 0.25,
+                      "instrument": 0,
+                      "startChar": 175,
+                      "endChar": 178,
+                      "gap": 0
+                    }
+                  ]
+                },
+                {
+                  "pitches": [
+                    {
+                      "pitch": 4,
+                      "name": "G",
+                      "verticalPos": 4
+                    }
+                  ],
+                  "duration": 0.25,
+                  "el_type": "note",
+                  "startChar": 178,
+                  "endChar": 180,
+                  "lyric": [
+                    {
+                      "syllable": "A",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "A",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "A",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "Que",
+                      "divider": " "
+                    }
+                  ],
+                  "currentTrackMilliseconds": 5333.333333333334,
+                  "currentTrackWholeNotes": 4,
+                  "midiPitches": [
+                    {
+                      "cmd": "note",
+                      "pitch": 67,
+                      "volume": 95,
+                      "start": 4,
+                      "duration": 0.25,
+                      "instrument": 0,
+                      "startChar": 178,
+                      "endChar": 180,
+                      "gap": 0
+                    }
+                  ]
+                },
+                {
+                  "type": "bar_thin",
+                  "el_type": "bar",
+                  "startChar": 180,
+                  "endChar": 181
+                },
+                {
+                  "chord": [
+                    {
+                      "name": "Dm",
+                      "position": "default"
+                    }
+                  ],
+                  "pitches": [
+                    {
+                      "pitch": 3,
+                      "name": "F",
+                      "verticalPos": 3
+                    }
+                  ],
+                  "duration": 0.5,
+                  "el_type": "note",
+                  "startChar": 181,
+                  "endChar": 189,
+                  "lyric": [
+                    {
+                      "syllable": "ti,",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "ti,",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "glÃ³",
+                      "divider": "-"
+                    },
+                    {
+                      "syllable": "nÃ£o",
+                      "divider": " "
+                    }
+                  ],
+                  "currentTrackMilliseconds": 5666.666666666666,
+                  "currentTrackWholeNotes": 4.25,
+                  "midiPitches": [
+                    {
+                      "cmd": "note",
+                      "pitch": 65,
+                      "volume": 105,
+                      "start": 4.25,
+                      "duration": 0.5,
+                      "instrument": 0,
+                      "startChar": 181,
+                      "endChar": 189,
+                      "gap": 0
+                    }
+                  ]
+                },
+                {
+                  "chord": [
+                    {
+                      "name": "G7",
+                      "position": "default"
+                    }
+                  ],
+                  "pitches": [
+                    {
+                      "pitch": 2,
+                      "name": "E",
+                      "verticalPos": 2
+                    }
+                  ],
+                  "duration": 0.25,
+                  "el_type": "note",
+                  "startChar": 189,
+                  "endChar": 196,
+                  "lyric": [
+                    {
+                      "syllable": "Ã³",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "quea",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "ria",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "po",
+                      "divider": "-"
+                    }
+                  ],
+                  "currentTrackMilliseconds": 6333.333333333333,
+                  "currentTrackWholeNotes": 4.75,
+                  "midiPitches": [
+                    {
+                      "cmd": "note",
+                      "pitch": 64,
+                      "volume": 95,
+                      "start": 4.75,
+                      "duration": 0.25,
+                      "instrument": 0,
+                      "startChar": 189,
+                      "endChar": 196,
+                      "gap": 0
+                    }
+                  ]
+                },
+                {
+                  "pitches": [
+                    {
+                      "pitch": 1,
+                      "name": "D",
+                      "verticalPos": 1
+                    }
+                  ],
+                  "duration": 0.25,
+                  "el_type": "note",
+                  "startChar": 196,
+                  "endChar": 198,
+                  "lyric": [
+                    {
+                      "syllable": "Deus",
+                      "divider": "-"
+                    },
+                    {
+                      "syllable": "jus",
+                      "divider": "-"
+                    },
+                    {
+                      "syllable": "di",
+                      "divider": "-"
+                    },
+                    {
+                      "syllable": "dea",
+                      "divider": " "
+                    }
+                  ],
+                  "currentTrackMilliseconds": 6666.666666666666,
+                  "currentTrackWholeNotes": 5,
+                  "midiPitches": [
+                    {
+                      "cmd": "note",
+                      "pitch": 62,
+                      "volume": 95,
+                      "start": 5,
+                      "duration": 0.25,
+                      "instrument": 0,
+                      "startChar": 196,
+                      "endChar": 198,
+                      "gap": 0
+                    }
+                  ]
+                },
+                {
+                  "type": "bar_thin",
+                  "el_type": "bar",
+                  "startChar": 198,
+                  "endChar": 199
+                },
+                {
+                  "chord": [
+                    {
+                      "name": "C",
+                      "position": "default"
+                    }
+                  ],
+                  "pitches": [
+                    {
+                      "pitch": 2,
+                      "name": "E",
+                      "startSlur": [
+                        {
+                          "label": 101
+                        }
+                      ],
+                      "verticalPos": 2
+                    }
+                  ],
+                  "duration": 0.25,
+                  "el_type": "note",
+                  "startChar": 199,
+                  "endChar": 207,
+                  "lyric": [
+                    {
+                      "syllable": "Ho",
+                      "divider": "_"
+                    },
+                    {
+                      "syllable": "ti",
+                      "divider": "_"
+                    },
+                    {
+                      "syllable": "vi",
+                      "divider": "_"
+                    },
+                    {
+                      "syllable": "cul",
+                      "divider": "_"
+                    }
+                  ],
+                  "currentTrackMilliseconds": 7000,
+                  "currentTrackWholeNotes": 5.25,
+                  "midiPitches": [
+                    {
+                      "cmd": "note",
+                      "pitch": 64,
+                      "volume": 105,
+                      "start": 5.25,
+                      "duration": 0.25,
+                      "instrument": 0,
+                      "startChar": 199,
+                      "endChar": 207,
+                      "endType": "tenuto",
+                      "gap": -0.001
+                    }
+                  ]
+                },
+                {
+                  "pitches": [
+                    {
+                      "pitch": 3,
+                      "name": "F",
+                      "endSlur": [
+                        101
+                      ],
+                      "verticalPos": 3
+                    }
+                  ],
+                  "duration": 0.25,
+                  "el_type": "note",
+                  "startChar": 207,
+                  "endChar": 211,
+                  "lyric": [
+                    {
+                      "syllable": "",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "",
+                      "divider": " "
+                    }
+                  ],
+                  "currentTrackMilliseconds": 7333.333333333333,
+                  "currentTrackWholeNotes": 5.5,
+                  "midiPitches": [
+                    {
+                      "cmd": "note",
+                      "pitch": 65,
+                      "volume": 95,
+                      "start": 5.5,
+                      "duration": 0.25,
+                      "instrument": 0,
+                      "startChar": 207,
+                      "endChar": 211,
+                      "gap": 0
+                    }
+                  ]
+                },
+                {
+                  "pitches": [
+                    {
+                      "pitch": 4,
+                      "name": "G",
+                      "verticalPos": 4
+                    }
+                  ],
+                  "duration": 0.25,
+                  "el_type": "note",
+                  "startChar": 211,
+                  "endChar": 214,
+                  "lyric": [
+                    {
+                      "syllable": "mem,",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "Ã§a",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "na",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "pa",
+                      "divider": " "
+                    }
+                  ],
+                  "currentTrackMilliseconds": 7666.666666666666,
+                  "currentTrackWholeNotes": 5.75,
+                  "midiPitches": [
+                    {
+                      "cmd": "note",
+                      "pitch": 67,
+                      "volume": 95,
+                      "start": 5.75,
+                      "duration": 0.25,
+                      "instrument": 0,
+                      "startChar": 211,
+                      "endChar": 214,
+                      "gap": 0
+                    }
+                  ]
+                },
+                {
+                  "pitches": [
+                    {
+                      "pitch": 5,
+                      "name": "A",
+                      "verticalPos": 5
+                    }
+                  ],
+                  "duration": 0.25,
+                  "el_type": "note",
+                  "startChar": 214,
+                  "endChar": 216,
+                  "lyric": [
+                    {
+                      "syllable": "no",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "de",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "por",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "dei",
+                      "divider": "-"
+                    }
+                  ],
+                  "currentTrackMilliseconds": 8000,
+                  "currentTrackWholeNotes": 6,
+                  "midiPitches": [
+                    {
+                      "cmd": "note",
+                      "pitch": 69,
+                      "volume": 95,
+                      "start": 6,
+                      "duration": 0.25,
+                      "instrument": 0,
+                      "startChar": 214,
+                      "endChar": 216,
+                      "gap": 0
+                    }
+                  ]
+                },
+                {
+                  "type": "bar_thin",
+                  "el_type": "bar",
+                  "startChar": 216,
+                  "endChar": 217
+                },
+                {
+                  "chord": [
+                    {
+                      "name": "G7",
+                      "position": "default"
+                    }
+                  ],
+                  "pitches": [
+                    {
+                      "pitch": 2,
+                      "name": "E",
+                      "verticalPos": 2
+                    }
+                  ],
+                  "duration": 0.5,
+                  "el_type": "note",
+                  "startChar": 217,
+                  "endChar": 225,
+                  "lyric": [
+                    {
+                      "syllable": "cÃ©u",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "Deus",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "ti",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "xar",
+                      "divider": " "
+                    }
+                  ],
+                  "currentTrackMilliseconds": 8333.333333333334,
+                  "currentTrackWholeNotes": 6.25,
+                  "midiPitches": [
+                    {
+                      "cmd": "note",
+                      "pitch": 64,
+                      "volume": 105,
+                      "start": 6.25,
+                      "duration": 0.5,
+                      "instrument": 0,
+                      "startChar": 217,
+                      "endChar": 225,
+                      "gap": 0
+                    }
+                  ]
+                },
+                {
+                  "pitches": [
+                    {
+                      "pitch": 1,
+                      "name": "D",
+                      "verticalPos": 1
+                    }
+                  ],
+                  "duration": 0.375,
+                  "el_type": "note",
+                  "startChar": 225,
+                  "endChar": 227,
+                  "lyric": [
+                    {
+                      "syllable": "as",
+                      "divider": "-"
+                    },
+                    {
+                      "syllable": "sus",
+                      "divider": "-"
+                    },
+                    {
+                      "syllable": "re",
+                      "divider": "-"
+                    },
+                    {
+                      "syllable": "sem",
+                      "divider": " "
+                    }
+                  ],
+                  "currentTrackMilliseconds": 9000,
+                  "currentTrackWholeNotes": 6.75,
+                  "midiPitches": [
+                    {
+                      "cmd": "note",
+                      "pitch": 62,
+                      "volume": 95,
+                      "start": 6.75,
+                      "duration": 0.375,
+                      "instrument": 0,
+                      "startChar": 225,
+                      "endChar": 227,
+                      "gap": 0
+                    }
+                  ]
+                },
+                {
+                  "pitches": [
+                    {
+                      "pitch": 0,
+                      "name": "C",
+                      "verticalPos": 0
+                    }
+                  ],
+                  "duration": 0.125,
+                  "el_type": "note",
+                  "startChar": 227,
+                  "endChar": 228,
+                  "lyric": [
+                    {
+                      "syllable": "sen",
+                      "divider": "-"
+                    },
+                    {
+                      "syllable": "ten",
+                      "divider": "-"
+                    },
+                    {
+                      "syllable": "ve",
+                      "divider": "-"
+                    },
+                    {
+                      "syllable": "cas",
+                      "divider": "-"
+                    }
+                  ],
+                  "currentTrackMilliseconds": 9500,
+                  "currentTrackWholeNotes": 7.125,
+                  "midiPitches": [
+                    {
+                      "cmd": "note",
+                      "pitch": 60,
+                      "volume": 85,
+                      "start": 7.125,
+                      "duration": 0.125,
+                      "instrument": 0,
+                      "startChar": 227,
+                      "endChar": 228,
+                      "gap": 0
+                    }
+                  ]
+                },
+                {
+                  "type": "bar_thin",
+                  "el_type": "bar",
+                  "startChar": 228,
+                  "endChar": 229
+                },
+                {
+                  "chord": [
+                    {
+                      "name": "C7",
+                      "position": "default"
+                    }
+                  ],
+                  "pitches": [
+                    {
+                      "pitch": 0,
+                      "name": "C",
+                      "verticalPos": 0
+                    }
+                  ],
+                  "duration": 0.5,
+                  "el_type": "note",
+                  "startChar": 229,
+                  "endChar": 236,
+                  "lyric": [
+                    {
+                      "syllable": "ta",
+                      "divider": "-"
+                    },
+                    {
+                      "syllable": "tas",
+                      "divider": "-"
+                    },
+                    {
+                      "syllable": "la",
+                      "divider": "-"
+                    },
+                    {
+                      "syllable": "ti",
+                      "divider": "-"
+                    }
+                  ],
+                  "currentTrackMilliseconds": 9666.666666666668,
+                  "currentTrackWholeNotes": 7.25,
+                  "midiPitches": [
+                    {
+                      "cmd": "note",
+                      "pitch": 60,
+                      "volume": 105,
+                      "start": 7.25,
+                      "duration": 0.5,
+                      "instrument": 0,
+                      "startChar": 229,
+                      "endChar": 236,
+                      "gap": 0
+                    }
+                  ]
+                },
+                {
+                  "pitches": [
+                    {
+                      "pitch": 0,
+                      "name": "C",
+                      "verticalPos": 0
+                    }
+                  ],
+                  "duration": 0.25,
+                  "el_type": "note",
+                  "startChar": 236,
+                  "endChar": 239,
+                  "lyric": [
+                    {
+                      "syllable": "do;",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "te,",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "da,",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "go.",
+                      "divider": " "
+                    }
+                  ],
+                  "currentTrackMilliseconds": 10333.333333333334,
+                  "currentTrackWholeNotes": 7.75,
+                  "midiPitches": [
+                    {
+                      "cmd": "note",
+                      "pitch": 60,
+                      "volume": 95,
+                      "start": 7.75,
+                      "duration": 0.25,
+                      "instrument": 0,
+                      "startChar": 236,
+                      "endChar": 239,
+                      "gap": 0
+                    }
+                  ]
+                },
+                {
+                  "pitches": [
+                    {
+                      "pitch": 0,
+                      "name": "C",
+                      "verticalPos": 0
+                    }
+                  ],
+                  "duration": 0.25,
+                  "el_type": "note",
+                  "startChar": 239,
+                  "endChar": 241,
+                  "lyric": [
+                    {
+                      "syllable": "Queem",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "A",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "Que",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "Com",
+                      "divider": " "
+                    }
+                  ],
+                  "currentTrackMilliseconds": 10666.666666666668,
+                  "currentTrackWholeNotes": 8,
+                  "midiPitches": [
+                    {
+                      "cmd": "note",
+                      "pitch": 60,
+                      "volume": 95,
+                      "start": 8,
+                      "duration": 0.25,
+                      "instrument": 0,
+                      "startChar": 239,
+                      "endChar": 241,
+                      "gap": 0
+                    }
+                  ]
+                },
+                {
+                  "type": "bar_thin",
+                  "el_type": "bar",
+                  "startChar": 241,
+                  "endChar": 242
+                },
+                {
+                  "chord": [
+                    {
+                      "name": "F",
+                      "position": "default"
+                    }
+                  ],
+                  "pitches": [
+                    {
+                      "pitch": 7,
+                      "name": "c",
+                      "verticalPos": 7
+                    }
+                  ],
+                  "duration": 0.5,
+                  "el_type": "note",
+                  "startChar": 242,
+                  "endChar": 249,
+                  "lyric": [
+                    {
+                      "syllable": "tem",
+                      "divider": "-"
+                    },
+                    {
+                      "syllable": "pe",
+                      "divider": "-"
+                    },
+                    {
+                      "syllable": "pa",
+                      "divider": "-"
+                    },
+                    {
+                      "syllable": "a",
+                      "divider": " "
+                    }
+                  ],
+                  "currentTrackMilliseconds": 11000,
+                  "currentTrackWholeNotes": 8.25,
+                  "midiPitches": [
+                    {
+                      "cmd": "note",
+                      "pitch": 72,
+                      "volume": 105,
+                      "start": 8.25,
+                      "duration": 0.5,
+                      "instrument": 0,
+                      "startChar": 242,
+                      "endChar": 249,
+                      "gap": 0
+                    }
+                  ]
+                },
+                {
+                  "pitches": [
+                    {
+                      "pitch": 6,
+                      "name": "B",
+                      "verticalPos": 6
+                    }
+                  ],
+                  "duration": 0.25,
+                  "el_type": "note",
+                  "startChar": 249,
+                  "endChar": 252,
+                  "lyric": [
+                    {
+                      "syllable": "po",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "na",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "ra",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "com",
+                      "divider": "-"
+                    }
+                  ],
+                  "currentTrackMilliseconds": 11666.666666666666,
+                  "currentTrackWholeNotes": 8.75,
+                  "midiPitches": [
+                    {
+                      "cmd": "note",
+                      "pitch": 70,
+                      "volume": 95,
+                      "start": 8.75,
+                      "duration": 0.25,
+                      "instrument": 0,
+                      "startChar": 249,
+                      "endChar": 252,
+                      "gap": 0
+                    }
+                  ]
+                },
+                {
+                  "pitches": [
+                    {
+                      "pitch": 5,
+                      "name": "A",
+                      "verticalPos": 5
+                    }
+                  ],
+                  "duration": 0.25,
+                  "el_type": "note",
+                  "startChar": 252,
+                  "endChar": 254,
+                  "lyric": [
+                    {
+                      "syllable": "de",
+                      "divider": "-"
+                    },
+                    {
+                      "syllable": "so",
+                      "divider": "-"
+                    },
+                    {
+                      "syllable": "nÃ³s",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "pai",
+                      "divider": "-"
+                    }
+                  ],
+                  "currentTrackMilliseconds": 12000,
+                  "currentTrackWholeNotes": 9,
+                  "midiPitches": [
+                    {
+                      "cmd": "note",
+                      "pitch": 69,
+                      "volume": 95,
+                      "start": 9,
+                      "duration": 0.25,
+                      "instrument": 0,
+                      "startChar": 252,
+                      "endChar": 254,
+                      "gap": 0
+                    }
+                  ]
+                },
+                {
+                  "type": "bar_thin",
+                  "el_type": "bar",
+                  "startChar": 254,
+                  "endChar": 255
+                },
+                {
+                  "chord": [
+                    {
+                      "name": "B♭",
+                      "position": "default"
+                    }
+                  ],
+                  "pitches": [
+                    {
+                      "pitch": 6,
+                      "name": "B",
+                      "verticalPos": 6
+                    }
+                  ],
+                  "duration": 0.5,
+                  "el_type": "note",
+                  "startChar": 255,
+                  "endChar": 263,
+                  "lyric": [
+                    {
+                      "syllable": "vi",
+                      "divider": "-"
+                    },
+                    {
+                      "syllable": "fren",
+                      "divider": "-"
+                    },
+                    {
+                      "syllable": "bri",
+                      "divider": "-"
+                    },
+                    {
+                      "syllable": "xÃ£o",
+                      "divider": " "
+                    }
+                  ],
+                  "currentTrackMilliseconds": 12333.333333333332,
+                  "currentTrackWholeNotes": 9.25,
+                  "midiPitches": [
+                    {
+                      "cmd": "note",
+                      "pitch": 70,
+                      "volume": 105,
+                      "start": 9.25,
+                      "duration": 0.5,
+                      "instrument": 0,
+                      "startChar": 255,
+                      "endChar": 263,
+                      "gap": 0
+                    }
+                  ]
+                },
+                {
+                  "chord": [
+                    {
+                      "name": "F",
+                      "position": "default"
+                    }
+                  ],
+                  "pitches": [
+                    {
+                      "pitch": 5,
+                      "name": "A",
+                      "verticalPos": 5
+                    }
+                  ],
+                  "duration": 0.25,
+                  "el_type": "note",
+                  "startChar": 263,
+                  "endChar": 269,
+                  "lyric": [
+                    {
+                      "syllable": "do,",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "do",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "lha",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "que",
+                      "divider": " "
+                    }
+                  ],
+                  "currentTrackMilliseconds": 13000,
+                  "currentTrackWholeNotes": 9.75,
+                  "midiPitches": [
+                    {
+                      "cmd": "note",
+                      "pitch": 69,
+                      "volume": 95,
+                      "start": 9.75,
+                      "duration": 0.25,
+                      "instrument": 0,
+                      "startChar": 263,
+                      "endChar": 269,
+                      "gap": 0
+                    }
+                  ]
+                },
+                {
+                  "pitches": [
+                    {
+                      "pitch": 5,
+                      "name": "A",
+                      "verticalPos": 5
+                    }
+                  ],
+                  "duration": 0.25,
+                  "el_type": "note",
+                  "startChar": 269,
+                  "endChar": 271,
+                  "lyric": [
+                    {
+                      "syllable": "na",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "por",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "na",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "por",
+                      "divider": " "
+                    }
+                  ],
+                  "currentTrackMilliseconds": 13333.333333333332,
+                  "currentTrackWholeNotes": 10,
+                  "midiPitches": [
+                    {
+                      "cmd": "note",
+                      "pitch": 69,
+                      "volume": 95,
+                      "start": 10,
+                      "duration": 0.25,
+                      "instrument": 0,
+                      "startChar": 269,
+                      "endChar": 271,
+                      "gap": 0
+                    }
+                  ]
+                },
+                {
+                  "type": "bar_thin",
+                  "el_type": "bar",
+                  "startChar": 271,
+                  "endChar": 272
+                },
+                {
+                  "chord": [
+                    {
+                      "name": "G7",
+                      "position": "default"
+                    }
+                  ],
+                  "pitches": [
+                    {
+                      "pitch": 4,
+                      "name": "G",
+                      "startSlur": [
+                        {
+                          "label": 101
+                        }
+                      ],
+                      "verticalPos": 4
+                    }
+                  ],
+                  "duration": 0.25,
+                  "el_type": "note",
+                  "startChar": 272,
+                  "endChar": 281,
+                  "lyric": [
+                    {
+                      "syllable": "ter",
+                      "divider": "_"
+                    },
+                    {
+                      "syllable": "nÃ³s",
+                      "divider": "_"
+                    },
+                    {
+                      "syllable": "luz",
+                      "divider": "_"
+                    },
+                    {
+                      "syllable": "gra",
+                      "divider": "_"
+                    }
+                  ],
+                  "currentTrackMilliseconds": 13666.666666666666,
+                  "currentTrackWholeNotes": 10.25,
+                  "midiPitches": [
+                    {
+                      "cmd": "note",
+                      "pitch": 67,
+                      "volume": 105,
+                      "start": 10.25,
+                      "duration": 0.25,
+                      "instrument": 0,
+                      "startChar": 272,
+                      "endChar": 281,
+                      "endType": "tenuto",
+                      "gap": -0.001
+                    }
+                  ]
+                },
+                {
+                  "pitches": [
+                    {
+                      "pitch": 5,
+                      "name": "A",
+                      "endSlur": [
+                        101
+                      ],
+                      "verticalPos": 5
+                    }
+                  ],
+                  "duration": 0.25,
+                  "el_type": "note",
+                  "startChar": 281,
+                  "endChar": 285,
+                  "lyric": [
+                    {
+                      "syllable": "",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "",
+                      "divider": " "
+                    }
+                  ],
+                  "currentTrackMilliseconds": 14000,
+                  "currentTrackWholeNotes": 10.5,
+                  "midiPitches": [
+                    {
+                      "cmd": "note",
+                      "pitch": 69,
+                      "volume": 95,
+                      "start": 10.5,
+                      "duration": 0.25,
+                      "instrument": 0,
+                      "startChar": 281,
+                      "endChar": 285,
+                      "gap": 0
+                    }
+                  ]
+                },
+                {
+                  "pitches": [
+                    {
+                      "pitch": 3,
+                      "name": "F",
+                      "verticalPos": 3
+                    }
+                  ],
+                  "duration": 0.25,
+                  "el_type": "note",
+                  "startChar": 285,
+                  "endChar": 288,
+                  "lyric": [
+                    {
+                      "syllable": "rahu",
+                      "divider": "-"
+                    },
+                    {
+                      "syllable": "me",
+                      "divider": "-"
+                    },
+                    {
+                      "syllable": "es",
+                      "divider": "-"
+                    },
+                    {
+                      "syllable": "Ã§a",
+                      "divider": " "
+                    }
+                  ],
+                  "currentTrackMilliseconds": 14333.333333333334,
+                  "currentTrackWholeNotes": 10.75,
+                  "midiPitches": [
+                    {
+                      "cmd": "note",
+                      "pitch": 65,
+                      "volume": 95,
+                      "start": 10.75,
+                      "duration": 0.25,
+                      "instrument": 0,
+                      "startChar": 285,
+                      "endChar": 288,
+                      "gap": 0
+                    }
+                  ]
+                },
+                {
+                  "pitches": [
+                    {
+                      "pitch": 4,
+                      "name": "G",
+                      "verticalPos": 4
+                    }
+                  ],
+                  "duration": 0.25,
+                  "el_type": "note",
+                  "startChar": 288,
+                  "endChar": 290,
+                  "lyric": [
+                    {
+                      "syllable": "mi",
+                      "divider": "-"
+                    },
+                    {
+                      "syllable": "re",
+                      "divider": "-"
+                    },
+                    {
+                      "syllable": "plen",
+                      "divider": "-"
+                    },
+                    {
+                      "syllable": "re",
+                      "divider": "-"
+                    }
+                  ],
+                  "currentTrackMilliseconds": 14666.666666666666,
+                  "currentTrackWholeNotes": 11,
+                  "midiPitches": [
+                    {
+                      "cmd": "note",
+                      "pitch": 67,
+                      "volume": 95,
+                      "start": 11,
+                      "duration": 0.25,
+                      "instrument": 0,
+                      "startChar": 288,
+                      "endChar": 290,
+                      "gap": 0
+                    }
+                  ]
+                },
+                {
+                  "type": "bar_thin",
+                  "el_type": "bar",
+                  "startChar": 290,
+                  "endChar": 291
+                },
+                {
+                  "chord": [
+                    {
+                      "name": "C7",
+                      "position": "default"
+                    }
+                  ],
+                  "pitches": [
+                    {
+                      "pitch": 2,
+                      "name": "E",
+                      "verticalPos": 2
+                    }
+                  ],
+                  "duration": 0.375,
+                  "el_type": "note",
+                  "startChar": 291,
+                  "endChar": 299,
+                  "lyric": [
+                    {
+                      "syllable": "lha",
+                      "divider": "_"
+                    },
+                    {
+                      "syllable": "ci",
+                      "divider": "_"
+                    },
+                    {
+                      "syllable": "den",
+                      "divider": "_"
+                    },
+                    {
+                      "syllable": "ce",
+                      "divider": "_"
+                    }
+                  ],
+                  "currentTrackMilliseconds": 15000,
+                  "currentTrackWholeNotes": 11.25,
+                  "midiPitches": [
+                    {
+                      "cmd": "note",
+                      "pitch": 64,
+                      "volume": 105,
+                      "start": 11.25,
+                      "duration": 0.375,
+                      "instrument": 0,
+                      "startChar": 291,
+                      "endChar": 299,
+                      "gap": 0
+                    }
+                  ]
+                },
+                {
+                  "pitches": [
+                    {
+                      "pitch": 1,
+                      "name": "D",
+                      "verticalPos": 1
+                    }
+                  ],
+                  "duration": 0.125,
+                  "el_type": "note",
+                  "startChar": 299,
+                  "endChar": 301,
+                  "lyric": [
+                    {
+                      "syllable": "",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "",
+                      "divider": " "
+                    }
+                  ],
+                  "currentTrackMilliseconds": 15500.000000000002,
+                  "currentTrackWholeNotes": 11.625,
+                  "midiPitches": [
+                    {
+                      "cmd": "note",
+                      "pitch": 62,
+                      "volume": 85,
+                      "start": 11.625,
+                      "duration": 0.125,
+                      "instrument": 0,
+                      "startChar": 299,
+                      "endChar": 301,
+                      "gap": 0
+                    }
+                  ]
+                },
+                {
+                  "pitches": [
+                    {
+                      "pitch": 0,
+                      "name": "C",
+                      "verticalPos": 0
+                    }
+                  ],
+                  "duration": 0.25,
+                  "el_type": "note",
+                  "startChar": 301,
+                  "endChar": 304,
+                  "lyric": [
+                    {
+                      "syllable": "do,",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "da,",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "te,",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "be",
+                      "divider": " "
+                    }
+                  ],
+                  "currentTrackMilliseconds": 15666.666666666668,
+                  "currentTrackWholeNotes": 11.75,
+                  "midiPitches": [
+                    {
+                      "cmd": "note",
+                      "pitch": 60,
+                      "volume": 95,
+                      "start": 11.75,
+                      "duration": 0.25,
+                      "instrument": 0,
+                      "startChar": 301,
+                      "endChar": 304,
+                      "gap": 0
+                    }
+                  ]
+                },
+                {
+                  "pitches": [
+                    {
+                      "pitch": 3,
+                      "name": "F",
+                      "verticalPos": 3
+                    }
+                  ],
+                  "duration": 0.25,
+                  "el_type": "note",
+                  "startChar": 304,
+                  "endChar": 306,
+                  "lyric": [
+                    {
+                      "syllable": "Por",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "A",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "Fa",
+                      "divider": "-"
+                    },
+                    {
+                      "syllable": "Ee",
+                      "divider": "-"
+                    }
+                  ],
+                  "currentTrackMilliseconds": 16000,
+                  "currentTrackWholeNotes": 12,
+                  "midiPitches": [
+                    {
+                      "cmd": "note",
+                      "pitch": 65,
+                      "volume": 95,
+                      "start": 12,
+                      "duration": 0.25,
+                      "instrument": 0,
+                      "startChar": 304,
+                      "endChar": 306,
+                      "gap": 0
+                    }
+                  ]
+                },
+                {
+                  "type": "bar_thin",
+                  "el_type": "bar",
+                  "startChar": 306,
+                  "endChar": 307
+                },
+                {
+                  "chord": [
+                    {
+                      "name": "F",
+                      "position": "default"
+                    }
+                  ],
+                  "pitches": [
+                    {
+                      "pitch": 3,
+                      "name": "F",
+                      "startSlur": [
+                        {
+                          "label": 101
+                        }
+                      ],
+                      "verticalPos": 3
+                    }
+                  ],
+                  "duration": 0.25,
+                  "el_type": "note",
+                  "startChar": 307,
+                  "endChar": 315,
+                  "lyric": [
+                    {
+                      "syllable": "nos",
+                      "divider": "_"
+                    },
+                    {
+                      "syllable": "vi",
+                      "divider": "_"
+                    },
+                    {
+                      "syllable": "zen",
+                      "divider": "_"
+                    },
+                    {
+                      "syllable": "xi",
+                      "divider": "_"
+                    }
+                  ],
+                  "currentTrackMilliseconds": 16333.333333333332,
+                  "currentTrackWholeNotes": 12.25,
+                  "midiPitches": [
+                    {
+                      "cmd": "note",
+                      "pitch": 65,
+                      "volume": 105,
+                      "start": 12.25,
+                      "duration": 0.25,
+                      "instrument": 0,
+                      "startChar": 307,
+                      "endChar": 315,
+                      "endType": "tenuto",
+                      "gap": -0.001
+                    }
+                  ]
+                },
+                {
+                  "pitches": [
+                    {
+                      "pitch": 2,
+                      "name": "E",
+                      "endSlur": [
+                        101
+                      ],
+                      "verticalPos": 2
+                    }
+                  ],
+                  "duration": 0.25,
+                  "el_type": "note",
+                  "startChar": 315,
+                  "endChar": 319,
+                  "lyric": [
+                    {
+                      "syllable": "",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "",
+                      "divider": " "
+                    }
+                  ],
+                  "currentTrackMilliseconds": 16666.666666666668,
+                  "currentTrackWholeNotes": 12.5,
+                  "midiPitches": [
+                    {
+                      "cmd": "note",
+                      "pitch": 64,
+                      "volume": 95,
+                      "start": 12.5,
+                      "duration": 0.25,
+                      "instrument": 0,
+                      "startChar": 315,
+                      "endChar": 319,
+                      "gap": 0
+                    }
+                  ]
+                },
+                {
+                  "chord": [
+                    {
+                      "name": "B♭",
+                      "position": "default"
+                    }
+                  ],
+                  "pitches": [
+                    {
+                      "pitch": 3,
+                      "name": "F",
+                      "verticalPos": 3
+                    }
+                  ],
+                  "duration": 0.25,
+                  "el_type": "note",
+                  "startChar": 319,
+                  "endChar": 326,
+                  "lyric": [
+                    {
+                      "syllable": "sos",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "da",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "do",
+                      "divider": "-"
+                    },
+                    {
+                      "syllable": "me",
+                      "divider": " "
+                    }
+                  ],
+                  "currentTrackMilliseconds": 17000,
+                  "currentTrackWholeNotes": 12.75,
+                  "midiPitches": [
+                    {
+                      "cmd": "note",
+                      "pitch": 65,
+                      "volume": 95,
+                      "start": 12.75,
+                      "duration": 0.25,
+                      "instrument": 0,
+                      "startChar": 319,
+                      "endChar": 326,
+                      "gap": 0
+                    }
+                  ]
+                },
+                {
+                  "pitches": [
+                    {
+                      "pitch": 4,
+                      "name": "G",
+                      "verticalPos": 4
+                    }
+                  ],
+                  "duration": 0.25,
+                  "el_type": "note",
+                  "startChar": 326,
+                  "endChar": 328,
+                  "lyric": [
+                    {
+                      "syllable": "pe",
+                      "divider": "-"
+                    },
+                    {
+                      "syllable": "de",
+                      "divider": "-"
+                    },
+                    {
+                      "syllable": "nos",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "de",
+                      "divider": " "
+                    }
+                  ],
+                  "currentTrackMilliseconds": 17333.333333333332,
+                  "currentTrackWholeNotes": 13,
+                  "midiPitches": [
+                    {
+                      "cmd": "note",
+                      "pitch": 67,
+                      "volume": 95,
+                      "start": 13,
+                      "duration": 0.25,
+                      "instrument": 0,
+                      "startChar": 326,
+                      "endChar": 328,
+                      "gap": 0
+                    }
+                  ]
+                },
+                {
+                  "type": "bar_thin",
+                  "el_type": "bar",
+                  "startChar": 328,
+                  "endChar": 329
+                },
+                {
+                  "chord": [
+                    {
+                      "name": "F",
+                      "position": "default"
+                    }
+                  ],
+                  "pitches": [
+                    {
+                      "pitch": 3,
+                      "name": "F",
+                      "verticalPos": 3
+                    }
+                  ],
+                  "duration": 0.5,
+                  "el_type": "note",
+                  "startChar": 329,
+                  "endChar": 336,
+                  "lyric": [
+                    {
+                      "syllable": "ca",
+                      "divider": "-"
+                    },
+                    {
+                      "syllable": "pon",
+                      "divider": "-"
+                    },
+                    {
+                      "syllable": "ver",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "cul",
+                      "divider": "-"
+                    }
+                  ],
+                  "currentTrackMilliseconds": 17666.666666666668,
+                  "currentTrackWholeNotes": 13.25,
+                  "midiPitches": [
+                    {
+                      "cmd": "note",
+                      "pitch": 65,
+                      "volume": 105,
+                      "start": 13.25,
+                      "duration": 0.5,
+                      "instrument": 0,
+                      "startChar": 329,
+                      "endChar": 336,
+                      "gap": 0
+                    }
+                  ]
+                },
+                {
+                  "chord": [
+                    {
+                      "name": "C",
+                      "position": "default"
+                    }
+                  ],
+                  "pitches": [
+                    {
+                      "pitch": 0,
+                      "name": "C",
+                      "verticalPos": 0
+                    }
+                  ],
+                  "duration": 0.25,
+                  "el_type": "note",
+                  "startChar": 336,
+                  "endChar": 342,
+                  "lyric": [
+                    {
+                      "syllable": "dos",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "do",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "a",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "pas",
+                      "divider": " "
+                    }
+                  ],
+                  "currentTrackMilliseconds": 18333.333333333336,
+                  "currentTrackWholeNotes": 13.75,
+                  "midiPitches": [
+                    {
+                      "cmd": "note",
+                      "pitch": 60,
+                      "volume": 95,
+                      "start": 13.75,
+                      "duration": 0.25,
+                      "instrument": 0,
+                      "startChar": 336,
+                      "endChar": 342,
+                      "gap": 0
+                    }
+                  ]
+                },
+                {
+                  "pitches": [
+                    {
+                      "pitch": 5,
+                      "name": "A",
+                      "verticalPos": 5
+                    }
+                  ],
+                  "duration": 0.25,
+                  "el_type": "note",
+                  "startChar": 342,
+                  "endChar": 344,
+                  "lyric": [
+                    {
+                      "syllable": "mor",
+                      "divider": "-"
+                    },
+                    {
+                      "syllable": "praas",
+                      "divider": "-"
+                    },
+                    {
+                      "syllable": "re",
+                      "divider": "-"
+                    },
+                    {
+                      "syllable": "o",
+                      "divider": " "
+                    }
+                  ],
+                  "currentTrackMilliseconds": 18666.666666666668,
+                  "currentTrackWholeNotes": 14,
+                  "midiPitches": [
+                    {
+                      "cmd": "note",
+                      "pitch": 69,
+                      "volume": 95,
+                      "start": 14,
+                      "duration": 0.25,
+                      "instrument": 0,
+                      "startChar": 342,
+                      "endChar": 344,
+                      "gap": 0
+                    }
+                  ]
+                },
+                {
+                  "type": "bar_thin",
+                  "el_type": "bar",
+                  "startChar": 344,
+                  "endChar": 345
+                },
+                {
+                  "chord": [
+                    {
+                      "name": "F",
+                      "position": "default"
+                    }
+                  ],
+                  "pitches": [
+                    {
+                      "pitch": 5,
+                      "name": "A",
+                      "startSlur": [
+                        {
+                          "label": 101
+                        }
+                      ],
+                      "verticalPos": 5
+                    }
+                  ],
+                  "duration": 0.25,
+                  "el_type": "note",
+                  "startChar": 345,
+                  "endChar": 353,
+                  "lyric": [
+                    {
+                      "syllable": "res",
+                      "divider": "_"
+                    },
+                    {
+                      "syllable": "sim",
+                      "divider": "_"
+                    },
+                    {
+                      "syllable": "al",
+                      "divider": "_"
+                    },
+                    {
+                      "syllable": "rÃ©u",
+                      "divider": "_"
+                    }
+                  ],
+                  "currentTrackMilliseconds": 19000,
+                  "currentTrackWholeNotes": 14.25,
+                  "midiPitches": [
+                    {
+                      "cmd": "note",
+                      "pitch": 69,
+                      "volume": 105,
+                      "start": 14.25,
+                      "duration": 0.25,
+                      "instrument": 0,
+                      "startChar": 345,
+                      "endChar": 353,
+                      "endType": "tenuto",
+                      "gap": -0.001
+                    }
+                  ]
+                },
+                {
+                  "pitches": [
+                    {
+                      "pitch": 4,
+                      "name": "G",
+                      "endSlur": [
+                        101
+                      ],
+                      "verticalPos": 4
+                    }
+                  ],
+                  "duration": 0.25,
+                  "el_type": "note",
+                  "startChar": 353,
+                  "endChar": 357,
+                  "lyric": [
+                    {
+                      "syllable": "",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "",
+                      "divider": " "
+                    }
+                  ],
+                  "currentTrackMilliseconds": 19333.333333333336,
+                  "currentTrackWholeNotes": 14.5,
+                  "midiPitches": [
+                    {
+                      "cmd": "note",
+                      "pitch": 67,
+                      "volume": 95,
+                      "start": 14.5,
+                      "duration": 0.25,
+                      "instrument": 0,
+                      "startChar": 353,
+                      "endChar": 357,
+                      "gap": 0
+                    }
+                  ]
+                },
+                {
+                  "chord": [
+                    {
+                      "name": "B♭",
+                      "position": "default"
+                    }
+                  ],
+                  "pitches": [
+                    {
+                      "pitch": 5,
+                      "name": "A",
+                      "verticalPos": 5
+                    }
+                  ],
+                  "duration": 0.25,
+                  "el_type": "note",
+                  "startChar": 357,
+                  "endChar": 364,
+                  "lyric": [
+                    {
+                      "syllable": "te",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "nos",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "per",
+                      "divider": "-"
+                    },
+                    {
+                      "syllable": "pe",
+                      "divider": "-"
+                    }
+                  ],
+                  "currentTrackMilliseconds": 19666.666666666668,
+                  "currentTrackWholeNotes": 14.75,
+                  "midiPitches": [
+                    {
+                      "cmd": "note",
+                      "pitch": 69,
+                      "volume": 95,
+                      "start": 14.75,
+                      "duration": 0.25,
+                      "instrument": 0,
+                      "startChar": 357,
+                      "endChar": 364,
+                      "gap": 0
+                    }
+                  ]
+                },
+                {
+                  "pitches": [
+                    {
+                      "pitch": 6,
+                      "name": "B",
+                      "verticalPos": 6
+                    }
+                  ],
+                  "duration": 0.25,
+                  "el_type": "note",
+                  "startChar": 364,
+                  "endChar": 366,
+                  "lyric": [
+                    {
+                      "syllable": "na",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "re",
+                      "divider": "-"
+                    },
+                    {
+                      "syllable": "fei",
+                      "divider": "-"
+                    },
+                    {
+                      "syllable": "ca",
+                      "divider": "-"
+                    }
+                  ],
+                  "currentTrackMilliseconds": 20000,
+                  "currentTrackWholeNotes": 15,
+                  "midiPitches": [
+                    {
+                      "cmd": "note",
+                      "pitch": 70,
+                      "volume": 95,
+                      "start": 15,
+                      "duration": 0.25,
+                      "instrument": 0,
+                      "startChar": 364,
+                      "endChar": 366,
+                      "gap": 0
+                    }
+                  ]
+                },
+                {
+                  "type": "bar_thin",
+                  "el_type": "bar",
+                  "startChar": 366,
+                  "endChar": 367
+                },
+                {
+                  "chord": [
+                    {
+                      "name": "F",
+                      "position": "default"
+                    }
+                  ],
+                  "pitches": [
+                    {
+                      "pitch": 5,
+                      "name": "A",
+                      "verticalPos": 5
+                    }
+                  ],
+                  "duration": 0.5,
+                  "el_type": "note",
+                  "startChar": 367,
+                  "endChar": 374,
+                  "lyric": [
+                    {
+                      "syllable": "cruz",
+                      "divider": "_"
+                    },
+                    {
+                      "syllable": "mir.",
+                      "divider": "_"
+                    },
+                    {
+                      "syllable": "Ã§Ã£o.",
+                      "divider": "_"
+                    },
+                    {
+                      "syllable": "dor.",
+                      "divider": "_"
+                    }
+                  ],
+                  "currentTrackMilliseconds": 20333.333333333336,
+                  "currentTrackWholeNotes": 15.25,
+                  "midiPitches": [
+                    {
+                      "cmd": "note",
+                      "pitch": 69,
+                      "volume": 105,
+                      "start": 15.25,
+                      "duration": 0.5,
+                      "instrument": 0,
+                      "startChar": 367,
+                      "endChar": 374,
+                      "gap": 0
+                    }
+                  ]
+                },
+                {
+                  "chord": [
+                    {
+                      "name": "C",
+                      "position": "default"
+                    }
+                  ],
+                  "pitches": [
+                    {
+                      "pitch": 4,
+                      "name": "G",
+                      "verticalPos": 4
+                    }
+                  ],
+                  "duration": 0.25,
+                  "el_type": "note",
+                  "startChar": 374,
+                  "endChar": 380,
+                  "lyric": [
+                    {
+                      "syllable": "",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "",
+                      "divider": " "
+                    }
+                  ],
+                  "currentTrackMilliseconds": 21000,
+                  "currentTrackWholeNotes": 15.75,
+                  "midiPitches": [
+                    {
+                      "cmd": "note",
+                      "pitch": 67,
+                      "volume": 95,
+                      "start": 15.75,
+                      "duration": 0.25,
+                      "instrument": 0,
+                      "startChar": 374,
+                      "endChar": 380,
+                      "gap": 0
+                    }
+                  ]
+                },
+                {
+                  "pitches": [
+                    {
+                      "pitch": 5,
+                      "name": "A",
+                      "verticalPos": 5
+                    }
+                  ],
+                  "duration": 0.25,
+                  "el_type": "note",
+                  "startChar": 380,
+                  "endChar": 382,
+                  "lyric": [
+                    {
+                      "syllable": "Por",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "A",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "Fa",
+                      "divider": "-"
+                    },
+                    {
+                      "syllable": "Ee",
+                      "divider": "-"
+                    }
+                  ],
+                  "currentTrackMilliseconds": 21333.333333333336,
+                  "currentTrackWholeNotes": 16,
+                  "midiPitches": [
+                    {
+                      "cmd": "note",
+                      "pitch": 69,
+                      "volume": 95,
+                      "start": 16,
+                      "duration": 0.25,
+                      "instrument": 0,
+                      "startChar": 380,
+                      "endChar": 382,
+                      "gap": 0
+                    }
+                  ]
+                },
+                {
+                  "type": "bar_thin",
+                  "el_type": "bar",
+                  "startChar": 382,
+                  "endChar": 383
+                },
+                {
+                  "chord": [
+                    {
+                      "name": "B♭",
+                      "position": "default"
+                    }
+                  ],
+                  "pitches": [
+                    {
+                      "pitch": 6,
+                      "name": "B",
+                      "startSlur": [
+                        {
+                          "label": 101
+                        }
+                      ],
+                      "verticalPos": 6
+                    }
+                  ],
+                  "duration": 0.25,
+                  "el_type": "note",
+                  "startChar": 383,
+                  "endChar": 392,
+                  "lyric": [
+                    {
+                      "syllable": "nos",
+                      "divider": "_"
+                    },
+                    {
+                      "syllable": "vi",
+                      "divider": "_"
+                    },
+                    {
+                      "syllable": "zen",
+                      "divider": "_"
+                    },
+                    {
+                      "syllable": "xi",
+                      "divider": "_"
+                    }
+                  ],
+                  "currentTrackMilliseconds": 21666.666666666668,
+                  "currentTrackWholeNotes": 16.25,
+                  "midiPitches": [
+                    {
+                      "cmd": "note",
+                      "pitch": 70,
+                      "volume": 105,
+                      "start": 16.25,
+                      "duration": 0.25,
+                      "instrument": 0,
+                      "startChar": 383,
+                      "endChar": 392,
+                      "endType": "tenuto",
+                      "gap": -0.001
+                    }
+                  ]
+                },
+                {
+                  "pitches": [
+                    {
+                      "pitch": 5,
+                      "name": "A",
+                      "endSlur": [
+                        101
+                      ],
+                      "verticalPos": 5
+                    }
+                  ],
+                  "duration": 0.25,
+                  "el_type": "note",
+                  "startChar": 392,
+                  "endChar": 396,
+                  "lyric": [
+                    {
+                      "syllable": "",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "",
+                      "divider": " "
+                    }
+                  ],
+                  "currentTrackMilliseconds": 22000,
+                  "currentTrackWholeNotes": 16.5,
+                  "midiPitches": [
+                    {
+                      "cmd": "note",
+                      "pitch": 69,
+                      "volume": 95,
+                      "start": 16.5,
+                      "duration": 0.25,
+                      "instrument": 0,
+                      "startChar": 392,
+                      "endChar": 396,
+                      "gap": 0
+                    }
+                  ]
+                },
+                {
+                  "pitches": [
+                    {
+                      "pitch": 4,
+                      "name": "G",
+                      "verticalPos": 4
+                    }
+                  ],
+                  "duration": 0.25,
+                  "el_type": "note",
+                  "startChar": 396,
+                  "endChar": 399,
+                  "lyric": [
+                    {
+                      "syllable": "sos",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "da",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "do",
+                      "divider": "-"
+                    },
+                    {
+                      "syllable": "me",
+                      "divider": " "
+                    }
+                  ],
+                  "currentTrackMilliseconds": 22333.333333333336,
+                  "currentTrackWholeNotes": 16.75,
+                  "midiPitches": [
+                    {
+                      "cmd": "note",
+                      "pitch": 67,
+                      "volume": 95,
+                      "start": 16.75,
+                      "duration": 0.25,
+                      "instrument": 0,
+                      "startChar": 396,
+                      "endChar": 399,
+                      "gap": 0
+                    }
+                  ]
+                },
+                {
+                  "pitches": [
+                    {
+                      "pitch": 3,
+                      "name": "F",
+                      "verticalPos": 3
+                    }
+                  ],
+                  "duration": 0.25,
+                  "el_type": "note",
+                  "startChar": 399,
+                  "endChar": 401,
+                  "lyric": [
+                    {
+                      "syllable": "pe",
+                      "divider": "-"
+                    },
+                    {
+                      "syllable": "de",
+                      "divider": "-"
+                    },
+                    {
+                      "syllable": "nos",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "de",
+                      "divider": " "
+                    }
+                  ],
+                  "currentTrackMilliseconds": 22666.666666666664,
+                  "currentTrackWholeNotes": 17,
+                  "midiPitches": [
+                    {
+                      "cmd": "note",
+                      "pitch": 65,
+                      "volume": 95,
+                      "start": 17,
+                      "duration": 0.25,
+                      "instrument": 0,
+                      "startChar": 399,
+                      "endChar": 401,
+                      "gap": 0
+                    }
+                  ]
+                },
+                {
+                  "type": "bar_thin",
+                  "el_type": "bar",
+                  "startChar": 401,
+                  "endChar": 402
+                },
+                {
+                  "chord": [
+                    {
+                      "name": "C",
+                      "position": "default"
+                    }
+                  ],
+                  "pitches": [
+                    {
+                      "pitch": 2,
+                      "name": "E",
+                      "verticalPos": 2
+                    }
+                  ],
+                  "duration": 0.5,
+                  "el_type": "note",
+                  "startChar": 402,
+                  "endChar": 409,
+                  "lyric": [
+                    {
+                      "syllable": "ca",
+                      "divider": "-"
+                    },
+                    {
+                      "syllable": "pon",
+                      "divider": "-"
+                    },
+                    {
+                      "syllable": "ver",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "cul",
+                      "divider": "-"
+                    }
+                  ],
+                  "currentTrackMilliseconds": 23000,
+                  "currentTrackWholeNotes": 17.25,
+                  "midiPitches": [
+                    {
+                      "cmd": "note",
+                      "pitch": 64,
+                      "volume": 105,
+                      "start": 17.25,
+                      "duration": 0.5,
+                      "instrument": 0,
+                      "startChar": 402,
+                      "endChar": 409,
+                      "gap": 0
+                    }
+                  ]
+                },
+                {
+                  "chord": [
+                    {
+                      "name": "F",
+                      "position": "default"
+                    }
+                  ],
+                  "pitches": [
+                    {
+                      "pitch": 3,
+                      "name": "F",
+                      "verticalPos": 3
+                    }
+                  ],
+                  "duration": 0.25,
+                  "el_type": "note",
+                  "startChar": 409,
+                  "endChar": 415,
+                  "lyric": [
+                    {
+                      "syllable": "dos",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "do",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "a",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "pas",
+                      "divider": " "
+                    }
+                  ],
+                  "currentTrackMilliseconds": 23666.666666666664,
+                  "currentTrackWholeNotes": 17.75,
+                  "midiPitches": [
+                    {
+                      "cmd": "note",
+                      "pitch": 65,
+                      "volume": 95,
+                      "start": 17.75,
+                      "duration": 0.25,
+                      "instrument": 0,
+                      "startChar": 409,
+                      "endChar": 415,
+                      "gap": 0
+                    }
+                  ]
+                },
+                {
+                  "pitches": [
+                    {
+                      "pitch": 6,
+                      "name": "B",
+                      "verticalPos": 6
+                    }
+                  ],
+                  "duration": 0.25,
+                  "el_type": "note",
+                  "startChar": 415,
+                  "endChar": 417,
+                  "lyric": [
+                    {
+                      "syllable": "mor",
+                      "divider": "-"
+                    },
+                    {
+                      "syllable": "praas",
+                      "divider": "-"
+                    },
+                    {
+                      "syllable": "re",
+                      "divider": "-"
+                    },
+                    {
+                      "syllable": "o",
+                      "divider": " "
+                    }
+                  ],
+                  "currentTrackMilliseconds": 24000,
+                  "currentTrackWholeNotes": 18,
+                  "midiPitches": [
+                    {
+                      "cmd": "note",
+                      "pitch": 70,
+                      "volume": 95,
+                      "start": 18,
+                      "duration": 0.25,
+                      "instrument": 0,
+                      "startChar": 415,
+                      "endChar": 417,
+                      "gap": 0
+                    }
+                  ]
+                },
+                {
+                  "type": "bar_thin",
+                  "el_type": "bar",
+                  "startChar": 417,
+                  "endChar": 418
+                },
+                {
+                  "chord": [
+                    {
+                      "name": "F/C",
+                      "position": "default"
+                    }
+                  ],
+                  "pitches": [
+                    {
+                      "pitch": 5,
+                      "name": "A",
+                      "verticalPos": 5
+                    }
+                  ],
+                  "duration": 0.5,
+                  "el_type": "note",
+                  "startChar": 418,
+                  "endChar": 427,
+                  "lyric": [
+                    {
+                      "syllable": "res",
+                      "divider": "-"
+                    },
+                    {
+                      "syllable": "sim",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "al",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "rÃ©u",
+                      "divider": " "
+                    }
+                  ],
+                  "currentTrackMilliseconds": 24333.333333333332,
+                  "currentTrackWholeNotes": 18.25,
+                  "midiPitches": [
+                    {
+                      "cmd": "note",
+                      "pitch": 69,
+                      "volume": 105,
+                      "start": 18.25,
+                      "duration": 0.5,
+                      "instrument": 0,
+                      "startChar": 418,
+                      "endChar": 427,
+                      "gap": 0
+                    }
+                  ]
+                },
+                {
+                  "chord": [
+                    {
+                      "name": "C7",
+                      "position": "default"
+                    }
+                  ],
+                  "pitches": [
+                    {
+                      "pitch": 4,
+                      "name": "G",
+                      "verticalPos": 4
+                    }
+                  ],
+                  "duration": 0.375,
+                  "el_type": "note",
+                  "startChar": 427,
+                  "endChar": 433,
+                  "lyric": [
+                    {
+                      "syllable": "te",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "nos",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "per",
+                      "divider": "-"
+                    },
+                    {
+                      "syllable": "pe",
+                      "divider": "-"
+                    }
+                  ],
+                  "currentTrackMilliseconds": 25000,
+                  "currentTrackWholeNotes": 18.75,
+                  "midiPitches": [
+                    {
+                      "cmd": "note",
+                      "pitch": 67,
+                      "volume": 95,
+                      "start": 18.75,
+                      "duration": 0.375,
+                      "instrument": 0,
+                      "startChar": 427,
+                      "endChar": 433,
+                      "gap": 0
+                    }
+                  ]
+                },
+                {
+                  "pitches": [
+                    {
+                      "pitch": 3,
+                      "name": "F",
+                      "verticalPos": 3
+                    }
+                  ],
+                  "duration": 0.125,
+                  "el_type": "note",
+                  "startChar": 433,
+                  "endChar": 434,
+                  "lyric": [
+                    {
+                      "syllable": "na",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "re",
+                      "divider": "-"
+                    },
+                    {
+                      "syllable": "fei",
+                      "divider": "-"
+                    },
+                    {
+                      "syllable": "ca",
+                      "divider": "-"
+                    }
+                  ],
+                  "currentTrackMilliseconds": 25500,
+                  "currentTrackWholeNotes": 19.125,
+                  "midiPitches": [
+                    {
+                      "cmd": "note",
+                      "pitch": 65,
+                      "volume": 85,
+                      "start": 19.125,
+                      "duration": 0.125,
+                      "instrument": 0,
+                      "startChar": 433,
+                      "endChar": 434,
+                      "gap": 0
+                    }
+                  ]
+                },
+                {
+                  "type": "bar_thin",
+                  "el_type": "bar",
+                  "startChar": 434,
+                  "endChar": 435
+                },
+                {
+                  "chord": [
+                    {
+                      "name": "F",
+                      "position": "default"
+                    }
+                  ],
+                  "pitches": [
+                    {
+                      "pitch": 3,
+                      "name": "F",
+                      "verticalPos": 3
+                    }
+                  ],
+                  "duration": 0.5,
+                  "el_type": "note",
+                  "startChar": 435,
+                  "endChar": 442,
+                  "lyric": [
+                    {
+                      "syllable": "cruz",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "mir.",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "Ã§Ã£o.",
+                      "divider": " "
+                    },
+                    {
+                      "syllable": "dor.",
+                      "divider": " "
+                    }
+                  ],
+                  "currentTrackMilliseconds": 25666.666666666664,
+                  "currentTrackWholeNotes": 19.25,
+                  "midiPitches": [
+                    {
+                      "cmd": "note",
+                      "pitch": 65,
+                      "volume": 105,
+                      "start": 19.25,
+                      "duration": 0.5,
+                      "instrument": 0,
+                      "startChar": 435,
+                      "endChar": 442,
+                      "gap": 0
+                    }
+                  ]
+                },
+                {
+                  "rest": {
+                    "type": "rest"
+                  },
+                  "duration": 0.25,
+                  "el_type": "note",
+                  "startChar": 442,
+                  "endChar": 445,
+                  "currentTrackMilliseconds": 26333.333333333332,
+                  "currentTrackWholeNotes": 19.75
+                },
+                {
+                  "type": "bar_thin_thick",
+                  "el_type": "bar",
+                  "startChar": 445,
+                  "endChar": 447
+                }
+              ]
+            ],
+            "clef": {
+              "type": "treble",
+              "verticalPos": 0,
+              "clefPos": 4
+            },
+            "key": {
+              "accidentals": [
+                {
+                  "acc": "flat",
+                  "note": "B",
+                  "verticalPos": 6
+                }
+              ],
+              "root": "F",
+              "acc": "",
+              "mode": ""
+            },
+            "meter": {
+              "type": "specified",
+              "value": [
+                {
+                  "num": "4",
+                  "den": "4"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "midiEvents": [
+      [
+        {
+          "cmd": "program",
+          "channel": 0,
+          "instrument": 0
+        },
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        {
+          "cmd": "program",
+          "channel": 1,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 41,
+          "volume": 64,
+          "start": 0.25,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 53,
+          "volume": 48,
+          "start": 0.5,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 57,
+          "volume": 48,
+          "start": 0.5,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 60,
+          "volume": 48,
+          "start": 0.5,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 36,
+          "volume": 64,
+          "start": 0.75,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 53,
+          "volume": 48,
+          "start": 1,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 57,
+          "volume": 48,
+          "start": 1,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 60,
+          "volume": 48,
+          "start": 1,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 36,
+          "volume": 64,
+          "start": 1.25,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 48,
+          "volume": 48,
+          "start": 1.5,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 52,
+          "volume": 48,
+          "start": 1.5,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 55,
+          "volume": 48,
+          "start": 1.5,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 31,
+          "volume": 64,
+          "start": 1.75,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 48,
+          "volume": 48,
+          "start": 2,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 52,
+          "volume": 48,
+          "start": 2,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 55,
+          "volume": 48,
+          "start": 2,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 41,
+          "volume": 64,
+          "start": 2.25,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 53,
+          "volume": 48,
+          "start": 2.5,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 57,
+          "volume": 48,
+          "start": 2.5,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 60,
+          "volume": 48,
+          "start": 2.5,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 36,
+          "volume": 64,
+          "start": 2.75,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 53,
+          "volume": 48,
+          "start": 3,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 57,
+          "volume": 48,
+          "start": 3,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 60,
+          "volume": 48,
+          "start": 3,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 36,
+          "volume": 64,
+          "start": 3.25,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 48,
+          "volume": 48,
+          "start": 3.5,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 52,
+          "volume": 48,
+          "start": 3.5,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 55,
+          "volume": 48,
+          "start": 3.5,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 31,
+          "volume": 64,
+          "start": 3.75,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 48,
+          "volume": 48,
+          "start": 4,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 52,
+          "volume": 48,
+          "start": 4,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 55,
+          "volume": 48,
+          "start": 4,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 38,
+          "volume": 64,
+          "start": 4.25,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 50,
+          "volume": 48,
+          "start": 4.5,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 53,
+          "volume": 48,
+          "start": 4.5,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 57,
+          "volume": 48,
+          "start": 4.5,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 43,
+          "volume": 64,
+          "start": 4.75,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 55,
+          "volume": 48,
+          "start": 5,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 59,
+          "volume": 48,
+          "start": 5,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 62,
+          "volume": 48,
+          "start": 5,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 65,
+          "volume": 48,
+          "start": 5,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 36,
+          "volume": 64,
+          "start": 5.25,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 48,
+          "volume": 48,
+          "start": 5.5,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 52,
+          "volume": 48,
+          "start": 5.5,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 55,
+          "volume": 48,
+          "start": 5.5,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 31,
+          "volume": 64,
+          "start": 5.75,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 48,
+          "volume": 48,
+          "start": 6,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 52,
+          "volume": 48,
+          "start": 6,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 55,
+          "volume": 48,
+          "start": 6,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 43,
+          "volume": 64,
+          "start": 6.25,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 55,
+          "volume": 48,
+          "start": 6.5,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 59,
+          "volume": 48,
+          "start": 6.5,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 62,
+          "volume": 48,
+          "start": 6.5,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 65,
+          "volume": 48,
+          "start": 6.5,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 38,
+          "volume": 64,
+          "start": 6.75,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 55,
+          "volume": 48,
+          "start": 7,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 59,
+          "volume": 48,
+          "start": 7,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 62,
+          "volume": 48,
+          "start": 7,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 65,
+          "volume": 48,
+          "start": 7,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 36,
+          "volume": 64,
+          "start": 7.25,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 48,
+          "volume": 48,
+          "start": 7.5,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 52,
+          "volume": 48,
+          "start": 7.5,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 55,
+          "volume": 48,
+          "start": 7.5,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 58,
+          "volume": 48,
+          "start": 7.5,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 31,
+          "volume": 64,
+          "start": 7.75,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 48,
+          "volume": 48,
+          "start": 8,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 52,
+          "volume": 48,
+          "start": 8,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 55,
+          "volume": 48,
+          "start": 8,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 58,
+          "volume": 48,
+          "start": 8,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 41,
+          "volume": 64,
+          "start": 8.25,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 53,
+          "volume": 48,
+          "start": 8.5,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 57,
+          "volume": 48,
+          "start": 8.5,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 60,
+          "volume": 48,
+          "start": 8.5,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 36,
+          "volume": 64,
+          "start": 8.75,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 53,
+          "volume": 48,
+          "start": 9,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 57,
+          "volume": 48,
+          "start": 9,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 60,
+          "volume": 48,
+          "start": 9,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 34,
+          "volume": 64,
+          "start": 9.25,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 46,
+          "volume": 48,
+          "start": 9.5,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 50,
+          "volume": 48,
+          "start": 9.5,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 53,
+          "volume": 48,
+          "start": 9.5,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 41,
+          "volume": 64,
+          "start": 9.75,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 53,
+          "volume": 48,
+          "start": 10,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 57,
+          "volume": 48,
+          "start": 10,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 60,
+          "volume": 48,
+          "start": 10,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 43,
+          "volume": 64,
+          "start": 10.25,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 55,
+          "volume": 48,
+          "start": 10.5,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 59,
+          "volume": 48,
+          "start": 10.5,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 62,
+          "volume": 48,
+          "start": 10.5,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 65,
+          "volume": 48,
+          "start": 10.5,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 38,
+          "volume": 64,
+          "start": 10.75,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 55,
+          "volume": 48,
+          "start": 11,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 59,
+          "volume": 48,
+          "start": 11,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 62,
+          "volume": 48,
+          "start": 11,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 65,
+          "volume": 48,
+          "start": 11,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 36,
+          "volume": 64,
+          "start": 11.25,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 48,
+          "volume": 48,
+          "start": 11.5,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 52,
+          "volume": 48,
+          "start": 11.5,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 55,
+          "volume": 48,
+          "start": 11.5,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 58,
+          "volume": 48,
+          "start": 11.5,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 31,
+          "volume": 64,
+          "start": 11.75,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 48,
+          "volume": 48,
+          "start": 12,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 52,
+          "volume": 48,
+          "start": 12,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 55,
+          "volume": 48,
+          "start": 12,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 58,
+          "volume": 48,
+          "start": 12,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 41,
+          "volume": 64,
+          "start": 12.25,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 53,
+          "volume": 48,
+          "start": 12.5,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 57,
+          "volume": 48,
+          "start": 12.5,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 60,
+          "volume": 48,
+          "start": 12.5,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 34,
+          "volume": 64,
+          "start": 12.75,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 46,
+          "volume": 48,
+          "start": 13,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 50,
+          "volume": 48,
+          "start": 13,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 53,
+          "volume": 48,
+          "start": 13,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 41,
+          "volume": 64,
+          "start": 13.25,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 53,
+          "volume": 48,
+          "start": 13.5,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 57,
+          "volume": 48,
+          "start": 13.5,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 60,
+          "volume": 48,
+          "start": 13.5,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 36,
+          "volume": 64,
+          "start": 13.75,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 48,
+          "volume": 48,
+          "start": 14,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 52,
+          "volume": 48,
+          "start": 14,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 55,
+          "volume": 48,
+          "start": 14,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 41,
+          "volume": 64,
+          "start": 14.25,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 53,
+          "volume": 48,
+          "start": 14.5,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 57,
+          "volume": 48,
+          "start": 14.5,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 60,
+          "volume": 48,
+          "start": 14.5,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 34,
+          "volume": 64,
+          "start": 14.75,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 46,
+          "volume": 48,
+          "start": 15,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 50,
+          "volume": 48,
+          "start": 15,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 53,
+          "volume": 48,
+          "start": 15,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 41,
+          "volume": 64,
+          "start": 15.25,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 53,
+          "volume": 48,
+          "start": 15.5,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 57,
+          "volume": 48,
+          "start": 15.5,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 60,
+          "volume": 48,
+          "start": 15.5,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 36,
+          "volume": 64,
+          "start": 15.75,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 48,
+          "volume": 48,
+          "start": 16,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 52,
+          "volume": 48,
+          "start": 16,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 55,
+          "volume": 48,
+          "start": 16,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 34,
+          "volume": 64,
+          "start": 16.25,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 46,
+          "volume": 48,
+          "start": 16.5,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 50,
+          "volume": 48,
+          "start": 16.5,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 53,
+          "volume": 48,
+          "start": 16.5,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 29,
+          "volume": 64,
+          "start": 16.75,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 46,
+          "volume": 48,
+          "start": 17,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 50,
+          "volume": 48,
+          "start": 17,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 53,
+          "volume": 48,
+          "start": 17,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 36,
+          "volume": 64,
+          "start": 17.25,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 48,
+          "volume": 48,
+          "start": 17.5,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 52,
+          "volume": 48,
+          "start": 17.5,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 55,
+          "volume": 48,
+          "start": 17.5,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 41,
+          "volume": 64,
+          "start": 17.75,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 53,
+          "volume": 48,
+          "start": 18,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 57,
+          "volume": 48,
+          "start": 18,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 60,
+          "volume": 48,
+          "start": 18,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 36,
+          "volume": 64,
+          "start": 18.25,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 53,
+          "volume": 48,
+          "start": 18.5,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 57,
+          "volume": 48,
+          "start": 18.5,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 60,
+          "volume": 48,
+          "start": 18.5,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 31,
+          "volume": 64,
+          "start": 18.75,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 48,
+          "volume": 48,
+          "start": 19,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 52,
+          "volume": 48,
+          "start": 19,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 55,
+          "volume": 48,
+          "start": 19,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 58,
+          "volume": 48,
+          "start": 19,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 53,
+          "volume": 48,
+          "start": 19.25,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 57,
+          "volume": 48,
+          "start": 19.25,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 60,
+          "volume": 48,
+          "start": 19.25,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 53,
+          "volume": 48,
+          "start": 19.5,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 57,
+          "volume": 48,
+          "start": 19.5,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        },
+        {
+          "cmd": "note",
+          "pitch": 60,
+          "volume": 48,
+          "start": 19.5,
+          "duration": 0.125,
+          "gap": 0,
+          "instrument": 0
+        }
+      ]
+    ]
+  }
+]

@@ -2,7 +2,7 @@ package io.github.ryangardner.abc.parser
 
 import java.util.ArrayDeque
 
-class AbcLexer(private val input: String) : Iterator<Token> {
+public class AbcLexer(private val input: String) : Iterator<Token> {
     private var position = 0
     private var line = 1
     private var column = 1
@@ -36,7 +36,7 @@ class AbcLexer(private val input: String) : Iterator<Token> {
         return token
     }
 
-    fun peekToken(): Token {
+    public fun peekToken(): Token {
         if (buffer.isEmpty()) {
             fillBuffer()
         }
@@ -54,7 +54,28 @@ class AbcLexer(private val input: String) : Iterator<Token> {
             return
         }
 
-        skipWhitespace()
+        // If we are at column 1, check for header field.
+        if (column == 1) {
+            val char = peek()
+            if ((char.isLetter() || char == 'w' || char == 'W') && peek(1) == ':') {
+                if (char == 'X') {
+                    state = LexerState.HEADER
+                    scanHeaderField()
+                } else if (state == LexerState.BODY) {
+                    scanHeaderInBody(column)
+                } else {
+                    scanHeaderField()
+                }
+                return
+            }
+        }
+
+        // Standard whitespace skipping
+        val nextChar = peek()
+        if (nextChar == ' ' || nextChar == '\t') {
+            skipWhitespace()
+        }
+        
         if (position >= input.length) {
              if (buffer.isEmpty() && !eofEmitted) {
                  buffer.add(Token(TokenType.EOF, "", line, column))
@@ -68,8 +89,42 @@ class AbcLexer(private val input: String) : Iterator<Token> {
         }
     }
 
+    private fun scanHeaderField() {
+        val startCol = column
+        val key = consume().toString() // Letter
+        consume() // :
+
+        buffer.add(Token(TokenType.HEADER_KEY, key, line, startCol))
+
+        // Skip any whitespace immediately after the colon
+        while (peek() == ' ' || peek() == '\t') {
+            consume()
+        }
+
+        // Read value until newline
+        val valueStartCol = column
+        val sb = StringBuilder()
+        while (position < input.length) {
+            val c = peek()
+            if (c == '\n' || c == '\r' || c == '%') break
+            sb.append(consume())
+        }
+        buffer.add(Token(TokenType.HEADER_VALUE, sb.toString().trim(), line, valueStartCol))
+
+        if (key == "K") {
+            pendingBodyTransition = true
+        }
+    }
+
     private fun scanHeader() {
         val char = peek()
+
+        // Whitespace
+        if (char == ' ' || char == '\t') {
+            consume()
+            buffer.add(Token(TokenType.WHITESPACE, char.toString(), line, column - 1))
+            return
+        }
 
         // Comment
         if (char == '%') {
@@ -83,43 +138,8 @@ class AbcLexer(private val input: String) : Iterator<Token> {
              return
         }
 
-        // Header Field: Letter followed by :
-        if (char.isLetter()) {
-            val nextChar = peek(1)
-            if (nextChar == ':') {
-                val startCol = column
-                val key = consume().toString() // Letter
-                consume() // :
-
-                buffer.add(Token(TokenType.HEADER_KEY, key, line, startCol))
-
-                // Read value until newline
-                val valueStartCol = column
-                val sb = StringBuilder()
-                while (position < input.length) {
-                    val c = peek()
-                    if (c == '\n' || c == '\r' || c == '%') break
-                    sb.append(consume())
-                }
-                buffer.add(Token(TokenType.HEADER_VALUE, sb.toString().trim(), line, valueStartCol))
-
-                if (key == "K") {
-                    pendingBodyTransition = true
-                }
-                return
-            }
-        }
-
-        // If not a header field, but we are in HEADER state, it might be a continuation or we should be in BODY?
-        // Standard says "The next line [after K:] is the start of the tune body."
-        // But if we encounter a line that is NOT a header field before K:?
-        // "A line beginning with a letter followed by a colon is a header field. Any other line is part of the tune body."
-        // So if it's NOT a header field, we should switch to BODY?
-        // But comments and empty lines are allowed in header.
-
         // If it's not a comment, not a newline, and not a header field:
         // Switch to BODY immediately?
-        // Let's assume yes.
         state = LexerState.BODY
         scanBody()
     }
@@ -128,6 +148,11 @@ class AbcLexer(private val input: String) : Iterator<Token> {
         val char = peek()
         val startCol = column
 
+        if (char == ' ' || char == '\t') {
+            consume()
+            buffer.add(Token(TokenType.WHITESPACE, char.toString(), line, startCol))
+            return
+        }
         if (char == '%') {
              scanCommentOrDirective()
              return
@@ -137,135 +162,202 @@ class AbcLexer(private val input: String) : Iterator<Token> {
              return
         }
 
-        // Bar Lines
-        if (char == '|') {
-             consume()
-             if (peek() == ']') {
-                 consume()
-                 buffer.add(Token(TokenType.BAR_LINE, "|]", line, startCol))
-             } else if (peek() == '|') {
-                 consume()
-                 buffer.add(Token(TokenType.BAR_LINE, "||", line, startCol))
-             } else if (peek() == ':') {
-                 consume()
-                 buffer.add(Token(TokenType.BAR_LINE, "|:", line, startCol))
-             } else {
-                 buffer.add(Token(TokenType.BAR_LINE, "|", line, startCol))
-             }
-             return
-        }
-
-        if (char == ':') {
-             if (peek(1) == '|') {
-                 consume()
-                 consume()
-                 buffer.add(Token(TokenType.BAR_LINE, ":|", line, startCol))
-                 return
-             }
-             // : inside body? Repeat start |: handled above.
-             // Maybe just consume as UNKNOWN?
-             consume()
-             buffer.add(Token(TokenType.UNKNOWN, ":", line, startCol))
-             return
-        }
-
-        // Chords or Inline Fields
-        if (char == '[') {
-            // Check for inline field [K:...]
-            if (peek(1).isLetter() && peek(2) == ':') {
-                scanInlineField()
-                return
+        when (char) {
+            '"' -> scanAnnotation(startCol)
+            '|' -> scanBarLine(startCol)
+            ':' -> scanColon(startCol)
+            '[' -> scanSquareBracket(startCol)
+            ']' -> {
+                consume()
+                buffer.add(Token(TokenType.CHORD_END, "]", line, startCol))
             }
-            // Chord start
-            consume()
-            buffer.add(Token(TokenType.CHORD_START, "[", line, startCol))
-            return
-        }
-
-        if (char == ']') {
-            consume()
-            buffer.add(Token(TokenType.CHORD_END, "]", line, startCol))
-            return
-        }
-
-        // Notes
-        if (char in "abcdefgABCDEFG") {
-            val noteStart = consume().toString()
-            var noteText = noteStart
-            while (position < input.length) {
-                val next = peek()
-                if (next == ',' || next == '\'') {
-                    noteText += consume()
+            in "abcdefgABCDEFG", ',', '\'' -> scanNote(startCol)
+            in "zZxX" -> {
+                buffer.add(Token(TokenType.REST, consume().toString(), line, startCol))
+            }
+            '^', '_', '=' -> scanAccidental(startCol)
+            '>', '<' -> scanBrokenRhythm(startCol)
+            in '0'..'9' -> {
+                // If it's a digit and the previous token was a TIE, it might be a note continuation (e.g. c-4)
+                if (buffer.isNotEmpty() && buffer.last.type == TokenType.TIE) {
+                    scanNote(startCol)
                 } else {
-                    break
+                    scanDuration(startCol)
                 }
             }
-            buffer.add(Token(TokenType.NOTE, noteText, line, startCol))
-            return
-        }
-
-        // Rest 'z' or 'Z' or 'x' or 'X'
-        if (char in "zZxX") {
-             buffer.add(Token(TokenType.REST, consume().toString(), line, startCol))
-             return
-        }
-
-        // Accidentals
-        if (char == '^' || char == '_' || char == '=') {
-            var acc = consume().toString()
-            if ((peek() == '^' && acc == "^") || (peek() == '_' && acc == "_")) {
-                acc += consume()
+            '/' -> scanDuration(startCol)
+            '-' -> {
+                buffer.add(Token(TokenType.TIE, consume().toString(), line, startCol))
             }
-            buffer.add(Token(TokenType.ACCIDENTAL, acc, line, startCol))
-            return
-        }
-
-        // Duration
-        if (char.isDigit() || char == '/') {
-            val sb = StringBuilder()
-            while (peek().isDigit() || peek() == '/') {
-                sb.append(consume())
+            '(' -> scanLeftParenthesis(startCol)
+            ')' -> {
+                buffer.add(Token(TokenType.SLUR_END, consume().toString(), line, startCol))
             }
-            buffer.add(Token(TokenType.DURATION, sb.toString(), line, startCol))
-            return
+            '{' -> {
+                buffer.add(Token(TokenType.GRACE_START, consume().toString(), line, startCol))
+            }
+            '}' -> {
+                buffer.add(Token(TokenType.GRACE_END, consume().toString(), line, startCol))
+            }
+            '!' -> scanDecorationExclamation(startCol)
+            in ".~HLMSTuv" -> {
+                buffer.add(Token(TokenType.DECORATION, consume().toString(), line, startCol))
+            }
+            else -> {
+                consume()
+                buffer.add(Token(TokenType.UNKNOWN, char.toString(), line, startCol))
+            }
         }
+    }
 
-        // Ties -
-        if (char == '-') {
-            buffer.add(Token(TokenType.TIE, consume().toString(), line, startCol))
-            return
-        }
-
-        // Slurs ( )
-        if (char == '(') {
-            buffer.add(Token(TokenType.SLUR_START, consume().toString(), line, startCol))
-            return
-        }
-        if (char == ')') {
-            buffer.add(Token(TokenType.SLUR_END, consume().toString(), line, startCol))
-            return
-        }
-
-        // Decorations !...! or . ~ etc
-        if (char == '!') {
+    private fun scanHeaderInBody(startCol: Int) {
+        val key = consume().toString()
+        consume() // :
+        buffer.add(Token(TokenType.HEADER_KEY, key, line, startCol))
+        
+        // Skip spaces after colon
+        while (peek() == ' ' || peek() == '\t') {
             consume()
-            val sb = StringBuilder()
-            while (position < input.length && peek() != '!' && peek() != '\n') {
-                sb.append(consume())
+        }
+        
+        val valueStartCol = column
+        val value = readUntilNewline()
+        buffer.add(Token(TokenType.HEADER_VALUE, value.trim(), line, valueStartCol))
+    }
+
+    private fun scanAnnotation(startCol: Int) {
+        consume()
+        val sb = StringBuilder()
+        while (position < input.length && peek() != '"' && peek() != '\n') {
+            sb.append(consume())
+        }
+        if (peek() == '"') consume()
+        buffer.add(Token(TokenType.UNKNOWN, sb.toString(), line, startCol))
+    }
+
+    private fun scanBarLine(startCol: Int) {
+        consume()
+        if (peek() == ']') {
+            consume()
+            buffer.add(Token(TokenType.BAR_LINE, "|]", line, startCol))
+        } else if (peek() == '|') {
+            consume()
+            buffer.add(Token(TokenType.BAR_LINE, "||", line, startCol))
+        } else if (peek() == ':') {
+            consume()
+            buffer.add(Token(TokenType.BAR_LINE, "|:", line, startCol))
+        } else {
+            buffer.add(Token(TokenType.BAR_LINE, "|", line, startCol))
+        }
+    }
+
+    private fun scanColon(startCol: Int) {
+        if (peek(1) == '|') {
+            consume()
+            consume()
+            if (peek() == ':') {
+                consume()
+                buffer.add(Token(TokenType.BAR_LINE, ":|:", line, startCol))
+            } else {
+                buffer.add(Token(TokenType.BAR_LINE, ":|", line, startCol))
             }
-            if (peek() == '!') consume()
-            buffer.add(Token(TokenType.DECORATION, sb.toString(), line, startCol))
             return
         }
-
-        if (char in ".~HLMSTuv") {
-             buffer.add(Token(TokenType.DECORATION, consume().toString(), line, startCol))
-             return
+        if (peek(1) == ':') {
+            consume()
+            consume()
+            buffer.add(Token(TokenType.BAR_LINE, "::", line, startCol))
+            return
         }
-
-        // Fallback
         consume()
-        buffer.add(Token(TokenType.UNKNOWN, char.toString(), line, startCol))
+        buffer.add(Token(TokenType.UNKNOWN, ":", line, startCol))
+    }
+
+    private fun scanSquareBracket(startCol: Int) {
+        if (peek(1).isLetter() && peek(2) == ':') {
+            scanInlineField()
+        } else {
+            consume()
+            buffer.add(Token(TokenType.CHORD_START, "[", line, startCol))
+        }
+    }
+
+    private fun scanLeftParenthesis(startCol: Int) {
+        if (peek(1).isDigit()) {
+            consume() // (
+            val sb = StringBuilder()
+            while (peek().isDigit() || peek() == ':') {
+                sb.append(consume())
+            }
+            buffer.add(Token(TokenType.TUPLET, "(" + sb.toString(), line, startCol))
+        } else {
+            consume()
+            buffer.add(Token(TokenType.SLUR_START, "(", line, startCol))
+        }
+    }
+
+    private fun scanBrokenRhythm(startCol: Int) {
+        val char = consume()
+        val sb = StringBuilder().append(char)
+        while (peek() == char) {
+            sb.append(consume())
+        }
+        buffer.add(Token(TokenType.BROKEN_RHYTHM, sb.toString(), line, startCol))
+    }
+
+    private fun scanNote(startCol: Int) {
+        val sb = StringBuilder()
+        var hasLetter = false
+        
+        while (position < input.length) {
+            val c = peek()
+            if (!hasLetter && c.isLetter() && c.uppercaseChar() in "ABCDEFG") {
+                sb.append(consume())
+                hasLetter = true
+            } else if (c == ',' || c == '\'') {
+                sb.append(consume())
+            } else if (!hasLetter && (c == ',' || c == '\'')) {
+                // Modifiers before letter (not strictly standard but happens)
+                sb.append(consume())
+            } else {
+                break
+            }
+        }
+        buffer.add(Token(TokenType.NOTE, sb.toString(), line, startCol))
+    }
+
+    private fun scanAccidental(startCol: Int) {
+        var acc = consume().toString()
+        if ((peek() == '^' && acc == "^") || (peek() == '_' && acc == "_")) {
+            acc += consume()
+        }
+        buffer.add(Token(TokenType.ACCIDENTAL, acc, line, startCol))
+    }
+
+    private fun scanNoteLength(startCol: Int) {
+        val sb = StringBuilder()
+        while (peek().isDigit() || peek() == '/') {
+            sb.append(consume())
+        }
+        buffer.add(Token(TokenType.DURATION, sb.toString(), line, startCol))
+    }
+
+    private fun scanDuration(startCol: Int) {
+        val sb = StringBuilder()
+        while (peek().isDigit() || peek() == '/') {
+            sb.append(consume())
+        }
+        buffer.add(Token(TokenType.DURATION, sb.toString(), line, startCol))
+    }
+
+    private fun scanDecorationExclamation(startCol: Int) {
+        consume()
+        val sb = StringBuilder()
+        while (position < input.length && peek() != '!' && peek() != '\n') {
+            sb.append(consume())
+        }
+        if (peek() == '!') consume()
+        buffer.add(Token(TokenType.DECORATION, sb.toString(), line, startCol))
     }
 
     private fun scanInlineField() {
@@ -305,10 +397,18 @@ class AbcLexer(private val input: String) : Iterator<Token> {
 
     private fun scanNewline() {
         val startCol = column
-        val c = consume() // \n or \r
-        if (c == '\r' && peek() == '\n') consume()
+        val c = peek()
+        if (c == '\r') {
+            position++
+            if (peek() == '\n') {
+                position++
+            }
+        } else if (c == '\n') {
+            position++
+        }
 
         buffer.add(Token(TokenType.NEWLINE, "\n", line, startCol))
+        
         line++
         column = 1
 

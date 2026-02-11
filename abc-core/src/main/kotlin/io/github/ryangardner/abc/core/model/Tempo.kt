@@ -6,7 +6,7 @@ package io.github.ryangardner.abc.core.model
  * @property bpm Beats per minute.
  * @property beatUnit The note value that the beat refers to (optional).
  */
-data class Tempo @JvmOverloads constructor(
-    val bpm: Int,
-    val beatUnit: NoteDuration? = null
+public data class Tempo @JvmOverloads constructor(
+    public val bpm: Int,
+    public val beatUnit: NoteDuration? = null
 )

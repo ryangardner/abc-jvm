@@ -1,15 +1,16 @@
 package io.github.ryangardner.abc.parser
 
 import io.github.ryangardner.abc.core.model.*
+import io.github.ryangardner.abc.theory.util.KeyParserUtil
 
-data class HeaderResult(
-    val header: TuneHeader,
-    val metadata: TuneMetadata
+public data class HeaderResult(
+    public val header: TuneHeader,
+    public val metadata: TuneMetadata
 )
 
-class HeaderParser(private val lexer: Iterator<Token>) {
+public class HeaderParser(private val lexer: AbcLexer) {
 
-    fun parse(): HeaderResult? {
+    public fun parse(): HeaderResult? {
         var reference: Int? = null
         val titles = mutableListOf<String>()
         var key: KeySignature? = null
@@ -17,6 +18,7 @@ class HeaderParser(private val lexer: Iterator<Token>) {
         var length: NoteDuration? = null
         var tempo: Tempo? = null
         val unknownHeaders = mutableMapOf<String, String>()
+        val allHeaders = mutableListOf<Pair<String, String>>()
         var metadata = TuneMetadata()
 
         while (lexer.hasNext()) {
@@ -30,6 +32,7 @@ class HeaderParser(private val lexer: Iterator<Token>) {
                         val valToken = lexer.next()
                         if (valToken.type == TokenType.HEADER_VALUE) {
                             val valueText = valToken.text.trim()
+                            allHeaders.add(keyText to valueText)
                             when (keyText) {
                                 "X" -> reference = valueText.toIntOrNull()
                                 "T" -> titles.add(valueText)
@@ -37,8 +40,13 @@ class HeaderParser(private val lexer: Iterator<Token>) {
                                 "L" -> length = parseLength(valueText)
                                 "Q" -> tempo = parseTempo(valueText)
                                 "K" -> {
-                                    key = io.github.ryangardner.abc.parser.util.KeyParserUtil.parse(valueText)
+                                    key = KeyParserUtil.parse(valueText)
                                     // K is the last header. We are done with header parsing.
+                                    // Consume the newline after K: if present
+                                    if (lexer.hasNext() && lexer.peekToken().type == TokenType.NEWLINE) {
+                                        lexer.next() // ACTUALLY CONSUME IT
+                                    }
+
                                     return HeaderResult(
                                         TuneHeader(
                                             reference = reference ?: 0,
@@ -47,6 +55,7 @@ class HeaderParser(private val lexer: Iterator<Token>) {
                                             meter = meter ?: TimeSignature(4, 4),
                                             length = length ?: NoteDuration(1, 8),
                                             tempo = tempo,
+                                            headers = allHeaders,
                                             unknownHeaders = unknownHeaders
                                         ),
                                         metadata
@@ -59,6 +68,7 @@ class HeaderParser(private val lexer: Iterator<Token>) {
                 }
                 TokenType.DIRECTIVE -> {
                     metadata = DirectiveParser.parse(token.text, metadata)
+                    allHeaders.add("%%" to token.text.trim().removePrefix("%%"))
                 }
                 TokenType.COMMENT, TokenType.NEWLINE, TokenType.WHITESPACE -> {
                     // Skip

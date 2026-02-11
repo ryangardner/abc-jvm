@@ -4,10 +4,10 @@ import io.github.ryangardner.abc.core.model.*
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
-class HeaderParserTest {
+public class HeaderParserTest {
 
     @Test
-    fun `test standard headers`() {
+    public fun `test standard headers`(): Unit {
         val input = """
             X: 1
             T: Test Tune
@@ -34,7 +34,7 @@ class HeaderParserTest {
     }
 
     @Test
-    fun `test multiple titles`() {
+    public fun `test multiple titles`(): Unit {
         val input = """
             X: 2
             T: Title 1
@@ -54,7 +54,7 @@ class HeaderParserTest {
     }
 
     @Test
-    fun `test unknown headers`() {
+    public fun `test unknown headers`(): Unit {
         val input = """
             X: 3
             C: Composer Name
@@ -75,7 +75,7 @@ class HeaderParserTest {
     }
 
     @Test
-    fun `test key parsing simple`() {
+    public fun `test key parsing simple`(): Unit {
         // Just verify what currently implemented
         val input = "X:1\nK:Dm"
         val lexer = AbcLexer(input)
@@ -87,7 +87,7 @@ class HeaderParserTest {
     }
 
     @Test
-    fun `test visual transpose directive`() {
+    public fun `test visual transpose directive`(): Unit {
         val input = """
             X: 4
             %%visualTranspose 2
@@ -103,7 +103,7 @@ class HeaderParserTest {
     }
 
     @Test
-    fun `test missing mandatory header`() {
+    public fun `test missing mandatory header`(): Unit {
         // Missing K
         val input = """
             X: 5

@@ -1,0 +1,23 @@
+X: 1
+T: Complex Sample - Slurs and Ties
+M: 4/4
+L: 1/8
+K: C
+(CDEF) (GABc) | c-c4-c3 | (c2 d2) (e2 f2) |]
+
+X: 2
+T: Complex Sample - Tuplets
+M: 4/4
+L: 1/8
+K: G
+(3GAB (3cde (3def g2 | (2AB (4cdef g4 |]
+
+X: 3
+T: Complex Sample - Multiple Voices
+M: 4/4
+L: 1/4
+K: C
+V: 1 treble
+C E G c | c G E C |
+V: 2 bass
+C,, E,, G,, C, | C, G,, E,, C,, |

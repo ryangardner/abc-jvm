@@ -1,0 +1,12 @@
+X:1
+T:Parts and Repeats Test
+P:(AB)2C
+M:4/4
+L:1/4
+K:C
+P:A
+C D E F |
+P:B
+|: G A B c :|
+P:C
+c2 G2 | C4 |]

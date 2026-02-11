@@ -3,9 +3,9 @@ package io.github.ryangardner.abc.parser
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
-class AbcLexerTest {
+public class AbcLexerTest {
     @Test
-    fun `test header parsing`() {
+    public fun `test header parsing`(): Unit {
         val input = """
             X: 1
             T: Test Tune
@@ -35,7 +35,7 @@ class AbcLexerTest {
     }
 
     @Test
-    fun `test body transition and parsing`() {
+    public fun `test body transition and parsing`(): Unit {
         val input = "K:C\nC D z |"
         val lexer = AbcLexer(input)
         val tokens = lexer.asSequence().toList()
@@ -60,7 +60,7 @@ class AbcLexerTest {
     }
 
     @Test
-    fun `test inline fields`() {
+    public fun `test inline fields`(): Unit {
         val input = "K:C\n[K:Dm] A B"
         val lexer = AbcLexer(input)
         val tokens = lexer.asSequence().toList()

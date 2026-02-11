@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNull
 import org.junit.jupiter.api.Test
 
-class TransposerTest {
+public class TransposerTest {
 
     private fun createSimpleTune(tonic: NoteStep, accidental: Accidental, mode: KeyMode, notes: List<Pitch>): AbcTune {
         val key = KeySignature(KeyRoot(tonic, accidental), mode)
@@ -23,7 +23,7 @@ class TransposerTest {
     }
 
     @Test
-    fun `test transpose C Major up 2 semitones to D Major`() {
+    public fun `test transpose C Major up 2 semitones to D Major`(): Unit {
         val tune = createSimpleTune(NoteStep.C, Accidental.NATURAL, KeyMode.IONIAN, listOf(Pitch(NoteStep.C, 4)))
         val transposed = Transposer.transpose(tune, 2)
         
@@ -38,7 +38,7 @@ class TransposerTest {
     }
 
     @Test
-    fun `test transpose G Major up 1 semitone to Ab Major`() {
+    public fun `test transpose G Major up 1 semitone to Ab Major`(): Unit {
         val tune = createSimpleTune(NoteStep.G, Accidental.NATURAL, KeyMode.IONIAN, listOf(Pitch(NoteStep.G, 4)))
         val transposed = Transposer.transpose(tune, 1)
         
@@ -51,7 +51,7 @@ class TransposerTest {
     }
 
     @Test
-    fun `test explicit natural in G Major`() {
+    public fun `test explicit natural in G Major`(): Unit {
         val tune = createSimpleTune(NoteStep.C, Accidental.NATURAL, KeyMode.IONIAN, listOf(Pitch(NoteStep.F, 4, Accidental.SHARP)))
         val transposed = Transposer.transpose(tune, 7)
         
@@ -62,7 +62,7 @@ class TransposerTest {
     }
 
     @Test
-    fun `test natural accidental needed`() {
+    public fun `test natural accidental needed`(): Unit {
         val tune = createSimpleTune(NoteStep.G, Accidental.NATURAL, KeyMode.IONIAN, listOf(Pitch(NoteStep.F, 4, Accidental.NATURAL)))
         val transposed = Transposer.transpose(tune, 2)
         
@@ -73,7 +73,7 @@ class TransposerTest {
     }
 
     @Test
-    fun `test setVisualTranspose`() {
+    public fun `test setVisualTranspose`(): Unit {
         val tune = createSimpleTune(NoteStep.C, Accidental.NATURAL, KeyMode.IONIAN, listOf(Pitch(NoteStep.C, 4)))
         val visual = tune.setVisualTranspose(2)
         

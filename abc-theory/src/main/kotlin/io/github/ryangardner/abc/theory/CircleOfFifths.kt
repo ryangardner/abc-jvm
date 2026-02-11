@@ -2,14 +2,14 @@ package io.github.ryangardner.abc.theory
 
 import io.github.ryangardner.abc.core.model.*
 
-data class KeyCandidate(
-    val tonicStep: NoteStep,
-    val tonicAccidental: Int, // -1 for flat, 0 for natural, 1 for sharp, etc.
-    val accidentalsCount: Int // Positive for sharps, negative for flats
+public data class KeyCandidate(
+    public val tonicStep: NoteStep,
+    public val tonicAccidental: Int, // -1 for flat, 0 for natural, 1 for sharp, etc.
+    public val accidentalsCount: Int // Positive for sharps, negative for flats
 ) {
-    val absoluteAccidentals: Int get() = kotlin.math.abs(accidentalsCount)
+    public val absoluteAccidentals: Int get() = kotlin.math.abs(accidentalsCount)
     
-    val tonicName: String get() = buildString {
+    public val tonicName: String get() = buildString {
         append(tonicStep.name)
         when (tonicAccidental) {
             1 -> append("#")
@@ -20,7 +20,7 @@ data class KeyCandidate(
     }
 }
 
-object CircleOfFifths {
+public object CircleOfFifths {
     // Maps semitones (0-11) to candidate Major keys
     private val majorKeys = mapOf(
         0 to listOf(KeyCandidate(NoteStep.C, 0, 0)),
@@ -37,7 +37,7 @@ object CircleOfFifths {
         11 to listOf(KeyCandidate(NoteStep.B, 0, 5), KeyCandidate(NoteStep.C, -1, -7))
     )
 
-    fun getBestMajorKey(semitones: Int): KeyCandidate {
+    public fun getBestMajorKey(semitones: Int): KeyCandidate {
         val normalized = ((semitones % 12) + 12) % 12
         return majorKeys[normalized]?.minByOrNull { it.absoluteAccidentals } 
             ?: KeyCandidate(NoteStep.C, 0, 0)
@@ -46,11 +46,33 @@ object CircleOfFifths {
     /**
      * Gets the best key for a given semitone and mode.
      */
-    fun getBestKey(tonicSemitones: Int, mode: KeyMode): KeyCandidate {
+    public fun getBestKey(key: KeySignature): KeyCandidate {
+        val tonicSemitones = key.tonicSemitones
+        val mode = key.mode
+        
         val modeOffset = getModeOffsetInSemitones(mode)
-        // Find the relative major tonic
-        val relativeMajorSemitones = (tonicSemitones + modeOffset) % 12
-        val bestMajor = getBestMajorKey(relativeMajorSemitones)
+        // Find the relative major semitones
+        val relativeMajorSemitones = (tonicSemitones + modeOffset + 12) % 12
+        
+        val candidates = majorKeys[relativeMajorSemitones] ?: listOf(KeyCandidate(NoteStep.C, 0, 0))
+        
+        // If the key explicitly specifies an accidental for the root, prefer that candidate
+        val rootAccidentalValue = accidentalToSemitones(key.root.accidental)
+        val bestMajor = if (rootAccidentalValue != 0) {
+            // This is slightly tricky because the root accidental is for the MODE's root, not the Major's root.
+            // But usually they match in terms of sharp/flat preference.
+            candidates.find { 
+                val candidateModeStepOrdinal = (it.tonicStep.ordinal + (7 - getModeStepOffset(mode))) % 7
+                val candidateModeStep = NoteStep.values()[candidateModeStepOrdinal]
+                val candidateBaseSemitones = stepToSemitones(candidateModeStep)
+                var candidateDiff = (tonicSemitones - candidateBaseSemitones) % 12
+                if (candidateDiff > 6) candidateDiff -= 12
+                if (candidateDiff < -6) candidateDiff += 12
+                candidateDiff == rootAccidentalValue
+            } ?: candidates.minBy { it.absoluteAccidentals }
+        } else {
+            candidates.minBy { it.absoluteAccidentals }
+        }
         
         // Now find the mode's tonic step by shifting from the major tonic step
         val stepOffset = getModeStepOffset(mode)
@@ -58,6 +80,24 @@ object CircleOfFifths {
         val modeStep = NoteStep.values()[modeStepOrdinal]
         
         // Calculate accidental for this step to match tonicSemitones
+        val baseSemitones = stepToSemitones(modeStep)
+        var diff = (tonicSemitones - baseSemitones) % 12
+        if (diff > 6) diff -= 12
+        if (diff < -6) diff += 12
+        
+        return KeyCandidate(modeStep, diff, bestMajor.accidentalsCount)
+    }
+
+    public fun getBestKey(tonicSemitones: Int, mode: KeyMode): KeyCandidate {
+        // Fallback for when we don't have the full KeySignature object
+        val modeOffset = getModeOffsetInSemitones(mode)
+        val relativeMajorSemitones = (tonicSemitones + modeOffset + 12) % 12
+        val bestMajor = getBestMajorKey(relativeMajorSemitones)
+        
+        val stepOffset = getModeStepOffset(mode)
+        val modeStepOrdinal = (bestMajor.tonicStep.ordinal + stepOffset) % 7
+        val modeStep = NoteStep.values()[modeStepOrdinal]
+        
         val baseSemitones = stepToSemitones(modeStep)
         var diff = (tonicSemitones - baseSemitones) % 12
         if (diff > 6) diff -= 12
@@ -86,7 +126,7 @@ object CircleOfFifths {
         KeyMode.LOCRIAN -> 6
     }
 
-    fun getAccidentalForStep(step: NoteStep, k: Int): Int {
+    public fun getAccidentalForStep(step: NoteStep, k: Int): Int {
         val sharpOrder = listOf(NoteStep.F, NoteStep.C, NoteStep.G, NoteStep.D, NoteStep.A, NoteStep.E, NoteStep.B)
         val flatOrder = sharpOrder.reversed()
         
@@ -99,7 +139,7 @@ object CircleOfFifths {
         }
     }
 
-    fun stepToSemitones(step: NoteStep): Int = when (step) {
+    public fun stepToSemitones(step: NoteStep): Int = when (step) {
         NoteStep.C -> 0
         NoteStep.D -> 2
         NoteStep.E -> 4
@@ -109,16 +149,9 @@ object CircleOfFifths {
         NoteStep.B -> 11
     }
 
-    fun accidentalToSemitones(accidental: Accidental?): Int = when (accidental) {
-        Accidental.SHARP -> 1
-        Accidental.FLAT -> -1
-        Accidental.DOUBLE_SHARP -> 2
-        Accidental.DOUBLE_FLAT -> -2
-        Accidental.NATURAL -> 0
-        null -> 0
-    }
+    public fun accidentalToSemitones(accidental: Accidental?): Int = accidental?.semitones ?: 0
 
-    fun semitonesToAccidental(semitones: Int): Accidental? = when (semitones) {
+    public fun semitonesToAccidental(semitones: Int): Accidental? = when (semitones) {
         1 -> Accidental.SHARP
         -1 -> Accidental.FLAT
         2 -> Accidental.DOUBLE_SHARP
@@ -131,17 +164,17 @@ object CircleOfFifths {
 /**
  * Extension property to get the absolute semitone value of a pitch within its octave.
  */
-val Pitch.semitones: Int
+public val Pitch.semitones: Int
     get() = CircleOfFifths.stepToSemitones(step) + CircleOfFifths.accidentalToSemitones(accidental)
 
 /**
  * Extension property to get the total semitones including octave.
  */
-val Pitch.totalSemitones: Int
+public val Pitch.totalSemitones: Int
     get() = semitones + octave * 12
 
 /**
  * Extension property to get semitones of a KeySignature tonic.
  */
-val KeySignature.tonicSemitones: Int
+public val KeySignature.tonicSemitones: Int
     get() = CircleOfFifths.stepToSemitones(root.step) + CircleOfFifths.accidentalToSemitones(root.accidental)

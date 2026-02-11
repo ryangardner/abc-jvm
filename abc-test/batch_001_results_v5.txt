@@ -1,0 +1,1032 @@
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::staticFieldBase has been called by com.google.inject.internal.aop.HiddenClassDefiner (file:/opt/homebrew/Cellar/maven/3.9.11/libexec/lib/guice-5.1.0-classes.jar)
+WARNING: Please consider reporting this to the maintainers of class com.google.inject.internal.aop.HiddenClassDefiner
+WARNING: sun.misc.Unsafe::staticFieldBase will be removed in a future release
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -------------------< io.github.ryangardner:abc-test >-------------------
+[INFO] Building abc-test 0.1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ abc-test ---
+[INFO] Deleting /Users/ryan.gardner/gitother/abc-jvm/abc-test/target
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ abc-test ---
+[INFO] skip non existing resourceDirectory /Users/ryan.gardner/gitother/abc-jvm/abc-test/src/main/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ abc-test ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- kotlin:1.9.22:compile (compile) @ abc-test ---
+[WARNING] Source root doesn't exist: /Users/ryan.gardner/gitother/abc-jvm/abc-test/src/main/java
+[WARNING] /Users/ryan.gardner/gitother/abc-jvm/abc-test/src/main/kotlin/io/github/ryangardner/abc/test/DatasetDownloader.kt: (22, 19) 'constructor URL(String!)' is deprecated. Deprecated in Java
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ abc-test ---
+[INFO] Copying 2082 resources from src/test/resources to target/test-classes
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ abc-test ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- kotlin:1.9.22:test-compile (test-compile) @ abc-test ---
+[WARNING] Source root doesn't exist: /Users/ryan.gardner/gitother/abc-jvm/abc-test/src/test/java
+[WARNING] /Users/ryan.gardner/gitother/abc-jvm/abc-test/src/test/kotlin/io/github/ryangardner/abc/test/AbcjsSemanticParityTest.kt: (62, 29) Variable 'count' is never used
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ abc-test ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running io.github.ryangardner.abc.test.AbcjsSemanticParityTest
+DEBUG: Voice 1 elements: [NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement]
+DEBUG: Voice 1: before=12, after=12
+DEBUG: Voice 1: after expansion, indices 20-30:
+DEBUG: index 20: Note Pitch(step=C, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 21: SpacerElement
+DEBUG: index 22: Note Pitch(step=E, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 23: SpacerElement
+DEBUG: index 24: Note Pitch(step=G, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 25: SpacerElement
+DEBUG: index 26: Note Pitch(step=C, octave=5, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 27: SpacerElement
+DEBUG: index 28: BarLineElement
+DEBUG: [tune_000287.abc] allAbcjsVoices size: 1, our voices size: 1
+DEBUG: Voice 1 elements: [NoteElement, NoteElement, SpacerElement, NoteElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, NoteElement, NoteElement, NoteElement, SpacerElement, NoteElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, NoteElement, SpacerElement, NoteElement, NoteElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, NoteElement, SpacerElement, NoteElement, NoteElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, NoteElement, NoteElement, SpacerElement, NoteElement, NoteElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, NoteElement, NoteElement, SpacerElement, NoteElement, NoteElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, NoteElement, NoteElement, SpacerElement, NoteElement, NoteElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, NoteElement, NoteElement, SpacerElement, NoteElement, NoteElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, NoteElement, SpacerElement, NoteElement, NoteElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, NoteElement, SpacerElement, NoteElement, NoteElement, NoteElement, SpacerElement, BarLineElement]
+DEBUG: Voice 1: before=61, after=81
+DEBUG: Voice 1: after expansion, indices 20-30:
+DEBUG: index 20: SpacerElement
+DEBUG: index 21: Note Pitch(step=C, octave=5, accidental=null) dur NoteDuration(numerator=3, denominator=8)
+DEBUG: index 22: Note Pitch(step=B, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=16)
+DEBUG: index 23: Note Pitch(step=C, octave=5, accidental=null) dur NoteDuration(numerator=1, denominator=16)
+DEBUG: index 24: SpacerElement
+DEBUG: index 25: BarLineElement
+DEBUG: index 26: SpacerElement
+DEBUG: index 27: Note Pitch(step=D, octave=5, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 28: Note Pitch(step=A, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 29: SpacerElement
+DEBUG: index 30: Note Pitch(step=F, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 31: Note Pitch(step=E, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=8)
+DEBUG: index 32: Note Pitch(step=D, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=8)
+DEBUG: index 33: SpacerElement
+DEBUG: index 34: BarLineElement
+DEBUG: index 35: Note Pitch(step=A, octave=5, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 36: Note Pitch(step=F, octave=5, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 37: SpacerElement
+DEBUG: index 38: Note Pitch(step=G, octave=5, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 39: Note Pitch(step=F, octave=5, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: [tune_001614.abc] Line 0 has no staff
+DEBUG: [tune_001614.abc] allAbcjsVoices size: 1, our voices size: 1
+DEBUG: [tune_001614.abc] Voice 0 (1) count mismatch: abcjs=61, ours=81
+DEBUG: Event 0: type=note abcjsMidi=[81], oursMidi=[81], abcjsDur=0.25, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 1: type=note abcjsMidi=[78], oursMidi=[78], abcjsDur=0.25, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 2: type=note abcjsMidi=[79], oursMidi=[79], abcjsDur=0.25, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 3: type=note abcjsMidi=[78], oursMidi=[78], abcjsDur=0.25, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 4: type=note abcjsMidi=[76], oursMidi=[76], abcjsDur=0.125, oursDur=NoteDuration(numerator=1, denominator=8)
+DEBUG: Event 5: type=note abcjsMidi=[74], oursMidi=[74], abcjsDur=0.125, oursDur=NoteDuration(numerator=1, denominator=8)
+DEBUG: Event 6: type=note abcjsMidi=[73], oursMidi=[73], abcjsDur=0.125, oursDur=NoteDuration(numerator=1, denominator=8)
+DEBUG: Event 7: type=note abcjsMidi=[71], oursMidi=[71], abcjsDur=0.125, oursDur=NoteDuration(numerator=1, denominator=8)
+DEBUG: Event 8: type=note abcjsMidi=[69], oursMidi=[69], abcjsDur=0.25, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 9: type=note abcjsMidi=[78], oursMidi=[78], abcjsDur=0.25, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 10: type=note abcjsMidi=[79], oursMidi=[79], abcjsDur=0.25, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 11: type=note abcjsMidi=[71], oursMidi=[71], abcjsDur=0.25, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 12: type=note abcjsMidi=[73], oursMidi=[73], abcjsDur=0.375, oursDur=NoteDuration(numerator=3, denominator=8)
+DEBUG: Event 13: type=note abcjsMidi=[71], oursMidi=[71], abcjsDur=0.0625, oursDur=NoteDuration(numerator=1, denominator=16)
+DEBUG: Event 14: type=note abcjsMidi=[73], oursMidi=[73], abcjsDur=0.0625, oursDur=NoteDuration(numerator=1, denominator=16)
+DEBUG: Event 15: type=note abcjsMidi=[74], oursMidi=[74], abcjsDur=0.25, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 16: type=note abcjsMidi=[69], oursMidi=[69], abcjsDur=0.25, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 17: type=note abcjsMidi=[66], oursMidi=[66], abcjsDur=0.25, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 18: type=note abcjsMidi=[64], oursMidi=[64], abcjsDur=0.125, oursDur=NoteDuration(numerator=1, denominator=8)
+DEBUG: Event 19: type=note abcjsMidi=[62], oursMidi=[62], abcjsDur=0.125, oursDur=NoteDuration(numerator=1, denominator=8)
+DEBUG: Event 20: type=note abcjsMidi=[66], oursMidi=[81], abcjsDur=0.25, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 21: type=note abcjsMidi=[69], oursMidi=[78], abcjsDur=0.5, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 22: type=note abcjsMidi=[67], oursMidi=[79], abcjsDur=0.125, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 23: type=note abcjsMidi=[66], oursMidi=[78], abcjsDur=0.125, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 24: type=note abcjsMidi=[67], oursMidi=[76], abcjsDur=0.25, oursDur=NoteDuration(numerator=1, denominator=8)
+DEBUG: Event 25: type=note abcjsMidi=[71], oursMidi=[74], abcjsDur=0.5, oursDur=NoteDuration(numerator=1, denominator=8)
+DEBUG: Event 26: type=note abcjsMidi=[71], oursMidi=[73], abcjsDur=0.25, oursDur=NoteDuration(numerator=1, denominator=8)
+DEBUG: Event 27: type=note abcjsMidi=[73], oursMidi=[71], abcjsDur=0.125, oursDur=NoteDuration(numerator=1, denominator=8)
+DEBUG: Event 28: type=note abcjsMidi=[74], oursMidi=[69], abcjsDur=0.125, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 29: type=note abcjsMidi=[76], oursMidi=[78], abcjsDur=0.25, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 30: type=note abcjsMidi=[73], oursMidi=[79], abcjsDur=0.125, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 31: type=note abcjsMidi=[74], oursMidi=[71], abcjsDur=0.125, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 32: type=note abcjsMidi=[76], oursMidi=[73], abcjsDur=0.25, oursDur=NoteDuration(numerator=3, denominator=8)
+DEBUG: Event 33: type=note abcjsMidi=[73], oursMidi=[71], abcjsDur=0.25, oursDur=NoteDuration(numerator=1, denominator=16)
+DEBUG: Event 34: type=note abcjsMidi=[71], oursMidi=[73], abcjsDur=0.125, oursDur=NoteDuration(numerator=1, denominator=16)
+DEBUG: Event 35: type=note abcjsMidi=[73], oursMidi=[74], abcjsDur=0.125, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 36: type=note abcjsMidi=[69], oursMidi=[69], abcjsDur=0.25, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 37: type=note abcjsMidi=[74], oursMidi=[66], abcjsDur=0.125, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 38: type=note abcjsMidi=[76], oursMidi=[64], abcjsDur=0.125, oursDur=NoteDuration(numerator=1, denominator=8)
+DEBUG: Event 39: type=note abcjsMidi=[78], oursMidi=[62], abcjsDur=0.25, oursDur=NoteDuration(numerator=1, denominator=8)
+DEBUG: Voice 1 elements: [BodyHeaderElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, SlurElement, NoteElement, SpacerElement, NoteElement, SlurElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, SlurElement, NoteElement, SpacerElement, NoteElement, SlurElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, SlurElement, NoteElement, SpacerElement, NoteElement, SlurElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, SlurElement, NoteElement, NoteElement, SlurElement, SpacerElement, BarLineElement, SpacerElement, SlurElement, NoteElement, SpacerElement, NoteElement, SlurElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, SlurElement, NoteElement, SpacerElement, NoteElement, SlurElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, SlurElement, NoteElement, NoteElement, SlurElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, SlurElement, NoteElement, SpacerElement, NoteElement, SlurElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, SlurElement, NoteElement, SpacerElement, NoteElement, SlurElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, SpacerElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement]
+DEBUG: Voice 1: before=37, after=37
+DEBUG: Voice 1: after expansion, indices 20-30:
+DEBUG: index 20: Note Pitch(step=C, octave=5, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 21: SpacerElement
+DEBUG: index 22: BarLineElement
+DEBUG: index 23: SpacerElement
+DEBUG: index 24: Note Pitch(step=B, octave=4, accidental=null) dur NoteDuration(numerator=3, denominator=4)
+DEBUG: index 25: SpacerElement
+DEBUG: index 26: BarLineElement
+DEBUG: index 27: SpacerElement
+DEBUG: index 28: SlurElement
+DEBUG: index 29: Note Pitch(step=B, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 30: SpacerElement
+DEBUG: index 31: Note Pitch(step=A, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 32: SlurElement
+DEBUG: index 33: SpacerElement
+DEBUG: index 34: Note Pitch(step=B, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 35: SpacerElement
+DEBUG: index 36: BarLineElement
+DEBUG: index 37: SpacerElement
+DEBUG: index 38: SlurElement
+DEBUG: index 39: Note Pitch(step=B, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: Voice 1 elements: [BodyHeaderElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, SlurElement, NoteElement, SpacerElement, NoteElement, SlurElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, SlurElement, NoteElement, SpacerElement, NoteElement, SlurElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, SlurElement, NoteElement, SpacerElement, NoteElement, SlurElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, SlurElement, NoteElement, NoteElement, SlurElement, SpacerElement, BarLineElement, SpacerElement, SlurElement, NoteElement, SpacerElement, NoteElement, SlurElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, SlurElement, NoteElement, SpacerElement, NoteElement, SlurElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, SlurElement, NoteElement, NoteElement, SlurElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, SlurElement, NoteElement, SpacerElement, NoteElement, SlurElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, SlurElement, NoteElement, SpacerElement, NoteElement, SlurElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, SpacerElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement]
+DEBUG: Voice 1: before=37, after=37
+DEBUG: Voice 1: after expansion, indices 20-30:
+DEBUG: index 20: SpacerElement
+DEBUG: index 21: BarLineElement
+DEBUG: index 22: SpacerElement
+DEBUG: index 23: Note Pitch(step=A, octave=4, accidental=null) dur NoteDuration(numerator=3, denominator=4)
+DEBUG: index 24: SpacerElement
+DEBUG: index 25: BarLineElement
+DEBUG: index 26: SpacerElement
+DEBUG: index 27: SlurElement
+DEBUG: index 28: Note Pitch(step=A, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 29: SpacerElement
+DEBUG: index 30: Note Pitch(step=G, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 31: SlurElement
+DEBUG: index 32: SpacerElement
+DEBUG: index 33: Note Pitch(step=A, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 34: SpacerElement
+DEBUG: index 35: BarLineElement
+DEBUG: index 36: SpacerElement
+DEBUG: index 37: SlurElement
+DEBUG: index 38: Note Pitch(step=A, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 39: SpacerElement
+DEBUG: [tune_000020.abc] Line 0 has no staff
+DEBUG: [tune_000020.abc] Line 1 has no staff
+DEBUG: [tune_000020.abc] Line 2 has no staff
+DEBUG: [tune_000020.abc] allAbcjsVoices size: 1, our voices size: 1
+DEBUG: [tune_000019.abc] Line 0 has no staff
+DEBUG: [tune_000019.abc] Line 1 has no staff
+DEBUG: [tune_000019.abc] Line 2 has no staff
+DEBUG: [tune_000019.abc] allAbcjsVoices size: 1, our voices size: 1
+DEBUG: Voice 1 elements: [BodyHeaderElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, SlurElement, NoteElement, SpacerElement, NoteElement, SlurElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, SlurElement, NoteElement, SpacerElement, NoteElement, SlurElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, SlurElement, NoteElement, SpacerElement, NoteElement, SlurElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, SlurElement, NoteElement, NoteElement, SlurElement, SpacerElement, BarLineElement, SpacerElement, SlurElement, NoteElement, SpacerElement, NoteElement, SlurElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, SlurElement, NoteElement, SpacerElement, NoteElement, SlurElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, SlurElement, NoteElement, NoteElement, SlurElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, SlurElement, NoteElement, SpacerElement, NoteElement, SlurElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, SlurElement, NoteElement, SpacerElement, NoteElement, SlurElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, SpacerElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement]
+DEBUG: Voice 1: before=37, after=37
+DEBUG: Voice 1: after expansion, indices 20-30:
+DEBUG: index 20: SpacerElement
+DEBUG: index 21: BarLineElement
+DEBUG: index 22: SpacerElement
+DEBUG: index 23: Note Pitch(step=F, octave=4, accidental=null) dur NoteDuration(numerator=3, denominator=4)
+DEBUG: index 24: SpacerElement
+DEBUG: index 25: BarLineElement
+DEBUG: index 26: SpacerElement
+DEBUG: index 27: SlurElement
+DEBUG: index 28: Note Pitch(step=F, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 29: SpacerElement
+DEBUG: index 30: Note Pitch(step=E, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 31: SlurElement
+DEBUG: index 32: SpacerElement
+DEBUG: index 33: Note Pitch(step=F, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 34: SpacerElement
+DEBUG: index 35: BarLineElement
+DEBUG: index 36: SpacerElement
+DEBUG: index 37: SlurElement
+DEBUG: index 38: Note Pitch(step=F, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 39: SpacerElement
+DEBUG: [tune_000021.abc] Line 0 has no staff
+DEBUG: [tune_000021.abc] Line 1 has no staff
+DEBUG: [tune_000021.abc] Line 2 has no staff
+DEBUG: [tune_000021.abc] allAbcjsVoices size: 1, our voices size: 1
+DEBUG: Voice 1 elements: [BodyHeaderElement, NoteElement, NoteElement, NoteElement, BarLineElement, SpacerElement, NoteElement, NoteElement, NoteElement, BarLineElement, SpacerElement, NoteElement, NoteElement, SpacerElement, NoteElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, BarLineElement, SpacerElement, NoteElement, NoteElement, SpacerElement, NoteElement, BarLineElement, SpacerElement, NoteElement, BarLineElement, SpacerElement, NoteElement, NoteElement, NoteElement, BarLineElement, SpacerElement, NoteElement, NoteElement, NoteElement, BarLineElement, SpacerElement, NoteElement, NoteElement, NoteElement, BarLineElement, SpacerElement, NoteElement, NoteElement, NoteElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, NoteElement, SpacerElement, NoteElement, NoteElement, BarLineElement, SpacerElement, NoteElement, NoteElement, SpacerElement, NoteElement, BarLineElement, SpacerElement, NoteElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, BarLineElement, SpacerElement, NoteElement, BarLineElement, SpacerElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement]
+DEBUG: Voice 1: before=41, after=41
+DEBUG: Voice 1: after expansion, indices 20-30:
+DEBUG: index 20: SpacerElement
+DEBUG: index 21: Note Pitch(step=F, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 22: BarLineElement
+DEBUG: index 23: SpacerElement
+DEBUG: index 24: Note Pitch(step=G, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 25: Note Pitch(step=F, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 26: SpacerElement
+DEBUG: index 27: Note Pitch(step=E, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 28: BarLineElement
+DEBUG: index 29: SpacerElement
+DEBUG: index 30: Note Pitch(step=F, octave=4, accidental=null) dur NoteDuration(numerator=3, denominator=4)
+DEBUG: index 31: BarLineElement
+DEBUG: index 32: SpacerElement
+DEBUG: index 33: Note Pitch(step=C, octave=5, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 34: Note Pitch(step=C, octave=5, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 35: Note Pitch(step=C, octave=5, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 36: BarLineElement
+DEBUG: index 37: SpacerElement
+DEBUG: index 38: Note Pitch(step=C, octave=5, accidental=null) dur NoteDuration(numerator=3, denominator=8)
+DEBUG: index 39: Note Pitch(step=B, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=8)
+DEBUG: [tune_000009.abc] Line 0 has no staff
+DEBUG: [tune_000009.abc] Line 1 has no staff
+DEBUG: [tune_000009.abc] allAbcjsVoices size: 1, our voices size: 1
+DEBUG: Voice 1 elements: [BodyHeaderElement, NoteElement, SpacerElement, NoteElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, SlurElement, NoteElement, NoteElement, SlurElement, SpacerElement, SlurElement, NoteElement, NoteElement, SlurElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, RestElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, SlurElement, NoteElement, NoteElement, SpacerElement, NoteElement, SlurElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, RestElement, SpacerElement, BarLineElement, SpacerElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement]
+DEBUG: Voice 1: before=38, after=38
+DEBUG: Voice 1: after expansion, indices 20-30:
+DEBUG: index 20: Note Pitch(step=A, octave=4, accidental=null) dur NoteDuration(numerator=3, denominator=8)
+DEBUG: index 21: Note Pitch(step=B, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=8)
+DEBUG: index 22: SlurElement
+DEBUG: index 23: SpacerElement
+DEBUG: index 24: BarLineElement
+DEBUG: index 25: SpacerElement
+DEBUG: index 26: Note Pitch(step=C, octave=5, accidental=null) dur NoteDuration(numerator=3, denominator=4)
+DEBUG: index 27: SpacerElement
+DEBUG: index 28: Rest dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 29: SpacerElement
+DEBUG: index 30: BarLineElement
+DEBUG: index 31: SpacerElement
+DEBUG: index 32: Note Pitch(step=B, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=2)
+DEBUG: index 33: SpacerElement
+DEBUG: index 34: Note Pitch(step=B, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 35: Note Pitch(step=C, octave=5, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 36: SpacerElement
+DEBUG: index 37: BarLineElement
+DEBUG: index 38: SpacerElement
+DEBUG: index 39: Note Pitch(step=B, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=2)
+DEBUG: [tune_000023.abc] Line 0 has no staff
+DEBUG: [tune_000023.abc] Line 1 has no staff
+DEBUG: [tune_000023.abc] allAbcjsVoices size: 1, our voices size: 1
+DEBUG: Voice 1 elements: [BodyHeaderElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement]
+DEBUG: Voice 1: before=46, after=46
+DEBUG: Voice 1: after expansion, indices 20-30:
+DEBUG: index 20: SpacerElement
+DEBUG: index 21: Note Pitch(step=C, octave=5, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 22: SpacerElement
+DEBUG: index 23: Note Pitch(step=C, octave=5, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 24: SpacerElement
+DEBUG: index 25: BarLineElement
+DEBUG: index 26: SpacerElement
+DEBUG: index 27: Note Pitch(step=B, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=2)
+DEBUG: index 28: SpacerElement
+DEBUG: index 29: Note Pitch(step=G, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=2)
+DEBUG: index 30: SpacerElement
+DEBUG: index 31: BarLineElement
+DEBUG: index 32: SpacerElement
+DEBUG: index 33: Note Pitch(step=B, octave=4, accidental=null) dur NoteDuration(numerator=3, denominator=8)
+DEBUG: index 34: SpacerElement
+DEBUG: index 35: Note Pitch(step=B, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=8)
+DEBUG: index 36: SpacerElement
+DEBUG: index 37: Note Pitch(step=B, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 38: SpacerElement
+DEBUG: index 39: Note Pitch(step=B, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: [tune_000015.abc] Line 0 has no staff
+DEBUG: [tune_000015.abc] Line 1 has no staff
+DEBUG: [tune_000015.abc] Line 2 has no staff
+DEBUG: [tune_000015.abc] allAbcjsVoices size: 1, our voices size: 1
+DEBUG: Voice 1 elements: [BodyHeaderElement, NoteElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, BarLineElement, SpacerElement, SlurElement, NoteElement, SpacerElement, NoteElement, SlurElement, SpacerElement, NoteElement, SpacerElement, NoteElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, BarLineElement, SpacerElement, SlurElement, NoteElement, SpacerElement, NoteElement, SlurElement, SpacerElement, NoteElement, SpacerElement, NoteElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, NoteElement, BarLineElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, BarLineElement, SpacerElement, SlurElement, NoteElement, SpacerElement, NoteElement, SlurElement, SpacerElement, NoteElement, SpacerElement, NoteElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, BarLineElement, SpacerElement, SlurElement, NoteElement, SpacerElement, NoteElement, SlurElement, SpacerElement, NoteElement, SpacerElement, NoteElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, BarLineElement, SpacerElement, SlurElement, NoteElement, SpacerElement, NoteElement, SlurElement, SpacerElement, NoteElement, SpacerElement, NoteElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, BarLineElement, SpacerElement, SlurElement, NoteElement, SpacerElement, NoteElement, SlurElement, SpacerElement, NoteElement, SpacerElement, NoteElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, NoteElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, RestElement, SpacerElement, BarLineElement, SpacerElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement]
+DEBUG: Voice 1: before=67, after=67
+DEBUG: Voice 1: after expansion, indices 20-30:
+DEBUG: index 20: SpacerElement
+DEBUG: index 21: Note Pitch(step=B, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 22: SlurElement
+DEBUG: index 23: SpacerElement
+DEBUG: index 24: Note Pitch(step=C, octave=5, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 25: SpacerElement
+DEBUG: index 26: Note Pitch(step=D, octave=5, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 27: BarLineElement
+DEBUG: index 28: SpacerElement
+DEBUG: index 29: Note Pitch(step=C, octave=5, accidental=null) dur NoteDuration(numerator=1, denominator=2)
+DEBUG: index 30: SpacerElement
+DEBUG: index 31: Note Pitch(step=B, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 32: SpacerElement
+DEBUG: index 33: Note Pitch(step=B, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 34: BarLineElement
+DEBUG: index 35: SpacerElement
+DEBUG: index 36: Note Pitch(step=A, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=2)
+DEBUG: index 37: SpacerElement
+DEBUG: index 38: Note Pitch(step=G, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 39: SpacerElement
+DEBUG: [tune_000025.abc] Line 0 has no staff
+DEBUG: [tune_000025.abc] Line 1 has no staff
+DEBUG: [tune_000025.abc] allAbcjsVoices size: 1, our voices size: 1
+DEBUG: Voice 1 elements: [BodyHeaderElement, NoteElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, BarLineElement, SpacerElement, SlurElement, NoteElement, SpacerElement, NoteElement, SlurElement, SpacerElement, NoteElement, SpacerElement, NoteElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, BarLineElement, SpacerElement, SlurElement, NoteElement, SpacerElement, NoteElement, SlurElement, SpacerElement, NoteElement, SpacerElement, NoteElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, NoteElement, BarLineElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, BarLineElement, SpacerElement, SlurElement, NoteElement, SpacerElement, NoteElement, SlurElement, SpacerElement, NoteElement, SpacerElement, NoteElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, BarLineElement, SpacerElement, SlurElement, NoteElement, SpacerElement, NoteElement, SlurElement, SpacerElement, NoteElement, SpacerElement, NoteElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, BarLineElement, SpacerElement, SlurElement, NoteElement, SpacerElement, NoteElement, SlurElement, SpacerElement, NoteElement, SpacerElement, NoteElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, BarLineElement, SpacerElement, SlurElement, NoteElement, SpacerElement, NoteElement, SlurElement, SpacerElement, NoteElement, SpacerElement, NoteElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, NoteElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, RestElement, SpacerElement, BarLineElement, SpacerElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement]
+DEBUG: Voice 1: before=67, after=67
+DEBUG: Voice 1: after expansion, indices 20-30:
+DEBUG: index 20: SpacerElement
+DEBUG: index 21: Note Pitch(step=A, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 22: SlurElement
+DEBUG: index 23: SpacerElement
+DEBUG: index 24: Note Pitch(step=B, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 25: SpacerElement
+DEBUG: index 26: Note Pitch(step=C, octave=5, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 27: BarLineElement
+DEBUG: index 28: SpacerElement
+DEBUG: index 29: Note Pitch(step=B, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=2)
+DEBUG: index 30: SpacerElement
+DEBUG: index 31: Note Pitch(step=A, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 32: SpacerElement
+DEBUG: index 33: Note Pitch(step=A, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 34: BarLineElement
+DEBUG: index 35: SpacerElement
+DEBUG: index 36: Note Pitch(step=G, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=2)
+DEBUG: index 37: SpacerElement
+DEBUG: index 38: Note Pitch(step=F, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 39: SpacerElement
+DEBUG: [tune_000026.abc] Line 0 has no staff
+DEBUG: [tune_000026.abc] Line 1 has no staff
+DEBUG: [tune_000026.abc] allAbcjsVoices size: 1, our voices size: 1
+DEBUG: Voice 1 elements: [BodyHeaderElement, NoteElement, SpacerElement, NoteElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, SlurElement, NoteElement, NoteElement, SlurElement, SpacerElement, SlurElement, NoteElement, NoteElement, SlurElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, RestElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, SlurElement, NoteElement, NoteElement, SpacerElement, NoteElement, SlurElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, RestElement, SpacerElement, BarLineElement, SpacerElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement]
+DEBUG: Voice 1: before=38, after=38
+DEBUG: Voice 1: after expansion, indices 20-30:
+DEBUG: index 20: Note Pitch(step=B, octave=4, accidental=null) dur NoteDuration(numerator=3, denominator=8)
+DEBUG: index 21: Note Pitch(step=C, octave=5, accidental=null) dur NoteDuration(numerator=1, denominator=8)
+DEBUG: index 22: SlurElement
+DEBUG: index 23: SpacerElement
+DEBUG: index 24: BarLineElement
+DEBUG: index 25: SpacerElement
+DEBUG: index 26: Note Pitch(step=D, octave=5, accidental=null) dur NoteDuration(numerator=3, denominator=4)
+DEBUG: index 27: SpacerElement
+DEBUG: index 28: Rest dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 29: SpacerElement
+DEBUG: index 30: BarLineElement
+DEBUG: index 31: SpacerElement
+DEBUG: index 32: Note Pitch(step=C, octave=5, accidental=null) dur NoteDuration(numerator=1, denominator=2)
+DEBUG: index 33: SpacerElement
+DEBUG: index 34: Note Pitch(step=C, octave=5, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 35: Note Pitch(step=D, octave=5, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 36: SpacerElement
+DEBUG: index 37: BarLineElement
+DEBUG: index 38: SpacerElement
+DEBUG: index 39: Note Pitch(step=C, octave=5, accidental=null) dur NoteDuration(numerator=1, denominator=2)
+DEBUG: Voice 1 elements: [BodyHeaderElement, NoteElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, BarLineElement, SpacerElement, SlurElement, NoteElement, SpacerElement, NoteElement, SlurElement, SpacerElement, NoteElement, SpacerElement, NoteElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, BarLineElement, SpacerElement, SlurElement, NoteElement, SpacerElement, NoteElement, SlurElement, SpacerElement, NoteElement, SpacerElement, NoteElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, NoteElement, BarLineElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, BarLineElement, SpacerElement, SlurElement, NoteElement, SpacerElement, NoteElement, SlurElement, SpacerElement, NoteElement, SpacerElement, NoteElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, BarLineElement, SpacerElement, SlurElement, NoteElement, SpacerElement, NoteElement, SlurElement, SpacerElement, NoteElement, SpacerElement, NoteElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, BarLineElement, SpacerElement, SlurElement, NoteElement, SpacerElement, NoteElement, SlurElement, SpacerElement, NoteElement, SpacerElement, NoteElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, BarLineElement, SpacerElement, SlurElement, NoteElement, SpacerElement, NoteElement, SlurElement, SpacerElement, NoteElement, SpacerElement, NoteElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, NoteElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, RestElement, SpacerElement, BarLineElement, SpacerElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement]
+DEBUG: Voice 1: before=67, after=67
+DEBUG: Voice 1: after expansion, indices 20-30:
+DEBUG: index 20: SpacerElement
+DEBUG: index 21: Note Pitch(step=G, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 22: SlurElement
+DEBUG: index 23: SpacerElement
+DEBUG: index 24: Note Pitch(step=A, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 25: SpacerElement
+DEBUG: index 26: Note Pitch(step=B, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 27: BarLineElement
+DEBUG: index 28: SpacerElement
+DEBUG: index 29: Note Pitch(step=A, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=2)
+DEBUG: index 30: SpacerElement
+DEBUG: index 31: Note Pitch(step=G, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 32: SpacerElement
+DEBUG: index 33: Note Pitch(step=G, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 34: BarLineElement
+DEBUG: index 35: SpacerElement
+DEBUG: index 36: Note Pitch(step=F, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=2)
+DEBUG: index 37: SpacerElement
+DEBUG: index 38: Note Pitch(step=E, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 39: SpacerElement
+DEBUG: [tune_000027.abc] Line 0 has no staff
+DEBUG: [tune_000027.abc] Line 1 has no staff
+DEBUG: [tune_000027.abc] allAbcjsVoices size: 1, our voices size: 1
+DEBUG: [tune_000022.abc] Line 0 has no staff
+DEBUG: [tune_000022.abc] Line 1 has no staff
+DEBUG: [tune_000022.abc] allAbcjsVoices size: 1, our voices size: 1
+DEBUG: Voice 1 elements: [BodyHeaderElement, NoteElement, NoteElement, NoteElement, BarLineElement, SpacerElement, NoteElement, NoteElement, NoteElement, BarLineElement, SpacerElement, NoteElement, NoteElement, SpacerElement, NoteElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, BarLineElement, SpacerElement, NoteElement, NoteElement, SpacerElement, NoteElement, BarLineElement, SpacerElement, NoteElement, BarLineElement, SpacerElement, NoteElement, NoteElement, NoteElement, BarLineElement, SpacerElement, NoteElement, NoteElement, NoteElement, BarLineElement, SpacerElement, NoteElement, NoteElement, NoteElement, BarLineElement, SpacerElement, NoteElement, NoteElement, NoteElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, NoteElement, SpacerElement, NoteElement, NoteElement, BarLineElement, SpacerElement, NoteElement, NoteElement, SpacerElement, NoteElement, BarLineElement, SpacerElement, NoteElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, BarLineElement, SpacerElement, NoteElement, BarLineElement, SpacerElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement]
+DEBUG: Voice 1: before=41, after=41
+DEBUG: Voice 1: after expansion, indices 20-30:
+DEBUG: index 20: SpacerElement
+DEBUG: index 21: Note Pitch(step=E, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 22: BarLineElement
+DEBUG: index 23: SpacerElement
+DEBUG: index 24: Note Pitch(step=F, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 25: Note Pitch(step=E, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 26: SpacerElement
+DEBUG: index 27: Note Pitch(step=D, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 28: BarLineElement
+DEBUG: index 29: SpacerElement
+DEBUG: index 30: Note Pitch(step=E, octave=4, accidental=null) dur NoteDuration(numerator=3, denominator=4)
+DEBUG: index 31: BarLineElement
+DEBUG: index 32: SpacerElement
+DEBUG: index 33: Note Pitch(step=B, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 34: Note Pitch(step=B, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 35: Note Pitch(step=B, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 36: BarLineElement
+DEBUG: index 37: SpacerElement
+DEBUG: index 38: Note Pitch(step=B, octave=4, accidental=null) dur NoteDuration(numerator=3, denominator=8)
+DEBUG: index 39: Note Pitch(step=A, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=8)
+DEBUG: Voice 1 elements: [BodyHeaderElement, NoteElement, NoteElement, NoteElement, BarLineElement, SpacerElement, NoteElement, NoteElement, NoteElement, BarLineElement, SpacerElement, NoteElement, NoteElement, SpacerElement, NoteElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, BarLineElement, SpacerElement, NoteElement, NoteElement, SpacerElement, NoteElement, BarLineElement, SpacerElement, NoteElement, BarLineElement, SpacerElement, NoteElement, NoteElement, NoteElement, BarLineElement, SpacerElement, NoteElement, NoteElement, NoteElement, BarLineElement, SpacerElement, NoteElement, NoteElement, NoteElement, BarLineElement, SpacerElement, NoteElement, NoteElement, NoteElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, NoteElement, SpacerElement, NoteElement, NoteElement, BarLineElement, SpacerElement, NoteElement, NoteElement, SpacerElement, NoteElement, BarLineElement, SpacerElement, NoteElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, BarLineElement, SpacerElement, NoteElement, BarLineElement, SpacerElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement]
+DEBUG: Voice 1: before=41, after=41
+DEBUG: Voice 1: after expansion, indices 20-30:
+DEBUG: index 20: SpacerElement
+DEBUG: index 21: Note Pitch(step=D, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 22: BarLineElement
+DEBUG: index 23: SpacerElement
+DEBUG: index 24: Note Pitch(step=E, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 25: Note Pitch(step=D, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 26: SpacerElement
+DEBUG: index 27: Note Pitch(step=C, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 28: BarLineElement
+DEBUG: index 29: SpacerElement
+DEBUG: index 30: Note Pitch(step=D, octave=4, accidental=null) dur NoteDuration(numerator=3, denominator=4)
+DEBUG: index 31: BarLineElement
+DEBUG: index 32: SpacerElement
+DEBUG: index 33: Note Pitch(step=A, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 34: Note Pitch(step=A, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 35: Note Pitch(step=A, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 36: BarLineElement
+DEBUG: index 37: SpacerElement
+DEBUG: index 38: Note Pitch(step=A, octave=4, accidental=null) dur NoteDuration(numerator=3, denominator=8)
+DEBUG: index 39: Note Pitch(step=G, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=8)
+DEBUG: [tune_000011.abc] Line 0 has no staff
+DEBUG: [tune_000011.abc] Line 1 has no staff
+DEBUG: [tune_000011.abc] allAbcjsVoices size: 1, our voices size: 1
+DEBUG: [tune_000010.abc] Line 0 has no staff
+DEBUG: [tune_000010.abc] Line 1 has no staff
+DEBUG: [tune_000010.abc] allAbcjsVoices size: 1, our voices size: 1
+DEBUG: Voice 1 elements: [BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, BarLineElement, SpacerElement, RestElement, SpacerElement, RestElement, SpacerElement, RestElement, SpacerElement, BarLineElement, SpacerElement, RestElement, SpacerElement, RestElement, SpacerElement, RestElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, BarLineElement, SpacerElement, RestElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, RestElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, SpacerElement, BodyHeaderElement]
+DEBUG: Voice 1: before=58, after=106
+DEBUG: Voice 1: after expansion, indices 20-30:
+DEBUG: index 20: SpacerElement
+DEBUG: index 21: Note Pitch(step=D, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 22: SpacerElement
+DEBUG: Voice 1 elements: [BodyHeaderElement, NoteElement, NoteElement, NoteElement, BarLineElement, SpacerElement, SlurElement, NoteElement, NoteElement, SlurElement, NoteElement, BarLineElement, SpacerElement, NoteElement, RestElement, BarLineElement, SpacerElement, NoteElement, NoteElement, NoteElement, BarLineElement, SpacerElement, SlurElement, NoteElement, NoteElement, NoteElement, SlurElement, NoteElement, BarLineElement, SpacerElement, NoteElement, RestElement, BarLineElement, SpacerElement, NoteElement, NoteElement, NoteElement, BarLineElement, SpacerElement, NoteElement, RestElement, BarLineElement, SpacerElement, NoteElement, NoteElement, NoteElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, NoteElement, BarLineElement, SpacerElement, NoteElement, NoteElement, NoteElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, NoteElement, BarLineElement, SpacerElement, NoteElement, NoteElement, NoteElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, NoteElement, BarLineElement, SpacerElement, NoteElement, NoteElement, NoteElement, BarLineElement, SpacerElement, NoteElement, BarLineElement, SpacerElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement]
+DEBUG: Voice 1: before=44, after=44
+DEBUG: Voice 1: after expansion, indices 20-30:
+DEBUG: index 20: BarLineElement
+DEBUG: index 21: SpacerElement
+DEBUG: index 22: SlurElement
+DEBUG: index 23: Note Pitch(step=B, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=8)
+DEBUG: index 24: Note Pitch(step=C, octave=5, accidental=null) dur NoteDuration(numerator=1, denominator=8)
+DEBUG: index 25: Note Pitch(step=B, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 26: SlurElement
+DEBUG: index 27: Note Pitch(step=A, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 28: BarLineElement
+DEBUG: index 29: SpacerElement
+DEBUG: index 30: Note Pitch(step=G, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=2)
+DEBUG: index 31: Rest dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 32: BarLineElement
+DEBUG: index 33: SpacerElement
+DEBUG: index 34: Note Pitch(step=C, octave=5, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 35: Note Pitch(step=A, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 36: Note Pitch(step=F, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 37: BarLineElement
+DEBUG: index 38: SpacerElement
+DEBUG: index 39: Note Pitch(step=C, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=2)
+DEBUG: [tune_000007.abc] Line 0 has no staff
+DEBUG: [tune_000007.abc] Line 1 has no staff
+DEBUG: [tune_000007.abc] Line 2 has no staff
+DEBUG: [tune_000007.abc] allAbcjsVoices size: 1, our voices size: 1
+DEBUG: index 23: BarLineElement
+DEBUG: index 24: SpacerElement
+DEBUG: index 25: Note Pitch(step=F, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=2)
+DEBUG: index 26: SpacerElement
+DEBUG: index 27: Note Pitch(step=E, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 28: SpacerElement
+DEBUG: index 29: Note Pitch(step=E, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 30: SpacerElement
+DEBUG: index 31: BarLineElement
+DEBUG: index 32: SpacerElement
+DEBUG: index 33: Note Pitch(step=D, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=2)
+DEBUG: index 34: SpacerElement
+DEBUG: index 35: Note Pitch(step=D, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=2)
+DEBUG: index 36: SpacerElement
+DEBUG: index 37: BarLineElement
+DEBUG: index 38: SpacerElement
+DEBUG: index 39: Note Pitch(step=B, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=2)
+DEBUG: [tune_000004.abc] Line 0 has no staff
+DEBUG: [tune_000004.abc] Line 1 has no staff
+DEBUG: [tune_000004.abc] allAbcjsVoices size: 1, our voices size: 1
+DEBUG: [tune_000004.abc] Voice 0 (1) count mismatch: abcjs=58, ours=106
+DEBUG: Event 0: type=note abcjsMidi=[62], oursMidi=[62], abcjsDur=0.5, oursDur=NoteDuration(numerator=1, denominator=2)
+DEBUG: Event 1: type=note abcjsMidi=[62], oursMidi=[62], abcjsDur=0.25, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 2: type=note abcjsMidi=[62], oursMidi=[62], abcjsDur=0.25, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 3: type=note abcjsMidi=[62], oursMidi=[62], abcjsDur=0.5, oursDur=NoteDuration(numerator=1, denominator=2)
+DEBUG: Event 4: type=note abcjsMidi=[62], oursMidi=[62], abcjsDur=0.25, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 5: type=note abcjsMidi=[62], oursMidi=[62], abcjsDur=0.25, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 6: type=note abcjsMidi=[65], oursMidi=[65], abcjsDur=0.5, oursDur=NoteDuration(numerator=1, denominator=2)
+DEBUG: Event 7: type=note abcjsMidi=[63], oursMidi=[63], abcjsDur=0.25, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 8: type=note abcjsMidi=[63], oursMidi=[63], abcjsDur=0.25, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 9: type=note abcjsMidi=[62], oursMidi=[62], abcjsDur=0.5, oursDur=NoteDuration(numerator=1, denominator=2)
+DEBUG: Event 10: type=note abcjsMidi=[62], oursMidi=[62], abcjsDur=0.5, oursDur=NoteDuration(numerator=1, denominator=2)
+DEBUG: Event 11: type=note abcjsMidi=[70], oursMidi=[70], abcjsDur=0.5, oursDur=NoteDuration(numerator=1, denominator=2)
+DEBUG: Event 12: type=note abcjsMidi=[70], oursMidi=[70], abcjsDur=0.25, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 13: type=note abcjsMidi=[70], oursMidi=[70], abcjsDur=0.25, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 14: type=note abcjsMidi=[69], oursMidi=[69], abcjsDur=0.5, oursDur=NoteDuration(numerator=1, denominator=2)
+DEBUG: Event 15: type=note abcjsMidi=[67], oursMidi=[67], abcjsDur=0.25, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 16: type=note abcjsMidi=[65], oursMidi=[65], abcjsDur=0.25, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 17: type=note abcjsMidi=[65], oursMidi=[65], abcjsDur=0.5, oursDur=NoteDuration(numerator=1, denominator=2)
+DEBUG: Event 18: type=note abcjsMidi=[64], oursMidi=[64], abcjsDur=0.5, oursDur=NoteDuration(numerator=1, denominator=2)
+DEBUG: Event 19: type=note abcjsMidi=[65], oursMidi=[65], abcjsDur=0.5, oursDur=NoteDuration(numerator=1, denominator=2)
+DEBUG: Event 20: type=note abcjsMidi=[65], oursMidi=[65], abcjsDur=0.5, oursDur=NoteDuration(numerator=1, denominator=2)
+DEBUG: Event 21: type=note abcjsMidi=[], oursMidi=[62], abcjsDur=0.5, oursDur=NoteDuration(numerator=1, denominator=2)
+DEBUG: Event 22: type=note abcjsMidi=[], oursMidi=[62], abcjsDur=0.25, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 23: type=note abcjsMidi=[], oursMidi=[62], abcjsDur=0.25, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 24: type=note abcjsMidi=[], oursMidi=[62], abcjsDur=0.5, oursDur=NoteDuration(numerator=1, denominator=2)
+DEBUG: Event 25: type=note abcjsMidi=[], oursMidi=[62], abcjsDur=0.25, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 26: type=note abcjsMidi=[], oursMidi=[62], abcjsDur=0.25, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 27: type=note abcjsMidi=[70], oursMidi=[65], abcjsDur=0.5, oursDur=NoteDuration(numerator=1, denominator=2)
+DEBUG: Event 28: type=note abcjsMidi=[68], oursMidi=[63], abcjsDur=0.25, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 29: type=note abcjsMidi=[68], oursMidi=[63], abcjsDur=0.25, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 30: type=note abcjsMidi=[67], oursMidi=[62], abcjsDur=0.5, oursDur=NoteDuration(numerator=1, denominator=2)
+DEBUG: Event 31: type=note abcjsMidi=[65], oursMidi=[62], abcjsDur=0.5, oursDur=NoteDuration(numerator=1, denominator=2)
+DEBUG: Event 32: type=note abcjsMidi=[63], oursMidi=[70], abcjsDur=0.5, oursDur=NoteDuration(numerator=1, denominator=2)
+DEBUG: Event 33: type=note abcjsMidi=[65], oursMidi=[70], abcjsDur=0.5, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 34: type=note abcjsMidi=[62], oursMidi=[70], abcjsDur=0.5, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 35: type=note abcjsMidi=[65], oursMidi=[69], abcjsDur=0.25, oursDur=NoteDuration(numerator=1, denominator=2)
+DEBUG: Event 36: type=note abcjsMidi=[65], oursMidi=[67], abcjsDur=0.25, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 37: type=note abcjsMidi=[67], oursMidi=[65], abcjsDur=0.25, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 38: type=note abcjsMidi=[69], oursMidi=[65], abcjsDur=0.25, oursDur=NoteDuration(numerator=1, denominator=2)
+DEBUG: Event 39: type=note abcjsMidi=[70], oursMidi=[64], abcjsDur=0.25, oursDur=NoteDuration(numerator=1, denominator=2)
+DEBUG: Voice 1 elements: [BodyHeaderElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, NoteElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, NoteElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, NoteElement, SpacerElement, BarLineElement, NoteElement, NoteElement, NoteElement, SpacerElement, BarLineElement, NoteElement, NoteElement, NoteElement, BarLineElement, NoteElement, NoteElement, NoteElement, BarLineElement, SpacerElement, NoteElement, NoteElement, BarLineElement, NoteElement, NoteElement, NoteElement, BarLineElement, SpacerElement, NoteElement, NoteElement, NoteElement, BarLineElement, NoteElement, NoteElement, NoteElement, BarLineElement, SpacerElement, NoteElement, BarLineElement, SpacerElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement]
+DEBUG: Voice 1: before=42, after=42
+DEBUG: Voice 1: after expansion, indices 20-30:
+DEBUG: index 20: Note Pitch(step=E, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 21: SpacerElement
+DEBUG: index 22: BarLineElement
+DEBUG: index 23: SpacerElement
+DEBUG: index 24: Note Pitch(step=D, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=2)
+DEBUG: index 25: SpacerElement
+DEBUG: index 26: Note Pitch(step=G, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 27: SpacerElement
+DEBUG: index 28: BarLineElement
+DEBUG: index 29: Note Pitch(step=C, octave=5, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 30: Note Pitch(step=C, octave=5, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 31: SpacerElement
+DEBUG: index 32: Note Pitch(step=A, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 33: SpacerElement
+DEBUG: index 34: BarLineElement
+DEBUG: index 35: SpacerElement
+DEBUG: index 36: Note Pitch(step=D, octave=5, accidental=null) dur NoteDuration(numerator=1, denominator=2)
+DEBUG: index 37: Note Pitch(step=B, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 38: SpacerElement
+DEBUG: index 39: BarLineElement
+DEBUG: [tune_000028.abc] Line 0 has no staff
+DEBUG: [tune_000028.abc] Line 1 has no staff
+DEBUG: [tune_000028.abc] Line 2 has no staff
+DEBUG: [tune_000028.abc] allAbcjsVoices size: 1, our voices size: 1
+DEBUG: Voice 1 elements: [NoteElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, TupletElement, NoteElement, NoteElement, NoteElement, SpacerElement, NoteElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, TupletElement, NoteElement, NoteElement, NoteElement, SpacerElement, NoteElement, NoteElement, SpacerElement, GraceNoteElement, NoteElement, NoteElement, SpacerElement, NoteElement, SpacerElement, GraceNoteElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, NoteElement, SpacerElement, GraceNoteElement, NoteElement, NoteElement, SpacerElement, NoteElement, NoteElement, NoteElement, NoteElement, SpacerElement, GraceNoteElement, NoteElement, SpacerElement, GraceNoteElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, NoteElement, SpacerElement, NoteElement, SpacerElement, GraceNoteElement, NoteElement, NoteElement, SpacerElement, TupletElement, NoteElement, NoteElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement]
+DEBUG: Voice 1: before=48, after=48
+DEBUG: Voice 1: after expansion, indices 20-30:
+DEBUG: index 20: SpacerElement
+DEBUG: index 21: Note Pitch(step=D, octave=5, accidental=null) dur NoteDuration(numerator=1, denominator=2)
+DEBUG: index 22: SpacerElement
+DEBUG: index 23: BarLineElement
+DEBUG: index 24: SpacerElement
+DEBUG: index 25: Note Pitch(step=A, octave=5, accidental=null) dur NoteDuration(numerator=1, denominator=2)
+DEBUG: index 26: SpacerElement
+DEBUG: index 27: Note Pitch(step=G, octave=5, accidental=null) dur NoteDuration(numerator=1, denominator=2)
+DEBUG: index 28: SpacerElement
+DEBUG: index 29: TupletElement
+DEBUG: index 30: Note Pitch(step=F, octave=5, accidental=null) dur NoteDuration(numerator=1, denominator=8)
+DEBUG: index 31: Note Pitch(step=G, octave=5, accidental=null) dur NoteDuration(numerator=1, denominator=8)
+DEBUG: index 32: Note Pitch(step=F, octave=5, accidental=null) dur NoteDuration(numerator=1, denominator=8)
+DEBUG: index 33: SpacerElement
+DEBUG: index 34: Note Pitch(step=E, octave=5, accidental=null) dur NoteDuration(numerator=1, denominator=8)
+DEBUG: index 35: Note Pitch(step=F, octave=5, accidental=null) dur NoteDuration(numerator=1, denominator=8)
+DEBUG: index 36: SpacerElement
+DEBUG: index 37: GraceNoteElement
+DEBUG: index 38: Note Pitch(step=A, octave=5, accidental=null) dur NoteDuration(numerator=3, denominator=8)
+DEBUG: index 39: Note Pitch(step=G, octave=5, accidental=null) dur NoteDuration(numerator=1, denominator=8)
+DEBUG: [tune_001008.abc] allAbcjsVoices size: 1, our voices size: 1
+DEBUG: Voice 1 elements: [BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, BarLineElement, SpacerElement, RestElement, SpacerElement, RestElement, SpacerElement, RestElement, SpacerElement, BarLineElement, SpacerElement, RestElement, SpacerElement, RestElement, SpacerElement, RestElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, BarLineElement, SpacerElement, RestElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, RestElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, SpacerElement, BodyHeaderElement]
+DEBUG: Voice 1: before=58, after=106
+DEBUG: Voice 1: after expansion, indices 20-30:
+DEBUG: index 20: SpacerElement
+DEBUG: index 21: Note Pitch(step=C, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 22: SpacerElement
+DEBUG: index 23: BarLineElement
+DEBUG: index 24: SpacerElement
+DEBUG: index 25: Note Pitch(step=E, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=2)
+DEBUG: index 26: SpacerElement
+DEBUG: index 27: Note Pitch(step=D, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 28: SpacerElement
+DEBUG: index 29: Note Pitch(step=D, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 30: SpacerElement
+DEBUG: index 31: BarLineElement
+DEBUG: index 32: SpacerElement
+DEBUG: index 33: Note Pitch(step=C, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=2)
+DEBUG: index 34: SpacerElement
+DEBUG: index 35: Note Pitch(step=C, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=2)
+DEBUG: index 36: SpacerElement
+DEBUG: index 37: BarLineElement
+DEBUG: index 38: SpacerElement
+DEBUG: index 39: Note Pitch(step=A, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=2)
+DEBUG: [tune_000005.abc] Line 0 has no staff
+DEBUG: [tune_000005.abc] Line 1 has no staff
+DEBUG: [tune_000005.abc] allAbcjsVoices size: 1, our voices size: 1
+DEBUG: [tune_000005.abc] Voice 0 (1) count mismatch: abcjs=58, ours=106
+DEBUG: Event 0: type=note abcjsMidi=[60], oursMidi=[60], abcjsDur=0.5, oursDur=NoteDuration(numerator=1, denominator=2)
+DEBUG: Event 1: type=note abcjsMidi=[60], oursMidi=[60], abcjsDur=0.25, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 2: type=note abcjsMidi=[60], oursMidi=[60], abcjsDur=0.25, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 3: type=note abcjsMidi=[60], oursMidi=[60], abcjsDur=0.5, oursDur=NoteDuration(numerator=1, denominator=2)
+DEBUG: Event 4: type=note abcjsMidi=[60], oursMidi=[60], abcjsDur=0.25, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 5: type=note abcjsMidi=[60], oursMidi=[60], abcjsDur=0.25, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 6: type=note abcjsMidi=[63], oursMidi=[63], abcjsDur=0.5, oursDur=NoteDuration(numerator=1, denominator=2)
+DEBUG: Event 7: type=note abcjsMidi=[61], oursMidi=[61], abcjsDur=0.25, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 8: type=note abcjsMidi=[61], oursMidi=[61], abcjsDur=0.25, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 9: type=note abcjsMidi=[60], oursMidi=[60], abcjsDur=0.5, oursDur=NoteDuration(numerator=1, denominator=2)
+DEBUG: Event 10: type=note abcjsMidi=[60], oursMidi=[60], abcjsDur=0.5, oursDur=NoteDuration(numerator=1, denominator=2)
+DEBUG: Event 11: type=note abcjsMidi=[68], oursMidi=[68], abcjsDur=0.5, oursDur=NoteDuration(numerator=1, denominator=2)
+DEBUG: Event 12: type=note abcjsMidi=[68], oursMidi=[68], abcjsDur=0.25, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 13: type=note abcjsMidi=[68], oursMidi=[68], abcjsDur=0.25, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 14: type=note abcjsMidi=[67], oursMidi=[67], abcjsDur=0.5, oursDur=NoteDuration(numerator=1, denominator=2)
+DEBUG: Event 15: type=note abcjsMidi=[65], oursMidi=[65], abcjsDur=0.25, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 16: type=note abcjsMidi=[63], oursMidi=[63], abcjsDur=0.25, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 17: type=note abcjsMidi=[63], oursMidi=[63], abcjsDur=0.5, oursDur=NoteDuration(numerator=1, denominator=2)
+DEBUG: Event 18: type=note abcjsMidi=[62], oursMidi=[62], abcjsDur=0.5, oursDur=NoteDuration(numerator=1, denominator=2)
+DEBUG: Event 19: type=note abcjsMidi=[63], oursMidi=[63], abcjsDur=0.5, oursDur=NoteDuration(numerator=1, denominator=2)
+DEBUG: Event 20: type=note abcjsMidi=[63], oursMidi=[63], abcjsDur=0.5, oursDur=NoteDuration(numerator=1, denominator=2)
+DEBUG: Event 21: type=note abcjsMidi=[], oursMidi=[60], abcjsDur=0.5, oursDur=NoteDuration(numerator=1, denominator=2)
+DEBUG: Event 22: type=note abcjsMidi=[], oursMidi=[60], abcjsDur=0.25, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 23: type=note abcjsMidi=[], oursMidi=[60], abcjsDur=0.25, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 24: type=note abcjsMidi=[], oursMidi=[60], abcjsDur=0.5, oursDur=NoteDuration(numerator=1, denominator=2)
+DEBUG: Event 25: type=note abcjsMidi=[], oursMidi=[60], abcjsDur=0.25, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 26: type=note abcjsMidi=[], oursMidi=[60], abcjsDur=0.25, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 27: type=note abcjsMidi=[68], oursMidi=[63], abcjsDur=0.5, oursDur=NoteDuration(numerator=1, denominator=2)
+DEBUG: Event 28: type=note abcjsMidi=[66], oursMidi=[61], abcjsDur=0.25, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 29: type=note abcjsMidi=[66], oursMidi=[61], abcjsDur=0.25, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 30: type=note abcjsMidi=[65], oursMidi=[60], abcjsDur=0.5, oursDur=NoteDuration(numerator=1, denominator=2)
+DEBUG: Event 31: type=note abcjsMidi=[63], oursMidi=[60], abcjsDur=0.5, oursDur=NoteDuration(numerator=1, denominator=2)
+DEBUG: Event 32: type=note abcjsMidi=[61], oursMidi=[68], abcjsDur=0.5, oursDur=NoteDuration(numerator=1, denominator=2)
+DEBUG: Event 33: type=note abcjsMidi=[63], oursMidi=[68], abcjsDur=0.5, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 34: type=note abcjsMidi=[60], oursMidi=[68], abcjsDur=0.5, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 35: type=note abcjsMidi=[63], oursMidi=[67], abcjsDur=0.25, oursDur=NoteDuration(numerator=1, denominator=2)
+DEBUG: Event 36: type=note abcjsMidi=[63], oursMidi=[65], abcjsDur=0.25, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 37: type=note abcjsMidi=[65], oursMidi=[63], abcjsDur=0.25, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 38: type=note abcjsMidi=[67], oursMidi=[63], abcjsDur=0.25, oursDur=NoteDuration(numerator=1, denominator=2)
+DEBUG: Event 39: type=note abcjsMidi=[68], oursMidi=[62], abcjsDur=0.25, oursDur=NoteDuration(numerator=1, denominator=2)
+DEBUG: Voice 1 elements: [NoteElement, SpacerElement, NoteElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, NoteElement, SpacerElement, NoteElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, SlurElement, NoteElement, NoteElement, SlurElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, BarLineElement]
+DEBUG: Voice 1: before=26, after=26
+DEBUG: Voice 1: after expansion, indices 20-30:
+DEBUG: index 20: SpacerElement
+DEBUG: index 21: BarLineElement
+DEBUG: index 22: SpacerElement
+DEBUG: index 23: Note Pitch(step=E, octave=5, accidental=null) dur NoteDuration(numerator=1, denominator=2)
+DEBUG: index 24: Note Pitch(step=D, octave=5, accidental=null) dur NoteDuration(numerator=1, denominator=2)
+DEBUG: index 25: SpacerElement
+DEBUG: index 26: BarLineElement
+DEBUG: index 27: SpacerElement
+DEBUG: index 28: Note Pitch(step=E, octave=5, accidental=null) dur NoteDuration(numerator=1, denominator=1)
+DEBUG: index 29: SpacerElement
+DEBUG: index 30: BarLineElement
+DEBUG: index 31: Note Pitch(step=C, octave=5, accidental=null) dur NoteDuration(numerator=1, denominator=2)
+DEBUG: index 32: SpacerElement
+DEBUG: index 33: Note Pitch(step=B, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 34: SpacerElement
+DEBUG: index 35: Note Pitch(step=A, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 36: SpacerElement
+DEBUG: index 37: Note Pitch(step=E, octave=5, accidental=null) dur NoteDuration(numerator=1, denominator=2)
+DEBUG: index 38: SpacerElement
+DEBUG: index 39: BarLineElement
+DEBUG: [tune_001419.abc] Line 0 has no staff
+DEBUG: [tune_001419.abc] allAbcjsVoices size: 1, our voices size: 1
+DEBUG: Voice 1 elements: [BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, SpacerElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, SpacerElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement]
+DEBUG: Voice 1: before=40, after=40
+DEBUG: Voice 1: after expansion, indices 20-30:
+DEBUG: index 20: BodyHeaderElement
+DEBUG: index 21: BodyHeaderElement
+DEBUG: index 22: BodyHeaderElement
+DEBUG: index 23: Note Pitch(step=G, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=2)
+DEBUG: index 24: SpacerElement
+DEBUG: index 25: Note Pitch(step=G, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 26: SpacerElement
+DEBUG: index 27: Note Pitch(step=F, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 28: SpacerElement
+DEBUG: index 29: BarLineElement
+DEBUG: index 30: SpacerElement
+DEBUG: index 31: Note Pitch(step=E, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=2)
+DEBUG: index 32: SpacerElement
+DEBUG: index 33: Note Pitch(step=B, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=2)
+DEBUG: index 34: SpacerElement
+DEBUG: index 35: BarLineElement
+DEBUG: index 36: SpacerElement
+DEBUG: index 37: Note Pitch(step=C, octave=5, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 38: SpacerElement
+DEBUG: index 39: Note Pitch(step=B, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: [tune_000000.abc] Line 0 has no staff
+DEBUG: [tune_000000.abc] Line 1 has no staff
+DEBUG: [tune_000000.abc] allAbcjsVoices size: 1, our voices size: 1
+DEBUG: Voice 1 elements: [SlurElement, NoteElement, NoteElement, NoteElement, NoteElement, SlurElement, SpacerElement, SlurElement, NoteElement, NoteElement, NoteElement, NoteElement, SlurElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, NoteElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, SlurElement, NoteElement, SpacerElement, NoteElement, SlurElement, SpacerElement, SlurElement, NoteElement, SpacerElement, NoteElement, SlurElement, SpacerElement, BarLineElement, SpacerElement]
+DEBUG: Voice 1: before=15, after=15
+DEBUG: Voice 1: after expansion, indices 20-30:
+DEBUG: index 20: BarLineElement
+DEBUG: index 21: SpacerElement
+DEBUG: index 22: SlurElement
+DEBUG: index 23: Note Pitch(step=C, octave=5, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 24: SpacerElement
+DEBUG: index 25: Note Pitch(step=D, octave=5, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 26: SlurElement
+DEBUG: index 27: SpacerElement
+DEBUG: index 28: SlurElement
+DEBUG: index 29: Note Pitch(step=E, octave=5, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 30: SpacerElement
+DEBUG: index 31: Note Pitch(step=F, octave=5, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 32: SlurElement
+DEBUG: index 33: SpacerElement
+DEBUG: index 34: BarLineElement
+DEBUG: index 35: SpacerElement
+DEBUG: [complex_samples.abc] allAbcjsVoices size: 1, our voices size: 1
+DEBUG: Voice 1 elements: [TupletElement, NoteElement, NoteElement, NoteElement, SpacerElement, TupletElement, NoteElement, NoteElement, NoteElement, SpacerElement, TupletElement, NoteElement, NoteElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, TupletElement, NoteElement, NoteElement, SpacerElement, TupletElement, NoteElement, NoteElement, NoteElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement]
+DEBUG: Voice 1: before=17, after=17
+DEBUG: Voice 1: after expansion, indices 20-30:
+DEBUG: index 20: Note Pitch(step=A, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=8)
+DEBUG: index 21: Note Pitch(step=B, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=8)
+DEBUG: index 22: SpacerElement
+DEBUG: index 23: TupletElement
+DEBUG: index 24: Note Pitch(step=C, octave=5, accidental=null) dur NoteDuration(numerator=1, denominator=8)
+DEBUG: index 25: Note Pitch(step=D, octave=5, accidental=null) dur NoteDuration(numerator=1, denominator=8)
+DEBUG: index 26: Note Pitch(step=E, octave=5, accidental=null) dur NoteDuration(numerator=1, denominator=8)
+DEBUG: index 27: Note Pitch(step=F, octave=5, accidental=null) dur NoteDuration(numerator=1, denominator=8)
+DEBUG: index 28: SpacerElement
+DEBUG: index 29: Note Pitch(step=G, octave=5, accidental=null) dur NoteDuration(numerator=1, denominator=2)
+DEBUG: index 30: SpacerElement
+DEBUG: index 31: BarLineElement
+DEBUG: index 32: SpacerElement
+DEBUG: [complex_samples.abc] allAbcjsVoices size: 1, our voices size: 1
+DEBUG: Voice 1 elements: [BodyHeaderElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement]
+DEBUG: Voice 1: before=8, after=8
+DEBUG: Voice 1: after expansion, indices 20-30:
+DEBUG: index 20: SpacerElement
+DEBUG: Voice 2: before=8, after=8
+DEBUG: [complex_samples.abc] allAbcjsVoices size: 2, our voices size: 2
+DEBUG: Voice 1 elements: [BodyHeaderElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement]
+DEBUG: Voice 1: before=46, after=46
+DEBUG: Voice 1: after expansion, indices 20-30:
+DEBUG: index 20: SpacerElement
+DEBUG: index 21: Note Pitch(step=B, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 22: SpacerElement
+DEBUG: index 23: Note Pitch(step=B, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 24: SpacerElement
+DEBUG: index 25: BarLineElement
+DEBUG: index 26: SpacerElement
+DEBUG: index 27: Note Pitch(step=A, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=2)
+DEBUG: index 28: SpacerElement
+DEBUG: index 29: Note Pitch(step=F, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=2)
+DEBUG: index 30: SpacerElement
+DEBUG: index 31: BarLineElement
+DEBUG: index 32: SpacerElement
+DEBUG: index 33: Note Pitch(step=A, octave=4, accidental=null) dur NoteDuration(numerator=3, denominator=8)
+DEBUG: index 34: SpacerElement
+DEBUG: index 35: Note Pitch(step=A, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=8)
+DEBUG: index 36: SpacerElement
+DEBUG: index 37: Note Pitch(step=A, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 38: SpacerElement
+DEBUG: index 39: Note Pitch(step=A, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: [tune_000016.abc] Line 0 has no staff
+DEBUG: [tune_000016.abc] Line 1 has no staff
+DEBUG: [tune_000016.abc] Line 2 has no staff
+DEBUG: [tune_000016.abc] allAbcjsVoices size: 1, our voices size: 1
+DEBUG: Voice 1 elements: [BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, SpacerElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, SpacerElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement]
+DEBUG: Voice 1: before=40, after=40
+DEBUG: Voice 1: after expansion, indices 20-30:
+DEBUG: index 20: BodyHeaderElement
+DEBUG: index 21: BodyHeaderElement
+DEBUG: index 22: BodyHeaderElement
+DEBUG: index 23: BodyHeaderElement
+DEBUG: index 24: BodyHeaderElement
+DEBUG: index 25: BodyHeaderElement
+DEBUG: index 26: Note Pitch(step=F, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=2)
+DEBUG: index 27: SpacerElement
+DEBUG: index 28: Note Pitch(step=F, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 29: SpacerElement
+DEBUG: index 30: Note Pitch(step=E, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 31: SpacerElement
+DEBUG: index 32: BarLineElement
+DEBUG: index 33: SpacerElement
+DEBUG: index 34: Note Pitch(step=D, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=2)
+DEBUG: index 35: SpacerElement
+DEBUG: index 36: Note Pitch(step=A, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=2)
+DEBUG: index 37: SpacerElement
+DEBUG: index 38: BarLineElement
+DEBUG: index 39: SpacerElement
+DEBUG: [tune_000001.abc] Line 0 has no staff
+DEBUG: [tune_000001.abc] Line 1 has no staff
+DEBUG: [tune_000001.abc] allAbcjsVoices size: 1, our voices size: 1
+DEBUG: Voice 1 elements: [BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, BodyHeaderElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, BarLineElement, SpacerElement, RestElement, SpacerElement, RestElement, SpacerElement, RestElement, SpacerElement, BarLineElement, SpacerElement, RestElement, SpacerElement, RestElement, SpacerElement, RestElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, BarLineElement, SpacerElement, RestElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, RestElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, SpacerElement, BodyHeaderElement]
+DEBUG: Voice 1: before=58, after=106
+DEBUG: Voice 1: after expansion, indices 20-30:
+DEBUG: index 20: Note Pitch(step=E, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 21: SpacerElement
+DEBUG: index 22: Note Pitch(step=E, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 23: SpacerElement
+DEBUG: index 24: BarLineElement
+DEBUG: index 25: SpacerElement
+DEBUG: index 26: Note Pitch(step=G, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=2)
+DEBUG: index 27: SpacerElement
+DEBUG: index 28: Note Pitch(step=F, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 29: SpacerElement
+DEBUG: index 30: Note Pitch(step=F, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 31: SpacerElement
+DEBUG: index 32: BarLineElement
+DEBUG: index 33: SpacerElement
+DEBUG: index 34: Note Pitch(step=E, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=2)
+DEBUG: index 35: SpacerElement
+DEBUG: index 36: Note Pitch(step=E, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=2)
+DEBUG: index 37: SpacerElement
+DEBUG: index 38: BarLineElement
+DEBUG: index 39: SpacerElement
+DEBUG: [tune_000003.abc] Line 0 has no staff
+DEBUG: [tune_000003.abc] Line 1 has no staff
+DEBUG: [tune_000003.abc] allAbcjsVoices size: 1, our voices size: 1
+DEBUG: [tune_000003.abc] Voice 0 (1) count mismatch: abcjs=58, ours=106
+DEBUG: Event 0: type=note abcjsMidi=[64], oursMidi=[64], abcjsDur=0.5, oursDur=NoteDuration(numerator=1, denominator=2)
+DEBUG: Event 1: type=note abcjsMidi=[64], oursMidi=[64], abcjsDur=0.25, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 2: type=note abcjsMidi=[64], oursMidi=[64], abcjsDur=0.25, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 3: type=note abcjsMidi=[64], oursMidi=[64], abcjsDur=0.5, oursDur=NoteDuration(numerator=1, denominator=2)
+DEBUG: Event 4: type=note abcjsMidi=[64], oursMidi=[64], abcjsDur=0.25, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 5: type=note abcjsMidi=[64], oursMidi=[64], abcjsDur=0.25, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 6: type=note abcjsMidi=[67], oursMidi=[67], abcjsDur=0.5, oursDur=NoteDuration(numerator=1, denominator=2)
+DEBUG: Event 7: type=note abcjsMidi=[65], oursMidi=[65], abcjsDur=0.25, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 8: type=note abcjsMidi=[65], oursMidi=[65], abcjsDur=0.25, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 9: type=note abcjsMidi=[64], oursMidi=[64], abcjsDur=0.5, oursDur=NoteDuration(numerator=1, denominator=2)
+DEBUG: Event 10: type=note abcjsMidi=[64], oursMidi=[64], abcjsDur=0.5, oursDur=NoteDuration(numerator=1, denominator=2)
+DEBUG: Event 11: type=note abcjsMidi=[72], oursMidi=[72], abcjsDur=0.5, oursDur=NoteDuration(numerator=1, denominator=2)
+DEBUG: Event 12: type=note abcjsMidi=[72], oursMidi=[72], abcjsDur=0.25, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 13: type=note abcjsMidi=[72], oursMidi=[72], abcjsDur=0.25, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 14: type=note abcjsMidi=[71], oursMidi=[71], abcjsDur=0.5, oursDur=NoteDuration(numerator=1, denominator=2)
+DEBUG: Event 15: type=note abcjsMidi=[69], oursMidi=[69], abcjsDur=0.25, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 16: type=note abcjsMidi=[67], oursMidi=[67], abcjsDur=0.25, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 17: type=note abcjsMidi=[67], oursMidi=[67], abcjsDur=0.5, oursDur=NoteDuration(numerator=1, denominator=2)
+DEBUG: Event 18: type=note abcjsMidi=[66], oursMidi=[66], abcjsDur=0.5, oursDur=NoteDuration(numerator=1, denominator=2)
+DEBUG: Event 19: type=note abcjsMidi=[67], oursMidi=[67], abcjsDur=0.5, oursDur=NoteDuration(numerator=1, denominator=2)
+DEBUG: Event 20: type=note abcjsMidi=[67], oursMidi=[67], abcjsDur=0.5, oursDur=NoteDuration(numerator=1, denominator=2)
+DEBUG: Event 21: type=note abcjsMidi=[], oursMidi=[64], abcjsDur=0.5, oursDur=NoteDuration(numerator=1, denominator=2)
+DEBUG: Event 22: type=note abcjsMidi=[], oursMidi=[64], abcjsDur=0.25, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 23: type=note abcjsMidi=[], oursMidi=[64], abcjsDur=0.25, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 24: type=note abcjsMidi=[], oursMidi=[64], abcjsDur=0.5, oursDur=NoteDuration(numerator=1, denominator=2)
+DEBUG: Event 25: type=note abcjsMidi=[], oursMidi=[64], abcjsDur=0.25, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 26: type=note abcjsMidi=[], oursMidi=[64], abcjsDur=0.25, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 27: type=note abcjsMidi=[72], oursMidi=[67], abcjsDur=0.5, oursDur=NoteDuration(numerator=1, denominator=2)
+DEBUG: Event 28: type=note abcjsMidi=[70], oursMidi=[65], abcjsDur=0.25, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 29: type=note abcjsMidi=[70], oursMidi=[65], abcjsDur=0.25, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 30: type=note abcjsMidi=[69], oursMidi=[64], abcjsDur=0.5, oursDur=NoteDuration(numerator=1, denominator=2)
+DEBUG: Event 31: type=note abcjsMidi=[67], oursMidi=[64], abcjsDur=0.5, oursDur=NoteDuration(numerator=1, denominator=2)
+DEBUG: Event 32: type=note abcjsMidi=[65], oursMidi=[72], abcjsDur=0.5, oursDur=NoteDuration(numerator=1, denominator=2)
+DEBUG: Event 33: type=note abcjsMidi=[67], oursMidi=[72], abcjsDur=0.5, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 34: type=note abcjsMidi=[64], oursMidi=[72], abcjsDur=0.5, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 35: type=note abcjsMidi=[67], oursMidi=[71], abcjsDur=0.25, oursDur=NoteDuration(numerator=1, denominator=2)
+DEBUG: Event 36: type=note abcjsMidi=[67], oursMidi=[69], abcjsDur=0.25, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 37: type=note abcjsMidi=[69], oursMidi=[67], abcjsDur=0.25, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 38: type=note abcjsMidi=[71], oursMidi=[67], abcjsDur=0.25, oursDur=NoteDuration(numerator=1, denominator=2)
+DEBUG: Event 39: type=note abcjsMidi=[72], oursMidi=[66], abcjsDur=0.25, oursDur=NoteDuration(numerator=1, denominator=2)
+DEBUG: Voice 1 elements: [NoteElement, NoteElement, BarLineElement, SpacerElement, NoteElement, SpacerElement, NoteElement, SpacerElement, SlurElement, NoteElement, NoteElement, SlurElement, SlurElement, NoteElement, NoteElement, SlurElement, BarLineElement, NoteElement, NoteElement, NoteElement, SpacerElement, NoteElement, NoteElement, NoteElement, BarLineElement, NoteElement, SpacerElement, NoteElement, SpacerElement, SlurElement, NoteElement, NoteElement, SlurElement, SlurElement, NoteElement, NoteElement, SlurElement, SpacerElement, BarLineElement, NoteElement, NoteElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, NoteElement, SpacerElement, BarLineElement, SlurElement, NoteElement, NoteElement, SlurElement, SlurElement, NoteElement, NoteElement, SlurElement, SpacerElement, SlurElement, NoteElement, NoteElement, SlurElement, SlurElement, NoteElement, NoteElement, SlurElement, BarLineElement, NoteElement, NoteElement, NoteElement, SpacerElement, NoteElement, NoteElement, NoteElement, BarLineElement, NoteElement, NoteElement, NoteElement, NoteElement, SpacerElement, SlurElement, NoteElement, NoteElement, SlurElement, SlurElement, NoteElement, NoteElement, SlurElement, BarLineElement, NoteElement, NoteElement, NoteElement, SpacerElement, NoteElement, BarLineElement, SpacerElement, NoteElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, NoteElement, NoteElement, NoteElement, SpacerElement, NoteElement, NoteElement, NoteElement, NoteElement, SpacerElement, BarLineElement, NoteElement, NoteElement, NoteElement, SpacerElement, NoteElement, NoteElement, NoteElement, BarLineElement, NoteElement, NoteElement, NoteElement, NoteElement, SpacerElement, SlurElement, NoteElement, NoteElement, SlurElement, SlurElement, NoteElement, NoteElement, SlurElement, SpacerElement, BarLineElement, NoteElement, NoteElement, NoteElement, SpacerElement, NoteElement, SpacerElement, NoteElement, NoteElement, SpacerElement, BarLineElement, SpacerElement, NoteElement, NoteElement, NoteElement, NoteElement, SpacerElement, NoteElement, NoteElement, NoteElement, NoteElement, SpacerElement, BarLineElement, NoteElement, NoteElement, NoteElement, NoteElement, SpacerElement, NoteElement, NoteElement, NoteElement, NoteElement, BarLineElement, NoteElement, NoteElement, NoteElement, NoteElement, SpacerElement, NoteElement, NoteElement, NoteElement, NoteElement, SpacerElement, BarLineElement, NoteElement, NoteElement, NoteElement, SpacerElement, NoteElement, BarLineElement]
+DEBUG: Voice 1: before=110, after=220
+DEBUG: Voice 1: after expansion, indices 20-30:
+DEBUG: index 20: SpacerElement
+DEBUG: index 21: Note Pitch(step=D, octave=5, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: index 22: Note Pitch(step=A, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=8)
+DEBUG: index 23: Note Pitch(step=B, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=8)
+DEBUG: index 24: BarLineElement
+DEBUG: index 25: Note Pitch(step=C, octave=5, accidental=null) dur NoteDuration(numerator=3, denominator=8)
+DEBUG: index 26: SpacerElement
+DEBUG: index 27: Note Pitch(step=E, octave=5, accidental=null) dur NoteDuration(numerator=1, denominator=8)
+DEBUG: index 28: SpacerElement
+DEBUG: index 29: SlurElement
+DEBUG: index 30: Note Pitch(step=D, octave=5, accidental=null) dur NoteDuration(numerator=1, denominator=8)
+DEBUG: index 31: Note Pitch(step=B, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=8)
+DEBUG: index 32: SlurElement
+DEBUG: index 33: SlurElement
+DEBUG: index 34: Note Pitch(step=A, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=8)
+DEBUG: index 35: Note Pitch(step=G, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=8)
+DEBUG: index 36: SlurElement
+DEBUG: index 37: SpacerElement
+DEBUG: index 38: BarLineElement
+DEBUG: index 39: Note Pitch(step=B, octave=4, accidental=null) dur NoteDuration(numerator=1, denominator=4)
+DEBUG: [tune_000667.abc] allAbcjsVoices size: 1, our voices size: 1
+DEBUG: [tune_000667.abc] Voice 0 (1) count mismatch: abcjs=110, ours=220
+DEBUG: Event 0: type=note abcjsMidi=[67], oursMidi=[67], abcjsDur=0.1875, oursDur=NoteDuration(numerator=3, denominator=16)
+DEBUG: Event 1: type=note abcjsMidi=[69], oursMidi=[69], abcjsDur=0.0625, oursDur=NoteDuration(numerator=1, denominator=16)
+DEBUG: Event 2: type=note abcjsMidi=[71], oursMidi=[71], abcjsDur=0.375, oursDur=NoteDuration(numerator=3, denominator=8)
+DEBUG: Event 3: type=note abcjsMidi=[79], oursMidi=[79], abcjsDur=0.125, oursDur=NoteDuration(numerator=1, denominator=8)
+DEBUG: Event 4: type=note abcjsMidi=[74], oursMidi=[74], abcjsDur=0.125, oursDur=NoteDuration(numerator=1, denominator=8)
+DEBUG: Event 5: type=note abcjsMidi=[71], oursMidi=[71], abcjsDur=0.125, oursDur=NoteDuration(numerator=1, denominator=8)
+DEBUG: Event 6: type=note abcjsMidi=[69], oursMidi=[69], abcjsDur=0.125, oursDur=NoteDuration(numerator=1, denominator=8)
+DEBUG: Event 7: type=note abcjsMidi=[67], oursMidi=[67], abcjsDur=0.125, oursDur=NoteDuration(numerator=1, denominator=8)
+DEBUG: Event 8: type=note abcjsMidi=[71], oursMidi=[71], abcjsDur=0.25, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 9: type=note abcjsMidi=[74], oursMidi=[74], abcjsDur=0.1875, oursDur=NoteDuration(numerator=3, denominator=16)
+DEBUG: Event 10: type=note abcjsMidi=[76], oursMidi=[76], abcjsDur=0.0625, oursDur=NoteDuration(numerator=1, denominator=16)
+DEBUG: Event 11: type=note abcjsMidi=[74], oursMidi=[74], abcjsDur=0.25, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 12: type=note abcjsMidi=[69], oursMidi=[69], abcjsDur=0.125, oursDur=NoteDuration(numerator=1, denominator=8)
+DEBUG: Event 13: type=note abcjsMidi=[71], oursMidi=[71], abcjsDur=0.125, oursDur=NoteDuration(numerator=1, denominator=8)
+DEBUG: Event 14: type=note abcjsMidi=[72], oursMidi=[72], abcjsDur=0.375, oursDur=NoteDuration(numerator=3, denominator=8)
+DEBUG: Event 15: type=note abcjsMidi=[76], oursMidi=[76], abcjsDur=0.125, oursDur=NoteDuration(numerator=1, denominator=8)
+DEBUG: Event 16: type=note abcjsMidi=[74], oursMidi=[74], abcjsDur=0.125, oursDur=NoteDuration(numerator=1, denominator=8)
+DEBUG: Event 17: type=note abcjsMidi=[71], oursMidi=[71], abcjsDur=0.125, oursDur=NoteDuration(numerator=1, denominator=8)
+DEBUG: Event 18: type=note abcjsMidi=[69], oursMidi=[69], abcjsDur=0.125, oursDur=NoteDuration(numerator=1, denominator=8)
+DEBUG: Event 19: type=note abcjsMidi=[67], oursMidi=[67], abcjsDur=0.125, oursDur=NoteDuration(numerator=1, denominator=8)
+DEBUG: Event 20: type=note abcjsMidi=[71], oursMidi=[71], abcjsDur=0.25, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 21: type=note abcjsMidi=[69], oursMidi=[69], abcjsDur=0.1875, oursDur=NoteDuration(numerator=3, denominator=16)
+DEBUG: Event 22: type=note abcjsMidi=[71], oursMidi=[71], abcjsDur=0.0625, oursDur=NoteDuration(numerator=1, denominator=16)
+DEBUG: Event 23: type=note abcjsMidi=[69], oursMidi=[69], abcjsDur=0.25, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 24: type=note abcjsMidi=[67], oursMidi=[67], abcjsDur=0.125, oursDur=NoteDuration(numerator=1, denominator=8)
+DEBUG: Event 25: type=note abcjsMidi=[69], oursMidi=[69], abcjsDur=0.125, oursDur=NoteDuration(numerator=1, denominator=8)
+DEBUG: Event 26: type=note abcjsMidi=[71], oursMidi=[71], abcjsDur=0.125, oursDur=NoteDuration(numerator=1, denominator=8)
+DEBUG: Event 27: type=note abcjsMidi=[74], oursMidi=[74], abcjsDur=0.125, oursDur=NoteDuration(numerator=1, denominator=8)
+DEBUG: Event 28: type=note abcjsMidi=[76], oursMidi=[76], abcjsDur=0.125, oursDur=NoteDuration(numerator=1, denominator=8)
+DEBUG: Event 29: type=note abcjsMidi=[79], oursMidi=[79], abcjsDur=0.125, oursDur=NoteDuration(numerator=1, denominator=8)
+DEBUG: Event 30: type=note abcjsMidi=[74], oursMidi=[74], abcjsDur=0.125, oursDur=NoteDuration(numerator=1, denominator=8)
+DEBUG: Event 31: type=note abcjsMidi=[71], oursMidi=[71], abcjsDur=0.125, oursDur=NoteDuration(numerator=1, denominator=8)
+DEBUG: Event 32: type=note abcjsMidi=[69], oursMidi=[69], abcjsDur=0.125, oursDur=NoteDuration(numerator=1, denominator=8)
+DEBUG: Event 33: type=note abcjsMidi=[67], oursMidi=[67], abcjsDur=0.125, oursDur=NoteDuration(numerator=1, denominator=8)
+DEBUG: Event 34: type=note abcjsMidi=[71], oursMidi=[71], abcjsDur=0.25, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 35: type=note abcjsMidi=[79], oursMidi=[79], abcjsDur=0.125, oursDur=NoteDuration(numerator=1, denominator=8)
+DEBUG: Event 36: type=note abcjsMidi=[81], oursMidi=[81], abcjsDur=0.125, oursDur=NoteDuration(numerator=1, denominator=8)
+DEBUG: Event 37: type=note abcjsMidi=[79], oursMidi=[79], abcjsDur=0.25, oursDur=NoteDuration(numerator=1, denominator=4)
+DEBUG: Event 38: type=note abcjsMidi=[71], oursMidi=[71], abcjsDur=0.125, oursDur=NoteDuration(numerator=1, denominator=8)
+DEBUG: Event 39: type=note abcjsMidi=[72], oursMidi=[72], abcjsDur=0.125, oursDur=NoteDuration(numerator=1, denominator=8)
+[ERROR] Tests run: 26, Failures: 5, Errors: 0, Skipped: 0, Time elapsed: 2.910 s <<< FAILURE! -- in io.github.ryangardner.abc.test.AbcjsSemanticParityTest
+[ERROR] io.github.ryangardner.abc.test.AbcjsSemanticParityTest.test semantic parity with abcjs(AbcjsBaseline)[2] -- Time elapsed: 1.126 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: [tune_001614.abc] Event count mismatch in voice 1 ==> expected: <61> but was: <81>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:150)
+	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:563)
+	at io.github.ryangardner.abc.test.AbcjsSemanticParityTest.test semantic parity with abcjs(AbcjsSemanticParityTest.kt:142)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.concurrent.RecursiveAction.exec(RecursiveAction.java:194)
+	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:507)
+	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1394)
+	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1970)
+	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:187)
+
+[ERROR] io.github.ryangardner.abc.test.AbcjsSemanticParityTest.test semantic parity with abcjs(AbcjsBaseline)[13] -- Time elapsed: 1.071 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: [tune_000004.abc] Event count mismatch in voice 1 ==> expected: <58> but was: <106>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:150)
+	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:563)
+	at io.github.ryangardner.abc.test.AbcjsSemanticParityTest.test semantic parity with abcjs(AbcjsSemanticParityTest.kt:142)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.concurrent.RecursiveAction.exec(RecursiveAction.java:194)
+	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:507)
+	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1394)
+	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1970)
+	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:187)
+
+[ERROR] io.github.ryangardner.abc.test.AbcjsSemanticParityTest.test semantic parity with abcjs(AbcjsBaseline)[16] -- Time elapsed: 1.126 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: [tune_000005.abc] Event count mismatch in voice 1 ==> expected: <58> but was: <106>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:150)
+	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:563)
+	at io.github.ryangardner.abc.test.AbcjsSemanticParityTest.test semantic parity with abcjs(AbcjsSemanticParityTest.kt:142)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.concurrent.RecursiveAction.exec(RecursiveAction.java:194)
+	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:507)
+	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1394)
+	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1970)
+	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:187)
+
+[ERROR] io.github.ryangardner.abc.test.AbcjsSemanticParityTest.test semantic parity with abcjs(AbcjsBaseline)[22] -- Time elapsed: 0.793 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: [tune_000003.abc] Event count mismatch in voice 1 ==> expected: <58> but was: <106>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:150)
+	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:563)
+	at io.github.ryangardner.abc.test.AbcjsSemanticParityTest.test semantic parity with abcjs(AbcjsSemanticParityTest.kt:142)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.concurrent.RecursiveAction.exec(RecursiveAction.java:194)
+	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:507)
+	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1394)
+	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1970)
+	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:187)
+
+[ERROR] io.github.ryangardner.abc.test.AbcjsSemanticParityTest.test semantic parity with abcjs(AbcjsBaseline)[24] -- Time elapsed: 0.481 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: [tune_000667.abc] Event count mismatch in voice 1 ==> expected: <110> but was: <220>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:150)
+	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:563)
+	at io.github.ryangardner.abc.test.AbcjsSemanticParityTest.test semantic parity with abcjs(AbcjsSemanticParityTest.kt:142)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.concurrent.RecursiveAction.exec(RecursiveAction.java:194)
+	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:507)
+	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1394)
+	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1970)
+	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:187)
+
+[INFO] 
+[INFO] Results:
+[INFO] 
+[ERROR] Failures: 
+[ERROR]   AbcjsSemanticParityTest.test semantic parity with abcjs:142 [tune_000004.abc] Event count mismatch in voice 1 ==> expected: <58> but was: <106>
+[ERROR]   AbcjsSemanticParityTest.test semantic parity with abcjs:142 [tune_000005.abc] Event count mismatch in voice 1 ==> expected: <58> but was: <106>
+[ERROR]   AbcjsSemanticParityTest.test semantic parity with abcjs:142 [tune_000003.abc] Event count mismatch in voice 1 ==> expected: <58> but was: <106>
+[ERROR]   AbcjsSemanticParityTest.test semantic parity with abcjs:142 [tune_000667.abc] Event count mismatch in voice 1 ==> expected: <110> but was: <220>
+[ERROR]   AbcjsSemanticParityTest.test semantic parity with abcjs:142 [tune_001614.abc] Event count mismatch in voice 1 ==> expected: <61> but was: <81>
+[INFO] 
+[ERROR] Tests run: 26, Failures: 5, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  15.449 s
+[INFO] Finished at: 2026-02-10T21:26:30-05:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.2.5:test (default-test) on project abc-test: There are test failures.
+[ERROR] 
+[ERROR] Please refer to /Users/ryan.gardner/gitother/abc-jvm/abc-test/target/surefire-reports for the individual test results.
+[ERROR] Please refer to dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
