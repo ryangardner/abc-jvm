@@ -246,3 +246,295 @@ Both abcjs and music21 disagree with our parser OR they disagree with each other
 | abc_notation_batch_001/tune_000659.abc | music21 missing/error AND abcjs mismatch: [abc_notation_batch_001/tune_000659.abc] Voice 1 event count mismatch (expanded and unexpanded) ==> expected: <18> but was: <84> |
 | abc_notation_batch_001/tune_000881.abc | music21 missing/error AND abcjs mismatch: [abc_notation_batch_001/tune_000881.abc] Voice 1 event count mismatch (expanded and unexpanded) ==> expected: <76> but was: <171> |
 | abc_notation_batch_001/tune_001008.abc | music21 missing/error AND abcjs mismatch: [abc_notation_batch_001/tune_001008.abc] Voice 1 event count mismatch (expanded and unexpanded) ==> expected: <7> but was: <48> |
+| abc_notation_batch_002/tune_002915.abc | [abc_notation_batch_002/tune_002915.abc] Voice 1 event count mismatch (expanded: 425, unexpanded: 215) ==> expected: <201> but was: <425> |
+| abc_notation_batch_002/tune_003202.abc | [abc_notation_batch_002/tune_003202.abc] Voice 1 event count mismatch (expanded: 200, unexpanded: 157) ==> expected: <55> but was: <200> |
+| abc_notation_batch_002/tune_002524.abc | [abc_notation_batch_002/tune_002524.abc] Voice 1 event count mismatch (expanded: 49, unexpanded: 33) ==> expected: <16> but was: <49> |
+| abc_notation_batch_002/tune_002726.abc | [abc_notation_batch_002/tune_002726.abc] Voice 1 event count mismatch (expanded: 60, unexpanded: 43) ==> expected: <17> but was: <60> |
+| abc_notation_batch_002/tune_001987.abc | [abc_notation_batch_002/tune_001987.abc] Voice 1 event count mismatch (expanded: 90, unexpanded: 70) ==> expected: <20> but was: <90> |
+| abc_notation_batch_002/tune_002336.abc | [abc_notation_batch_002/tune_002336.abc] Voice 1 event count mismatch (expanded: 168, unexpanded: 117) ==> expected: <52> but was: <168> |
+| abc_notation_batch_002/tune_003363.abc | [abc_notation_batch_002/tune_003363.abc] Voice 1 event count mismatch (expanded: 198, unexpanded: 149) ==> expected: <49> but was: <198> |
+| abc_notation_batch_002/tune_003203.abc | [abc_notation_batch_002/tune_003203.abc] Voice 1 event count mismatch (expanded: 200, unexpanded: 114) ==> expected: <97> but was: <200> |
+| abc_notation_batch_002/tune_002874.abc | [abc_notation_batch_002/tune_002874.abc] Voice 1 event count mismatch (expanded: 115, unexpanded: 115) ==> expected: <155> but was: <115> |
+| abc_notation_batch_002/tune_002243.abc | abcjs warnings: Music Line:17:1: Expected integer parameter in MIDI program:  <span style="text-decoration:underline;font-size:1.3em;font-weight:bold;">p</span>rogram 0/ |
+| abc_notation_batch_002/tune_002525.abc | [abc_notation_batch_002/tune_002525.abc] Voice 1 event count mismatch (expanded: 150, unexpanded: 76) ==> expected: <72> but was: <150> |
+| abc_notation_batch_002/tune_003836.abc | [abc_notation_batch_002/tune_003836.abc] Voice 1 event count mismatch (expanded: 722, unexpanded: 376) ==> expected: <475> but was: <722> |
+| abc_notation_batch_002/tune_002269.abc | [abc_notation_batch_002/tune_002269.abc] Voice 1 event count mismatch (expanded: 146, unexpanded: 73) ==> expected: <71> but was: <146> |
+| abc_notation_batch_002/tune_003605.abc | [abc_notation_batch_002/tune_003605.abc] Voice 1 event count mismatch (expanded: 166, unexpanded: 89) ==> expected: <37> but was: <166> |
+| abc_notation_batch_002/tune_003188.abc | abcjs warnings: Music Line:8:9: Unknown bar symbol:  ["Em"G,D<span style="text-decoration:underline;font-size:1.3em;font-weight:bold;">]</span>[B,2E2][B,E-][B,4E4]|"G"BABc BAGD|"Em"[G,D][B,2E2][B,E-][B,4E4]| |
+| abc_notation_batch_002/tune_002255.abc | [abc_notation_batch_002/tune_002255.abc] Voice 1 event count mismatch (expanded: 275, unexpanded: 185) ==> expected: <90> but was: <275> |
+| abc_notation_batch_002/tune_002731.abc | [abc_notation_batch_002/tune_002731.abc] Voice 1 event count mismatch (expanded: 194, unexpanded: 97) ==> expected: <95> but was: <194> |
+| abc_notation_batch_002/tune_003573.abc | [abc_notation_batch_002/tune_003573.abc] Voice 1 event count mismatch (expanded: 240, unexpanded: 126) ==> expected: <114> but was: <240> |
+| abc_notation_batch_002/tune_002876.abc | [abc_notation_batch_002/tune_002876.abc] Voice 1 event count mismatch (expanded: 115, unexpanded: 115) ==> expected: <155> but was: <115> |
+| abc_notation_batch_002/tune_002484.abc | [abc_notation_batch_002/tune_002484.abc] Voice 1 event count mismatch (expanded: 176, unexpanded: 91) ==> expected: <85> but was: <176> |
+| abc_notation_batch_002/tune_002334.abc | [abc_notation_batch_002/tune_002334.abc] Voice 1 event count mismatch (expanded: 110, unexpanded: 62) ==> expected: <70> but was: <110> |
+| abc_notation_batch_002/tune_003201.abc | [abc_notation_batch_002/tune_003201.abc] Voice 1 event count mismatch (expanded: 208, unexpanded: 161) ==> expected: <59> but was: <208> |
+| abc_notation_batch_002/tune_002254.abc | [abc_notation_batch_002/tune_002254.abc] Voice 1 event count mismatch (expanded: 275, unexpanded: 185) ==> expected: <90> but was: <275> |
+| abc_notation_batch_002/tune_002042.abc | [abc_notation_batch_002/tune_002042.abc] Voice 1 event count mismatch (expanded: 65, unexpanded: 50) ==> expected: <15> but was: <65> |
+| abc_notation_batch_002/tune_001991.abc | [abc_notation_batch_002/tune_001991.abc] Voice 1 event count mismatch (expanded: 67, unexpanded: 47) ==> expected: <20> but was: <67> |
+| abc_notation_batch_002/tune_003610.abc | [abc_notation_batch_002/tune_003610.abc] Voice 1 event count mismatch (expanded: 180, unexpanded: 139) ==> expected: <41> but was: <180> |
+| abc_notation_batch_002/tune_003827.abc | [abc_notation_batch_002/tune_003827.abc] Voice 1 event count mismatch (expanded: 134, unexpanded: 85) ==> expected: <51> but was: <134> |
+| abc_notation_batch_002/tune_002278.abc | [abc_notation_batch_002/tune_002278.abc] Voice 1 event count mismatch (expanded: 158, unexpanded: 79) ==> expected: <75> but was: <158> |
+| abc_notation_batch_002/tune_003600.abc | [abc_notation_batch_002/tune_003600.abc] Voice 1 event count mismatch (expanded: 142, unexpanded: 108) ==> expected: <33> but was: <142> |
+| abc_notation_batch_002/tune_003837.abc | [abc_notation_batch_002/tune_003837.abc] Voice 1 event count mismatch (expanded: 722, unexpanded: 376) ==> expected: <474> but was: <722> |
+| abc_notation_batch_002/tune_002720.abc | [abc_notation_batch_002/tune_002720.abc] Voice 1 event count mismatch (expanded: 122, unexpanded: 76) ==> expected: <31> but was: <122> |
+| abc_notation_batch_002/tune_003638.abc | [abc_notation_batch_002/tune_003638.abc] Voice 1 event count mismatch (expanded: 564, unexpanded: 526) ==> expected: <37> but was: <564> |
+| abc_notation_batch_002/tune_003774.abc | [abc_notation_batch_002/tune_003774.abc] Voice 1 event count mismatch (expanded: 113, unexpanded: 87) ==> expected: <26> but was: <113> |
+| abc_notation_batch_002/tune_003775.abc | [abc_notation_batch_002/tune_003775.abc] Voice 1 event count mismatch (expanded: 132, unexpanded: 99) ==> expected: <43> but was: <132> |
+| abc_notation_batch_002/tune_002668.abc | [abc_notation_batch_002/tune_002668.abc] Voice 1 event count mismatch (expanded: 364, unexpanded: 210) ==> expected: <154> but was: <364> |
+| abc_notation_batch_002/tune_002331.abc | [abc_notation_batch_002/tune_002331.abc] Voice 1 event count mismatch (expanded: 178, unexpanded: 90) ==> expected: <88> but was: <178> |
+| abc_notation_batch_002/tune_002279.abc | [abc_notation_batch_002/tune_002279.abc] Voice 1 event count mismatch (expanded: 158, unexpanded: 79) ==> expected: <75> but was: <158> |
+| abc_notation_batch_002/tune_002872.abc | [abc_notation_batch_002/tune_002872.abc] Voice 1 event count mismatch (expanded: 242, unexpanded: 127) ==> expected: <103> but was: <242> |
+| abc_notation_batch_002/tune_002721.abc | [abc_notation_batch_002/tune_002721.abc] Voice 1 event count mismatch (expanded: 116, unexpanded: 71) ==> expected: <30> but was: <116> |
+| abc_notation_batch_002/tune_002669.abc | [abc_notation_batch_002/tune_002669.abc] Voice 1 event count mismatch (expanded: 453, unexpanded: 231) ==> expected: <222> but was: <453> |
+| abc_notation_batch_002/tune_003371.abc | [abc_notation_batch_002/tune_003371.abc] Voice 1 event count mismatch (expanded: 408, unexpanded: 312) ==> expected: <42> but was: <408> |
+| abc_notation_batch_002/tune_003417.abc | [abc_notation_batch_002/tune_003417.abc] Voice 1 event count mismatch (expanded: 56, unexpanded: 42) ==> expected: <14> but was: <56> |
+| abc_notation_batch_002/tune_003601.abc | [abc_notation_batch_002/tune_003601.abc] Voice 1 event count mismatch (expanded: 124, unexpanded: 67) ==> expected: <57> but was: <124> |
+| abc_notation_batch_002/tune_002245.abc | [abc_notation_batch_002/tune_002245.abc] Voice 1 event count mismatch (expanded: 135, unexpanded: 96) ==> expected: <85> but was: <135> |
+| abc_notation_batch_002/tune_003198.abc | [abc_notation_batch_002/tune_003198.abc] Voice 1 event count mismatch (expanded: 186, unexpanded: 134) ==> expected: <52> but was: <186> |
+| abc_notation_batch_002/tune_003402.abc | [abc_notation_batch_002/tune_003402.abc] Voice 1 event count mismatch (expanded: 99, unexpanded: 82) ==> expected: <17> but was: <99> |
+| abc_notation_batch_002/tune_003629.abc | [abc_notation_batch_002/tune_003629.abc] Voice 1 event count mismatch (expanded: 228, unexpanded: 154) ==> expected: <74> but was: <228> |
+| abc_notation_batch_002/tune_002535.abc | [abc_notation_batch_002/tune_002535.abc] Voice 1 event count mismatch (expanded: 182, unexpanded: 91) ==> expected: <99> but was: <182> |
+| abc_notation_batch_002/tune_003603.abc | abcjs warnings: Music Line:10:65: Unknown bar symbol:  "D"f2e2f2a2 A4A4|f2A2e2f2 g2f2e2d2|"A7"c4e2c2 A4g4|"A7"g2e2c2A2 <span style="text-decoration:underline;font-size:1.3em;font-weight:bold;">:</span>D:d4:| |
+| abc_notation_batch_002/tune_003429.abc | [abc_notation_batch_002/tune_003429.abc] Voice 1 event count mismatch (expanded: 90, unexpanded: 90) ==> expected: <2> but was: <90> |
+| abc_notation_batch_002/tune_002079.abc | [abc_notation_batch_002/tune_002079.abc] Voice 1 event count mismatch (expanded: 107, unexpanded: 80) ==> expected: <27> but was: <107> |
+| abc_notation_batch_002/tune_003207.abc | abcjs warnings: Music Line:11:3: Unknown parameter: -8:  C <span style="text-decoration:underline;font-size:1.3em;font-weight:bold;">-</span>8va |
+| abc_notation_batch_002/tune_002441.abc | [abc_notation_batch_002/tune_002441.abc] Voice 1 event count mismatch (expanded: 145, unexpanded: 85) ==> expected: <60> but was: <145> |
+| abc_notation_batch_002/tune_003777.abc | [abc_notation_batch_002/tune_003777.abc] Voice 1 event count mismatch (expanded: 132, unexpanded: 99) ==> expected: <43> but was: <132> |
+| abc_notation_batch_002/tune_003366.abc | [abc_notation_batch_002/tune_003366.abc] Voice 1 event count mismatch (expanded: 136, unexpanded: 83) ==> expected: <32> but was: <136> |
+| abc_notation_batch_002/tune_003400.abc | [abc_notation_batch_002/tune_003400.abc] Voice 1 event count mismatch (expanded: 73, unexpanded: 73) ==> expected: <2> but was: <73> |
+| abc_notation_batch_002/tune_003206.abc | abcjs warnings: Music Line:11:3: Unknown parameter: -8:  C <span style="text-decoration:underline;font-size:1.3em;font-weight:bold;">-</span>8va |
+| abc_notation_batch_002/tune_002871.abc | [abc_notation_batch_002/tune_002871.abc] Duration mismatch at event 0 in voice 1 (expanded). abcjsDur: 0.125, ours: 0.08333333333333333 ==> expected: <0.125> but was: <0.08333333333333333> |
+| abc_notation_batch_002/tune_002252.abc | abcjs warnings: Music Line:11:15: Unknown character ignored:   E2 A B,2 B, |<span style="text-decoration:underline;font-size:1.3em;font-weight:bold;">$</span> C2 D E2 | A | G2 B G2 B | F F E3 A | G2 B G2 B | (G2 ^A B2) B | |
+| abc_notation_batch_002/tune_003372.abc | [abc_notation_batch_002/tune_003372.abc] Voice 1 event count mismatch (expanded: 323, unexpanded: 182) ==> expected: <225> but was: <323> |
+| abc_notation_batch_002/tune_002209.abc | [abc_notation_batch_002/tune_002209.abc] Pitch mismatch at event 81 in voice 1 (Prev: NoteDuration(numerator=1, denominator=2)/NoteDuration(numerator=1, denominator=2)) ==> expected: <[66]> but was: <[66, 69]> |
+| abc_notation_batch_002/tune_003467.abc | abcjs warnings: Music Line:10:68: Unknown character ignored:  | F C B F | F F/ G/ F F | F D B A/ B/ | c C C D | D D D C/ B,/ |<span style="text-decoration:underline;font-size:1.3em;font-weight:bold;">$</span> D F B z | |
+| abc_notation_batch_002/tune_003212.abc | [abc_notation_batch_002/tune_003212.abc] Voice 1 event count mismatch (expanded: 61, unexpanded: 46) ==> expected: <15> but was: <61> |
+| abc_notation_batch_002/tune_002590.abc | [abc_notation_batch_002/tune_002590.abc] Voice 1 event count mismatch (expanded: 214, unexpanded: 107) ==> expected: <131> but was: <214> |
+| abc_notation_batch_002/tune_002802.abc | [abc_notation_batch_002/tune_002802.abc] Voice 1 event count mismatch (expanded: 232, unexpanded: 183) ==> expected: <51> but was: <232> |
+| abc_notation_batch_002/tune_003513.abc | [abc_notation_batch_002/tune_003513.abc] Voice 1 event count mismatch (expanded: 139, unexpanded: 94) ==> expected: <45> but was: <139> |
+| abc_notation_batch_002/tune_002745.abc | [abc_notation_batch_002/tune_002745.abc] Voice 1 event count mismatch (expanded: 254, unexpanded: 174) ==> expected: <83> but was: <254> |
+| abc_notation_batch_002/tune_003705.abc | [abc_notation_batch_002/tune_003705.abc] Voice 1 event count mismatch (expanded: 190, unexpanded: 112) ==> expected: <78> but was: <190> |
+| abc_notation_batch_002/tune_003329.abc | [abc_notation_batch_002/tune_003329.abc] Voice 1 event count mismatch (expanded: 59, unexpanded: 44) ==> expected: <15> but was: <59> |
+| abc_notation_batch_002/tune_003710.abc | [abc_notation_batch_002/tune_003710.abc] Voice 1 event count mismatch (expanded: 113, unexpanded: 83) ==> expected: <32> but was: <113> |
+| abc_notation_batch_002/tune_003739.abc | [abc_notation_batch_002/tune_003739.abc] Voice 1 event count mismatch (expanded: 472, unexpanded: 292) ==> expected: <180> but was: <472> |
+| abc_notation_batch_002/tune_002022.abc | [abc_notation_batch_002/tune_002022.abc] Duration mismatch at event 0 in voice 1 (expanded). abcjsDur: 0.125, ours: 0.08333333333333333 ==> expected: <0.125> but was: <0.08333333333333333> |
+| abc_notation_batch_002/tune_002744.abc | [abc_notation_batch_002/tune_002744.abc] Voice 1 event count mismatch (expanded: 286, unexpanded: 162) ==> expected: <124> but was: <286> |
+| abc_notation_batch_002/tune_002787.abc | [abc_notation_batch_002/tune_002787.abc] Voice 1 event count mismatch (expanded: 146, unexpanded: 73) ==> expected: <77> but was: <146> |
+| abc_notation_batch_002/tune_003699.abc | [abc_notation_batch_002/tune_003699.abc] Voice 1 event count mismatch (expanded: 224, unexpanded: 112) ==> expected: <109> but was: <224> |
+| abc_notation_batch_002/tune_003128.abc | abcjs warnings: Music Line:11:6: Unknown parameter: -8:  Amin <span style="text-decoration:underline;font-size:1.3em;font-weight:bold;">-</span>8va |
+| abc_notation_batch_002/tune_002544.abc | [abc_notation_batch_002/tune_002544.abc] Pitch mismatch at event 15 in voice 1 (Prev: NoteDuration(numerator=3, denominator=8)/NoteDuration(numerator=1, denominator=2)) ==> expected: <[70]> but was: <[70, 72]> |
+| abc_notation_batch_002/tune_003300.abc | [abc_notation_batch_002/tune_003300.abc] Voice 1 event count mismatch (expanded: 214, unexpanded: 160) ==> expected: <54> but was: <214> |
+| abc_notation_batch_002/tune_002168.abc | [abc_notation_batch_002/tune_002168.abc] Voice 1 event count mismatch (expanded: 159, unexpanded: 85) ==> expected: <73> but was: <159> |
+| abc_notation_batch_002/tune_002425.abc | [abc_notation_batch_002/tune_002425.abc] Voice 1 event count mismatch (expanded: 288, unexpanded: 144) ==> expected: <166> but was: <288> |
+| abc_notation_batch_002/tune_002020.abc | [abc_notation_batch_002/tune_002020.abc] Voice 1 event count mismatch (expanded: 54, unexpanded: 37) ==> expected: <17> but was: <54> |
+| abc_notation_batch_002/tune_003510.abc | [abc_notation_batch_002/tune_003510.abc] Voice 1 event count mismatch (expanded: 364, unexpanded: 183) ==> expected: <181> but was: <364> |
+| abc_notation_batch_002/tune_003114.abc | [abc_notation_batch_002/tune_003114.abc] Voice 1 event count mismatch (expanded: 99, unexpanded: 78) ==> expected: <21> but was: <99> |
+| abc_notation_batch_002/tune_003707.abc | [abc_notation_batch_002/tune_003707.abc] Voice 1 event count mismatch (expanded: 113, unexpanded: 83) ==> expected: <32> but was: <113> |
+| abc_notation_batch_002/tune_002424.abc | [abc_notation_batch_002/tune_002424.abc] Voice 1 event count mismatch (expanded: 203, unexpanded: 145) ==> expected: <60> but was: <203> |
+| abc_notation_batch_002/tune_002633.abc | [abc_notation_batch_002/tune_002633.abc] Voice 1 event count mismatch (expanded: 100, unexpanded: 100) ==> expected: <8> but was: <100> |
+| abc_notation_batch_002/tune_002753.abc | [abc_notation_batch_002/tune_002753.abc] Voice 1 event count mismatch (expanded: 169, unexpanded: 140) ==> expected: <41> but was: <169> |
+| abc_notation_batch_002/tune_003288.abc | [abc_notation_batch_002/tune_003288.abc] Voice 1 event count mismatch (expanded: 154, unexpanded: 77) ==> expected: <80> but was: <154> |
+| abc_notation_batch_002/tune_003511.abc | [abc_notation_batch_002/tune_003511.abc] Voice 1 event count mismatch (expanded: 125, unexpanded: 125) ==> expected: <1> but was: <125> |
+| abc_notation_batch_002/tune_002746.abc | abcjs warnings: Music Line:13:1: Expected one parameter in MIDI transpose:  <span style="text-decoration:underline;font-size:1.3em;font-weight:bold;">t</span>ranspose +0 |
+| abc_notation_batch_002/tune_002747.abc | [abc_notation_batch_002/tune_002747.abc] Voice 1 event count mismatch (expanded: 153, unexpanded: 111) ==> expected: <41> but was: <153> |
+| abc_notation_batch_002/tune_002169.abc | [abc_notation_batch_002/tune_002169.abc] Voice 1 event count mismatch (expanded: 46, unexpanded: 33) ==> expected: <13> but was: <46> |
+| abc_notation_batch_002/tune_002233.abc | abcjs warnings: Music Line:11:6: Unknown parameter: -8:  Amin <span style="text-decoration:underline;font-size:1.3em;font-weight:bold;">-</span>8va |
+| abc_notation_batch_002/tune_003883.abc | [abc_notation_batch_002/tune_003883.abc] Voice 1 event count mismatch (expanded: 177, unexpanded: 119) ==> expected: <60> but was: <177> |
+| abc_notation_batch_002/tune_003840.abc | [abc_notation_batch_002/tune_003840.abc] Voice 1 event count mismatch (expanded: 183, unexpanded: 100) ==> expected: <35> but was: <183> |
+| abc_notation_batch_002/tune_003688.abc | [abc_notation_batch_002/tune_003688.abc] Voice 1 event count mismatch (expanded: 113, unexpanded: 83) ==> expected: <30> but was: <113> |
+| abc_notation_batch_002/tune_002031.abc | [abc_notation_batch_002/tune_002031.abc] Voice 1 event count mismatch (expanded: 68, unexpanded: 48) ==> expected: <20> but was: <68> |
+| abc_notation_batch_002/tune_003501.abc | [abc_notation_batch_002/tune_003501.abc] Voice 1 event count mismatch (expanded: 197, unexpanded: 133) ==> expected: <64> but was: <197> |
+| abc_notation_batch_002/tune_003059.abc | [abc_notation_batch_002/tune_003059.abc] Voice 1 event count mismatch (expanded: 135, unexpanded: 92) ==> expected: <44> but was: <135> |
+| abc_notation_batch_002/tune_003071.abc | [abc_notation_batch_002/tune_003071.abc] Voice 1 event count mismatch (expanded: 198, unexpanded: 102) ==> expected: <147> but was: <198> |
+| abc_notation_batch_002/tune_003529.abc | [abc_notation_batch_002/tune_003529.abc] Voice 1 event count mismatch (expanded: 65, unexpanded: 49) ==> expected: <16> but was: <65> |
+| abc_notation_batch_002/tune_002346.abc | [abc_notation_batch_002/tune_002346.abc] Voice 1 event count mismatch (expanded: 150, unexpanded: 75) ==> expected: <80> but was: <150> |
+| abc_notation_batch_002/tune_002434.abc | abcjs warnings: Music Line:9:52: Unknown bar symbol:  [F2F,2][D2F,2][d2G,2]G,e|[d2G,2][c2G,2][c2C,2]C,A:|<span style="text-decoration:underline;font-size:1.3em;font-weight:bold;">:</span>[G2C,2][c2C,2][e2C,2][c2C,2]|[f2F,2]F,e[d2F,2][c2F,2]|[B2G,2][G2 |
+| abc_notation_batch_002/tune_003266.abc | [abc_notation_batch_002/tune_003266.abc] Voice 1 event count mismatch (expanded: 129, unexpanded: 129) ==> expected: <3> but was: <129> |
+| abc_notation_batch_002/tune_002232.abc | abcjs warnings: Music Line:11:6: Unknown parameter: -8:  Amin <span style="text-decoration:underline;font-size:1.3em;font-weight:bold;">-</span>8va |
+| abc_notation_batch_002/tune_003886.abc | abcjs warnings: Music Line:14:9: Unknown bar symbol:  D3A,) ]|<span style="text-decoration:underline;font-size:1.3em;font-weight:bold;">:</span> |
+| abc_notation_batch_002/tune_003853.abc | [abc_notation_batch_002/tune_003853.abc] Voice 1 event count mismatch (expanded: 120, unexpanded: 60) ==> expected: <113> but was: <120> |
+| abc_notation_batch_002/tune_003884.abc | abcjs warnings: Music Line:12:56: Unknown bar symbol:  Bggg gfaf|{a}gfef {a}gfga|bgaf gfed|efg^g a2=ge"^Segno"<span style="text-decoration:underline;font-size:1.3em;font-weight:bold;">:</span>[|]|] |
+| abc_notation_batch_002/tune_003304.abc | [abc_notation_batch_002/tune_003304.abc] Voice 1 event count mismatch (expanded: 146, unexpanded: 73) ==> expected: <261> but was: <146> |
+| abc_notation_batch_002/tune_002542.abc | [abc_notation_batch_002/tune_002542.abc] Pitch mismatch at event 15 in voice 1 (Prev: NoteDuration(numerator=3, denominator=8)/NoteDuration(numerator=1, denominator=2)) ==> expected: <[68]> but was: <[68, 70]> |
+| abc_notation_batch_002/tune_003460.abc | [abc_notation_batch_002/tune_003460.abc] Voice 1 event count mismatch (expanded: 156, unexpanded: 104) ==> expected: <52> but was: <156> |
+| abc_notation_batch_002/tune_002634.abc | [abc_notation_batch_002/tune_002634.abc] Voice 1 event count mismatch (expanded: 236, unexpanded: 130) ==> expected: <118> but was: <236> |
+| abc_notation_batch_002/tune_003112.abc | [abc_notation_batch_002/tune_003112.abc] Voice 2 event count mismatch (expanded: 98, unexpanded: 49) ==> expected: <48> but was: <98> |
+| abc_notation_batch_002/tune_002768.abc | [abc_notation_batch_002/tune_002768.abc] Voice 1 event count mismatch (expanded: 134, unexpanded: 69) ==> expected: <73> but was: <134> |
+| abc_notation_batch_002/tune_003729.abc | abcjs warnings: Music Line:3:3: Unknown character ignored:  tu<span style="text-decoration:underline;font-size:1.3em;font-weight:bold;">r</span>es |
+| abc_notation_batch_002/tune_002184.abc | [abc_notation_batch_002/tune_002184.abc] Voice 1 event count mismatch (expanded: 152, unexpanded: 83) ==> expected: <69> but was: <152> |
+| abc_notation_batch_002/tune_002422.abc | [abc_notation_batch_002/tune_002422.abc] Voice 1 event count mismatch (expanded: 203, unexpanded: 145) ==> expected: <59> but was: <203> |
+| abc_notation_batch_002/tune_002423.abc | [abc_notation_batch_002/tune_002423.abc] Voice 1 event count mismatch (expanded: 203, unexpanded: 145) ==> expected: <59> but was: <203> |
+| abc_notation_batch_002/tune_002027.abc | [abc_notation_batch_002/tune_002027.abc] Voice 1 event count mismatch (expanded: 65, unexpanded: 49) ==> expected: <16> but was: <65> |
+| abc_notation_batch_002/tune_003446.abc | [abc_notation_batch_002/tune_003446.abc] Voice 1 event count mismatch (expanded: 126, unexpanded: 72) ==> expected: <32> but was: <126> |
+| abc_notation_batch_002/tune_002543.abc | [abc_notation_batch_002/tune_002543.abc] Pitch mismatch at event 15 in voice 1 (Prev: NoteDuration(numerator=3, denominator=8)/NoteDuration(numerator=1, denominator=2)) ==> expected: <[66]> but was: <[66, 68]> |
+| abc_notation_batch_002/tune_003320.abc | [abc_notation_batch_002/tune_003320.abc] Voice 1 event count mismatch (expanded: 150, unexpanded: 75) ==> expected: <73> but was: <150> |
+| abc_notation_batch_002/tune_002219.abc | abcjs warnings: Music Line:14:7: Unknown parameter: -8:  G mix <span style="text-decoration:underline;font-size:1.3em;font-weight:bold;">-</span>8va |
+| abc_notation_batch_002/tune_002599.abc | [abc_notation_batch_002/tune_002599.abc] Voice 1 event count mismatch (expanded: 92, unexpanded: 92) ==> expected: <1> but was: <92> |
+| abc_notation_batch_002/tune_003308.abc | [abc_notation_batch_002/tune_003308.abc] Voice 1 event count mismatch (expanded: 168, unexpanded: 84) ==> expected: <80> but was: <168> |
+| abc_notation_batch_002/tune_003240.abc | [abc_notation_batch_002/tune_003240.abc] Duration mismatch at event 0 in voice 1 (expanded). abcjsDur: 0.125, ours: 0.08333333333333333 ==> expected: <0.125> but was: <0.08333333333333333> |
+| abc_notation_batch_002/tune_003268.abc | [abc_notation_batch_002/tune_003268.abc] Voice 1 event count mismatch (expanded: 110, unexpanded: 55) ==> expected: <57> but was: <110> |
+| abc_notation_batch_002/tune_003724.abc | [abc_notation_batch_002/tune_003724.abc] Voice 1 event count mismatch (expanded: 259, unexpanded: 136) ==> expected: <66> but was: <259> |
+| abc_notation_batch_002/tune_002413.abc | abcjs warnings: Music Line:11:34: Unknown character ignored:  v(c&lt;A)(A&gt;.B) (c&lt;A) (A&gt;.f) | (c"0"<span style="text-decoration:underline;font-size:1.3em;font-weight:bold;"><</span>A)"4"(A&gt;E) G2(G&gt;"4".e) |  |
+| abc_notation_batch_002/tune_003094.abc | [abc_notation_batch_002/tune_003094.abc] Voice 1 event count mismatch (expanded: 86, unexpanded: 86) ==> expected: <2> but was: <86> |
+| abc_notation_batch_002/tune_002407.abc | [abc_notation_batch_002/tune_002407.abc] Voice 1 event count mismatch (expanded: 220, unexpanded: 163) ==> expected: <54> but was: <220> |
+| abc_notation_batch_002/tune_003533.abc | [abc_notation_batch_002/tune_003533.abc] Voice 1 event count mismatch (expanded: 220, unexpanded: 110) ==> expected: <107> but was: <220> |
+| abc_notation_batch_002/tune_002374.abc | [abc_notation_batch_002/tune_002374.abc] Voice 1 event count mismatch (expanded: 69, unexpanded: 52) ==> expected: <17> but was: <69> |
+| abc_notation_batch_002/tune_002956.abc | [abc_notation_batch_002/tune_002956.abc] Voice 1 event count mismatch (expanded: 143, unexpanded: 96) ==> expected: <48> but was: <143> |
+| abc_notation_batch_002/tune_003876.abc | [abc_notation_batch_002/tune_003876.abc] Voice 1 event count mismatch (expanded: 195, unexpanded: 145) ==> expected: <47> but was: <195> |
+| abc_notation_batch_002/tune_003296.abc | [abc_notation_batch_002/tune_003296.abc] Voice 1 event count mismatch (expanded: 90, unexpanded: 65) ==> expected: <25> but was: <90> |
+| abc_notation_batch_002/tune_003453.abc | [abc_notation_batch_002/tune_003453.abc] Voice 4 event count mismatch (expanded: 98, unexpanded: 49) ==> expected: <48> but was: <98> |
+| abc_notation_batch_002/tune_003860.abc | [abc_notation_batch_002/tune_003860.abc] Voice 1 event count mismatch (expanded: 154, unexpanded: 154) ==> expected: <42> but was: <154> |
+| abc_notation_batch_002/tune_003874.abc | [abc_notation_batch_002/tune_003874.abc] Voice 1 event count mismatch (expanded: 172, unexpanded: 128) ==> expected: <45> but was: <172> |
+| abc_notation_batch_002/tune_002565.abc | [abc_notation_batch_002/tune_002565.abc] Voice 1 event count mismatch (expanded: 150, unexpanded: 75) ==> expected: <77> but was: <150> |
+| abc_notation_batch_002/tune_002767.abc | [abc_notation_batch_002/tune_002767.abc] Voice 1 event count mismatch (expanded: 134, unexpanded: 69) ==> expected: <73> but was: <134> |
+| abc_notation_batch_002/tune_003445.abc | [abc_notation_batch_002/tune_003445.abc] Voice 1 event count mismatch (expanded: 108, unexpanded: 108) ==> expected: <1> but was: <108> |
+| abc_notation_batch_002/tune_003323.abc | [abc_notation_batch_002/tune_003323.abc] Voice 1 event count mismatch (expanded: 146, unexpanded: 73) ==> expected: <261> but was: <146> |
+| abc_notation_batch_002/tune_003531.abc | [abc_notation_batch_002/tune_003531.abc] Voice 1 event count mismatch (expanded: 115, unexpanded: 67) ==> expected: <22> but was: <115> |
+| abc_notation_batch_002/tune_003294.abc | [abc_notation_batch_002/tune_003294.abc] Voice 1 event count mismatch (expanded: 177, unexpanded: 90) ==> expected: <86> but was: <177> |
+| abc_notation_batch_002/tune_003121.abc | [abc_notation_batch_002/tune_003121.abc] Voice 1 event count mismatch (expanded: 90, unexpanded: 54) ==> expected: <36> but was: <90> |
+| abc_notation_batch_002/tune_003733.abc | abcjs warnings: Music Line:5:25: Unknown character ignored:  C2D2 E2F2G2{FG}|G4-G6|1.<span style="text-decoration:underline;font-size:1.3em;font-weight:bold;">2</span>[M:5/4 (2/4 3/4)]G4{AB}z6:|["last time"A2B2 c6|| |
+| abc_notation_batch_002/tune_003727.abc | [abc_notation_batch_002/tune_003727.abc] Voice 1 event count mismatch (expanded: 244, unexpanded: 122) ==> expected: <132> but was: <244> |
+| abc_notation_batch_002/tune_003096.abc | [abc_notation_batch_002/tune_003096.abc] Duration mismatch at event 1 in voice 1 (Prev: NoteDuration(numerator=1, denominator=4)/NoteDuration(numerator=1, denominator=4)) (expanded). abcjsDur: 0.125, ours: 0.08333333333333333 ==> expected: <0.125> but was: <0.08333333333333333> |
+| abc_notation_batch_002/tune_002405.abc | [abc_notation_batch_002/tune_002405.abc] Voice 1 event count mismatch (expanded: 222, unexpanded: 119) ==> expected: <100> but was: <222> |
+| abc_notation_batch_002/tune_003097.abc | [abc_notation_batch_002/tune_003097.abc] Duration mismatch at event 1 in voice 1 (Prev: NoteDuration(numerator=1, denominator=4)/NoteDuration(numerator=1, denominator=4)) (expanded). abcjsDur: 0.125, ours: 0.08333333333333333 ==> expected: <0.125> but was: <0.08333333333333333> |
+| abc_notation_batch_002/tune_003726.abc | [abc_notation_batch_002/tune_003726.abc] Voice 1 event count mismatch (expanded: 244, unexpanded: 122) ==> expected: <132> but was: <244> |
+| abc_notation_batch_002/tune_002835.abc | abcjs warnings: Music Line:15:1: Unknown character ignored:  <span style="text-decoration:underline;font-size:1.3em;font-weight:bold;">n</span>otC:by Thos. Clark |
+| abc_notation_batch_002/tune_003732.abc | abcjs warnings: Music Line:5:3: Expected tempo in Q: field:  Q:<span style="text-decoration:underline;font-size:1.3em;font-weight:bold;">1</span>/4=ca. 80 |
+| abc_notation_batch_002/tune_002015.abc | [abc_notation_batch_002/tune_002015.abc] Voice 1 event count mismatch (expanded: 92, unexpanded: 67) ==> expected: <24> but was: <92> |
+| abc_notation_batch_002/tune_003518.abc | [abc_notation_batch_002/tune_003518.abc] Voice 1 event count mismatch (expanded: 63, unexpanded: 47) ==> expected: <16> but was: <63> |
+| abc_notation_batch_002/tune_002766.abc | [abc_notation_batch_002/tune_002766.abc] Voice 1 event count mismatch (expanded: 134, unexpanded: 69) ==> expected: <73> but was: <134> |
+| abc_notation_batch_002/tune_003322.abc | [abc_notation_batch_002/tune_003322.abc] Voice 1 event count mismatch (expanded: 146, unexpanded: 73) ==> expected: <261> but was: <146> |
+| abc_notation_batch_002/tune_003524.abc | [abc_notation_batch_002/tune_003524.abc] Voice 1 event count mismatch (expanded: 57, unexpanded: 43) ==> expected: <14> but was: <57> |
+| abc_notation_batch_002/tune_003871.abc | [abc_notation_batch_002/tune_003871.abc] Voice 1 event count mismatch (expanded: 172, unexpanded: 128) ==> expected: <45> but was: <172> |
+| abc_notation_batch_002/tune_003134.abc | [abc_notation_batch_002/tune_003134.abc] Voice 1 event count mismatch (expanded: 111, unexpanded: 79) ==> expected: <32> but was: <111> |
+| abc_notation_batch_002/tune_003875.abc | [abc_notation_batch_002/tune_003875.abc] Voice 1 event count mismatch (expanded: 172, unexpanded: 128) ==> expected: <45> but was: <172> |
+| abc_notation_batch_002/tune_003695.abc | [abc_notation_batch_002/tune_003695.abc] Voice 1 event count mismatch (expanded: 116, unexpanded: 82) ==> expected: <83> but was: <116> |
+| abc_notation_batch_002/tune_002212.abc | [abc_notation_batch_002/tune_002212.abc] Voice 1 event count mismatch (expanded: 376, unexpanded: 188) ==> expected: <184> but was: <376> |
+| abc_notation_batch_002/tune_002762.abc | [abc_notation_batch_002/tune_002762.abc] Voice 1 event count mismatch (expanded: 134, unexpanded: 69) ==> expected: <73> but was: <134> |
+| abc_notation_batch_002/tune_002776.abc | [abc_notation_batch_002/tune_002776.abc] Voice 1 event count mismatch (expanded: 310, unexpanded: 204) ==> expected: <232> but was: <310> |
+| abc_notation_batch_002/tune_003326.abc | [abc_notation_batch_002/tune_003326.abc] Voice 1 event count mismatch (expanded: 103, unexpanded: 103) ==> expected: <131> but was: <103> |
+| abc_notation_batch_002/tune_003247.abc | [abc_notation_batch_002/tune_003247.abc] Voice 1 event count mismatch (expanded: 102, unexpanded: 63) ==> expected: <39> but was: <102> |
+| abc_notation_batch_002/tune_003246.abc | [abc_notation_batch_002/tune_003246.abc] Voice 1 event count mismatch (expanded: 102, unexpanded: 63) ==> expected: <39> but was: <102> |
+| abc_notation_batch_002/tune_002372.abc | [abc_notation_batch_002/tune_002372.abc] Voice 1 event count mismatch (expanded: 150, unexpanded: 76) ==> expected: <74> but was: <150> |
+| abc_notation_batch_002/tune_003252.abc | [abc_notation_batch_002/tune_003252.abc] Voice 1 event count mismatch (expanded: 236, unexpanded: 118) ==> expected: <117> but was: <236> |
+| abc_notation_batch_002/tune_003520.abc | [abc_notation_batch_002/tune_003520.abc] Voice 1 event count mismatch (expanded: 115, unexpanded: 115) ==> expected: <4> but was: <115> |
+| abc_notation_batch_002/tune_003723.abc | [abc_notation_batch_002/tune_003723.abc] Voice 1 event count mismatch (expanded: 365, unexpanded: 197) ==> expected: <108> but was: <365> |
+| abc_notation_batch_002/tune_003284.abc | [abc_notation_batch_002/tune_003284.abc] Voice 1 event count mismatch (expanded: 67, unexpanded: 67) ==> expected: <28> but was: <67> |
+| abc_notation_batch_002/tune_003441.abc | [abc_notation_batch_002/tune_003441.abc] Voice 1 event count mismatch (expanded: 119, unexpanded: 77) ==> expected: <42> but was: <119> |
+| abc_notation_batch_002/tune_002206.abc | abcjs warnings: Music Line:13:7: Unknown parameter: -8:  D dor <span style="text-decoration:underline;font-size:1.3em;font-weight:bold;">-</span>8va |
+| abc_notation_batch_002/tune_003131.abc | [abc_notation_batch_002/tune_003131.abc] Voice 1 event count mismatch (expanded: 136, unexpanded: 68) ==> expected: <65> but was: <136> |
+| abc_notation_batch_002/tune_003509.abc | [abc_notation_batch_002/tune_003509.abc] Voice 1 event count mismatch (expanded: 226, unexpanded: 126) ==> expected: <297> but was: <226> |
+| abc_notation_batch_002/tune_003872.abc | [abc_notation_batch_002/tune_003872.abc] Voice 1 event count mismatch (expanded: 172, unexpanded: 128) ==> expected: <45> but was: <172> |
+| abc_notation_batch_002/tune_003482.abc | [abc_notation_batch_002/tune_003482.abc] Voice 1 event count mismatch (expanded: 58, unexpanded: 41) ==> expected: <17> but was: <58> |
+| abc_notation_batch_002/tune_003694.abc | [abc_notation_batch_002/tune_003694.abc] Voice 1 event count mismatch (expanded: 116, unexpanded: 82) ==> expected: <83> but was: <116> |
+| abc_notation_batch_002/tune_003333.abc | [abc_notation_batch_002/tune_003333.abc] Voice 1 event count mismatch (expanded: 439, unexpanded: 248) ==> expected: <188> but was: <439> |
+| abc_notation_batch_002/tune_003696.abc | [abc_notation_batch_002/tune_003696.abc] Voice 1 event count mismatch (expanded: 116, unexpanded: 82) ==> expected: <83> but was: <116> |
+| abc_notation_batch_002/tune_003682.abc | abcjs warnings: Music Line:10:83: Unknown character ignored:   | B2 B2 d3 D | G2 G G B2 A G | A2 G ^F A3 | G | B2 B B d2 c B |<span style="text-decoration:underline;font-size:1.3em;font-weight:bold;">$</span> d2 d c g3 e | |
+| abc_notation_batch_002/tune_003870.abc | [abc_notation_batch_002/tune_003870.abc] Voice 1 event count mismatch (expanded: 149, unexpanded: 149) ==> expected: <42> but was: <149> |
+| abc_notation_batch_002/tune_003669.abc | [abc_notation_batch_002/tune_003669.abc] Voice 1 event count mismatch (expanded: 114, unexpanded: 86) ==> expected: <29> but was: <114> |
+| abc_notation_batch_002/tune_003319.abc | [abc_notation_batch_002/tune_003319.abc] Voice 1 event count mismatch (expanded: 146, unexpanded: 73) ==> expected: <261> but was: <146> |
+| abc_notation_batch_002/tune_002991.abc | [abc_notation_batch_002/tune_002991.abc] Voice 1 event count mismatch (expanded: 13, unexpanded: 13) ==> expected: <1> but was: <13> |
+| abc_notation_batch_002/tune_003133.abc | [abc_notation_batch_002/tune_003133.abc] Voice 1 event count mismatch (expanded: 230, unexpanded: 115) ==> expected: <123> but was: <230> |
+| abc_notation_batch_002/tune_003127.abc | abcjs warnings: Music Line:11:6: Unknown parameter: -8:  Amin <span style="text-decoration:underline;font-size:1.3em;font-weight:bold;">-</span>8va |
+| abc_notation_batch_002/tune_003457.abc | [abc_notation_batch_002/tune_003457.abc] Voice 1 event count mismatch (expanded: 192, unexpanded: 113) ==> expected: <79> but was: <192> |
+| abc_notation_batch_002/tune_003325.abc | [abc_notation_batch_002/tune_003325.abc] Voice 1 event count mismatch (expanded: 75, unexpanded: 55) ==> expected: <104> but was: <75> |
+| abc_notation_batch_002/tune_002832.abc | [abc_notation_batch_002/tune_002832.abc] Voice 1 event count mismatch (expanded: 151, unexpanded: 89) ==> expected: <61> but was: <151> |
+| abc_notation_batch_002/tune_002749.abc | [abc_notation_batch_002/tune_002749.abc] Voice 1 event count mismatch (expanded: 247, unexpanded: 141) ==> expected: <106> but was: <247> |
+| abc_notation_batch_002/tune_003709.abc | [abc_notation_batch_002/tune_003709.abc] Voice 1 event count mismatch (expanded: 113, unexpanded: 83) ==> expected: <32> but was: <113> |
+| abc_notation_batch_002/tune_003494.abc | [abc_notation_batch_002/tune_003494.abc] Voice 1 event count mismatch (expanded: 58, unexpanded: 43) ==> expected: <15> but was: <58> |
+| abc_notation_batch_002/tune_003536.abc | [abc_notation_batch_002/tune_003536.abc] Voice 1 event count mismatch (expanded: 132, unexpanded: 66) ==> expected: <88> but was: <132> |
+| abc_notation_batch_002/tune_003523.abc | [abc_notation_batch_002/tune_003523.abc] Voice 1 event count mismatch (expanded: 56, unexpanded: 42) ==> expected: <14> but was: <56> |
+| abc_notation_batch_002/tune_003495.abc | [abc_notation_batch_002/tune_003495.abc] Voice 1 event count mismatch (expanded: 132, unexpanded: 98) ==> expected: <34> but was: <132> |
+| abc_notation_batch_002/tune_002833.abc | [abc_notation_batch_002/tune_002833.abc] Voice 1 event count mismatch (expanded: 151, unexpanded: 89) ==> expected: <61> but was: <151> |
+| abc_notation_batch_002/tune_003292.abc | [abc_notation_batch_002/tune_003292.abc] Voice 1 event count mismatch (expanded: 92, unexpanded: 71) ==> expected: <21> but was: <92> |
+| abc_notation_batch_002/tune_003873.abc | [abc_notation_batch_002/tune_003873.abc] Voice 1 event count mismatch (expanded: 172, unexpanded: 128) ==> expected: <45> but was: <172> |
+| abc_notation_batch_002/tune_002953.abc | abcjs warnings: Music Line:11:7: Unknown parameter: -8:  D min <span style="text-decoration:underline;font-size:1.3em;font-weight:bold;">-</span>8va |
+| abc_notation_batch_002/tune_003442.abc | [abc_notation_batch_002/tune_003442.abc] Voice 1 event count mismatch (expanded: 63, unexpanded: 47) ==> expected: <16> but was: <63> |
+| abc_notation_batch_002/tune_003683.abc | [abc_notation_batch_002/tune_003683.abc] Voice 1 event count mismatch (expanded: 151, unexpanded: 115) ==> expected: <36> but was: <151> |
+| abc_notation_batch_002/tune_002263.abc | [abc_notation_batch_002/tune_002263.abc] Voice 1 event count mismatch (expanded: 178, unexpanded: 97) ==> expected: <81> but was: <178> |
+| abc_notation_batch_002/tune_003697.abc | [abc_notation_batch_002/tune_003697.abc] Voice 1 event count mismatch (expanded: 116, unexpanded: 82) ==> expected: <83> but was: <116> |
+| abc_notation_batch_002/tune_003155.abc | [abc_notation_batch_002/tune_003155.abc] Voice 1 event count mismatch (expanded: 222, unexpanded: 125) ==> expected: <97> but was: <222> |
+| abc_notation_batch_002/tune_003800.abc | [abc_notation_batch_002/tune_003800.abc] Duration mismatch at event 26 in voice 1 (Prev: NoteDuration(numerator=1, denominator=24)/NoteDuration(numerator=1, denominator=24)) (unexpanded). abcjsDur: 0.208333, ours: 0.08333333333333333 ==> expected: <0.208333> but was: <0.08333333333333333> |
+| abc_notation_batch_002/tune_003141.abc | abcjs warnings: Music Line:10:78: Unknown character ignored:  D F | F F F F2 F | G G G G F E | F B, B, B,2 B, | B, D E E E F |<span style="text-decoration:underline;font-size:1.3em;font-weight:bold;">$</span> F F G F2 B | |
+| abc_notation_batch_002/tune_003394.abc | [abc_notation_batch_002/tune_003394.abc] Voice 1 event count mismatch (expanded: 118, unexpanded: 97) ==> expected: <21> but was: <118> |
+| abc_notation_batch_002/tune_003182.abc | [abc_notation_batch_002/tune_003182.abc] Voice 1 event count mismatch (expanded: 60, unexpanded: 44) ==> expected: <16> but was: <60> |
+| abc_notation_batch_002/tune_002868.abc | [abc_notation_batch_002/tune_002868.abc] Voice 1 event count mismatch (expanded: 136, unexpanded: 76) ==> expected: <60> but was: <136> |
+| abc_notation_batch_002/tune_002101.abc | abcjs warnings: Music Line:12:146: Unknown character ignored:  GE)G | ("F"FA)c | ("C"cG)"C7"B | ("F"Ac)"(Bb)"d | ("(F)"cA"(Bb)"<span style="text-decoration:underline;font-size:1.3em;font-weight:bold;">)</span>B | ("F/C"AF)"C7"G | "F"F3/z/ |] |
+| abc_notation_batch_002/tune_003545.abc | [abc_notation_batch_002/tune_003545.abc] Voice 1 event count mismatch (expanded: 116, unexpanded: 70) ==> expected: <48> but was: <116> |
+| abc_notation_batch_002/tune_003237.abc | [abc_notation_batch_002/tune_003237.abc] Voice 1 event count mismatch (expanded: 149, unexpanded: 90) ==> expected: <60> but was: <149> |
+| abc_notation_batch_002/tune_003784.abc | [abc_notation_batch_002/tune_003784.abc] Voice 1 event count mismatch (expanded: 154, unexpanded: 135) ==> expected: <19> but was: <154> |
+| abc_notation_batch_002/tune_003791.abc | [abc_notation_batch_002/tune_003791.abc] Voice 1 event count mismatch (expanded: 120, unexpanded: 63) ==> expected: <56> but was: <120> |
+| abc_notation_batch_002/tune_003236.abc | [abc_notation_batch_002/tune_003236.abc] Voice 1 event count mismatch (expanded: 170, unexpanded: 93) ==> expected: <85> but was: <170> |
+| abc_notation_batch_002/tune_002672.abc | [abc_notation_batch_002/tune_002672.abc] Voice 1 event count mismatch (expanded: 255, unexpanded: 129) ==> expected: <122> but was: <255> |
+| abc_notation_batch_002/tune_003587.abc | [abc_notation_batch_002/tune_003587.abc] Voice 1 event count mismatch (expanded: 111, unexpanded: 84) ==> expected: <27> but was: <111> |
+| abc_notation_batch_002/tune_003746.abc | [abc_notation_batch_002/tune_003746.abc] Voice 1 event count mismatch (expanded: 145, unexpanded: 145) ==> expected: <4> but was: <145> |
+| abc_notation_batch_002/tune_003356.abc | [abc_notation_batch_002/tune_003356.abc] Voice 1 event count mismatch (expanded: 64, unexpanded: 49) ==> expected: <15> but was: <64> |
+| abc_notation_batch_002/tune_003342.abc | [abc_notation_batch_002/tune_003342.abc] Voice 1 event count mismatch (expanded: 453, unexpanded: 277) ==> expected: <176> but was: <453> |
+| abc_notation_batch_002/tune_003154.abc | [abc_notation_batch_002/tune_003154.abc] Voice 1 event count mismatch (expanded: 128, unexpanded: 95) ==> expected: <36> but was: <128> |
+| abc_notation_batch_002/tune_003632.abc | [abc_notation_batch_002/tune_003632.abc] Voice 1 event count mismatch (expanded: 228, unexpanded: 154) ==> expected: <75> but was: <228> |
+| abc_notation_batch_002/tune_002260.abc | [abc_notation_batch_002/tune_002260.abc] Voice 1 event count mismatch (expanded: 127, unexpanded: 95) ==> expected: <38> but was: <127> |
+| abc_notation_batch_002/tune_003383.abc | [abc_notation_batch_002/tune_003383.abc] Voice 1 event count mismatch (expanded: 202, unexpanded: 158) ==> expected: <44> but was: <202> |
+| abc_notation_batch_002/tune_001964.abc | [abc_notation_batch_002/tune_001964.abc] Voice 1 event count mismatch (expanded: 68, unexpanded: 46) ==> expected: <22> but was: <68> |
+| abc_notation_batch_002/tune_002102.abc | abcjs warnings: Music Line:12:161: Unknown character ignored:  | ("Eb"EG)B | ("Bb"BF)"Bb7"A | ("Eb"GB)"(Ab)"c | ("(Eb)"BG"(Ab)"<span style="text-decoration:underline;font-size:1.3em;font-weight:bold;">)</span>A | ("Eb/Bb"GE)"Bb7"F | "Eb"E3/2z/2 |] |
+| abc_notation_batch_002/tune_003354.abc | [abc_notation_batch_002/tune_003354.abc] Voice 1 event count mismatch (expanded: 143, unexpanded: 92) ==> expected: <51> but was: <143> |
+| abc_notation_batch_002/tune_002880.abc | [abc_notation_batch_002/tune_002880.abc] Duration mismatch at event 60 in voice 1 (Prev: NoteDuration(numerator=1, denominator=4)/NoteDuration(numerator=1, denominator=4)) (expanded). abcjsDur: 0.125, ours: 0.08333333333333333 ==> expected: <0.125> but was: <0.08333333333333333> |
+| abc_notation_batch_002/tune_003368.abc | [abc_notation_batch_002/tune_003368.abc] Voice 1 event count mismatch (expanded: 152, unexpanded: 112) ==> expected: <41> but was: <152> |
+| abc_notation_batch_002/tune_002499.abc | [abc_notation_batch_002/tune_002499.abc] Voice 1 event count mismatch (expanded: 256, unexpanded: 128) ==> expected: <127> but was: <256> |
+| abc_notation_batch_002/tune_002670.abc | [abc_notation_batch_002/tune_002670.abc] Voice 1 event count mismatch (expanded: 480, unexpanded: 246) ==> expected: <245> but was: <480> |
+| abc_notation_batch_002/tune_002301.abc | [abc_notation_batch_002/tune_002301.abc] Pitch mismatch at event 18 in voice 1 (Prev: NoteDuration(numerator=1, denominator=8)/NoteDuration(numerator=1, denominator=8)) ==> expected: <[80]> but was: <[78]> |
+| abc_notation_batch_002/tune_003220.abc | [abc_notation_batch_002/tune_003220.abc] Voice 1 event count mismatch (expanded: 82, unexpanded: 64) ==> expected: <18> but was: <82> |
+| abc_notation_batch_002/tune_002329.abc | [abc_notation_batch_002/tune_002329.abc] Voice 1 event count mismatch (expanded: 236, unexpanded: 187) ==> expected: <49> but was: <236> |
+| abc_notation_batch_002/tune_003209.abc | [abc_notation_batch_002/tune_003209.abc] Voice 1 event count mismatch (expanded: 163, unexpanded: 82) ==> expected: <83> but was: <163> |
+| abc_notation_batch_002/tune_002103.abc | abcjs warnings: Music Line:12:162: Unknown character ignored:  | ("Db"DF)A | ("Ab"AE)"Ab7"G | ("Db"FA)"(Gb)"B | ("(Db)"AF"(Gb)"<span style="text-decoration:underline;font-size:1.3em;font-weight:bold;">)</span>G | ("Db/Ab"FD)"Ab7"E | "Db"D3/2z/2 |] |
+| abc_notation_batch_002/tune_002077.abc | [abc_notation_batch_002/tune_002077.abc] Voice 1 event count mismatch (expanded: 107, unexpanded: 80) ==> expected: <27> but was: <107> |
+| abc_notation_batch_002/tune_002739.abc | abcjs warnings: Music Line:11:6: Unknown parameter: -8:  Amin <span style="text-decoration:underline;font-size:1.3em;font-weight:bold;">-</span>8va |
+| abc_notation_batch_002/tune_002249.abc | [abc_notation_batch_002/tune_002249.abc] Voice 1 event count mismatch (expanded: 117, unexpanded: 117) ==> expected: <2> but was: <117> |
+| abc_notation_batch_002/tune_003427.abc | [abc_notation_batch_002/tune_003427.abc] Voice 1 event count mismatch (expanded: 134, unexpanded: 134) ==> expected: <1> but was: <134> |
+| abc_notation_batch_002/tune_003157.abc | [abc_notation_batch_002/tune_003157.abc] Voice 1 event count mismatch (expanded: 222, unexpanded: 125) ==> expected: <97> but was: <222> |
+| abc_notation_batch_002/tune_003184.abc | [abc_notation_batch_002/tune_003184.abc] Voice 1 event count mismatch (expanded: 156, unexpanded: 81) ==> expected: <74> but was: <156> |
+| abc_notation_batch_002/tune_003806.abc | [abc_notation_batch_002/tune_003806.abc] Voice 1 event count mismatch (expanded: 216, unexpanded: 108) ==> expected: <155> but was: <216> |
+| abc_notation_batch_002/tune_003631.abc | [abc_notation_batch_002/tune_003631.abc] Voice 1 event count mismatch (expanded: 228, unexpanded: 154) ==> expected: <75> but was: <228> |
+| abc_notation_batch_002/tune_002271.abc | abcjs warnings: Music Line:9:3: Unknown parameter: -8:  C <span style="text-decoration:underline;font-size:1.3em;font-weight:bold;">-</span>8va |
+| abc_notation_batch_002/tune_003194.abc | [abc_notation_batch_002/tune_003194.abc] Voice 1 event count mismatch (expanded: 240, unexpanded: 134) ==> expected: <116> but was: <240> |
+| abc_notation_batch_002/tune_003153.abc | [abc_notation_batch_002/tune_003153.abc] Voice 1 event count mismatch (expanded: 146, unexpanded: 73) ==> expected: <95> but was: <146> |
+| abc_notation_batch_002/tune_002715.abc | [abc_notation_batch_002/tune_002715.abc] Voice 1 event count mismatch (expanded: 139, unexpanded: 70) ==> expected: <68> but was: <139> |
+| abc_notation_batch_002/tune_001998.abc | [abc_notation_batch_002/tune_001998.abc] Voice 1 event count mismatch (expanded: 65, unexpanded: 46) ==> expected: <19> but was: <65> |
+| abc_notation_batch_002/tune_002107.abc | [abc_notation_batch_002/tune_002107.abc] Voice 1 event count mismatch (expanded: 154, unexpanded: 81) ==> expected: <73> but was: <154> |
+| abc_notation_batch_002/tune_003437.abc | [abc_notation_batch_002/tune_003437.abc] Voice 1 event count mismatch (expanded: 66, unexpanded: 49) ==> expected: <17> but was: <66> |
+| abc_notation_batch_002/tune_003557.abc | [abc_notation_batch_002/tune_003557.abc] Voice 1 event count mismatch (expanded: 304, unexpanded: 179) ==> expected: <122> but was: <304> |
+| abc_notation_batch_002/tune_003797.abc | [abc_notation_batch_002/tune_003797.abc] Voice 1 event count mismatch (expanded: 134, unexpanded: 103) ==> expected: <33> but was: <134> |
+| abc_notation_batch_002/tune_003027.abc | [abc_notation_batch_002/tune_003027.abc] Voice 1 event count mismatch (expanded: 44, unexpanded: 39) ==> expected: <5> but was: <44> |
+| abc_notation_batch_002/tune_003224.abc | [abc_notation_batch_002/tune_003224.abc] Voice 1 event count mismatch (expanded: 62, unexpanded: 37) ==> expected: <25> but was: <62> |
+| abc_notation_batch_002/tune_003741.abc | [abc_notation_batch_002/tune_003741.abc] Duration mismatch at event 12 in voice 1 (Prev: NoteDuration(numerator=1, denominator=4)/NoteDuration(numerator=1, denominator=4)) (expanded). abcjsDur: 0.125, ours: 0.08333333333333333 ==> expected: <0.125> but was: <0.08333333333333333> |
+| abc_notation_batch_002/tune_003230.abc | [abc_notation_batch_002/tune_003230.abc] Voice 1 event count mismatch (expanded: 84, unexpanded: 50) ==> expected: <34> but was: <84> |
+| abc_notation_batch_002/tune_003556.abc | [abc_notation_batch_002/tune_003556.abc] Voice 1 event count mismatch (expanded: 192, unexpanded: 126) ==> expected: <61> but was: <192> |
+| abc_notation_batch_002/tune_003225.abc | [abc_notation_batch_002/tune_003225.abc] Voice 1 event count mismatch (expanded: 63, unexpanded: 48) ==> expected: <15> but was: <63> |
+| abc_notation_batch_002/tune_003595.abc | [abc_notation_batch_002/tune_003595.abc] Voice 1 event count mismatch (expanded: 132, unexpanded: 66) ==> expected: <68> but was: <132> |
+| abc_notation_batch_002/tune_003152.abc | [abc_notation_batch_002/tune_003152.abc] Voice 1 event count mismatch (expanded: 193, unexpanded: 131) ==> expected: <62> but was: <193> |
+| abc_notation_batch_002/tune_003218.abc | [abc_notation_batch_002/tune_003218.abc] Voice 1 event count mismatch (expanded: 56, unexpanded: 40) ==> expected: <16> but was: <56> |
+| abc_notation_batch_002/tune_003543.abc | [abc_notation_batch_002/tune_003543.abc] Voice 1 event count mismatch (expanded: 146, unexpanded: 83) ==> expected: <63> but was: <146> |
+| abc_notation_batch_002/tune_002264.abc | [abc_notation_batch_002/tune_002264.abc] Voice 1 event count mismatch (expanded: 177, unexpanded: 93) ==> expected: <84> but was: <177> |
+| abc_notation_batch_002/tune_002066.abc | [abc_notation_batch_002/tune_002066.abc] Voice 1 event count mismatch (expanded: 189, unexpanded: 98) ==> expected: <91> but was: <189> |
+| abc_notation_batch_002/tune_003185.abc | [abc_notation_batch_002/tune_003185.abc] Voice 1 event count mismatch (expanded: 156, unexpanded: 81) ==> expected: <74> but was: <156> |
+| abc_notation_batch_002/tune_001976.abc | [abc_notation_batch_002/tune_001976.abc] Voice 1 event count mismatch (expanded: 152, unexpanded: 106) ==> expected: <46> but was: <152> |
+| abc_notation_batch_002/tune_003187.abc | [abc_notation_batch_002/tune_003187.abc] Voice 1 event count mismatch (expanded: 192, unexpanded: 149) ==> expected: <43> but was: <192> |
+| abc_notation_batch_002/tune_002500.abc | [abc_notation_batch_002/tune_002500.abc] Voice 1 event count mismatch (expanded: 240, unexpanded: 126) ==> expected: <94> but was: <240> |
+| abc_notation_batch_002/tune_003420.abc | [abc_notation_batch_002/tune_003420.abc] Voice 1 event count mismatch (expanded: 123, unexpanded: 72) ==> expected: <50> but was: <123> |
+| abc_notation_batch_002/tune_002716.abc | [abc_notation_batch_002/tune_002716.abc] Voice 1 event count mismatch (expanded: 157, unexpanded: 157) ==> expected: <1> but was: <157> |
+| abc_notation_batch_002/tune_003025.abc | [abc_notation_batch_002/tune_003025.abc] Voice 1 event count mismatch (expanded: 201, unexpanded: 121) ==> expected: <62> but was: <201> |
+| abc_notation_batch_002/tune_003541.abc | abcjs warnings: Music Line:10:77: Unknown character ignored:   F G | G, G, G, G,2 A | G E D C C D | E4 z E/ D/ | C C C E F G |<span style="text-decoration:underline;font-size:1.3em;font-weight:bold;">$</span> G, G, G, G,2 A | |
+| abc_notation_batch_002/tune_003227.abc | [abc_notation_batch_002/tune_003227.abc] Voice 1 event count mismatch (expanded: 178, unexpanded: 94) ==> expected: <84> but was: <178> |
+| abc_notation_batch_002/tune_003780.abc | [abc_notation_batch_002/tune_003780.abc] Voice 1 event count mismatch (expanded: 132, unexpanded: 99) ==> expected: <43> but was: <132> |
+| abc_notation_batch_002/tune_003596.abc | [abc_notation_batch_002/tune_003596.abc] Voice 1 event count mismatch (expanded: 132, unexpanded: 66) ==> expected: <68> but was: <132> |
+| abc_notation_batch_002/tune_002878.abc | [abc_notation_batch_002/tune_002878.abc] Voice 1 event count mismatch (expanded: 65, unexpanded: 45) ==> expected: <20> but was: <65> |
+| abc_notation_batch_002/tune_002058.abc | [abc_notation_batch_002/tune_002058.abc] Voice 1 event count mismatch (expanded: 55, unexpanded: 38) ==> expected: <17> but was: <55> |
+| abc_notation_batch_002/tune_003582.abc | [abc_notation_batch_002/tune_003582.abc] Voice 1 event count mismatch (expanded: 141, unexpanded: 112) ==> expected: <41> but was: <141> |
+| abc_notation_batch_002/tune_002703.abc | music21 missing/error AND abcjs mismatch: [abc_notation_batch_002/tune_002703.abc] Voice 1 event count mismatch (expanded: 100, unexpanded: 59) ==> expected: <71> but was: <100> |
+| abc_notation_batch_002/tune_002501.abc | [abc_notation_batch_002/tune_002501.abc] Voice 1 event count mismatch (expanded: 168, unexpanded: 91) ==> expected: <69> but was: <168> |
+| abc_notation_batch_002/tune_001975.abc | [abc_notation_batch_002/tune_001975.abc] Voice 1 event count mismatch (expanded: 93, unexpanded: 75) ==> expected: <18> but was: <93> |
+| abc_notation_batch_002/tune_002105.abc | [abc_notation_batch_002/tune_002105.abc] Voice 1 event count mismatch (expanded: 67, unexpanded: 51) ==> expected: <16> but was: <67> |
+| abc_notation_batch_002/tune_003186.abc | [abc_notation_batch_002/tune_003186.abc] Pitch mismatch at event 30 in voice 1 (Prev: NoteDuration(numerator=1, denominator=4)/NoteDuration(numerator=1, denominator=4)) ==> expected: <[64]> but was: <[66]> |
+| abc_notation_batch_002/tune_003435.abc | [abc_notation_batch_002/tune_003435.abc] Voice 1 event count mismatch (expanded: 80, unexpanded: 52) ==> expected: <28> but was: <80> |
+| abc_notation_batch_002/tune_002273.abc | [abc_notation_batch_002/tune_002273.abc] Voice 1 event count mismatch (expanded: 146, unexpanded: 73) ==> expected: <71> but was: <146> |
+| abc_notation_batch_002/tune_003838.abc | [abc_notation_batch_002/tune_003838.abc] Voice 1 event count mismatch (expanded: 722, unexpanded: 376) ==> expected: <474> but was: <722> |
+| abc_notation_batch_002/tune_003179.abc | [abc_notation_batch_002/tune_003179.abc] Voice 1 event count mismatch (expanded: 51, unexpanded: 34) ==> expected: <16> but was: <51> |
