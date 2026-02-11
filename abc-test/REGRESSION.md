@@ -26,9 +26,9 @@ This will extract files to `target/abc-dataset/abc_notation_batch_XXX/`.
 Baselines are generated using `abcjs` to provide a ground truth for semantic parity.
 
 ```bash
-cd src/test/resources/abcjs-exporter
+cd tools/abcjs-exporter
 npm install
-node export-batch.js ../../../../target/abc-dataset/abc_notation_batch_001
+node export-batch.js ../../target/abc-dataset/abc_notation_batch_001
 ```
 
 This produces JSON files in the `midi_json` subdirectory of each batch, containing both the notation structure and the linear MIDI sequence.
