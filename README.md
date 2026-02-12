@@ -30,21 +30,41 @@ The project is organized as a multi-module Maven project:
 
 ### Installation
 
-Add the `abc-parser` dependency to your project:
+> **Note:** This library is not yet available in Maven Central. We are prioritizing publication, but for now, you must install it to your local Maven repository.
 
-**Maven:**
-```xml
-<dependency>
-    <groupId>io.github.ryangardner</groupId>
-    <artifactId>abc-parser</artifactId>
-    <version>0.1.0-SNAPSHOT</version>
-</dependency>
-```
+1.  Clone the repository:
+    ```bash
+    git clone https://github.com/ryangardner/abc-jvm.git
+    cd abc-jvm
+    ```
 
-**Gradle (Kotlin DSL):**
-```kotlin
-implementation("io.github.ryangardner:abc-parser:0.1.0-SNAPSHOT")
-```
+2.  Install to local Maven repo:
+    ```bash
+    mvn clean install -DskipTests
+    ```
+
+3.  Add the `abc-parser` dependency to your project:
+
+    **Maven:**
+    ```xml
+    <dependency>
+        <groupId>io.github.ryangardner</groupId>
+        <artifactId>abc-parser</artifactId>
+        <version>0.1.0-SNAPSHOT</version>
+    </dependency>
+    ```
+
+    **Gradle (Kotlin DSL):**
+    ```kotlin
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+
+    dependencies {
+        implementation("io.github.ryangardner:abc-parser:0.1.0-SNAPSHOT")
+    }
+    ```
 
 ### Basic Usage
 
