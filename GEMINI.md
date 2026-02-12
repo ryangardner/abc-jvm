@@ -1,4 +1,4 @@
-# LibABC-Kotlin (abc-jvm)
+# abc-jvm
 
 A JVM-native library for symbolic music processing, specifically focused on ABC notation. It provides a robust, strictly typed, and immutable model for musical scores, with a focus on interoperability between ABC (including `abcjs` extensions), MusicXML, and TuxGuitar.
 

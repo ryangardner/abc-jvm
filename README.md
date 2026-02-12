@@ -1,6 +1,6 @@
-# LibABC-Kotlin (abc-jvm)
+# abc-jvm
 
-LibABC-Kotlin is a JVM-native library for parsing, manipulating, and generating [ABC Music Notation](https://abcnotation.com/wiki/abc:standard:v2.1). It features a novel, highly performant **ANTLR4-based parser**—believed to be the first of its kind for the ABC 2.1 standard—designed to provide strict type safety and high fidelity for JVM applications.
+abc-jvm is a JVM-native library for parsing, manipulating, and generating [ABC Music Notation](https://abcnotation.com/wiki/abc:standard:v2.1). It features a novel, highly performant **ANTLR4-based parser**—believed to be the first of its kind for the ABC 2.1 standard—designed to provide strict type safety and high fidelity for JVM applications.
 
 ## Project Motivation
 
