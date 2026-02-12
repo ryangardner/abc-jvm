@@ -3,7 +3,7 @@ package io.github.ryangardner.abc.test
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import io.github.ryangardner.abc.core.model.*
-import io.github.ryangardner.abc.parser.v2.AntlrAbcParser
+import io.github.ryangardner.abc.parser.AbcParser
 import io.github.ryangardner.abc.theory.*
 import io.github.ryangardner.abc.theory.PitchInterpreter
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -27,7 +27,7 @@ public class AbcjsSemanticParityTest {
     @ParameterizedTest(name = "abcjs parity: {0}")
     @MethodSource("baselineSources")
     public fun `test semantic parity with abcjs`(baseline: AbcjsBaseline) {
-        val parser = AntlrAbcParser()
+        val parser = AbcParser()
         val tunes = parser.parseBook(baseline.abcContent)
         
         val gson = Gson()

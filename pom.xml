@@ -5,15 +5,13 @@
     <artifactId>abc-jvm-parent</artifactId>
     <version>0.1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
-
     <modules>
         <module>abc-core</module>
+        <module>abc-antlr-grammar</module>
         <module>abc-parser</module>
         <module>abc-theory</module>
         <module>abc-interop</module>
         <module>abc-test</module>
-        <module>abc-parser-antlr</module>
-        <module>abc-parser-v2</module>
     </modules>
 
     <properties>
@@ -76,6 +74,11 @@
             <dependency>
                 <groupId>io.github.ryangardner</groupId>
                 <artifactId>abc-parser</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.ryangardner</groupId>
+                <artifactId>abc-antlr-grammar</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>

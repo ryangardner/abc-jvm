@@ -1,6 +1,6 @@
 package io.github.ryangardner.abc.test
 
-import io.github.ryangardner.abc.parser.v2.AntlrAbcParser
+import io.github.ryangardner.abc.parser.AbcParser
 import io.github.ryangardner.abc.theory.PitchInterpreter
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
@@ -17,7 +17,7 @@ class MetadataPreservationTest {
             "Am" C4
         """.trimIndent()
 
-        val tune = AntlrAbcParser().parse(abc)
+        val tune = AbcParser().parse(abc)
         val interpreted = PitchInterpreter.interpret(tune)
         
         val note = interpreted.voices["1"]!![0]
@@ -33,7 +33,7 @@ class MetadataPreservationTest {
             "G7" z4
         """.trimIndent()
 
-        val tune = AntlrAbcParser().parse(abc)
+        val tune = AbcParser().parse(abc)
         val interpreted = PitchInterpreter.interpret(tune)
         
         val rest = interpreted.voices["1"]!![0]
@@ -50,7 +50,7 @@ class MetadataPreservationTest {
             !staccato! C2 !fermata! D2
         """.trimIndent()
 
-        val tune = AntlrAbcParser().parse(abc)
+        val tune = AbcParser().parse(abc)
         val interpreted = PitchInterpreter.interpret(tune)
         
         val voice = interpreted.voices["1"]!!
@@ -71,7 +71,7 @@ class MetadataPreservationTest {
             "Dm7" [F A c e]4
         """.trimIndent()
 
-        val tune = AntlrAbcParser().parse(abc)
+        val tune = AbcParser().parse(abc)
         val interpreted = PitchInterpreter.interpret(tune)
         
         val chord = interpreted.voices["1"]!![0]

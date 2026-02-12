@@ -24,14 +24,14 @@ internal object InterpretationUtils {
         }
 
         // 2. Check for transpose=N
-        val transposeRegex = "transpose=([-]?\d+)".toRegex()
+        val transposeRegex = "transpose=([-]?\\d+)".toRegex()
         transposeRegex.find(text)?.let {
             totalShift += it.groupValues[1].toIntOrNull() ?: 0
             foundAny = true
         }
 
         // 3. Check for octave=N
-        val octaveRegex = "octave=([-]?\d+)".toRegex()
+        val octaveRegex = "octave=([-]?\\d+)".toRegex()
         octaveRegex.find(text)?.let {
             totalShift += (it.groupValues[1].toIntOrNull() ?: 0) * 12
             foundAny = true

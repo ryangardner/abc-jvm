@@ -28,12 +28,6 @@
         </dependency>
         <dependency>
             <groupId>io.github.ryangardner</groupId>
-            <artifactId>abc-parser-v2</artifactId>
-            <version>${project.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.github.ryangardner</groupId>
             <artifactId>abc-theory</artifactId>
         </dependency>
         <dependency>

@@ -1,7 +1,7 @@
 package io.github.ryangardner.abc.test
 
 import io.github.ryangardner.abc.core.model.*
-import io.github.ryangardner.abc.parser.v2.AntlrAbcParser
+import io.github.ryangardner.abc.parser.AbcParser
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
@@ -16,7 +16,7 @@ public class SymbolLineParserTest {
             s: "Cm" * !trill! * |
         """.trimIndent()
         
-        val parser = AntlrAbcParser()
+        val parser = AbcParser()
         val tune = parser.parse(abc)
         
         val elements = tune.body.elements

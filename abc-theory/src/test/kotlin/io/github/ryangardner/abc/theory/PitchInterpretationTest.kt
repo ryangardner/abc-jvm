@@ -11,7 +11,7 @@ public class PitchInterpretationTest {
         val key = KeySignature(KeyRoot(NoteStep.G, Accidental.NATURAL), KeyMode.MAJOR)
         val note = NoteElement(Pitch(NoteStep.F, 4, null), NoteDuration(1, 8))
         
-        val interpreted = PitchInterpreter.interpret(note, key, emptyMap())
+        val interpreted = PitchInterpreter.PitchResolver.interpretBasePitch(note, key, emptyMap())
         assertEquals(Accidental.SHARP, interpreted.accidental)
     }
 
@@ -20,7 +20,7 @@ public class PitchInterpretationTest {
         val key = KeySignature(KeyRoot(NoteStep.G, Accidental.NATURAL), KeyMode.MAJOR)
         val note = NoteElement(Pitch(NoteStep.F, 4, Accidental.NATURAL), NoteDuration(1, 8))
         
-        val interpreted = PitchInterpreter.interpret(note, key, emptyMap())
+        val interpreted = PitchInterpreter.PitchResolver.interpretBasePitch(note, key, emptyMap())
         assertEquals(Accidental.NATURAL, interpreted.accidental)
     }
 
@@ -29,7 +29,7 @@ public class PitchInterpretationTest {
         val key = KeySignature(KeyRoot(NoteStep.F, Accidental.NATURAL), KeyMode.MAJOR)
         val note = NoteElement(Pitch(NoteStep.B, 4, null), NoteDuration(1, 8))
         
-        val interpreted = PitchInterpreter.interpret(note, key, emptyMap())
+        val interpreted = PitchInterpreter.PitchResolver.interpretBasePitch(note, key, emptyMap())
         assertEquals(Accidental.FLAT, interpreted.accidental)
     }
 
@@ -38,7 +38,7 @@ public class PitchInterpretationTest {
         val key = KeySignature(KeyRoot(NoteStep.D, Accidental.NATURAL), KeyMode.MINOR)
         val note = NoteElement(Pitch(NoteStep.F, 4, null), NoteDuration(1, 8))
         
-        val interpreted = PitchInterpreter.interpret(note, key, emptyMap())
+        val interpreted = PitchInterpreter.PitchResolver.interpretBasePitch(note, key, emptyMap())
         assertEquals(null, interpreted.accidental) // D Minor has B flat, but F is natural
     }
 
@@ -47,7 +47,7 @@ public class PitchInterpretationTest {
         val key = KeySignature(KeyRoot(NoteStep.D, Accidental.NATURAL), KeyMode.MINOR)
         val note = NoteElement(Pitch(NoteStep.B, 4, null), NoteDuration(1, 8))
         
-        val interpreted = PitchInterpreter.interpret(note, key, emptyMap())
+        val interpreted = PitchInterpreter.PitchResolver.interpretBasePitch(note, key, emptyMap())
         assertEquals(Accidental.FLAT, interpreted.accidental)
     }
 }

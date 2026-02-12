@@ -1,6 +1,6 @@
 package io.github.ryangardner.abc.test
 
-import io.github.ryangardner.abc.parser.v2.AntlrAbcParser
+import io.github.ryangardner.abc.parser.AbcParser
 import org.junit.jupiter.api.Test
 import java.io.File
 
@@ -13,7 +13,7 @@ class AbcParserDebug {
             return
         }
         val abcContent = abcFile.readText()
-        val tune = AntlrAbcParser().parse(abcContent)
+        val tune = AbcParser().parse(abcContent)
         
         println("--- Music Elements for tune_011215 (Original) ---")
         tune.body.elements.forEachIndexed { index, element ->

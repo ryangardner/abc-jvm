@@ -2,7 +2,7 @@ package io.github.ryangardner.abc.test
 
 import io.github.ryangardner.abc.core.model.AbcTune
 import io.github.ryangardner.abc.parser.AbcSerializer
-import io.github.ryangardner.abc.parser.v2.AntlrAbcParser
+import io.github.ryangardner.abc.parser.AbcParser
 import io.github.ryangardner.abc.theory.MeasureValidator
 import io.github.ryangardner.abc.theory.PitchInterpreter
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -22,7 +22,7 @@ public class RoundTripAntlrTest {
     @ParameterizedTest(name = "ANTLR Round trip: {0}")
     @MethodSource("abcSources")
     public fun `test antlr parser fidelity`(source: AbcSource): Unit {
-        val parser = AntlrAbcParser()
+        val parser = AbcParser()
         val serializer = AbcSerializer()
 
         val originalAbc = source.content

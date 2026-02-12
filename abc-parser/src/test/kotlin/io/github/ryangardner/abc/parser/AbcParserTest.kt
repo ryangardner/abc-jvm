@@ -25,20 +25,16 @@ public class AbcParserTest {
         assertEquals(KeySignature(KeyRoot(NoteStep.C), KeyMode.IONIAN), tune.header.key)
 
         val elements = tune.body.elements
-        // C D E F | G A B c |
-        // 4 notes, 1 barline, 4 notes, 1 barline = 10 elements
-        assertEquals(10, elements.size)
+        val noteElements = elements.filterIsInstance<NoteElement>()
+        val barLines = elements.filterIsInstance<BarLineElement>()
 
-        val n1 = elements[0] as NoteElement
-        assertEquals(NoteStep.C, n1.pitch.step)
+        assertEquals(8, noteElements.size)
+        assertEquals(2, barLines.size)
 
-        val bar1 = elements[4] as BarLineElement
-        assertEquals(BarLineType.SINGLE, bar1.type)
-
-        val n5 = elements[5] as NoteElement
-        assertEquals(NoteStep.G, n5.pitch.step)
-
-        val bar2 = elements[9] as BarLineElement
-        assertEquals(BarLineType.SINGLE, bar2.type)
+        assertEquals(NoteStep.C, noteElements[0].pitch.step)
+        assertEquals(NoteStep.G, noteElements[4].pitch.step)
+        
+        assertEquals(BarLineType.SINGLE, barLines[0].type)
+        assertEquals(BarLineType.SINGLE, barLines[1].type)
     }
 }

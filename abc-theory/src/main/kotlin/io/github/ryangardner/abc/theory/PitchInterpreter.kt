@@ -65,9 +65,9 @@ public data class InterpretedTune(
     public val validationErrors: List<String> = emptyList()
 )
 
-private data class TupletState(val q: Int, val p: Int, var remainingNotes: Int)
+internal data class TupletState(val q: Int, val p: Int, var remainingNotes: Int)
 
-private class VoiceState(
+internal class VoiceState(
     var currentKey: KeySignature,
     var currentMeter: TimeSignature,
     val activeAccidentals: MutableMap<Pair<NoteStep, Int>, Accidental> = mutableMapOf(),
@@ -78,7 +78,7 @@ private class VoiceState(
     var measureCount: Int = 0
 )
 
-private class InterpretationSession(val tune: AbcTune) {
+internal class InterpretationSession(val tune: AbcTune) {
     val voices = mutableMapOf<String, MutableList<InterpretedNote>>()
     val validationErrors = mutableListOf<String>()
     val voiceStates = mutableMapOf<String, VoiceState>()
@@ -215,8 +215,8 @@ public object PitchInterpreter {
         }
     }
 
-    private object PitchResolver {
-        fun resolve(
+    internal object PitchResolver {
+        internal fun resolve(
             note: NoteElement,
             session: InterpretationSession
         ): Pitch {
@@ -238,7 +238,7 @@ public object PitchInterpreter {
          * @param activeAccidentals A map of step to accidental active in the current measure
          * @return The absolute pitch
          */
-        fun interpretBasePitch(note: NoteElement, key: KeySignature, activeAccidentals: Map<Pair<NoteStep, Int>, Accidental>): Pitch {
+        internal fun interpretBasePitch(note: NoteElement, key: KeySignature, activeAccidentals: Map<Pair<NoteStep, Int>, Accidental>): Pitch {
             val step = note.pitch.step
             val octave = note.pitch.octave
             val explicitAccidental = note.pitch.accidental ?: note.accidental

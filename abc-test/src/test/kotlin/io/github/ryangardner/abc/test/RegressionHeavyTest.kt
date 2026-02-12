@@ -2,7 +2,7 @@ package io.github.ryangardner.abc.test
 
 import io.github.ryangardner.abc.core.model.AbcTune
 import io.github.ryangardner.abc.parser.AbcSerializer
-import io.github.ryangardner.abc.parser.v2.AntlrAbcParser
+import io.github.ryangardner.abc.parser.AbcParser
 import io.github.ryangardner.abc.theory.PitchInterpreter
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.params.ParameterizedTest
@@ -14,7 +14,7 @@ public class RegressionHeavyTest {
     @ParameterizedTest(name = "Regression trip: {0}")
     @MethodSource("regressionFiles")
     public fun `test regression tunes fidelity`(file: File): Unit {
-        val parser = AntlrAbcParser()
+        val parser = AbcParser()
         val serializer = AbcSerializer()
 
         val originalAbc = file.readText()
