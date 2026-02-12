@@ -1,6 +1,6 @@
-# LibABC-Kotlin (abc-jvm)
+# abc-jvm
 
-A JVM-native library for symbolic music processing, specifically focused on ABC notation. It provides a robust, strictly typed, and immutable model for musical scores, with a focus on interoperability between ABC (including `abcjs` extensions), MusicXML, and TuxGuitar.
+A JVM-native library for symbolic music processing, specifically focused on ABC notation. It provides a robust, strictly typed, and immutable model for musical scores.
 
 ## Project Overview
 
@@ -10,7 +10,7 @@ A JVM-native library for symbolic music processing, specifically focused on ABC 
     - `abc-core`: Immutable Abstract Syntax Tree (AST) data models.
     - `abc-parser`: Primary parser engine for ABC notation.
     - `abc-theory`: Music theory algorithms (transposition, key analysis, durations).
-    - `abc-interop`: Integration layer for MusicXML and TuxGuitar.
+    - `abc-interop`: Placeholder for future integration layers (MusicXML, TuxGuitar).
     - `abc-parser-antlr`: Experimental ANTLR4-based parser for the ABC 2.1 standard.
     - `abc-test`: Integration tests, regression suites, and ground truth datasets.
     - `abc-parser-v2` & `abc-theory`: Evolving implementations of the parser and theory logic.

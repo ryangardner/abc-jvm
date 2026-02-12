@@ -1,8 +1,8 @@
-# **Architectural Design Specification for LibABC-Kotlin: A JVM-Native Library for Symbolic Music Processing**
+# **Architectural Design Specification for abc-jvm: A JVM-Native Library for Symbolic Music Processing**
 
 ## **1\. Executive Summary and Architectural Vision**
 
-The digital representation of music has evolved into a fragmented landscape of competing standards, each optimized for specific use cases—MusicXML for interchange, MIDI for playback, and ABC notation for concise, human-readable transcription. The proposed library, LibABC-Kotlin, aims to unify these disparate domains within the Java Virtual Machine (JVM) ecosystem. This document outlines a rigorous architectural specification for a Kotlin-based library designed to parse, manipulate, and generate ABC notation with full fidelity to the abcjs dialect.
+The digital representation of music has evolved into a fragmented landscape of competing standards, each optimized for specific use cases—MusicXML for interchange, MIDI for playback, and ABC notation for concise, human-readable transcription. The proposed library, abc-jvm, aims to unify these disparate domains within the Java Virtual Machine (JVM) ecosystem. This document outlines a rigorous architectural specification for a Kotlin-based library designed to parse, manipulate, and generate ABC notation with full fidelity to the abcjs dialect.
 
 The primary objective is to engineer a high-performance, immutable, and strictly typed library that serves as a bridge between the textual flexibility of ABC notation and the structural rigidity of object-oriented models like TuxGuitar and MusicXML. This library is not merely a parser; it is a semantic engine capable of understanding musical context, performing complex music theory operations such as semantic transposition, and ensuring seamless interoperability with legacy Java codebases through idiomatic API design.
 
@@ -12,11 +12,11 @@ The architectural vision prioritizes "correctness over permissiveness" in its in
 
 A core challenge addressed by this design is the "impedance mismatch" between stream-oriented and measure-oriented formats. ABC notation 1 is fundamentally a stream of events: notes, chords, and bar lines appear sequentially, often without strict enforcement of measure duration or voice synchronization. Conversely, libraries like TuxGuitar 3 and formats like MusicXML 5 are hierarchical and measure-centric; they require notes to be strictly contained within measure boundaries, often demanding precise vertical alignment of multiple voices.
 
-LibABC-Kotlin solves this by implementing a "Verticalization Engine" as a core component of its architecture. This engine transforms the linear AST (Abstract Syntax Tree) derived from ABC text into a time-sliced, vertically aligned representation required for export to TuxGuitar and MusicXML. This approach ensures that the library acts not just as a translator, but as a structural validator, capable of detecting and reconciling rhythmic inconsistencies inherent in hand-typed ABC files.
+abc-jvm is designed to eventually solve this by implementing a "Verticalization Engine". This future component will transform the linear AST (Abstract Syntax Tree) derived from ABC text into a time-sliced, vertically aligned representation required for export to TuxGuitar and MusicXML. This approach ensures that the library acts not just as a translator, but as a structural validator, capable of detecting and reconciling rhythmic inconsistencies inherent in hand-typed ABC files.
 
 ### **1.2 The abcjs Compatibility Mandate**
 
-While standard ABC 2.1 6 forms the baseline, the web ecosystem has coalesced around the abcjs library, which introduces a superset of directives for visual rendering and audio synthesis.8 Standard parsers often discard these directives as comments. To fulfill the requirement of "reading and writing to the abcjs format," LibABC-Kotlin treats abcjs directives—such as %%visualTranspose, %%MIDI program, and formatting parameters like %%staffwidth—as first-class citizens within the AST. This ensures that a file parsed, manipulated, and re-serialized by the library preserves the specific rendering instructions required for web presentation, facilitating a seamless round-trip workflow between the JVM backend and a browser frontend.
+While standard ABC 2.1 6 forms the baseline, the web ecosystem has coalesced around the abcjs library, which introduces a superset of directives for visual rendering and audio synthesis.8 Standard parsers often discard these directives as comments. To fulfill the requirement of "reading and writing to the abcjs format," abc-jvm treats abcjs directives—such as %%visualTranspose, %%MIDI program, and formatting parameters like %%staffwidth—as first-class citizens within the AST. This ensures that a file parsed, manipulated, and re-serialized by the library preserves the specific rendering instructions required for web presentation, facilitating a seamless round-trip workflow between the JVM backend and a browser frontend.
 
 ## **2\. High-Level System Architecture**
 
@@ -29,7 +29,7 @@ The library is structured as a multi-module Maven project. This modularity ensur
 | **Core Model** | abc-core | Defines the immutable data classes, enums, and interfaces representing the ABC AST. Contains zero logic beyond data holding. | kotlin-stdlib |
 | **Parser Engine** | abc-parser | Contains the Lexer, Parser, and Validator. Responsible for converting raw text strings into the Core Model. Handles abcjs directive parsing. | abc-core |
 | **Music Theory** | abc-theory | Implements algorithmic manipulations: Transposition (chromatic/diatonic), key analysis, and duration calculations. | abc-core |
-| **Integration** | abc-interop | Adapters for converting the Core Model to/from TuxGuitar and MusicXML formats. | abc-core, abc-theory, tuxguitar-lib |
+| **Integration** | abc-interop | (Planned) Adapters for converting the Core Model to/from TuxGuitar and MusicXML formats. | abc-core, abc-theory |
 | **Test Suite** | abc-test | Contains the "Ground Truth" datasets and integration tests. | All modules, JUnit 5 |
 
 ### **2.2 Technology Stack and Compatibility Profile**
@@ -63,7 +63,7 @@ data class AbcTune(
 
 ### **3.2 The Header Model**
 
-ABC headers define the global state. LibABC-Kotlin parses these into strongly typed objects rather than generic strings to facilitate algorithmic manipulation (e.g., transposition requires understanding KeySignature as an object, not just the string "K:Dm").
+ABC headers define the global state. abc-jvm parses these into strongly typed objects rather than generic strings to facilitate algorithmic manipulation (e.g., transposition requires understanding KeySignature as an object, not just the string "K:Dm").
 
 | Field | ABC Code | Type | Description |
 | :---- | :---- | :---- | :---- |
@@ -109,7 +109,7 @@ data class InlineFieldElement(
     val value: String  
 ) : MusicElement()
 
-**Insight:** Standard ABC parsers often fail to distinguish between a "decorating chord" (text above staff) and a "sounding chord" (notes played together). LibABC-Kotlin disambiguates these by treating text annotations (e.g., "Am") as properties of the MusicElement, while sounding chords (\[CEG\]) are distinct ChordElement objects.
+**Insight:** Standard ABC parsers often fail to distinguish between a "decorating chord" (text above staff) and a "sounding chord" (notes played together). abc-jvm disambiguates these by treating text annotations (e.g., "Am") as properties of the MusicElement, while sounding chords (\[CEG\]) are distinct ChordElement objects.
 
 ### **3.4 Handling abcjs Directives**
 
@@ -350,7 +350,7 @@ To make the library feel native to Java users:
 
 ## **11\. Conclusion**
 
-LibABC-Kotlin represents a robust, theoretically sound approach to bringing ABC notation into the professional Java/Kotlin ecosystem. By respecting the nuances of abcjs, implementing a rigorous semantic transposition engine, and solving the linear-to-vertical mapping problem for TuxGuitar integration, this library fills a critical gap in music software development tools. The detailed architectural plan and test-driven development roadmap provided herein ensure that an automated agent can execute this vision with high precision and reliability.
+abc-jvm represents a robust, theoretically sound approach to bringing ABC notation into the professional Java/Kotlin ecosystem. By respecting the nuances of abcjs, implementing a rigorous semantic transposition engine, and solving the linear-to-vertical mapping problem for TuxGuitar integration, this library fills a critical gap in music software development tools. The detailed architectural plan and test-driven development roadmap provided herein ensure that an automated agent can execute this vision with high precision and reliability.
 
 ---
 
