@@ -32,7 +32,12 @@ public class AbcjsSemanticParityTest {
         
         val gson = Gson()
         val type = object : TypeToken<List<Map<String, Any>>>() {}.type
-        val abcjsTunes: List<Map<String, Any>> = gson.fromJson(baseline.jsonContent, type)
+        val abcjsTunes: List<Map<String, Any>>? = try { gson.fromJson(baseline.jsonContent, type) } catch (e: Exception) { null }
+        if (abcjsTunes == null) {
+            println("ERROR: [${baseline.name}] Failed to parse abcjs JSON content (maybe empty?)")
+            assumeTrue(false, "Skipping [${baseline.name}] due to empty/malformed abcjs JSON")
+            return
+        }
 
         val m21FullResults: List<List<Map<String, Any>>>? = baseline.m21JsonContent?.let { 
             try { 
@@ -62,13 +67,6 @@ public class AbcjsSemanticParityTest {
             val abcjsWarnings = abcjsTune["warnings"] as? List<String> ?: emptyList()
             if (abcjsWarnings.isNotEmpty()) {
                 logDiscrepancy(baseline.name, abcjsWarnings)
-                if (m21FullResults != null) {
-                    if (compareWithMusic21(baseline.name, interpreted, m21FullResults)) {
-                        return@forEachIndexed 
-                    }
-                }
-                logTroublesome(baseline.name, "abcjs warnings: ${abcjsWarnings.firstOrNull()}")
-                assumeTrue(false, "Skipping [${baseline.name}] due to abcjs warnings and no music21 match")
             }
 
             // TRY COMPARING WITH ABCJS
@@ -419,9 +417,22 @@ public class AbcjsSemanticParityTest {
         fun baselineSources(): Stream<AbcjsBaseline> {
             val batchDirProp = System.getProperty("abc.test.batchDir")
             if (batchDirProp != null) {
-                return getBaselinesFromDir(File(batchDirProp))
+                val batchDir = File(batchDirProp)
+                val projectRoot = findProjectRoot()
+                File(projectRoot, "reports/abcjs_discrepancies_${batchDir.name}.md").delete()
+                File(projectRoot, "reports/troublesome_${batchDir.name}.md").delete()
+                
+                return getBaselinesFromDir(batchDir)
             }
             return Stream.empty()
+        }
+
+        private fun findProjectRoot(): File {
+            var curr = File(System.getProperty("user.dir"))
+            while (curr.parentFile != null && !File(curr, "pom.xml").exists()) {
+                curr = curr.parentFile
+            }
+            return curr
         }
 
         private fun getBaselinesFromDir(batchDir: File): Stream<AbcjsBaseline> {

@@ -27,3 +27,14 @@ tune.lines.forEach((line, lIdx) => {
         });
     });
 });
+
+const midiData = tune.setUpAudio ? tune.setUpAudio() : null;
+if (midiData && midiData.tracks) {
+    midiData.tracks.forEach((track, tIdx) => {
+        track.forEach((event, eIdx) => {
+            if (event.cmd === 'note') {
+                console.log(`MIDI Track ${tIdx} Event ${eIdx}: pitch=${event.pitch} start=${event.start} dur=${event.duration}`);
+            }
+        });
+    });
+}

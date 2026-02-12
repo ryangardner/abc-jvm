@@ -54,7 +54,8 @@ A JVM-native library for symbolic music processing, specifically focused on ABC 
 ### Testing Practices
 - **Unit Testing:** Standard JUnit 5 tests.
 - **Integration Testing:** Located in `abc-test`, using large datasets (e.g., Zenodo 10k samples) for round-trip fidelity checks.
-- **Regression Testing:** `abc-test/REGRESSION.md` tracks known issues and fixes.
+- **Regression Testing:** Large-scale semantic validation is documented in [REGRESSION.md](file:///Users/ryan.gardner/gitother/abc-jvm/abc-test/REGRESSION.md).
+- **Regression Log:** `abc-test/REGRESSION_LOG.md` (legacy) tracks known historical issues.
 
 ### Architecture Insights
 - **Verticalization Engine:** The library handles the transition from linear ABC streams to measure-oriented formats (TuxGuitar/MusicXML) via a "Verticalization Engine" in `abc-interop`.

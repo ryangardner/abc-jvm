@@ -23,41 +23,51 @@ This will extract files to `target/abc-dataset/abc_notation_batch_XXX/`.
 
 ## 3. Generating Baselines
 
-Baselines are generated using `abcjs` to provide a ground truth for semantic parity.
+Baselines provide a ground truth for semantic parity. We generate both `abcjs` and `music21` baselines.
 
+### abcjs Baselines
+Uses `abcjs` to capture the MIDI sequence and notation structure.
 ```bash
-cd tools/abcjs-exporter
-npm install
-node export-batch.js ../../target/abc-dataset/abc_notation_batch_001
+# In the project root
+export PATH=$PATH:/opt/homebrew/bin
+node tools/abcjs-exporter/export-batch.js target/abc-dataset/abc_notation_batch_001
 ```
 
-This produces JSON files in the `midi_json` subdirectory of each batch, containing both the notation structure and the linear MIDI sequence.
+### music21 Baselines
+Uses the `music21` Python library for a "second opinion" on pitch and duration expansion.
+```bash
+# In the project root
+mkdir -p target/abc-dataset/abc_notation_batch_001/music21_json
+python3 tools/music21-exporter/m21_validator.py \
+  target/abc-dataset/abc_notation_batch_001/abc_files \
+  target/abc-dataset/abc_notation_batch_001/music21_json
+```
 
 ## 4. Running Regression Tests
 
 ### Semantic Parity with abcjs
-Run the `AbcjsSemanticParityTest` to compare the JVM parser output against the `abcjs` MIDI baselines.
-
+Run the `AbcjsSemanticParityTest` to compare the JVM parser output against the baselines.
 ```bash
 # Run a specific batch
-mvn test -Dtest=AbcjsSemanticParityTest \
-  -DargLine="-Dtest.batchDir=$(pwd)/target/abc-dataset/abc_notation_batch_001"
+mvn test -pl abc-test -Dtest=AbcjsSemanticParityTest \
+  -Dabc.test.batchDir="target/abc-dataset/abc_notation_batch_001"
 ```
 
 ### Filtering Tests
 You can filter to a specific tune for debugging:
 ```bash
-mvn test -Dtest=AbcjsSemanticParityTest \
-  -DargLine="-Dtest.batchDir=$(pwd)/target/abc-dataset/abc_notation_batch_001 -Dabc.test.filter=tune_000004"
+mvn test -pl abc-test -Dtest=AbcjsSemanticParityTest \
+  -Dabc.test.batchDir="target/abc-dataset/abc_notation_batch_001" \
+  -Dabc.test.filter=tune_000004
 ```
 
 ## 5. Cross-Validation
 
-If a tune shows a mismatch between our parser and `abcjs`, use the `m21_validator.py` script to get a "second opinion" from the `music21` library.
-
+The test suite automatically uses `music21_json` baselines as a fallback when `abcjs` mismatches.
+To manually inspect a single file:
 ```bash
-# In the project root
-python3 m21_validator.py abc-test/target/abc-dataset/abc_notation_batch_001/abc_files/tune_000004.abc
+python3 tools/music21-exporter/m21_validator.py \
+  target/abc-dataset/abc_notation_batch_001/abc_files/tune_000004.abc
 ```
 
 ## 6. Interpreting Results
