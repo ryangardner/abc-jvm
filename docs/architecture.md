@@ -12,7 +12,7 @@ The architectural vision prioritizes "correctness over permissiveness" in its in
 
 A core challenge addressed by this design is the "impedance mismatch" between stream-oriented and measure-oriented formats. ABC notation 1 is fundamentally a stream of events: notes, chords, and bar lines appear sequentially, often without strict enforcement of measure duration or voice synchronization. Conversely, libraries like TuxGuitar 3 and formats like MusicXML 5 are hierarchical and measure-centric; they require notes to be strictly contained within measure boundaries, often demanding precise vertical alignment of multiple voices.
 
-abc-jvm solves this by implementing a "Verticalization Engine" as a core component of its architecture. This engine transforms the linear AST (Abstract Syntax Tree) derived from ABC text into a time-sliced, vertically aligned representation required for export to TuxGuitar and MusicXML. This approach ensures that the library acts not just as a translator, but as a structural validator, capable of detecting and reconciling rhythmic inconsistencies inherent in hand-typed ABC files.
+abc-jvm is designed to eventually solve this by implementing a "Verticalization Engine". This future component will transform the linear AST (Abstract Syntax Tree) derived from ABC text into a time-sliced, vertically aligned representation required for export to TuxGuitar and MusicXML. This approach ensures that the library acts not just as a translator, but as a structural validator, capable of detecting and reconciling rhythmic inconsistencies inherent in hand-typed ABC files.
 
 ### **1.2 The abcjs Compatibility Mandate**
 
@@ -29,7 +29,7 @@ The library is structured as a multi-module Maven project. This modularity ensur
 | **Core Model** | abc-core | Defines the immutable data classes, enums, and interfaces representing the ABC AST. Contains zero logic beyond data holding. | kotlin-stdlib |
 | **Parser Engine** | abc-parser | Contains the Lexer, Parser, and Validator. Responsible for converting raw text strings into the Core Model. Handles abcjs directive parsing. | abc-core |
 | **Music Theory** | abc-theory | Implements algorithmic manipulations: Transposition (chromatic/diatonic), key analysis, and duration calculations. | abc-core |
-| **Integration** | abc-interop | Adapters for converting the Core Model to/from TuxGuitar and MusicXML formats. | abc-core, abc-theory, tuxguitar-lib |
+| **Integration** | abc-interop | (Planned) Adapters for converting the Core Model to/from TuxGuitar and MusicXML formats. | abc-core, abc-theory |
 | **Test Suite** | abc-test | Contains the "Ground Truth" datasets and integration tests. | All modules, JUnit 5 |
 
 ### **2.2 Technology Stack and Compatibility Profile**

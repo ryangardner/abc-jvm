@@ -9,7 +9,7 @@ The primary goal of this project is to provide a robust, maintainable, and highl
 *   **Formal Specification:** A clear, machine-readable definition of the ABC language structure.
 *   **Error Recovery:** Robust handling of malformed input, common in user-generated files.
 *   **Type Safety:** A strictly typed Abstract Syntax Tree (AST) in Kotlin, ensuring invalid states are unrepresentable.
-*   **Interoperability:** Seamless integration with MusicXML and TuxGuitar (via `abc-interop`).
+*   **Interoperability:** Designed with future MusicXML and TuxGuitar integration in mind (via `abc-interop`).
 
 ## Architecture
 
@@ -19,7 +19,7 @@ The project is organized as a multi-module Maven project:
 *   **`abc-antlr-grammar`**: Contains the ANTLR4 `.g4` grammar files (`ABCLexer.g4`, `ABCParser.g4`) that define the language.
 *   **`abc-parser`**: The core parsing engine. It wraps the ANTLR-generated parser and transforms the parse tree into the `abc-core` AST.
 *   **`abc-theory`**: Provides music theory algorithms, such as key signature analysis, transposition, and duration calculations.
-*   **`abc-interop`**: Handles conversion to and from other formats like MusicXML and TuxGuitar.
+*   **`abc-interop`**: Placeholder module for future conversion logic to/from other formats like MusicXML and TuxGuitar.
 *   **`abc-test`**: Contains the regression test suite and tools for validating semantic fidelity against large datasets.
 
 ## Getting Started
