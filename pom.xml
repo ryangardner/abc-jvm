@@ -17,7 +17,6 @@
     <properties>
         <kotlin.version>1.9.22</kotlin.version>
         <java.version>1.8</java.version>
-        <tuxguitar.version>1.5.4</tuxguitar.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <kover.version>0.8.3</kover.version>
         <detekt.version>1.23.5</detekt.version>
