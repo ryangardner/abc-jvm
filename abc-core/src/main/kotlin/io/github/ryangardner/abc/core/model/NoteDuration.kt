@@ -24,6 +24,8 @@ public data class NoteDuration(
 
     public fun toDouble(): Double = numerator.toDouble() / denominator.toDouble()
 
+    public val wholeNoteDuration: Double get() = toDouble()
+
     public val isZero: Boolean get() = numerator == 0
 
     override fun compareTo(other: NoteDuration): Int {

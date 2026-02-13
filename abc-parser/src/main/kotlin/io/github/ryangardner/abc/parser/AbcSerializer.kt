@@ -56,7 +56,10 @@ public class AbcSerializer {
             
             append(serializedElement)
             
-            if (isLineBased) {
+            // Check for line-break triggers
+            val isManualLineBreak = element is SpacerElement && element.text == "!"
+            
+            if (isLineBased || isManualLineBreak) {
                 // Peek at NEXT element. If it is a Spacer starting with \n, we skip our own \n
                 // ALSO check if the serialized element itself already ended with a newline
                 if (!endsWith("\n")) {
@@ -65,17 +68,6 @@ public class AbcSerializer {
                     if (!nextIsNewlineSpacer) {
                         append("\n")
                     }
-                }
-            } else {
-                // Check for line-break decorations on Notes, Rests, Chords
-                val hasLineBreak = when (element) {
-                    is NoteElement -> element.decorations.any { it.value == "line-break" }
-                    is RestElement -> element.decorations.any { it.value == "line-break" }
-                    is ChordElement -> element.decorations.any { it.value == "line-break" }
-                    else -> false
-                }
-                if (hasLineBreak && !endsWith("\n")) {
-                    append("\n")
                 }
             }
         }
@@ -86,7 +78,9 @@ public class AbcSerializer {
         is ChordElement -> serializeChord(element)
         is BarLineElement -> serializeBarLine(element)
         is RestElement -> serializeRest(element)
-        is SpacerElement -> element.text
+        is SpacerElement -> {
+            if (element.text == "!") "!" else element.text
+        }
         is InlineFieldElement -> {
             if (element.fieldType == HeaderType.LENGTH) {
                 val parts = element.value.split("/")
@@ -223,13 +217,16 @@ public class AbcSerializer {
         chord.brokenRhythm?.let { append(it) }
     }
 
-    private fun serializeBarLine(bar: BarLineElement): String = when (bar.type) {
-        BarLineType.SINGLE -> "|"
-        BarLineType.DOUBLE -> "||"
-        BarLineType.FINAL -> "|]"
-        BarLineType.REPEAT_START -> "|:"
-        BarLineType.REPEAT_END -> ":|"
-        BarLineType.REPEAT_BOTH -> "::"
+    private fun serializeBarLine(bar: BarLineElement): String = buildString {
+        val s = when (bar.type) {
+            BarLineType.SINGLE -> "|"
+            BarLineType.DOUBLE -> "||"
+            BarLineType.FINAL -> "|]"
+            BarLineType.REPEAT_START -> "|:"
+            BarLineType.REPEAT_END -> ":|"
+            BarLineType.REPEAT_BOTH -> "::"
+        }
+        append(s)
     }
 
     private fun serializeRest(rest: RestElement): String = buildString {

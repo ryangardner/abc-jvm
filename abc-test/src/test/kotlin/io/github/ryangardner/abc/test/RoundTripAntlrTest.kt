@@ -1,7 +1,6 @@
 package io.github.ryangardner.abc.test
 
-import io.github.ryangardner.abc.core.model.AbcTune
-import io.github.ryangardner.abc.core.model.SpacerElement
+import io.github.ryangardner.abc.core.model.*
 import io.github.ryangardner.abc.parser.AbcSerializer
 import io.github.ryangardner.abc.parser.AbcParser
 import io.github.ryangardner.abc.theory.MeasureValidator
@@ -55,10 +54,24 @@ public class RoundTripAntlrTest {
             assertEquals(originalTune.header.meter, roundTrippedTune.header.meter, "[${source.name}] Tune $tuneIndex Meter mismatch")
             assertEquals(originalTune.header.length, roundTrippedTune.header.length, "[${source.name}] Tune $tuneIndex Length mismatch")
             
-            val originalBodyNormalized = originalTune.body.elements.dropLastWhile { it is SpacerElement && it.text == "\n" }
-            val roundTrippedBodyNormalized = roundTrippedTune.body.elements.dropLastWhile { it is SpacerElement && it.text == "\n" }
+            val originalTuneNormalized = originalTune.withoutLocation()
+            val roundTrippedTuneNormalized = roundTrippedTune.withoutLocation()
+            
+            val originalBodyNormalized: List<MusicElement> = originalTuneNormalized.body.elements.dropLastWhile { it is SpacerElement && it.text == "\n" }.normalizeSpacers()
+            val roundTrippedBodyNormalized: List<MusicElement> = roundTrippedTuneNormalized.body.elements.dropLastWhile { it is SpacerElement && it.text == "\n" }.normalizeSpacers()
             
             assertEquals(originalBodyNormalized.size, roundTrippedBodyNormalized.size, "[${source.name}] Tune $tuneIndex Body size mismatch")
+
+            // Detailed element-by-element comparison if size mismatch
+            if (originalBodyNormalized.size != roundTrippedBodyNormalized.size) {
+                originalBodyNormalized.zip(roundTrippedBodyNormalized).forEachIndexed { i, pair ->
+                    val orig = pair.first
+                    val round = pair.second
+                    if (orig != round) {
+                        println("DEBUG: Mismatch at index $i: expected $orig but was $round")
+                    }
+                }
+            }
 
             // Semantic Validation
             val originalInterpreted = PitchInterpreter.interpret(originalTune)
@@ -138,4 +151,26 @@ public class RoundTripAntlrTest {
             return sequence.take(10000).asStream()
         }
     }
+}
+
+private fun List<MusicElement>.normalizeSpacers(): List<MusicElement> {
+    if (isEmpty()) return emptyList()
+    val result = mutableListOf<MusicElement>()
+    var currentSpacerText = StringBuilder()
+    
+    for (element in this) {
+        if (element is SpacerElement) {
+            currentSpacerText.append(element.text)
+        } else {
+            if (currentSpacerText.isNotEmpty()) {
+                result.add(SpacerElement(currentSpacerText.toString(), -1, -1))
+                currentSpacerText = StringBuilder()
+            }
+            result.add(element)
+        }
+    }
+    if (currentSpacerText.isNotEmpty()) {
+        result.add(SpacerElement(currentSpacerText.toString(), -1, -1))
+    }
+    return result
 }

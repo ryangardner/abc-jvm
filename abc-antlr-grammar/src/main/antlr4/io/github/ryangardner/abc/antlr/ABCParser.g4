@@ -56,6 +56,7 @@ element
     | slur_end_alt           # SlurEnd
     | broken_rhythm_alt      # BrokenRhythm
     | spacer_alt             # Space
+    | BANG                   # Miscellaneous
     | OCTAVE_UP              # Miscellaneous
     | OCTAVE_DOWN            # Miscellaneous
     | BRACKET_START          # Miscellaneous
@@ -72,6 +73,7 @@ chord_element
     | decoration_alt    # ChordDecoration
     | annotation_alt    # ChordAnnotation
     | spacer_alt        # ChordSpace
+    | BANG              # ChordMisc
     | OCTAVE_UP         # ChordMisc
     | OCTAVE_DOWN       # ChordMisc
     | MUSIC_TEXT        # ChordMisc
@@ -114,8 +116,9 @@ tuplet_element
     ;
     
 chord_alt
-    : decoration_alt* BRACKET_START chord_element* BRACKET_END note_length?
+    : (decoration_alt | annotation_alt)* BRACKET_START chord_element* BRACKET_END note_length?
     ;
+
 
 annotation_alt
     : CHORD_START CHORD_CONTENT? CHORD_END

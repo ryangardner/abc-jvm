@@ -1,5 +1,15 @@
 lexer grammar ABCLexer;
 
+@members {
+    private boolean isDecoration() {
+        for (int i = 1; ; i++) {
+            int c = _input.LA(i);
+            if (c == '!') return true;
+            if (c == '\r' || c == '\n' || c == ' ' || c == '\t' || c == '|' || c == ':' || c == '[' || c == ']' || c == -1) return false;
+        }
+    }
+}
+
 tokens {
     STYLESHEET,
     NEWLINE,
@@ -121,7 +131,8 @@ mode MUSIC_MODE;
     INLINE_FIELD_START : '[' [A-Za-z] ':' -> pushMode(INLINE_FIELD_MODE) ;
     
     CHORD_START : '"' -> pushMode(CHORD_MODE);
-    DECORATION_START : '!' -> pushMode(BANG_DECO_MODE);
+    DECORATION_START : '!' { isDecoration() }? -> pushMode(BANG_DECO_MODE) ;
+    BANG : '!' ;
     PLUS_DECORATION  : '+' -> pushMode(PLUS_DECO_MODE);
 
     BRACKET_START : '[' ;
@@ -210,7 +221,7 @@ mode CHORD_MODE;
 
 mode BANG_DECO_MODE;
     DECORATION_END : '!' -> popMode ;
-    BANG_DECO_CONTENT : (~[\r\n!])+ ;
+    BANG_DECO_CONTENT : ~[\r\n!]+ ;
     BANG_DECO_NEWLINE : [\r\n] -> type(NEWLINE), popMode ;
 
 mode PLUS_DECO_MODE;

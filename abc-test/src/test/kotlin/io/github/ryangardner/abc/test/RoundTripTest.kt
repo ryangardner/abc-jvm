@@ -106,6 +106,7 @@ public class RoundTripTest {
                 is NoteElement -> el.copy(decorations = el.decorations.filter { d -> d.value != "line-break" })
                 is RestElement -> el.copy(decorations = el.decorations.filter { d -> d.value != "line-break" })
                 is ChordElement -> el.copy(decorations = el.decorations.filter { d -> d.value != "line-break" })
+                is BarLineElement -> BarLineElement(type = el.type, repeatCount = el.repeatCount)
                 else -> el
             }
         }

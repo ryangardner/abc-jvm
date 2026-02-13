@@ -104,7 +104,9 @@ private class AbcTunebookVisitor : ABCParserBaseVisitor<List<AbcTune>>() {
 
         val actualMeter = meter ?: TimeSignature.NONE
         val actualLength = length ?: run {
-            if (actualMeter.numerator * 4 < actualMeter.denominator * 3) NoteDuration(1, 16) else NoteDuration(1, 8)
+            if (actualMeter.isNone) NoteDuration(1, 8)
+            else if (actualMeter.toDouble() < 0.75) NoteDuration(1, 16)
+            else NoteDuration(1, 8)
         }
 
         val keyValue = ctx.key_field()?.children
@@ -210,14 +212,7 @@ private class AbcTuneBodyVisitor(val header: TuneHeader) : ABCParserBaseVisitor<
     }
 
     override fun visitMusicLineContent(ctx: ABCParser.MusicLineContentContext) {
-        val initialSize = elements.size
         ctx.children?.forEach { visit(it) }
-        if (elements.size > initialSize) {
-            val last = elements.lastOrNull()
-            if (last !is SpacerElement || last.text != "\n") {
-                elements.add(SpacerElement("\n"))
-            }
-        }
     }
 
     override fun visitMusicLineEmpty(ctx: ABCParser.MusicLineEmptyContext) {
@@ -272,6 +267,31 @@ private class AbcTuneBodyVisitor(val header: TuneHeader) : ABCParserBaseVisitor<
         }
 
         val notes = mutableListOf<NoteElement>()
+        
+        // Collect decorations and annotations from the grammar rule (before the '[')
+        val grammarDecorations = mutableListOf<Decoration>()
+        var grammarAnnotation: String? = null
+        
+        chordCtx.children?.forEach { child ->
+            when (child) {
+                is ABCParser.Decoration_altContext -> {
+                    parseDecoration(child)?.let { grammarDecorations.add(it) }
+                }
+                is ABCParser.Annotation_altContext -> {
+                    val content = child.CHORD_CONTENT()?.text
+                    if (content != null) {
+                        grammarAnnotation = if (grammarAnnotation == null) content else "$grammarAnnotation $content"
+                    }
+                }
+            }
+        }
+        
+        // Also capture any pending decorations/annotations from before the chord (standalone elements)
+        val allDecorations = (pendingDecorations.toList() + grammarDecorations).toMutableList()
+        var outerChordAnnotation = listOfNotNull(pendingAnnotation, grammarAnnotation).joinToString(" ").ifEmpty { null }
+        pendingAnnotation = null
+        pendingDecorations.clear()
+
         chordCtx.chord_element()?.forEach { elementCtx ->
             val chordItemVisitor = object : ABCParserBaseVisitor<Unit>() {
                 override fun visitChordNote(ctx: ABCParser.ChordNoteContext) {
@@ -279,6 +299,7 @@ private class AbcTuneBodyVisitor(val header: TuneHeader) : ABCParserBaseVisitor<
                     if (explicitChordMultiplier != null) {
                         note = note.copy(length = note.length * explicitChordMultiplier!!)
                     }
+                    // Apply any note-level annotation found inside the chord
                     if (pendingAnnotation != null) {
                         note = note.copy(annotation = pendingAnnotation)
                         pendingAnnotation = null
@@ -295,28 +316,37 @@ private class AbcTuneBodyVisitor(val header: TuneHeader) : ABCParserBaseVisitor<
                 }
 
                 override fun visitChordAnnotation(ctx: ABCParser.ChordAnnotationContext) {
-                    pendingAnnotation = ctx.annotation_alt().CHORD_CONTENT()?.text ?: ""
+                    val content = ctx.annotation_alt()?.CHORD_CONTENT()
+                    if (content != null) {
+                        val anno = content.text ?: ""
+                        if (notes.isEmpty() && outerChordAnnotation == null) {
+                            // If it's at the start of the chord and we don't have one yet, use it for the chord
+                            outerChordAnnotation = anno
+                        } else {
+                            // Otherwise, it belongs to the NEXT note in the chord
+                            pendingAnnotation = if (pendingAnnotation == null) anno else "$pendingAnnotation $anno"
+                        }
+                    }
                 }
             }
             elementCtx.accept(chordItemVisitor)
         }
         
-        var duration = notes.firstOrNull()?.length ?: currentDefaultLength
+        val duration = notes.firstOrNull()?.length ?: currentDefaultLength
         
-        val decorations = chordCtx.decoration_alt()?.mapNotNull { parseDecoration(it) } ?: emptyList()
-        
-        if (pendingDecorations.isNotEmpty()) {
-            val combinedDecos = decorations + pendingDecorations
-            elements.add(ChordElement(notes, duration, annotation = pendingAnnotation, decorations = combinedDecos, line = line, column = col))
-            pendingDecorations.clear()
-        } else {
-            elements.add(ChordElement(notes, duration, annotation = pendingAnnotation, decorations = decorations, line = line, column = col))
-        }
+        // Combine all decorations: from pending + from grammar + from inside chord
+        elements.add(ChordElement(notes, duration, annotation = outerChordAnnotation, decorations = allDecorations + pendingDecorations, line = line, column = col))
         pendingAnnotation = null
+        pendingDecorations.clear()
     }
 
+
     override fun visitAnnotation(ctx: ABCParser.AnnotationContext) {
-        pendingAnnotation = ctx.annotation_alt()?.CHORD_CONTENT()?.text ?: ""
+        val content = ctx.annotation_alt()?.CHORD_CONTENT()
+        if (content != null) {
+            val anno = content.text ?: ""
+            pendingAnnotation = if (pendingAnnotation == null) anno else "$pendingAnnotation $anno"
+        }
     }
 
     override fun visitDecoration(ctx: ABCParser.DecorationContext) {
@@ -376,7 +406,7 @@ private class AbcTuneBodyVisitor(val header: TuneHeader) : ABCParserBaseVisitor<
     override fun visitBrokenRhythm(ctx: ABCParser.BrokenRhythmContext) {
         val text = ctx.broken_rhythm_alt()?.text ?: ""
         
-        // Attach to the last rhythmic element instead of adding a spacer
+        // Attach actual broken rhythm symbols to the last rhythmic element
         for (i in elements.indices.reversed()) {
             val el = elements[i]
             when (el) {
@@ -412,6 +442,10 @@ private class AbcTuneBodyVisitor(val header: TuneHeader) : ABCParserBaseVisitor<
         val line = ctx.start.line
         val col = ctx.start.charPositionInLine
         val text = ctx.text ?: ""
+        if (text == "!") {
+            elements.add(SpacerElement("!", line, col))
+            return
+        }
         if (text == "-") {
             if (!isStrict) {
                 for (i in elements.indices.reversed()) {
@@ -430,6 +464,17 @@ private class AbcTuneBodyVisitor(val header: TuneHeader) : ABCParserBaseVisitor<
             }
         }
         elements.add(SpacerElement(text, line, col))
+    }
+
+    override fun visitChordMisc(ctx: ABCParser.ChordMiscContext) {
+        val text = ctx.text ?: ""
+        if (text == "!") {
+            // Standalone ! inside a chord is weird but we should preserve it
+            // However, the AST for ChordElement doesn't have a list of all elements, 
+            // just notes, duration, annotation, decorations.
+            // If we want to preserve formatting markers INSIDE chords, we need to extend ChordElement.
+            // For now, let's just ignore it or attach it as a decoration if it's !
+        }
     }
 
     override fun visitBar(ctx: ABCParser.BarContext) {
@@ -470,11 +515,7 @@ private class AbcTuneBodyVisitor(val header: TuneHeader) : ABCParserBaseVisitor<
                     // Reset Default Length logic when Meter changes in body, 
                     // ONLY if we don't have an explicit L: in this tune.
                     if (!hasExplicitLength) {
-                        if (currentMeter.numerator * 4 < currentMeter.denominator * 3) {
-                            currentDefaultLength = NoteDuration(1, 16)
-                        } else {
-                            currentDefaultLength = NoteDuration(1, 8)
-                        }
+                        currentDefaultLength = calculateDefaultLength(currentMeter)
                     }
                 }
                 "P" -> {
@@ -516,6 +557,11 @@ private class AbcTuneBodyVisitor(val header: TuneHeader) : ABCParserBaseVisitor<
     override fun visitText_block_music(ctx: ABCParser.Text_block_musicContext) {
         val children = (0 until ctx.childCount).map { ctx.getChild(it) }
         elements.add(extractTextBlock(children))
+    }
+
+    private fun calculateDefaultLength(meter: TimeSignature): NoteDuration {
+        if (meter.isNone) return NoteDuration(1, 8)
+        return if (meter.toDouble() < 0.75) NoteDuration(1, 16) else NoteDuration(1, 8)
     }
 
     private fun buildNote(ctx: ABCParser.Note_elementContext): NoteElement {
@@ -663,12 +709,15 @@ private class AbcTuneBodyVisitor(val header: TuneHeader) : ABCParserBaseVisitor<
     private fun parseDecoration(ctx: ABCParser.Decoration_altContext): Decoration? {
         val firstChild = ctx.getChild(0)
         if (firstChild is TerminalNode) {
-            val deco = when (firstChild.symbol.type) {
+            val tokenType = firstChild.symbol.type
+            val text = firstChild.text ?: ""
+            
+            val deco = when (tokenType) {
                 ABCLexer.ROLL -> Decoration("~")
                 ABCLexer.PLUS -> Decoration("+")
                 ABCLexer.UPBOW -> Decoration("u")
                 ABCLexer.DOWNBOW -> Decoration("v")
-                ABCLexer.USER_DEF_SYMBOL -> Decoration(firstChild.text)
+                ABCLexer.USER_DEF_SYMBOL -> Decoration(text)
                 ABCLexer.STACCATO -> Decoration(".")
                 else -> null
             }
