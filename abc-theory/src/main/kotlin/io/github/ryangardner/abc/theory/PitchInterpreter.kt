@@ -75,7 +75,9 @@ internal class VoiceState(
     var activeTuplet: TupletState? = null,
     val pendingGraceNotes: MutableList<InterpretedNote> = mutableListOf(),
     var measureDuration: NoteDuration = NoteDuration(0, 1),
-    var measureCount: Int = 0
+    var measureCount: Int = 0,
+    var pendingBrokenRhythmMultiplier: Double? = null,
+    var nextBrokenRhythmMultiplier: Double? = null
 )
 
 internal class InterpretationSession(val tune: AbcTune) {
@@ -108,6 +110,25 @@ internal class InterpretationSession(val tune: AbcTune) {
 
 public object PitchInterpreter {
     private val logger: Logger = LoggerFactory.getLogger(PitchInterpreter::class.java)
+
+    /**
+     * Converts an AbcTune to a Timeline, providing a high-level view of musical events.
+     */
+    @JvmStatic
+    public fun toTimeline(tune: AbcTune): Timeline {
+        val interpreted = interpret(tune)
+        val events = mutableListOf<TimeEvent>()
+
+        interpreted.voices.forEach { (voiceId, notes) ->
+            var currentBeat = 0.0
+            notes.forEach { note ->
+                events.add(TimeEvent(currentBeat, note, voiceId))
+                currentBeat += note.semanticDuration.toDouble()
+            }
+        }
+
+        return Timeline(events.sortedBy { it.beat })
+    }
 
     private object HeaderProcessor {
         fun processGlobalHeaders(session: InterpretationSession, tune: AbcTune) {
@@ -185,14 +206,25 @@ public object PitchInterpreter {
 
         fun calculate(
             baseDuration: NoteDuration,
-            tuplet: TupletState?
+            tuplet: TupletState?,
+            session: InterpretationSession
         ): DurationResult {
-            var played = baseDuration
+            val vState = session.currentVoiceState()
+            var scaled = baseDuration
             if (tuplet != null && tuplet.remainingNotes > 0) {
-                played = played.multiply(tuplet.q, tuplet.p)
+                scaled = scaled.multiply(tuplet.q, tuplet.p)
                 tuplet.remainingNotes--
             }
-            return DurationResult(played, played) // semantic is same as played (before grace stealing)
+            
+            if (vState.pendingBrokenRhythmMultiplier != null) {
+                scaled = scaled.scale(vState.pendingBrokenRhythmMultiplier!!)
+                vState.pendingBrokenRhythmMultiplier = null
+            } else if (vState.nextBrokenRhythmMultiplier != null) {
+                scaled = scaled.scale(vState.nextBrokenRhythmMultiplier!!)
+                vState.nextBrokenRhythmMultiplier = null
+            }
+            
+            return DurationResult(scaled, scaled) // semantic is same as played (before grace stealing)
         }
 
         fun handleGraceStealing(
@@ -330,7 +362,7 @@ public object PitchInterpreter {
         HeaderProcessor.processGlobalHeaders(session, tune)
         session.getVoiceState(session.currentVoiceId)
 
-        elements.forEach { element ->
+        elements.forEachIndexed { idx, element ->
             val vState = session.currentVoiceState()
             when (element) {
                 is BodyHeaderElement -> HeaderProcessor.handleBodyHeader(session, element)
@@ -372,6 +404,8 @@ public object PitchInterpreter {
                     val midiPitch = interpretedPitch.midiNoteNumber + vState.midiTranspose
                     val hasExplicitAccidental = element.pitch.accidental != null || element.accidental != null
 
+                    checkForBrokenRhythm(elements, idx, session)
+
                     processMusicEvent(
                         session,
                         listOf(interpretedPitch),
@@ -389,6 +423,8 @@ public object PitchInterpreter {
                     val hasTieOut = element.notes.firstOrNull()?.ties?.let { it == TieType.START || it == TieType.BOTH } ?: false
                     val tieType = if (hasTieOut) TieType.START else TieType.NONE
 
+                    checkForBrokenRhythm(elements, idx, session)
+
                     processMusicEvent(
                         session,
                         interpretedPitches,
@@ -402,7 +438,8 @@ public object PitchInterpreter {
                     )
                 }
                 is RestElement -> {
-                    val timing = TimeCalculator.calculate(element.duration, vState.activeTuplet)
+                    checkForBrokenRhythm(elements, idx, session)
+                    val timing = TimeCalculator.calculate(element.duration, vState.activeTuplet, session)
                     if (vState.activeTuplet?.remainingNotes == 0) vState.activeTuplet = null
 
                     session.appendNote(InterpretedNote(
@@ -433,6 +470,55 @@ public object PitchInterpreter {
         return InterpretedTune(session.voices, session.validationErrors)
     }
 
+    private fun checkForBrokenRhythm(elements: List<MusicElement>, currentIdx: Int, session: InterpretationSession) {
+        val vState = session.currentVoiceState()
+        val current = elements[currentIdx]
+        
+        // 1. Check if the current element already has the broken rhythm property (from AbcParser)
+        val directBroken = when (current) {
+            is NoteElement -> current.brokenRhythm
+            is ChordElement -> current.brokenRhythm
+            is RestElement -> current.brokenRhythm
+            else -> null
+        }
+
+        if (directBroken != null) {
+            println("DEBUG: Found direct broken rhythm '$directBroken' at idx $currentIdx")
+            applyBrokenRhythm(directBroken, vState)
+            return
+        }
+
+        // 2. Peek ahead for broken rhythm symbols in spacers (legacy/fallback)
+        for (i in currentIdx + 1 until elements.size) {
+            val el = elements[i]
+            if (el is SpacerElement) {
+                val text = el.text.trim()
+                if (text.isNotEmpty() && (text.all { it == '>' } || text.all { it == '<' })) {
+                    println("DEBUG: Found peeked broken rhythm '$text' at idx $i")
+                    applyBrokenRhythm(text, vState)
+                    return
+                }
+                if (text.isNotEmpty()) break // Some other spacer, stop looking
+            } else if (el is NoteElement || el is RestElement || el is ChordElement) {
+                break // Found next note without seeing broken rhythm
+            }
+        }
+    }
+
+    private fun applyBrokenRhythm(text: String, vState: VoiceState) {
+        val dots = text.length
+        val m1 = if (text.startsWith(">")) {
+            (Math.pow(2.0, dots.toDouble() + 1) - 1) / Math.pow(2.0, dots.toDouble())
+        } else {
+            1.0 / Math.pow(2.0, dots.toDouble())
+        }
+        val m2 = 2.0 - m1
+        
+        println("DEBUG: Applying multipliers m1=$m1, m2=$m2")
+        vState.pendingBrokenRhythmMultiplier = m1
+        vState.nextBrokenRhythmMultiplier = m2
+    }
+
     private fun processMusicEvent(
         session: InterpretationSession,
         pitches: List<Pitch>,
@@ -445,7 +531,7 @@ public object PitchInterpreter {
         isChord: Boolean = false
     ) {
         val vState = session.currentVoiceState()
-        val timing = TimeCalculator.calculate(baseDuration, vState.activeTuplet)
+        val timing = TimeCalculator.calculate(baseDuration, vState.activeTuplet, session)
         if (vState.activeTuplet?.remainingNotes == 0) vState.activeTuplet = null
         vState.measureDuration += timing.semantic
 

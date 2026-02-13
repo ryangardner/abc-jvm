@@ -8,7 +8,7 @@ import java.util.zip.ZipInputStream
 
 public object DatasetDownloader {
     private const val BASE_URL: String = "https://zenodo.org/records/17694747/files/"
-    private const val DATASET_DIR: String = "target/abc-dataset"
+    private const val DATASET_DIR: String = "abc-dataset"
 
     @JvmStatic
     public fun main(args: Array<String>): Unit {

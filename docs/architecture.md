@@ -27,7 +27,8 @@ The library is structured as a multi-module Maven project. This modularity ensur
 | Module Name | Artifact ID | Description | Dependencies |
 | :---- | :---- | :---- | :---- |
 | **Core Model** | abc-core | Defines the immutable data classes, enums, and interfaces representing the ABC AST. Contains zero logic beyond data holding. | kotlin-stdlib |
-| **Parser Engine** | abc-parser | Contains the Lexer, Parser, and Validator. Responsible for converting raw text strings into the Core Model. Handles abcjs directive parsing. | abc-core |
+| **ANTLR Grammar** | abc-antlr-grammar | Contains the ANTLR4 lexer and parser definitions (.g4) for the ABC 2.1 standard. | None |
+| **Parser Engine** | abc-parser | Primary engine that uses the ANTLR4 grammar to convert raw text into the Core Model. | abc-core, abc-antlr-grammar |
 | **Music Theory** | abc-theory | Implements algorithmic manipulations: Transposition (chromatic/diatonic), key analysis, and duration calculations. | abc-core |
 | **Integration** | abc-interop | (Planned) Adapters for converting the Core Model to/from TuxGuitar and MusicXML formats. | abc-core, abc-theory |
 | **Test Suite** | abc-test | Contains the "Ground Truth" datasets and integration tests. | All modules, JUnit 5 |

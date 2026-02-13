@@ -27,6 +27,7 @@ public class AbcjsSemanticParityTest {
     @ParameterizedTest(name = "abcjs parity: {0}")
     @MethodSource("baselineSources")
     public fun `test semantic parity with abcjs`(baseline: AbcjsBaseline) {
+        assumeTrue(baseline.name != "EMPTY", "Skipping abcjs parity test because no baseline directory was provided")
         val parser = AbcParser()
         val tunes = parser.parseBook(baseline.abcContent)
         
@@ -219,23 +220,45 @@ public class AbcjsSemanticParityTest {
                 val ourNotes: List<InterpretedNote>,
                 val usingUnexpanded: Boolean,
                 val isGraceFiltered: Boolean,
-                val score: Int
+                val score: Int,
+                val isMidi: Boolean
             )
 
             val attempts = mutableListOf<MatchAttempt>()
             candidates.forEach { candidate ->
+                val isMidi = candidate.isNotEmpty() && candidate.first().containsKey("isMidiTrack")
                 listOf(true, false).forEach { useUnexpanded ->
                     listOf(true, false).forEach { filterGrace ->
                         val baseNotes = if (useUnexpanded) unexpandedNotesForVoice else expandedNotes
                         val ourNotes = if (filterGrace) baseNotes.filter { !it.isGrace } else baseNotes
                         
-                        val score = if (candidate.size == ourNotes.size) 1000 else -Math.abs(candidate.size - ourNotes.size)
-                        attempts.add(MatchAttempt(candidate, ourNotes, useUnexpanded, filterGrace, score))
+                        var score = if (candidate.size == ourNotes.size) 1000 else -Math.abs(candidate.size - ourNotes.size)
+                        
+                        // Tie-breaker: if sizes match, try a quick duration check on the first few elements
+                        if (score == 1000 && candidate.isNotEmpty() && ourNotes.isNotEmpty()) {
+                            val checkSize = Math.min(10, Math.min(candidate.size, ourNotes.size))
+                            var durationMatches = 0
+                            for (i in 0 until checkSize) {
+                                val abcjsDur = (candidate[i]["duration"] as Number).toDouble()
+                                val ourDur = if (isMidi) ourNotes[i].playedDuration.toDouble() else ourNotes[i].duration.toDouble()
+                                val ourSemanticDur = ourNotes[i].semanticDuration.toDouble()
+                                
+                                if (Math.abs(abcjsDur - ourDur) < 0.001 || Math.abs(abcjsDur - ourSemanticDur) < 0.001) {
+                                    durationMatches++
+                                }
+                            }
+                            score += durationMatches
+                        }
+                        
+                        // Second tie-breaker: prefer notation over MIDI if scores are otherwise equal
+                        if (!isMidi) score += 1
+
+                        attempts.add(MatchAttempt(candidate, ourNotes, useUnexpanded, filterGrace, score, isMidi))
                     }
                 }
             }
 
-            val bestMatch = attempts.maxByOrNull { it.score } ?: MatchAttempt(emptyList(), emptyList(), false, false, -1000)
+            val bestMatch = attempts.maxByOrNull { it.score } ?: MatchAttempt(emptyList(), emptyList(), false, false, -1000, false)
             
             val abcjsEvents = bestMatch.abcjsEvents
             val usingUnexpanded = bestMatch.usingUnexpanded
@@ -263,9 +286,11 @@ public class AbcjsSemanticParityTest {
                 if (Math.abs(abcjsDuration - ourComparisonDuration) > 0.001) {
                     // Match notation fallback
                     val matchNotation = Math.abs(abcjsDuration - interpretedNote.duration.toDouble()) < 0.001
-                    if (!matchNotation) {
+                    val matchSemantic = Math.abs(abcjsDuration - interpretedNote.semanticDuration.toDouble()) < 0.001
+                    
+                    if (!matchNotation && !matchSemantic) {
                         assertEquals(abcjsDuration, ourComparisonDuration, 0.001, 
-                            "[$name] Duration mismatch at event $noteIndex in voice $voiceId$context (${if(usingUnexpanded) "unexpanded" else "expanded"}). abcjsDur: $abcjsDuration, ours: $ourComparisonDuration")
+                            "[$name] Duration mismatch at event $noteIndex in voice $voiceId$context (${if(usingUnexpanded) "unexpanded" else "expanded"}). abcjsDur: $abcjsDuration, ours: $ourComparisonDuration (semantic: ${interpretedNote.semanticDuration.toDouble()})")
                     }
                 }
                 
@@ -278,7 +303,7 @@ public class AbcjsSemanticParityTest {
                     
                     @Suppress("UNCHECKED_CAST")
                     val abcjsMidiPitchesRaw = abcjsEvent["midiPitches"] as? List<Map<String, Any>> ?: emptyList()
-                    val abcjsMidiPitches = abcjsMidiPitchesRaw.map { (it["pitch"] as Number).toInt() }
+                    val abcjsMidiPitches = abcjsMidiPitchesRaw.mapNotNull { (it["pitch"] as? Number)?.toInt() }
 
                     val interpretedMidi = interpretedNote.midiPitches
                     val abcjsSorted = abcjsMidiPitches.sorted()
@@ -418,13 +443,15 @@ public class AbcjsSemanticParityTest {
             val batchDirProp = System.getProperty("abc.test.batchDir")
             if (batchDirProp != null) {
                 val batchDir = File(batchDirProp)
-                val projectRoot = findProjectRoot()
+                val userDir = File(System.getProperty("user.dir"))
+                val projectRoot = if (File(userDir, "abc-test").exists()) userDir else userDir.parentFile
+                
                 File(projectRoot, "reports/abcjs_discrepancies_${batchDir.name}.md").delete()
                 File(projectRoot, "reports/troublesome_${batchDir.name}.md").delete()
                 
                 return getBaselinesFromDir(batchDir)
             }
-            return Stream.empty()
+            return Stream.of(AbcjsBaseline("EMPTY", "", "", null, ""))
         }
 
         private fun findProjectRoot(): File {

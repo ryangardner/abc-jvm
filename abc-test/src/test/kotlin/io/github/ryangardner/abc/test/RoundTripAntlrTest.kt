@@ -1,6 +1,7 @@
 package io.github.ryangardner.abc.test
 
 import io.github.ryangardner.abc.core.model.AbcTune
+import io.github.ryangardner.abc.core.model.SpacerElement
 import io.github.ryangardner.abc.parser.AbcSerializer
 import io.github.ryangardner.abc.parser.AbcParser
 import io.github.ryangardner.abc.theory.MeasureValidator
@@ -48,6 +49,17 @@ public class RoundTripAntlrTest {
         originalTunes.forEachIndexed { tuneIndex: Int, originalTune: AbcTune ->
             val roundTrippedTune = roundTrippedTunes[tuneIndex]
             
+            assertEquals(originalTune.header.reference, roundTrippedTune.header.reference, "[${source.name}] Tune $tuneIndex Reference mismatch")
+            assertEquals(originalTune.header.title, roundTrippedTune.header.title, "[${source.name}] Tune $tuneIndex Title mismatch")
+            assertEquals(originalTune.header.key, roundTrippedTune.header.key, "[${source.name}] Tune $tuneIndex Key mismatch")
+            assertEquals(originalTune.header.meter, roundTrippedTune.header.meter, "[${source.name}] Tune $tuneIndex Meter mismatch")
+            assertEquals(originalTune.header.length, roundTrippedTune.header.length, "[${source.name}] Tune $tuneIndex Length mismatch")
+            
+            val originalBodyNormalized = originalTune.body.elements.dropLastWhile { it is SpacerElement && it.text == "\n" }
+            val roundTrippedBodyNormalized = roundTrippedTune.body.elements.dropLastWhile { it is SpacerElement && it.text == "\n" }
+            
+            assertEquals(originalBodyNormalized.size, roundTrippedBodyNormalized.size, "[${source.name}] Tune $tuneIndex Body size mismatch")
+
             // Semantic Validation
             val originalInterpreted = PitchInterpreter.interpret(originalTune)
             val roundTrippedInterpreted = PitchInterpreter.interpret(roundTrippedTune)
@@ -80,11 +92,16 @@ public class RoundTripAntlrTest {
 
         @JvmStatic
         public fun abcSources(): Stream<AbcSource> {
+            val userDir = File(System.getProperty("user.dir"))
+            val projectRoot = if (File(userDir, "abc-test").exists()) userDir else userDir.parentFile
             val home = System.getProperty("user.home")
             val downloads = File(home, "Downloads")
             
             if (!isHeavy) {
-                val dir = File("abc-test/src/test/resources/sanity-samples")
+                val dir = File(projectRoot, "abc-test/src/test/resources/sanity-samples")
+                if (!dir.exists()) {
+                    return Stream.empty()
+                }
                 return (dir.listFiles { f -> f.extension == "abc" }?.map { 
                     AbcSource(it.name, it.readText()) 
                 }?.asSequence() ?: emptySequence()).asStream()

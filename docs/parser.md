@@ -456,16 +456,16 @@ This specification provides the necessary theoretical and structural foundation 
 20. abc:standard:v2.1 \[abc wiki\] \- ABC notation, accessed February 8, 2026, [https://abcnotation.com/wiki/abc:standard:v2.1\#information\_fields](https://abcnotation.com/wiki/abc:standard:v2.1#information_fields)
 ## **10. Implementation Status (Feb 2026)**
 
-Based on this specification, an experimental ANTLR4-based parser module `abc-parser-antlr` has been implemented.
+The ANTLR4-based parser specified in this document has been fully implemented and is now the primary parsing engine for the project, residing in the `abc-parser` module and utilizing grammar from `abc-antlr-grammar`.
 
 ### **10.1 Components**
 
-1.  **Grammar Files**:
+1.  **Grammar Files** (in `abc-antlr-grammar`):
     *   `src/main/antlr4/.../ABCLexer.g4`: Implements the Modal Lexing strategy (Header vs Music modes).
     *   `src/main/antlr4/.../ABCParser.g4`: Defines the structural hierarchy (Tunebook -> Tune -> Body).
 
-2.  **Wrapper**:
-    *   `AntlrAbcParser.kt`: A Kotlin wrapper providing a simple API to parse strings into ANTLR ParseTrees.
+2.  **Wrapper** (in `abc-parser`):
+    *   `AbcParser.kt`: The main entry point that uses the ANTLR generated classes to parse strings into the Core AST.
 
 3.  **Testing**:
     *   `TortureTest.kt`: A comprehensive test that scans the `abc-test` module for all `.abc` files and attempts to parse them, reporting success rates and specific failure modes.

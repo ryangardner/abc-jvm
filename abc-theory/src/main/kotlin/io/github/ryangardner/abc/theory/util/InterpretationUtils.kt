@@ -44,12 +44,12 @@ internal object InterpretationUtils {
         return when (text) {
             "C" -> TimeSignature(4, 4, "C")
             "C|" -> TimeSignature(2, 2, "C|")
-            "none" -> TimeSignature(4, 4) // Default
+            "none" -> TimeSignature.NONE
             else -> {
                 val parts = text.split("/")
                 if (parts.size == 2) {
                     TimeSignature(parts[0].trim().toIntOrNull() ?: 4, parts[1].trim().toIntOrNull() ?: 4)
-                } else TimeSignature(4, 4)
+                } else TimeSignature.NONE
             }
         }
     }
@@ -58,16 +58,14 @@ internal object InterpretationUtils {
 internal fun addDurations(d1: NoteDuration, d2: NoteDuration): NoteDuration {
     val commonDenom = d1.denominator.toLong() * d2.denominator.toLong()
     val newNum = d1.numerator.toLong() * d2.denominator + d2.numerator.toLong() * d1.denominator
-    return NoteDuration.simplify(newNum.toInt(), commonDenom.toInt())
+    return NoteDuration.simplify(newNum, commonDenom)
 }
 
 internal fun NoteDuration.multiply(p: Int, q: Int): NoteDuration {
-    return NoteDuration.simplify(this.numerator * p, this.denominator * q)
+    return NoteDuration.simplify(this.numerator.toLong() * p, this.denominator.toLong() * q)
 }
 
 internal fun NoteDuration.multiply(multiplier: Double): NoteDuration {
-    // Fallback for non-simple multipliers
-    val newNumerator = (this.numerator * multiplier * 1000).toInt()
-    val newDenominator = this.denominator * 1000
-    return NoteDuration.simplify(newNumerator, newDenominator)
+    // Use the exact rational scaling from NoteDuration
+    return this.scale(multiplier)
 }

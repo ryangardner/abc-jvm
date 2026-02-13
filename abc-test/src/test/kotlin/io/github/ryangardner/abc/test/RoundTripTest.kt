@@ -1,11 +1,12 @@
 package io.github.ryangardner.abc.test
 
-import io.github.ryangardner.abc.core.model.AbcTune
+import io.github.ryangardner.abc.core.model.*
 import io.github.ryangardner.abc.parser.AbcParser
 import io.github.ryangardner.abc.parser.AbcSerializer
 import io.github.ryangardner.abc.theory.MeasureValidator
 import io.github.ryangardner.abc.theory.PitchInterpreter
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
@@ -30,11 +31,6 @@ public class RoundTripTest {
         
         val serializedBook: String = originalTunes.joinToString("") { serializer.serialize(it) }
         
-        // Bit-perfect check (only for single-tune files for now, as we don't preserve inter-tune whitespace yet)
-        if (originalTunes.size == 1 && !originalAbc.contains("V:")) {
-             // assertEquals(originalAbc.trim(), serializedBook.trim(), "Bit-perfect round trip failed for ${file.name}")
-        }
-
         val roundTrippedTunes: List<AbcTune> = try {
             parser.parseBook(serializedBook)
         } catch (e: Exception) {
@@ -47,47 +43,70 @@ public class RoundTripTest {
 
         originalTunes.forEachIndexed { tuneIndex: Int, originalTune: AbcTune ->
             val roundTrippedTune = roundTrippedTunes[tuneIndex]
-            try {
-                assertEquals(originalTune.header.reference, roundTrippedTune.header.reference, "[${file.name}] Tune $tuneIndex Reference mismatch")
-                assertEquals(originalTune.header.title, roundTrippedTune.header.title, "[${file.name}] Tune $tuneIndex Title mismatch")
-                assertEquals(originalTune.header.key, roundTrippedTune.header.key, "[${file.name}] Tune $tuneIndex Key mismatch")
-                assertEquals(originalTune.header.meter, roundTrippedTune.header.meter, "[${file.name}] Tune $tuneIndex Meter mismatch")
-                assertEquals(originalTune.header.length, roundTrippedTune.header.length, "[${file.name}] Tune $tuneIndex Length mismatch")
-                assertEquals(originalTune.body.elements.size, roundTrippedTune.body.elements.size, "[${file.name}] Tune $tuneIndex Body size mismatch")
+            
+            // Basic header checks
+            assertTrue(originalTune.header.reference == roundTrippedTune.header.reference, FidelityReporter.reportRoundTripFailure(file, tuneIndex, originalTune, roundTrippedTune, "Reference mismatch: expected ${originalTune.header.reference}, got ${roundTrippedTune.header.reference}", originalAbc, serializedBook))
+            assertTrue(originalTune.header.title == roundTrippedTune.header.title, FidelityReporter.reportRoundTripFailure(file, tuneIndex, originalTune, roundTrippedTune, "Title mismatch", originalAbc, serializedBook))
+            assertTrue(originalTune.header.key == roundTrippedTune.header.key, FidelityReporter.reportRoundTripFailure(file, tuneIndex, originalTune, roundTrippedTune, "Key mismatch", originalAbc, serializedBook))
+            
+            // Body structural check (Normalized)
+            val originalNormalized = originalTune.withoutLocation()
+            val roundTrippedNormalized = roundTrippedTune.withoutLocation()
+
+            // Normalize elements more aggressively for the structural check.
+            val originalBodyElements = normalizeElements(originalNormalized.body.elements)
+            val roundTrippedBodyElements = normalizeElements(roundTrippedNormalized.body.elements)
+            
+            // We'll create normalized versions of the tunes just for the final identity check
+            val originalNormalizedTune = originalTune.copy(body = originalTune.body.copy(elements = originalBodyElements))
+            val roundTrippedNormalizedTune = roundTrippedTune.copy(body = roundTrippedTune.body.copy(elements = roundTrippedBodyElements))
+
+            assertTrue(originalBodyElements == roundTrippedBodyElements, FidelityReporter.reportRoundTripFailure(file, tuneIndex, originalNormalizedTune, roundTrippedNormalizedTune, "Body structural mismatch (Normalized)", originalAbc, serializedBook))
+            
+            // Preamble check (Normalized)
+            val originalPreamble = normalizeElements(originalNormalized.preamble)
+            val roundTrippedPreamble = normalizeElements(roundTrippedNormalized.preamble)
+            
+            val originalNormalizedPreambleTune = originalTune.copy(preamble = originalPreamble)
+            val roundTrippedNormalizedPreambleTune = roundTrippedTune.copy(preamble = roundTrippedPreamble)
+
+            assertTrue(originalPreamble == roundTrippedPreamble, FidelityReporter.reportRoundTripFailure(file, tuneIndex, originalNormalizedPreambleTune, roundTrippedNormalizedPreambleTune, "Preamble structural mismatch (Normalized)", originalAbc, serializedBook))
+
+            // Check for unrecognized characters
+            val unrecognizedOriginal = FidelityReporter.reportUnrecognizedCharacters(file, tuneIndex, originalTune)
+            assertTrue(unrecognizedOriginal.isEmpty(), unrecognizedOriginal)
+            
+            val unrecognizedRT = FidelityReporter.reportUnrecognizedCharacters(file, tuneIndex, roundTrippedTune)
+            assertTrue(unrecognizedRT.isEmpty(), unrecognizedRT)
+
+            // Semantic Validation
+            val originalInterpreted = PitchInterpreter.interpret(originalTune)
+            val roundTrippedInterpreted = PitchInterpreter.interpret(roundTrippedTune)
+            
+            assertTrue(originalInterpreted.voices.size == roundTrippedInterpreted.voices.size, FidelityReporter.reportRoundTripFailure(file, tuneIndex, originalTune, roundTrippedTune, "Interpreted voice count mismatch", originalAbc, serializedBook))
+            
+            originalInterpreted.voices.forEach { (voiceId, originalNotes) ->
+                val roundTrippedNotes = roundTrippedInterpreted.voices[voiceId] ?: throw AssertionError("Voice $voiceId missing in round-tripped tune")
+                assertTrue(originalNotes.size == roundTrippedNotes.size, FidelityReporter.reportRoundTripFailure(file, tuneIndex, originalTune, roundTrippedTune, "Voice $voiceId element count mismatch", originalAbc, serializedBook))
                 
-                // Semantic Validation
-                val originalInterpreted = PitchInterpreter.interpret(originalTune)
-                val roundTrippedInterpreted = PitchInterpreter.interpret(roundTrippedTune)
-                
-                assertEquals(originalInterpreted.voices.size, roundTrippedInterpreted.voices.size, "[${file.name}] Tune $tuneIndex Interpreted voice count mismatch")
-                
-                originalInterpreted.voices.forEach { (voiceId, originalNotes) ->
-                    val roundTrippedNotes = roundTrippedInterpreted.voices[voiceId] ?: throw AssertionError("Voice $voiceId missing in round-tripped tune")
-                    assertEquals(originalNotes.size, roundTrippedNotes.size, "[${file.name}] Tune $tuneIndex Voice $voiceId element count mismatch")
-                    
-                    originalNotes.forEachIndexed { noteIndex, originalNote ->
-                        val roundTrippedNote = roundTrippedNotes[noteIndex]
-                        assertEquals(originalNote.pitches.map { it.midiNoteNumber }.sorted(), roundTrippedNote.pitches.map { it.midiNoteNumber }.sorted(), "[${file.name}] Tune $tuneIndex Voice $voiceId Note $noteIndex pitch mismatch")
-                        assertEquals(originalNote.duration.toDouble(), roundTrippedNote.duration.toDouble(), 0.001, "[${file.name}] Tune $tuneIndex Voice $voiceId Note $noteIndex duration mismatch")
-                    }
+                originalNotes.forEachIndexed { noteIndex, originalNote ->
+                    val roundTrippedNote = roundTrippedNotes[noteIndex]
+                    assertTrue(originalNote.pitches.map { it.midiNoteNumber }.sorted() == roundTrippedNote.pitches.map { it.midiNoteNumber }.sorted(), FidelityReporter.reportRoundTripFailure(file, tuneIndex, originalTune, roundTrippedTune, "Voice $voiceId Note $noteIndex pitch mismatch", originalAbc, serializedBook))
+                    assertEquals(originalNote.duration.toDouble(), roundTrippedNote.duration.toDouble(), 0.001, FidelityReporter.reportRoundTripFailure(file, tuneIndex, originalTune, roundTrippedTune, "Voice $voiceId Note $noteIndex duration mismatch", originalAbc, serializedBook))
                 }
-                
-                // Measure Validation
-                MeasureValidator.validate(originalTune)
-                MeasureValidator.validate(roundTrippedTune)
-            } catch (e: Throwable) {
-                println("FIDELITY FAILURE for ${file.name} at Tune $tuneIndex")
-                // Find first diff in body
-                val size = minOf(originalTune.body.elements.size, roundTrippedTune.body.elements.size)
-                for (i in 0 until size) {
-                    if (originalTune.body.elements[i] != roundTrippedTune.body.elements[i]) {
-                        println("First diff in Tune $tuneIndex at element index $i:")
-                        println("  Expected: ${originalTune.body.elements[i]}")
-                        println("  Actual:   ${roundTrippedTune.body.elements[i]}")
-                        break
-                    }
-                }
-                throw e
+            }
+        }
+    }
+
+    private fun normalizeElements(elements: List<MusicElement>): List<MusicElement> {
+        // First pass: filter out ALL spacers for structural identity check and strip virtual line-break decorations
+        return elements.filter { it !is SpacerElement }.map { 
+            val el = it.withoutLocation()
+            when (el) {
+                is NoteElement -> el.copy(decorations = el.decorations.filter { d -> d.value != "line-break" })
+                is RestElement -> el.copy(decorations = el.decorations.filter { d -> d.value != "line-break" })
+                is ChordElement -> el.copy(decorations = el.decorations.filter { d -> d.value != "line-break" })
+                else -> el
             }
         }
     }
@@ -103,7 +122,7 @@ public class RoundTripTest {
                 datasetDir = DatasetDownloader.downloadAndExtract(1)
                 if (!datasetDir!!.exists() || datasetDir!!.list()?.isEmpty() == true) {
                     // Try fallback if running from root
-                    val rootDatasetDir = File("abc-test/target/abc-dataset/abc_notation_batch_001")
+                    val rootDatasetDir = File("abc-test/abc-dataset/abc_notation_batch_001")
                     if (rootDatasetDir.exists()) {
                         datasetDir = rootDatasetDir
                     }

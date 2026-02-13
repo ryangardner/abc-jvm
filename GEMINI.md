@@ -8,12 +8,12 @@ A JVM-native library for symbolic music processing, specifically focused on ABC 
 - **Technologies:** Kotlin 1.9.22, Java 8 compatibility, Maven, ANTLR4.
 - **Architecture:** Multi-module Maven project.
     - `abc-core`: Immutable Abstract Syntax Tree (AST) data models.
-    - `abc-parser`: Primary parser engine for ABC notation.
+    - `abc-antlr-grammar`: ANTLR4 grammar definitions for the ABC 2.1 standard.
+    - `abc-parser`: Primary parser engine, implemented using the ANTLR4 grammar.
     - `abc-theory`: Music theory algorithms (transposition, key analysis, durations).
-    - `abc-interop`: Placeholder for future integration layers (MusicXML, TuxGuitar).
+    - `abc-interop`: Integration layer for MusicXML and TuxGuitar.
     - `abc-parser-antlr`: Experimental ANTLR4-based parser for the ABC 2.1 standard.
     - `abc-test`: Integration tests, regression suites, and ground truth datasets.
-    - `abc-parser-v2` & `abc-theory`: Evolving implementations of the parser and theory logic.
 
 ## Building and Running
 

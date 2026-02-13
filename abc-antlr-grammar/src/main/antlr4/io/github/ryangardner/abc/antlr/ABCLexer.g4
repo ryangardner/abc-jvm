@@ -18,16 +18,16 @@ X_REF_START : 'X:' -> pushMode(HEADER_MODE), pushMode(FIELD_VALUE_MODE);
 // Comments/Stylesheets valid between tunes
 TEXT_BLOCK_START : '%%begintext' -> pushMode(TEXT_BLOCK_MODE) ;
 DEFAULT_STYLESHEET_DIRECTIVE : '%%' ~[\r\n]* ([\r\n]+ | EOF) -> type(STYLESHEET) ;
-DEFAULT_COMMENT : '%' ~[\r\n]* -> skip ;
+DEFAULT_COMMENT : '%' ~[\r\n]* ;
 
 // Skip whitespace between tunes
-WS_DEFAULT : [ \t\r\n]+ -> skip ;
+WS_DEFAULT : [ \t\r\n]+ ;
 
 // Free text check - more permissive
-FREE_TEXT : ~[X%]+ -> skip ;
+FREE_TEXT : ~[X%]+ ;
 
-// Catch-all for anything else in default mode to avoid errors
-ANY_DEFAULT : . -> skip ;
+// Catch-all for anything else in default mode to track unrecognized characters
+UNRECOGNIZED : . ;
 
 // ============================================================================
 // HEADER MODE (Inside Tune Header)
@@ -106,9 +106,6 @@ mode MUSIC_MODE;
     // (We use a predicate to check column position)
     X_REF_RESTART : { getCharPositionInLine() == 0 }? 'X:' -> type(X_REF_START), popMode, pushMode(HEADER_MODE), pushMode(FIELD_VALUE_MODE);
 
-    // End of Tune via blank line
-    TUNE_BODY_END : ([\r\n] [ \t]* [\r\n]+) -> type(EOL_MUSIC), popMode ; 
-
     // Fields inside Music (e.g. V:1, K:D, M:4/4 changed mid-tune)
     // Only at start of line
     MUSIC_KEY : { getCharPositionInLine() == 0 }? 'K:' -> type(KEY_FIELD), pushMode(KEY_VALUE_MODE);
@@ -149,6 +146,7 @@ mode MUSIC_MODE;
     SLUR_START   : '(' ;
     SLUR_END     : ')' ;
     
+    // Note/Rest followed by length
     NOTE_PITCH : [A-Ga-g] ;
     REST : [zZxX] ;
     SPACER : 'y' ;
@@ -212,15 +210,13 @@ mode CHORD_MODE;
 
 mode BANG_DECO_MODE;
     DECORATION_END : '!' -> popMode ;
-    BANG_DECO_CONTENT : (~[\r\n! ])+ ;
-    BANG_DECO_SPACE : [ \t]+ -> type(SPACE) ;
-    BANG_DECO_NEWLINE : [\r\n]+ -> type(NEWLINE), popMode ;
+    BANG_DECO_CONTENT : (~[\r\n!])+ ;
+    BANG_DECO_NEWLINE : [\r\n] -> type(NEWLINE), popMode ;
 
 mode PLUS_DECO_MODE;
     PLUS_DECORATION_END : '+' -> popMode ;
-    PLUS_DECO_CONTENT : (~[\r\n+ ])+ ;
-    PLUS_DECO_SPACE : [ \t]+ -> type(SPACE) ;
-    PLUS_DECO_NEWLINE : [\r\n]+ -> type(NEWLINE), popMode ;
+    PLUS_DECO_CONTENT : (~[\r\n+])+ ;
+    PLUS_DECO_NEWLINE : [\r\n] -> type(NEWLINE), popMode ;
 
 // ============================================================================
 // SYMBOL LINE MODE (Reading content of s:)
@@ -230,6 +226,7 @@ mode SYMBOL_LINE_MODE;
     // Symbol Tokens
     SYMBOL_CHORD : '"' ~'"'* '"' ;
     SYMBOL_DECO : '!' ~'!'* '!' ;
+    SYMBOL_DECO_PLUS : '+' ~'+'* '+' ;
     SYMBOL_SKIP : '*' ;
     
     // Separators
@@ -243,8 +240,9 @@ mode SYMBOL_LINE_MODE;
     
     // Catch deviations (or should we allow generic text?)
     // Spec says "symbol line contains only !...! ... "..." ... *
-    // But practically, maybe we should skip garbage?
-    SYMBOL_GARBAGE : . -> skip ;
+    // Let's allow generic text if it doesn't match above.
+    SYMBOL_TEXT : ~[\r\n \t"|!+*]+ ;
+    UNRECOGNIZED_SYMBOL : . ;
 
 // ============================================================================
 // TEXT BLOCK MODE (%%begintext ... %%endtext)

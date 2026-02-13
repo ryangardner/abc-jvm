@@ -19,7 +19,7 @@ Use the `DatasetDownloader` utility to fetch specific batches of 1,000 tunes eac
 # In the abc-test directory
 mvn exec:java -Dexec.mainClass="io.github.ryangardner.abc.test.DatasetDownloader" -Dexec.args="1 2 3"
 ```
-This will extract files to `target/abc-dataset/abc_notation_batch_XXX/`.
+This will extract files to `abc-dataset/abc_notation_batch_XXX/`.
 
 ## 3. Generating Baselines
 
@@ -30,17 +30,17 @@ Uses `abcjs` to capture the MIDI sequence and notation structure.
 ```bash
 # In the project root
 export PATH=$PATH:/opt/homebrew/bin
-node tools/abcjs-exporter/export-batch.js target/abc-dataset/abc_notation_batch_001
+node tools/abcjs-exporter/export-batch.js abc-dataset/abc_notation_batch_001
 ```
 
 ### music21 Baselines
 Uses the `music21` Python library for a "second opinion" on pitch and duration expansion.
 ```bash
 # In the project root
-mkdir -p target/abc-dataset/abc_notation_batch_001/music21_json
+mkdir -p abc-dataset/abc_notation_batch_001/music21_json
 python3 tools/music21-exporter/m21_validator.py \
-  target/abc-dataset/abc_notation_batch_001/abc_files \
-  target/abc-dataset/abc_notation_batch_001/music21_json
+  abc-dataset/abc_notation_batch_001/abc_files \
+  abc-dataset/abc_notation_batch_001/music21_json
 ```
 
 ## 4. Running Regression Tests
@@ -50,14 +50,14 @@ Run the `AbcjsSemanticParityTest` to compare the JVM parser output against the b
 ```bash
 # Run a specific batch
 mvn test -pl abc-test -Dtest=AbcjsSemanticParityTest \
-  -Dabc.test.batchDir="target/abc-dataset/abc_notation_batch_001"
+  -Dabc.test.batchDir="abc-dataset/abc_notation_batch_001"
 ```
 
 ### Filtering Tests
 You can filter to a specific tune for debugging:
 ```bash
 mvn test -pl abc-test -Dtest=AbcjsSemanticParityTest \
-  -Dabc.test.batchDir="target/abc-dataset/abc_notation_batch_001" \
+  -Dabc.test.batchDir="abc-dataset/abc_notation_batch_001" \
   -Dabc.test.filter=tune_000004
 ```
 
@@ -67,7 +67,7 @@ The test suite automatically uses `music21_json` baselines as a fallback when `a
 To manually inspect a single file:
 ```bash
 python3 tools/music21-exporter/m21_validator.py \
-  target/abc-dataset/abc_notation_batch_001/abc_files/tune_000004.abc
+  abc-dataset/abc_notation_batch_001/abc_files/tune_000004.abc
 ```
 
 ## 6. Interpreting Results
@@ -78,4 +78,4 @@ Due to structural expansion (Repeats, Variants, Parts), the note count in our pa
 - **Structural agreement**: Verified when our count matches `music21`'s expanded count, even if it differs from `abcjs`.
 
 ### Known Divergences
-Refer to `semantic_divergence_report.md` in the artifacts directory for documented edge cases where we intentionally diverge from `abcjs` or where further work is needed.
+Refer to `docs/semantic-divergences.md` for documented edge cases where we intentionally diverge from `abcjs` or where further work is needed.

@@ -13,4 +13,12 @@ public data class TimeSignature @JvmOverloads constructor(
     public val symbol: String? = null
 ) {
     public fun toDouble(): Double = numerator.toDouble() / denominator.toDouble()
+
+    public fun toNoteDuration(): NoteDuration = NoteDuration(numerator, denominator)
+
+    public val isNone: Boolean get() = numerator == 0
+
+    public companion object {
+        public val NONE: TimeSignature = TimeSignature(0, 1, "none")
+    }
 }

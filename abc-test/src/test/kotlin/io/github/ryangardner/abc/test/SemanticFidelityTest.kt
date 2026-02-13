@@ -61,19 +61,9 @@ public class SemanticFidelityTest {
         }
 
         tunes.forEachIndexed { tuneIndex, tune ->
-            val errors = MeasureValidator.validate(tune)
-            // Some tunes might have pickup measures or intentionally weird bars, 
-            // but if more than half the measures are wrong, something is likely semantically broken in our parser.
-            // For now, let's just log them and see what happens.
-            if (errors.isNotEmpty()) {
-                println("Semantic warnings for ${file.name} (Tune $tuneIndex): ${errors.size} measures with duration mismatch.")
-                errors.take(3).forEach { error ->
-                    println("  Measure ${error.measureIndex}: Got ${error.actualDuration}, expected ${error.expectedDuration}")
-                }
-            }
-            
-            // To make the test fail if we are totally wrong:
-            // assertTrue(errors.size < 5, "Too many duration errors in ${file.name}")
+            // In semantic fidelity test, we use non-strict mode because ABC allows partial measures.
+            val errors = MeasureValidator.validate(tune, strict = false)
+            assertTrue(errors.isEmpty(), FidelityReporter.reportMeasureErrors(file, tuneIndex, errors, originalAbc))
         }
     }
 }

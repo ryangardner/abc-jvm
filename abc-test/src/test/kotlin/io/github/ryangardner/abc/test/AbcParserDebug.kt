@@ -7,7 +7,7 @@ import java.io.File
 class AbcParserDebug {
     @Test
     fun debug011215() {
-        val abcFile = File("../target/abc-dataset/abc_notation_batch_007/abc_files/tune_011215.abc")
+        val abcFile = File("../abc-dataset/abc_notation_batch_007/abc_files/tune_011215.abc")
         if (!abcFile.exists()) {
             println("File not found: ${abcFile.absolutePath}")
             return
