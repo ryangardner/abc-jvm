@@ -15,7 +15,7 @@ public data class NoteElement @JvmOverloads constructor(
     public val ties: TieType = TieType.NONE,
     public val decorations: List<Decoration> = emptyList(),
     public val accidental: Accidental? = null,
-    public val annotation: String? = null,
+    public val annotations: List<String> = emptyList(),
     override val brokenRhythm: String? = null,
     override val line: Int = -1,
     override val column: Int = -1
@@ -27,7 +27,7 @@ public data class NoteElement @JvmOverloads constructor(
 public data class ChordElement @JvmOverloads constructor(
     public val notes: List<NoteElement>,
     override val duration: NoteDuration,
-    public val annotation: String? = null,
+    public val annotations: List<String> = emptyList(),
     public val decorations: List<Decoration> = emptyList(),
     override val brokenRhythm: String? = null,
     override val line: Int = -1,
@@ -60,7 +60,7 @@ public data class RestElement @JvmOverloads constructor(
     override val duration: NoteDuration,
     public val isInvisible: Boolean = false, // x or X
     public val decorations: List<Decoration> = emptyList(),
-    public val annotation: String? = null,
+    public val annotations: List<String> = emptyList(),
     override val brokenRhythm: String? = null,
     override val line: Int = -1,
     override val column: Int = -1

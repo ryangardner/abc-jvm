@@ -21,7 +21,7 @@ class MetadataPreservationTest {
         val interpreted = PitchInterpreter.interpret(tune)
         
         val note = interpreted.voices["1"]!![0]
-        assertEquals("Am", note.annotation, "Annotation 'Am' should be preserved on the note")
+        assertEquals("Am", note.annotations.first(), "Annotation 'Am' should be preserved on the note")
     }
 
     @Test
@@ -38,7 +38,7 @@ class MetadataPreservationTest {
         
         val rest = interpreted.voices["1"]!![0]
         assertTrue(rest.isRest)
-        assertEquals("G7", rest.annotation, "Annotation 'G7' should be preserved on the rest")
+        assertEquals("G7", rest.annotations.first(), "Annotation 'G7' should be preserved on the rest")
     }
 
     @Test
@@ -75,6 +75,6 @@ class MetadataPreservationTest {
         val interpreted = PitchInterpreter.interpret(tune)
         
         val chord = interpreted.voices["1"]!![0]
-        assertEquals("Dm7", chord.annotation, "Annotation 'Dm7' should be preserved on the chord")
+        assertEquals("Dm7", chord.annotations.first(), "Annotation 'Dm7' should be preserved on the chord")
     }
 }

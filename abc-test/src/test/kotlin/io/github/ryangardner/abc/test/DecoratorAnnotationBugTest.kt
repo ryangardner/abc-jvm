@@ -34,7 +34,7 @@ class DecoratorAnnotationBugTest {
             "Chord should have !slide! decoration, but has: ${chord.decorations}")
         
         // Check that the annotation is present
-        assertEquals("6:3", chord.annotation, 
+        assertEquals("6:3", chord.annotations.first(), 
             "Chord should have annotation '6:3'")
     }
     
@@ -65,7 +65,7 @@ class DecoratorAnnotationBugTest {
         val tune = parser.parse(abc)
         val chord = tune.body.elements.filterIsInstance<ChordElement>().firstOrNull()
         assertNotNull(chord)
-        assertEquals("6:3", chord.annotation)
+        assertEquals("6:3", chord.annotations.first())
     }
     
     @Test
@@ -81,6 +81,6 @@ class DecoratorAnnotationBugTest {
         val note = tune.body.elements.filterIsInstance<NoteElement>().firstOrNull()
         assertNotNull(note)
         assertTrue(note.decorations.any { it.value == "slide" })
-        assertEquals("6:3", note.annotation)
+        assertEquals("6:3", note.annotations.first())
     }
 }

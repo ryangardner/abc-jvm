@@ -51,9 +51,9 @@ public data class InterpretedNote(
      */
     public val isTieContinued: Boolean = false,
     /**
-     * An optional annotation (e.g., a chord symbol like "Am") attached to the note.
+     * A list of optional annotations (e.g., chord symbols like "Am") attached to the note.
      */
-    public val annotation: String? = null,
+    public val annotations: List<String> = emptyList(),
     /**
      * A list of musical decorations or articulations (e.g., staccato, roll) attached to the note.
      */
@@ -413,7 +413,7 @@ public object PitchInterpreter {
                         element.length,
                         element.ties,
                         hasExplicitAccidental,
-                        element.annotation,
+                        element.annotations,
                         element.decorations
                     )
                 }
@@ -432,7 +432,7 @@ public object PitchInterpreter {
                         element.duration,
                         tieType,
                         false, // Chords don't use fuzzy accidental matching in current logic
-                        element.annotation,
+                        element.annotations,
                         element.decorations,
                         isChord = true
                     )
@@ -449,7 +449,7 @@ public object PitchInterpreter {
                         semanticDuration = timing.semantic,
                         playedDuration = timing.played,
                         isRest = true,
-                        annotation = element.annotation,
+                        annotations = element.annotations,
                         decorations = element.decorations
                     ))
                 }
@@ -526,7 +526,7 @@ public object PitchInterpreter {
         baseDuration: NoteDuration,
         tieType: TieType,
         hasExplicitAccidental: Boolean,
-        annotation: String?,
+        annotations: List<String>,
         decorations: List<Decoration>,
         isChord: Boolean = false
     ) {
@@ -570,7 +570,7 @@ public object PitchInterpreter {
                 duration = baseDuration,
                 semanticDuration = timing.semantic,
                 playedDuration = playedDuration,
-                annotation = annotation,
+                annotations = annotations,
                 decorations = decorations
             ))
             if (tieType == TieType.START || tieType == TieType.BOTH) {

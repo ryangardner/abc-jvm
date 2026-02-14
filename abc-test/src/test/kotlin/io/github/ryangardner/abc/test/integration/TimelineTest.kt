@@ -53,7 +53,7 @@ class TimelineTest {
         // Beat 0 has "Am"C which is a chordal event due to annotation
         val chordsAt0 = timeline.getChordsAt(0.0)
         assertEquals(1, chordsAt0.size)
-        assertEquals("Am", chordsAt0[0].note.annotation)
+        assertEquals("Am", chordsAt0[0].note.annotations.first())
 
         // Beat 0.25 has [CEG] which is a chordal event due to multiple pitches
         val chordsAt1 = timeline.getChordsAt(0.25)

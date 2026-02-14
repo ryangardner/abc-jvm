@@ -21,11 +21,11 @@ class AnnotationTest {
 
         // "Am"C
         val note1 = elements.filterIsInstance<NoteElement>()[0]
-        assertEquals("Am", note1.annotation)
+        assertEquals("Am", note1.annotations.first())
 
         // "G"D
         val note2 = elements.filterIsInstance<NoteElement>()[1]
-        assertEquals("G", note2.annotation)
+        assertEquals("G", note2.annotations.first())
         
         // [CEG]2
         // Wait, the chord should also have its annotation if it had one.
@@ -45,6 +45,6 @@ class AnnotationTest {
         val elements = tune.body.elements
 
         val chord = elements.filterIsInstance<ChordElement>()[0]
-        assertEquals("F", chord.annotation)
+        assertEquals("F", chord.annotations.first())
     }
 }

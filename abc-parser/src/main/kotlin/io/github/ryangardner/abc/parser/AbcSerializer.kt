@@ -136,8 +136,8 @@ public class AbcSerializer {
                 }
             }
         }
-        if (note.annotation != null) {
-            append("\"${note.annotation}\"")
+        note.annotations.forEach { annotation ->
+            append("\"$annotation\"")
         }
         append(serializePitch(note.pitch))
         append(serializeDuration(note.length))
@@ -205,8 +205,8 @@ public class AbcSerializer {
                 }
             }
         }
-        if (chord.annotation != null) {
-            append("\"${chord.annotation}\"")
+        chord.annotations.forEach { annotation ->
+            append("\"$annotation\"")
         }
         append("[")
         chord.notes.forEach { append(serializeNote(it)) }
@@ -238,8 +238,8 @@ public class AbcSerializer {
                 }
             }
         }
-        if (rest.annotation != null) {
-            append("\"${rest.annotation}\"")
+        rest.annotations.forEach { annotation ->
+            append("\"$annotation\"")
         }
         append(if (rest.isInvisible) "x" else "z")
         append(serializeDuration(rest.duration))

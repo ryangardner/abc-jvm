@@ -129,9 +129,9 @@ public class BodyBuilder {
      * @param annotation An optional chord symbol annotation (e.g., "Am7").
      * @param block The builder block for the chord's notes.
      */
-    public fun chord(annotation: String? = null, block: ChordBuilder.() -> Unit): Unit {
+    public fun chord(vararg annotations: String, block: ChordBuilder.() -> Unit): Unit {
         val builder = ChordBuilder().apply(block)
-        elements.add(ChordElement(builder.notes, NoteDuration(1, 1), annotation))
+        elements.add(ChordElement(builder.notes, NoteDuration(1, 1), annotations.toList()))
     }
 }
 

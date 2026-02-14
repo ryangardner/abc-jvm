@@ -48,7 +48,7 @@ class AbcDSLTest {
         assertEquals(BarLineType.SINGLE, bar.type)
 
         val chord = elements[2] as ChordElement
-        assertEquals("F", chord.annotation)
+        assertEquals("F", chord.annotations.first())
         assertEquals(3, chord.notes.size)
     }
 }

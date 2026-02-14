@@ -47,7 +47,7 @@ public class Timeline(
      * @return A list of harmonic [TimeEvent]s.
      */
     public fun getChordsAt(beat: Double): List<TimeEvent> {
-        return events.filter { it.beat == beat && (it.note.annotation != null || it.note.pitches.size > 1) }
+        return events.filter { it.beat == beat && (it.note.annotations.isNotEmpty() || it.note.pitches.size > 1) }
     }
 
     /**
