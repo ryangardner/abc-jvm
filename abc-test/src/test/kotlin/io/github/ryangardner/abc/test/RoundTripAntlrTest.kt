@@ -26,22 +26,11 @@ public class RoundTripAntlrTest {
         val serializer = AbcSerializer()
 
         val originalAbc = source.content
-        val originalTunes: List<AbcTune> = try {
-            parser.parseBook(originalAbc)
-        } catch (e: Exception) {
-            println("ANTLR PARSE FAILED for ${source.name}: ${e.message}")
-            throw e // Fail the test
-        }
+        val originalTunes: List<AbcTune> = parser.parseBook(originalAbc)
         
         val serializedBook: String = originalTunes.joinToString("") { serializer.serialize(it) }
         
-        val roundTrippedTunes: List<AbcTune> = try {
-            parser.parseBook(serializedBook)
-        } catch (e: Exception) {
-            println("FAILED TO RE-PARSE SERIALIZED BOOK (ANTLR) for ${source.name}: ${e.message}")
-            println("SERIALIZED CONTENT:\n$serializedBook")
-            throw e
-        }
+        val roundTrippedTunes: List<AbcTune> = parser.parseBook(serializedBook)
         
         assertEquals(originalTunes.size, roundTrippedTunes.size, "[${source.name}] Tune count mismatch")
 
@@ -62,17 +51,6 @@ public class RoundTripAntlrTest {
             
             assertEquals(originalBodyNormalized.size, roundTrippedBodyNormalized.size, "[${source.name}] Tune $tuneIndex Body size mismatch")
 
-            // Detailed element-by-element comparison if size mismatch
-            if (originalBodyNormalized.size != roundTrippedBodyNormalized.size) {
-                originalBodyNormalized.zip(roundTrippedBodyNormalized).forEachIndexed { i, pair ->
-                    val orig = pair.first
-                    val round = pair.second
-                    if (orig != round) {
-                        println("DEBUG: Mismatch at index $i: expected $orig but was $round")
-                    }
-                }
-            }
-
             // Semantic Validation
             val originalInterpreted = PitchInterpreter.interpret(originalTune)
             val roundTrippedInterpreted = PitchInterpreter.interpret(roundTrippedTune)
@@ -91,12 +69,8 @@ public class RoundTripAntlrTest {
             }
             
             // Measure Validation
-            try {
-                MeasureValidator.validate(originalTune)
-                MeasureValidator.validate(roundTrippedTune)
-            } catch (e: Exception) {
-                // println("Measure validation failed for ${source.name}: ${e.message}")
-            }
+            MeasureValidator.validate(originalTune)
+            MeasureValidator.validate(roundTrippedTune)
         }
     }
 
