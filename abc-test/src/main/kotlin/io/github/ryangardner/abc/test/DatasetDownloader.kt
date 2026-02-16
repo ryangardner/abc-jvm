@@ -3,6 +3,7 @@ package io.github.ryangardner.abc.test
 import java.io.BufferedInputStream
 import java.io.File
 import java.io.FileOutputStream
+import java.io.IOException
 import java.net.URL
 import java.util.zip.ZipInputStream
 
@@ -19,6 +20,30 @@ public object DatasetDownloader {
             args.forEach { arg ->
                 arg.toIntOrNull()?.let { downloadAndExtract(it) }
             }
+        }
+    }
+
+    internal fun extract(zis: ZipInputStream, outputDir: File) {
+        val canonicalOutputDir = outputDir.canonicalPath
+        var entry = zis.nextEntry
+        while (entry != null) {
+            val newFile = File(outputDir, entry.name)
+            val canonicalDestinationPath = newFile.canonicalPath
+
+            if (!canonicalDestinationPath.startsWith(canonicalOutputDir + File.separator)) {
+                throw IOException("Entry is outside of the target dir: ${entry.name}")
+            }
+
+            if (entry.isDirectory) {
+                newFile.mkdirs()
+            } else {
+                newFile.parentFile.mkdirs()
+                FileOutputStream(newFile).use { fos ->
+                    zis.copyTo(fos)
+                }
+            }
+            zis.closeEntry()
+            entry = zis.nextEntry
         }
     }
 
@@ -40,20 +65,7 @@ public object DatasetDownloader {
         connection.connect()
         
         ZipInputStream(BufferedInputStream(connection.getInputStream())).use { zis ->
-            var entry = zis.nextEntry
-            while (entry != null) {
-                val newFile = File(outputDir, entry.name)
-                if (entry.isDirectory) {
-                    newFile.mkdirs()
-                } else {
-                    newFile.parentFile.mkdirs()
-                    FileOutputStream(newFile).use { fos ->
-                        zis.copyTo(fos)
-                    }
-                }
-                zis.closeEntry()
-                entry = zis.nextEntry
-            }
+            extract(zis, outputDir)
         }
         println("Extracted to ${outputDir.absolutePath}")
         return outputDir
