@@ -18,12 +18,14 @@ public object KeyParserUtil {
         "treble", "bass", "alto", "tenor", "perc", "none", "mezzosoprano", "soprano", "baritone", "subbass"
     )
 
+    private val WHITESPACE_REGEX = "\\s+".toRegex()
+
     public fun parse(keyText: String): KeySignature {
         val trimmed = keyText.substringBefore("%").trim()
         if (trimmed.isEmpty()) {
             return KeySignature(KeyRoot(NoteStep.C, Accidental.NATURAL), KeyMode.IONIAN)
         }
-        val parts = trimmed.split("\\s+".toRegex())
+        val parts = trimmed.split(WHITESPACE_REGEX)
         var firstWord = parts[0]
         
         // If the first word is a known clef name, the key is implicitly C Major

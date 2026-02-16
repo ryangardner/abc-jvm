@@ -3,6 +3,9 @@ package io.github.ryangardner.abc.theory.util
 import io.github.ryangardner.abc.core.model.*
 
 internal object InterpretationUtils {
+    private val TRANSPOSE_REGEX = "transpose=([-]?\\d+)".toRegex()
+    private val OCTAVE_REGEX = "octave=([-]?\\d+)".toRegex()
+
     fun parseCombinedTransposition(text: String): Int? {
         val lower = text.lowercase()
         var totalShift = 0
@@ -24,15 +27,13 @@ internal object InterpretationUtils {
         }
 
         // 2. Check for transpose=N
-        val transposeRegex = "transpose=([-]?\\d+)".toRegex()
-        transposeRegex.find(text)?.let {
+        TRANSPOSE_REGEX.find(text)?.let {
             totalShift += it.groupValues[1].toIntOrNull() ?: 0
             foundAny = true
         }
 
         // 3. Check for octave=N
-        val octaveRegex = "octave=([-]?\\d+)".toRegex()
-        octaveRegex.find(text)?.let {
+        OCTAVE_REGEX.find(text)?.let {
             totalShift += (it.groupValues[1].toIntOrNull() ?: 0) * 12
             foundAny = true
         }

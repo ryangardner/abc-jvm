@@ -110,6 +110,7 @@ internal class InterpretationSession(val tune: AbcTune) {
 
 public object PitchInterpreter {
     private val logger: Logger = LoggerFactory.getLogger(PitchInterpreter::class.java)
+    private val WHITESPACE_REGEX = "\\s+".toRegex()
 
     /**
      * Converts an AbcTune to a Timeline, providing a high-level view of musical events.
@@ -145,7 +146,7 @@ public object PitchInterpreter {
                     }
                     "%%" -> {
                         if (value.startsWith("MIDI transpose", ignoreCase = true)) {
-                            val transpose = value.split("\\s+".toRegex()).last().toIntOrNull() ?: 0
+                            val transpose = value.split(WHITESPACE_REGEX).last().toIntOrNull() ?: 0
                             session.globalMidiTranspose = transpose
                             session.voiceStates.values.forEach { it.midiTranspose = transpose }
                         }
@@ -193,7 +194,7 @@ public object PitchInterpreter {
 
         fun handleDirective(session: InterpretationSession, element: DirectiveElement) {
             if (element.content.startsWith("MIDI transpose", ignoreCase = true)) {
-                session.currentVoiceState().midiTranspose = element.content.split("\\s+".toRegex()).last().toIntOrNull() ?: 0
+                session.currentVoiceState().midiTranspose = element.content.split(WHITESPACE_REGEX).last().toIntOrNull() ?: 0
             }
         }
     }
