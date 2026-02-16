@@ -273,7 +273,6 @@ XML
     \<properties\>  
         \<kotlin.version\>1.9.22\</kotlin.version\>  
         \<java.version\>1.8\</java.version\>  
-        \<tuxguitar.version\>1.5.4\</tuxguitar.version\>  
     \</properties\>l
 
     \<dependencyManagement\>  
