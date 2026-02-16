@@ -26,7 +26,7 @@ tokens {
 X_REF_START : 'X:' -> pushMode(HEADER_MODE), pushMode(FIELD_VALUE_MODE);
 
 // Comments/Stylesheets valid between tunes
-TEXT_BLOCK_START : '%%begintext' -> pushMode(TEXT_BLOCK_MODE) ;
+TEXT_BLOCK_START : '%%begintext' ~[\r\n]* ([\r\n]+ | EOF) -> pushMode(TEXT_BLOCK_MODE) ;
 DEFAULT_STYLESHEET_DIRECTIVE : '%%' ~[\r\n]* ([\r\n]+ | EOF) -> type(STYLESHEET) ;
 DEFAULT_COMMENT : '%' ~[\r\n]* ;
 
@@ -56,11 +56,8 @@ mode HEADER_MODE;
     FIELD_ID : { getCharPositionInLine() == 0 }? [A-Za-z]+ ':' -> pushMode(FIELD_VALUE_MODE);
 
     // Stylesheets in header
-    HEADER_TEXT_BLOCK_START : '%%begintext' -> pushMode(TEXT_BLOCK_MODE) ;
+    HEADER_TEXT_BLOCK_START : '%%begintext' ~[\r\n]* ([\r\n]+ | EOF) -> pushMode(TEXT_BLOCK_MODE) ;
     HEADER_STYLESHEET : '%%' ~[\r\n]* ([\r\n]+ | EOF) -> type(STYLESHEET);
-
-    // Capture everything else in header to avoid errors. Single char to avoid swallowing fields.
-    HEADER_TEXT : . ; 
 
     // Newlines are significant: they separate fields
     HEADER_NEWLINE : [\r\n]+ -> type(NEWLINE);
@@ -70,6 +67,9 @@ mode HEADER_MODE;
 
     // Comments allowed in header
     HEADER_COMMENT : '%' ~[\r\n]* -> skip ;
+
+    // Capture everything else in header to avoid errors. Single char to avoid swallowing fields.
+    HEADER_TEXT : . ;
 
 // ============================================================================
 // LYRICS MODE (Reading content of w:)
@@ -123,7 +123,7 @@ mode MUSIC_MODE;
     MUSIC_FIELD : { getCharPositionInLine() == 0 }? [A-Za-z] ':' -> type(FIELD_ID), pushMode(FIELD_VALUE_MODE);
     
     // Directives and Comments in Music
-    MUSIC_TEXT_BLOCK_START : '%%begintext' -> pushMode(TEXT_BLOCK_MODE) ;
+    MUSIC_TEXT_BLOCK_START : '%%begintext' ~[\r\n]* ([\r\n]+ | EOF) -> pushMode(TEXT_BLOCK_MODE) ;
     MUSIC_STYLESHEET_DIRECTIVE : '%%' ~[\r\n]* -> type(STYLESHEET) ;
     MUSIC_COMMENT : '%' ~[\r\n]* -> skip ;
     
