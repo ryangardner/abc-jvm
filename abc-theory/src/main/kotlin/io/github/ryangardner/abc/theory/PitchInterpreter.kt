@@ -74,7 +74,7 @@ internal class VoiceState(
     var midiTranspose: Int = 0,
     var activeTuplet: TupletState? = null,
     val pendingGraceNotes: MutableList<InterpretedNote> = mutableListOf(),
-    var measureDuration: NoteDuration = NoteDuration(0, 1),
+    var measureDuration: NoteDuration = NoteDuration.ZERO,
     var measureCount: Int = 0,
     var pendingBrokenRhythmMultiplier: Double? = null,
     var nextBrokenRhythmMultiplier: Double? = null
@@ -394,7 +394,7 @@ public object PitchInterpreter {
                             pitches = listOf(interpretedPitch),
                             midiPitches = listOf(midiPitch),
                             duration = note.length,
-                            semanticDuration = NoteDuration(0, 1),
+                            semanticDuration = NoteDuration.ZERO,
                             playedDuration = note.length,
                             isGrace = true
                         ))
@@ -463,7 +463,7 @@ public object PitchInterpreter {
                         }
                     }
                     vState.measureCount++
-                    vState.measureDuration = NoteDuration(0, 1)
+                    vState.measureDuration = NoteDuration.ZERO
                 }
                 else -> {}
             }

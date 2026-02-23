@@ -3,7 +3,7 @@ package io.github.ryangardner.abc.parser
 import io.github.ryangardner.abc.core.model.*
 
 public class AbcSerializer {
-    private var currentDefaultLength: NoteDuration = NoteDuration(1, 8)
+    private var currentDefaultLength: NoteDuration = NoteDuration.EIGHTH
 
     public fun serialize(tune: AbcTune): String {
         currentDefaultLength = tune.header.length
@@ -105,7 +105,7 @@ public class AbcSerializer {
                         (parts[0].toDoubleOrNull() ?: 4.0) / (parts[1].toDoubleOrNull() ?: 4.0)
                     } else if (element.value == "C") 1.0 else if (element.value == "C|") 1.0 else 1.0
                     
-                    currentDefaultLength = if (ratio < 0.75) NoteDuration(1, 16) else NoteDuration(1, 8)
+                    currentDefaultLength = if (ratio < 0.75) NoteDuration.SIXTEENTH else NoteDuration.EIGHTH
                 }
             }
             "${element.key}:${element.value}"

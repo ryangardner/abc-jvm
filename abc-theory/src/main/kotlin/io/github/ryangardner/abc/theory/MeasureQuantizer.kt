@@ -43,7 +43,7 @@ public object MeasureQuantizer {
         
         var currentMeasureIndex = 1
         var currentMeasureElements = mutableListOf<MusicElement>()
-        var currentMeasureDuration = NoteDuration(0, 1)
+        var currentMeasureDuration = NoteDuration.ZERO
 
         tune.body.elements.forEach { element ->
             when (element) {
@@ -67,7 +67,7 @@ public object MeasureQuantizer {
                     currentMeasureElements.add(element)
                     measures.add(Measure(currentMeasureIndex++, currentMeasureElements.toList(), currentMeter, currentMeasureDuration))
                     currentMeasureElements = mutableListOf()
-                    currentMeasureDuration = NoteDuration(0, 1)
+                    currentMeasureDuration = NoteDuration.ZERO
                 }
                 is InlineFieldElement -> {
                     if (element.fieldType == HeaderType.METER) {

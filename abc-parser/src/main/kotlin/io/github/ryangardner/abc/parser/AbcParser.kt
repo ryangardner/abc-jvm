@@ -104,9 +104,9 @@ private class AbcTunebookVisitor : ABCParserBaseVisitor<List<AbcTune>>() {
 
         val actualMeter = meter ?: TimeSignature.NONE
         val actualLength = length ?: run {
-            if (actualMeter.isNone) NoteDuration(1, 8)
-            else if (actualMeter.toDouble() < 0.75) NoteDuration(1, 16)
-            else NoteDuration(1, 8)
+            if (actualMeter.isNone) NoteDuration.EIGHTH
+            else if (actualMeter.toDouble() < 0.75) NoteDuration.SIXTEENTH
+            else NoteDuration.EIGHTH
         }
 
         val keyValue = ctx.key_field()?.children
@@ -183,7 +183,7 @@ private fun parseLength(text: String): NoteDuration {
     val parts = cleanText.split("/")
     return if (parts.size == 2) {
         NoteDuration(parts[0].trim().toIntOrNull() ?: 1, parts[1].trim().toIntOrNull() ?: 8)
-    } else NoteDuration(1, 8)
+    } else NoteDuration.EIGHTH
 }
 
 private class AbcTuneBodyVisitor(val header: TuneHeader) : ABCParserBaseVisitor<Unit>() {
@@ -263,7 +263,7 @@ private class AbcTuneBodyVisitor(val header: TuneHeader) : ABCParserBaseVisitor<
         val explicitLengthCtx = chordCtx.note_length()
         var explicitChordMultiplier: NoteDuration? = null
         if (explicitLengthCtx != null) {
-            explicitChordMultiplier = calculateDuration(explicitLengthCtx.text, NoteDuration(1, 1))
+            explicitChordMultiplier = calculateDuration(explicitLengthCtx.text, NoteDuration.WHOLE)
         }
 
         val notes = mutableListOf<NoteElement>()
@@ -553,8 +553,8 @@ private class AbcTuneBodyVisitor(val header: TuneHeader) : ABCParserBaseVisitor<
     }
 
     private fun calculateDefaultLength(meter: TimeSignature): NoteDuration {
-        if (meter.isNone) return NoteDuration(1, 8)
-        return if (meter.toDouble() < 0.75) NoteDuration(1, 16) else NoteDuration(1, 8)
+        if (meter.isNone) return NoteDuration.EIGHTH
+        return if (meter.toDouble() < 0.75) NoteDuration.SIXTEENTH else NoteDuration.EIGHTH
     }
 
     private fun buildNote(ctx: ABCParser.Note_elementContext): NoteElement {
@@ -621,7 +621,7 @@ private class AbcTuneBodyVisitor(val header: TuneHeader) : ABCParserBaseVisitor<
         val duration = if (restChar.equals("Z", ignoreCase = false)) {
             val measureDuration = NoteDuration.simplify(currentMeter.numerator.toLong(), currentMeter.denominator.toLong())
             ctx.note_length()?.let { 
-                val multiplier = calculateDuration(it.text, NoteDuration(1, 1))
+                val multiplier = calculateDuration(it.text, NoteDuration.WHOLE)
                 measureDuration * multiplier
             } ?: measureDuration
         } else {

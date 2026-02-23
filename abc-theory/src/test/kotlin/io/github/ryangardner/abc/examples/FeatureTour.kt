@@ -19,11 +19,11 @@ fun main() {
             meter = "4/4"
         }
         body {
-            note("G", NoteDuration(1, 4))
-            note("A", NoteDuration(1, 4))
+            note("G", NoteDuration.QUARTER)
+            note("A", NoteDuration.QUARTER)
             bar() // Measure 1 is short (2 beats)
-            note("B", NoteDuration(1, 2))
-            note("C", NoteDuration(1, 2))
+            note("B", NoteDuration.HALF)
+            note("C", NoteDuration.HALF)
             bar() // Measure 2 is correct (4 beats)
         }
     }

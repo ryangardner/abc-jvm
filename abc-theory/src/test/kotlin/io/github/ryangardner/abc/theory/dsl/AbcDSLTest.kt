@@ -17,7 +17,7 @@ class AbcDSLTest {
                 length = "1/4"
             }
             body {
-                note("D", NoteDuration(1, 1))
+                note("D", NoteDuration.WHOLE)
                 bar()
                 chord("F") {
                     note("F")

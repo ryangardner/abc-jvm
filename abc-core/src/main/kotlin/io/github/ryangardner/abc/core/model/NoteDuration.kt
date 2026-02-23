@@ -66,6 +66,13 @@ public data class NoteDuration(
 
     public companion object {
         public val ZERO: NoteDuration = NoteDuration(0, 1)
+        public val WHOLE: NoteDuration = NoteDuration(1, 1)
+        public val HALF: NoteDuration = NoteDuration(1, 2)
+        public val QUARTER: NoteDuration = NoteDuration(1, 4)
+        public val EIGHTH: NoteDuration = NoteDuration(1, 8)
+        public val SIXTEENTH: NoteDuration = NoteDuration(1, 16)
+        public val THIRTY_SECOND: NoteDuration = NoteDuration(1, 32)
+        public val SIXTY_FOURTH: NoteDuration = NoteDuration(1, 64)
 
         public fun simplify(num: Long, den: Long): NoteDuration {
             val common = gcd(num, den)

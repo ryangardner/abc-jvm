@@ -14,7 +14,7 @@ public class DorianKeyTest {
         assertEquals(KeyMode.DORIAN, key.mode)
         assertEquals(NoteStep.G, key.root.step)
         
-        val note = NoteElement(Pitch(NoteStep.B, 4, null), NoteDuration(1, 8))
+        val note = NoteElement(Pitch(NoteStep.B, 4, null), NoteDuration.EIGHTH)
         val interpreted = PitchInterpreter.PitchResolver.interpretBasePitch(note, key, emptyMap())
         assertEquals(Accidental.FLAT, interpreted.accidental)
     }

@@ -14,10 +14,10 @@ public class TransposerTest {
             title = listOf("Test Tune"),
             key = key,
             meter = TimeSignature(4, 4),
-            length = NoteDuration(1, 8)
+            length = NoteDuration.EIGHTH
         )
         val body = TuneBody(
-            elements = notes.map { NoteElement(it, NoteDuration(1, 8)) }
+            elements = notes.map { NoteElement(it, NoteDuration.EIGHTH) }
         )
         return AbcTune(header, body, TuneMetadata())
     }

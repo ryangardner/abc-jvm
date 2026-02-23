@@ -10,22 +10,22 @@ class RepeatExpanderTest {
     fun testSimpleRepeat() {
         // C D E F |: G A B c :| C4 |]
         val elements = listOf(
-            NoteElement(Pitch(NoteStep.C, 4), NoteDuration(1, 4)),
-            NoteElement(Pitch(NoteStep.D, 4), NoteDuration(1, 4)),
-            NoteElement(Pitch(NoteStep.E, 4), NoteDuration(1, 4)),
-            NoteElement(Pitch(NoteStep.F, 4), NoteDuration(1, 4)),
+            NoteElement(Pitch(NoteStep.C, 4), NoteDuration.QUARTER),
+            NoteElement(Pitch(NoteStep.D, 4), NoteDuration.QUARTER),
+            NoteElement(Pitch(NoteStep.E, 4), NoteDuration.QUARTER),
+            NoteElement(Pitch(NoteStep.F, 4), NoteDuration.QUARTER),
             BarLineElement(BarLineType.REPEAT_START),
-            NoteElement(Pitch(NoteStep.G, 4), NoteDuration(1, 4)),
-            NoteElement(Pitch(NoteStep.A, 4), NoteDuration(1, 4)),
-            NoteElement(Pitch(NoteStep.B, 4), NoteDuration(1, 4)),
-            NoteElement(Pitch(NoteStep.C, 5), NoteDuration(1, 4)),
+            NoteElement(Pitch(NoteStep.G, 4), NoteDuration.QUARTER),
+            NoteElement(Pitch(NoteStep.A, 4), NoteDuration.QUARTER),
+            NoteElement(Pitch(NoteStep.B, 4), NoteDuration.QUARTER),
+            NoteElement(Pitch(NoteStep.C, 5), NoteDuration.QUARTER),
             BarLineElement(BarLineType.REPEAT_END),
-            NoteElement(Pitch(NoteStep.C, 4), NoteDuration(1, 1)),
+            NoteElement(Pitch(NoteStep.C, 4), NoteDuration.WHOLE),
             BarLineElement(BarLineType.FINAL)
         )
         
         val tune = AbcTune(
-            header = TuneHeader(1, listOf("Test"), KeySignature(KeyRoot(NoteStep.C, Accidental.NATURAL), KeyMode.IONIAN), TimeSignature(4, 4), NoteDuration(1, 4), null, emptyList(), emptyMap(), "2.1"),
+            header = TuneHeader(1, listOf("Test"), KeySignature(KeyRoot(NoteStep.C, Accidental.NATURAL), KeyMode.IONIAN), TimeSignature(4, 4), NoteDuration.QUARTER, null, emptyList(), emptyMap(), "2.1"),
             body = TuneBody(elements),
             metadata = TuneMetadata()
         )
@@ -42,20 +42,20 @@ class RepeatExpanderTest {
     fun testRepeatFromBeginning() {
         // C D E F | G A B c :|
         val elements = listOf(
-            NoteElement(Pitch(NoteStep.C, 4), NoteDuration(1, 4)),
-            NoteElement(Pitch(NoteStep.D, 4), NoteDuration(1, 4)),
-            NoteElement(Pitch(NoteStep.E, 4), NoteDuration(1, 4)),
-            NoteElement(Pitch(NoteStep.F, 4), NoteDuration(1, 4)),
+            NoteElement(Pitch(NoteStep.C, 4), NoteDuration.QUARTER),
+            NoteElement(Pitch(NoteStep.D, 4), NoteDuration.QUARTER),
+            NoteElement(Pitch(NoteStep.E, 4), NoteDuration.QUARTER),
+            NoteElement(Pitch(NoteStep.F, 4), NoteDuration.QUARTER),
             BarLineElement(BarLineType.SINGLE),
-            NoteElement(Pitch(NoteStep.G, 4), NoteDuration(1, 4)),
-            NoteElement(Pitch(NoteStep.A, 4), NoteDuration(1, 4)),
-            NoteElement(Pitch(NoteStep.B, 4), NoteDuration(1, 4)),
-            NoteElement(Pitch(NoteStep.C, 5), NoteDuration(1, 4)),
+            NoteElement(Pitch(NoteStep.G, 4), NoteDuration.QUARTER),
+            NoteElement(Pitch(NoteStep.A, 4), NoteDuration.QUARTER),
+            NoteElement(Pitch(NoteStep.B, 4), NoteDuration.QUARTER),
+            NoteElement(Pitch(NoteStep.C, 5), NoteDuration.QUARTER),
             BarLineElement(BarLineType.REPEAT_END)
         )
         
         val tune = AbcTune(
-            header = TuneHeader(1, listOf("Test"), KeySignature(KeyRoot(NoteStep.C, Accidental.NATURAL), KeyMode.IONIAN), TimeSignature(4, 4), NoteDuration(1, 4), null, emptyList(), emptyMap(), "2.1"),
+            header = TuneHeader(1, listOf("Test"), KeySignature(KeyRoot(NoteStep.C, Accidental.NATURAL), KeyMode.IONIAN), TimeSignature(4, 4), NoteDuration.QUARTER, null, emptyList(), emptyMap(), "2.1"),
             body = TuneBody(elements),
             metadata = TuneMetadata()
         )
@@ -71,21 +71,21 @@ class RepeatExpanderTest {
     fun testPartsExpansion() {
         // P:AAB
         // [P:A] C D E F | [P:B] G A B c |
-        val header = TuneHeader(1, listOf("Parts Test"), KeySignature(KeyRoot(NoteStep.C, Accidental.NATURAL), KeyMode.IONIAN), TimeSignature(4, 4), NoteDuration(1, 4), null, emptyList(), emptyMap(), "2.1", "AAB")
+        val header = TuneHeader(1, listOf("Parts Test"), KeySignature(KeyRoot(NoteStep.C, Accidental.NATURAL), KeyMode.IONIAN), TimeSignature(4, 4), NoteDuration.QUARTER, null, emptyList(), emptyMap(), "2.1", "AAB")
         val A = listOf(
             PartElement("A"),
-            NoteElement(Pitch(NoteStep.C, 4), NoteDuration(1, 4)),
-            NoteElement(Pitch(NoteStep.D, 4), NoteDuration(1, 4)),
-            NoteElement(Pitch(NoteStep.E, 4), NoteDuration(1, 4)),
-            NoteElement(Pitch(NoteStep.F, 4), NoteDuration(1, 4)),
+            NoteElement(Pitch(NoteStep.C, 4), NoteDuration.QUARTER),
+            NoteElement(Pitch(NoteStep.D, 4), NoteDuration.QUARTER),
+            NoteElement(Pitch(NoteStep.E, 4), NoteDuration.QUARTER),
+            NoteElement(Pitch(NoteStep.F, 4), NoteDuration.QUARTER),
             BarLineElement(BarLineType.SINGLE)
         )
         val B = listOf(
             PartElement("B"),
-            NoteElement(Pitch(NoteStep.G, 4), NoteDuration(1, 4)),
-            NoteElement(Pitch(NoteStep.A, 4), NoteDuration(1, 4)),
-            NoteElement(Pitch(NoteStep.B, 4), NoteDuration(1, 4)),
-            NoteElement(Pitch(NoteStep.C, 5), NoteDuration(1, 4)),
+            NoteElement(Pitch(NoteStep.G, 4), NoteDuration.QUARTER),
+            NoteElement(Pitch(NoteStep.A, 4), NoteDuration.QUARTER),
+            NoteElement(Pitch(NoteStep.B, 4), NoteDuration.QUARTER),
+            NoteElement(Pitch(NoteStep.C, 5), NoteDuration.QUARTER),
             BarLineElement(BarLineType.SINGLE)
         )
         val tune = AbcTune(header, TuneBody(A + B), TuneMetadata())
@@ -102,10 +102,10 @@ class RepeatExpanderTest {
     @Test
     fun testNestedPartsExpansion() {
         // P:(AB)2C
-        val header = TuneHeader(1, listOf("Nested Parts"), KeySignature(KeyRoot(NoteStep.C, Accidental.NATURAL), KeyMode.IONIAN), TimeSignature(4, 4), NoteDuration(1, 4), null, emptyList(), emptyMap(), "2.1", "(AB)2C")
-        val A = listOf(PartElement("A"), NoteElement(Pitch(NoteStep.C, 4), NoteDuration(1, 4)))
-        val B = listOf(PartElement("B"), NoteElement(Pitch(NoteStep.D, 4), NoteDuration(1, 4)))
-        val C = listOf(PartElement("C"), NoteElement(Pitch(NoteStep.E, 4), NoteDuration(1, 4)))
+        val header = TuneHeader(1, listOf("Nested Parts"), KeySignature(KeyRoot(NoteStep.C, Accidental.NATURAL), KeyMode.IONIAN), TimeSignature(4, 4), NoteDuration.QUARTER, null, emptyList(), emptyMap(), "2.1", "(AB)2C")
+        val A = listOf(PartElement("A"), NoteElement(Pitch(NoteStep.C, 4), NoteDuration.QUARTER))
+        val B = listOf(PartElement("B"), NoteElement(Pitch(NoteStep.D, 4), NoteDuration.QUARTER))
+        val C = listOf(PartElement("C"), NoteElement(Pitch(NoteStep.E, 4), NoteDuration.QUARTER))
         
         val tune = AbcTune(header, TuneBody(A + B + C), TuneMetadata())
         val expanded = RepeatExpander.expand(tune)

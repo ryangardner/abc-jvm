@@ -14,7 +14,7 @@ import io.github.ryangardner.abc.theory.util.KeyParserUtil
  *         key = "G"
  *     }
  *     body {
- *         note("G", NoteDuration(1, 4))
+ *         note("G", NoteDuration.QUARTER)
  *         bar()
  *     }
  * }
@@ -73,7 +73,7 @@ public class AbcTuneBuilder {
         val parts = text.split("/")
         return if (parts.size == 2) {
             NoteDuration(parts[0].toIntOrNull() ?: 1, parts[1].toIntOrNull() ?: 8)
-        } else NoteDuration(1, 8)
+        } else NoteDuration.EIGHTH
     }
 }
 
@@ -109,7 +109,7 @@ public class BodyBuilder {
      * @param octave The octave (default is 4).
      * @param accidental The accidental (optional).
      */
-    public fun note(step: String, duration: NoteDuration = NoteDuration(1, 1), octave: Int = 4, accidental: Accidental? = null): Unit {
+    public fun note(step: String, duration: NoteDuration = NoteDuration.WHOLE, octave: Int = 4, accidental: Accidental? = null): Unit {
         val noteStep = NoteStep.valueOf(step.uppercase())
         elements.add(NoteElement(Pitch(noteStep, octave, accidental), duration))
     }
@@ -131,7 +131,7 @@ public class BodyBuilder {
      */
     public fun chord(vararg annotations: String, block: ChordBuilder.() -> Unit): Unit {
         val builder = ChordBuilder().apply(block)
-        elements.add(ChordElement(builder.notes, NoteDuration(1, 1), annotations.toList()))
+        elements.add(ChordElement(builder.notes, NoteDuration.WHOLE, annotations.toList()))
     }
 }
 
@@ -147,7 +147,7 @@ public class ChordBuilder {
      */
     public fun note(step: String, octave: Int = 4, accidental: Accidental? = null): Unit {
         val noteStep = NoteStep.valueOf(step.uppercase())
-        notes.add(NoteElement(Pitch(noteStep, octave, accidental), NoteDuration(1, 1)))
+        notes.add(NoteElement(Pitch(noteStep, octave, accidental), NoteDuration.WHOLE))
     }
 }
 
