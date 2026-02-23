@@ -1,12 +1,15 @@
 package io.github.ryangardner.abc.theory
 
 import io.github.ryangardner.abc.core.model.*
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 
 /**
  * Expands repeats and variants in an ABC tune to produce a linear sequence of elements.
  * This is necessary for MIDI generation to match abcjs's output.
  */
 public object RepeatExpander {
+    private val logger: Logger = LoggerFactory.getLogger(RepeatExpander::class.java)
 
     public fun expand(tune: AbcTune): List<MusicElement> {
         val elements = tune.body.elements
@@ -174,7 +177,7 @@ private fun parsePlayingOrder(order: String): List<String> {
             }
             
             if (output.size > 20000) {
-                println("ERROR: Expansion runaway detected! elements.size=${elements.size}, output.size=${output.size} at i=$i")
+                logger.error("Expansion runaway detected! elements.size={}, output.size={} at i={}", elements.size, output.size, i)
                 break
             }
             

@@ -109,6 +109,7 @@ internal class InterpretationSession(val tune: AbcTune) {
 }
 
 public object PitchInterpreter {
+    /** Logger for PitchInterpreter and its nested objects. */
     private val logger: Logger = LoggerFactory.getLogger(PitchInterpreter::class.java)
     private val WHITESPACE_REGEX = "\\s+".toRegex()
 
@@ -484,7 +485,7 @@ public object PitchInterpreter {
         }
 
         if (directBroken != null) {
-            println("DEBUG: Found direct broken rhythm '$directBroken' at idx $currentIdx")
+            logger.debug("Found direct broken rhythm '{}' at idx {}", directBroken, currentIdx)
             applyBrokenRhythm(directBroken, vState)
             return
         }
@@ -495,7 +496,7 @@ public object PitchInterpreter {
             if (el is SpacerElement) {
                 val text = el.text.trim()
                 if (text.isNotEmpty() && (text.all { it == '>' } || text.all { it == '<' })) {
-                    println("DEBUG: Found peeked broken rhythm '$text' at idx $i")
+                    logger.debug("Found peeked broken rhythm '{}' at idx {}", text, i)
                     applyBrokenRhythm(text, vState)
                     return
                 }
@@ -515,7 +516,7 @@ public object PitchInterpreter {
         }
         val m2 = 2.0 - m1
         
-        println("DEBUG: Applying multipliers m1=$m1, m2=$m2")
+        logger.debug("Applying multipliers m1={}, m2={}", m1, m2)
         vState.pendingBrokenRhythmMultiplier = m1
         vState.nextBrokenRhythmMultiplier = m2
     }

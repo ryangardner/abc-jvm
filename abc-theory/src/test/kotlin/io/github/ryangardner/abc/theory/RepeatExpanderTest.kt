@@ -2,6 +2,7 @@ package io.github.ryangardner.abc.theory
 
 import io.github.ryangardner.abc.core.model.*
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 
 class RepeatExpanderTest {
@@ -118,5 +119,32 @@ class RepeatExpanderTest {
         assertEquals(NoteStep.C, notes[2].pitch.step)
         assertEquals(NoteStep.D, notes[3].pitch.step)
         assertEquals(NoteStep.E, notes[4].pitch.step)
+    }
+
+    @Test
+    fun testRunawayExpansion() {
+        // Create a large number of notes followed by a repeat to exceed the 20000 limit
+        // 1000 notes repeated 24 times = 24000 notes, which exceeds 20000
+        val baseNotes = mutableListOf<MusicElement>()
+        repeat(1000) {
+            baseNotes.add(NoteElement(Pitch(NoteStep.C, 4), NoteDuration(1, 4)))
+        }
+        baseNotes.add(BarLineElement(BarLineType.REPEAT_END, repeatCount = 24))
+
+        val tune = AbcTune(
+            header = TuneHeader(1, listOf("Runaway Test"), KeySignature(KeyRoot(NoteStep.C, Accidental.NATURAL), KeyMode.IONIAN), TimeSignature(4, 4), NoteDuration(1, 4), null, emptyList(), emptyMap(), "2.1"),
+            body = TuneBody(baseNotes),
+            metadata = TuneMetadata()
+        )
+
+        val expanded = RepeatExpander.expand(tune)
+
+        // It should cap at slightly over 20000 because it checks after adding a block
+        // In this case, it adds 1001 elements 20 times -> 20020 elements, then breaks.
+        // Wait, the check is:
+        // if (output.size > 20000) { break }
+        // So it will be > 20000.
+        assertTrue(expanded.size >= 20000, "Should have expanded to at least 20000 elements")
+        assertTrue(expanded.size < 24000, "Should have capped expansion before reaching 24000")
     }
 }
