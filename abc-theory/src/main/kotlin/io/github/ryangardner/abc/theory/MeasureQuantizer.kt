@@ -1,6 +1,7 @@
 package io.github.ryangardner.abc.theory
 
 import io.github.ryangardner.abc.core.model.*
+import io.github.ryangardner.abc.theory.util.InterpretationUtils
 
 /**
  * Represents a logical musical measure.
@@ -71,14 +72,31 @@ public object MeasureQuantizer {
                 }
                 is InlineFieldElement -> {
                     if (element.fieldType == HeaderType.METER) {
-                        // For quantization, we need to know the meter. 
-                        // A more complete implementation would parse the value here.
+                        val newMeter = InterpretationUtils.parseMeter(element.value)
+                        if (!newMeter.isNone && newMeter != currentMeter) {
+                            if (currentMeasureElements.any { it !is SpacerElement } || currentMeasureDuration.toDouble() > 0) {
+                                measures.add(Measure(currentMeasureIndex++, currentMeasureElements.toList(), currentMeter, currentMeasureDuration))
+                                currentMeasureElements = mutableListOf()
+                                currentMeasureDuration = NoteDuration(0, 1)
+                            }
+                            currentMeter = newMeter
+                            targetDuration = currentMeter.toNoteDuration()
+                        }
                     }
                     currentMeasureElements.add(element)
                 }
                 is BodyHeaderElement -> {
                     if (element.key == "M") {
-                        // Update meter
+                        val newMeter = InterpretationUtils.parseMeter(element.value)
+                        if (!newMeter.isNone && newMeter != currentMeter) {
+                            if (currentMeasureElements.any { it !is SpacerElement } || currentMeasureDuration.toDouble() > 0) {
+                                measures.add(Measure(currentMeasureIndex++, currentMeasureElements.toList(), currentMeter, currentMeasureDuration))
+                                currentMeasureElements = mutableListOf()
+                                currentMeasureDuration = NoteDuration(0, 1)
+                            }
+                            currentMeter = newMeter
+                            targetDuration = currentMeter.toNoteDuration()
+                        }
                     }
                     currentMeasureElements.add(element)
                 }
