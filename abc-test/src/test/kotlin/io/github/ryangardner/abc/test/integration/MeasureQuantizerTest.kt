@@ -1,21 +1,23 @@
 package io.github.ryangardner.abc.test.integration
-
-import io.github.ryangardner.abc.core.model.*
+import io.github.ryangardner.abc.core.model.NoteElement
 import io.github.ryangardner.abc.parser.AbcParser
 import io.github.ryangardner.abc.theory.MeasureQuantizer
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertFalse
+import org.junit.jupiter.api.Assertions.assertNotNull
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 
 class MeasureQuantizerTest {
-
     @Test
     fun `test quantize groups notes into measures correctly`() {
-        val input = """
+        val input =
+            """
             X:1
             K:C
             L:1/4
             C D | E F | G4 |
-        """.trimIndent()
+            """.trimIndent()
 
         val tune = AbcParser().parse(input)
         println("DEBUG: Tune elements: ${tune.body.elements.size}")
@@ -26,7 +28,7 @@ class MeasureQuantizerTest {
         println("DEBUG: Measures: ${measures.size}")
 
         assertEquals(3, measures.size)
-        
+
         // Measure 1: C D
         assertEquals(1, measures[0].index)
         assertEquals(2, measures[0].elements.filterIsInstance<NoteElement>().size)

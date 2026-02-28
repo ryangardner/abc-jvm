@@ -1,30 +1,32 @@
 package io.github.ryangardner.abc.test.integration
-
-import io.github.ryangardner.abc.core.model.*
+import io.github.ryangardner.abc.core.model.NoteStep
 import io.github.ryangardner.abc.parser.AbcParser
 import io.github.ryangardner.abc.theory.PitchInterpreter
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertFalse
+import org.junit.jupiter.api.Assertions.assertNotNull
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 
 class TimelineTest {
-
     @Test
     fun `test toTimeline creates events at correct positions`() {
-        val input = """
+        val input =
+            """
             X:1
             K:C
             L:1/4
             C D | E2 |
-        """.trimIndent()
+            """.trimIndent()
 
         val tune = AbcParser().parse(input)
         val timeline = PitchInterpreter.toTimeline(tune)
 
         assertEquals(1.0, timeline.totalBeats())
-        
+
         val events = timeline.events
         assertEquals(3, events.size)
-        
+
         // C at beat 0
         assertEquals(0.0, events[0].beat)
         assertEquals(NoteStep.C, events[0].note.pitches[0].step)
@@ -40,12 +42,13 @@ class TimelineTest {
 
     @Test
     fun `test getChordsAt identifies chords and annotated notes`() {
-        val input = """
+        val input =
+            """
             X:1
             K:C
             L:1/4
             "Am"C [CEG] |
-        """.trimIndent()
+            """.trimIndent()
 
         val tune = AbcParser().parse(input)
         val timeline = PitchInterpreter.toTimeline(tune)

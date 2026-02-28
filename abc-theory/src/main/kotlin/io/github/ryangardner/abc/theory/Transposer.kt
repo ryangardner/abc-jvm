@@ -1,7 +1,21 @@
 package io.github.ryangardner.abc.theory
+import io.github.ryangardner.abc.core.model.AbcTune
+import io.github.ryangardner.abc.core.model.Accidental
+import io.github.ryangardner.abc.core.model.BarLineElement
+import io.github.ryangardner.abc.core.model.ChordElement
+import io.github.ryangardner.abc.core.model.DirectiveElement
+import io.github.ryangardner.abc.core.model.InlineFieldElement
+import io.github.ryangardner.abc.core.model.KeyRoot
+import io.github.ryangardner.abc.core.model.KeySignature
+import io.github.ryangardner.abc.core.model.MusicElement
+import io.github.ryangardner.abc.core.model.NoteElement
+import io.github.ryangardner.abc.core.model.NoteStep
+import io.github.ryangardner.abc.core.model.Pitch
+import io.github.ryangardner.abc.core.model.RestElement
+import io.github.ryangardner.abc.core.model.TuneBody
+import io.github.ryangardner.abc.core.model.TuneHeader
 
-import io.github.ryangardner.abc.core.model.*
-
+@Suppress("MagicNumber", "MaxLineLength")
 public object Transposer {
     /**
      * Transposes the given tune by the specified number of semitones.
@@ -9,11 +23,14 @@ public object Transposer {
      * Java usage: Transposer.transpose(tune, 2)
      */
     @JvmStatic
-    public fun transpose(tune: AbcTune, semitones: Int): AbcTune {
+    public fun transpose(
+        tune: AbcTune,
+        semitones: Int,
+    ): AbcTune {
         if (semitones == 0) return tune
 
         val newHeader = transposeHeader(tune.header, semitones)
-        
+
         // Find the step difference between the old tonic and the new tonic
         val oldKey = tune.header.key
         val newKey = newHeader.key
@@ -21,57 +38,85 @@ public object Transposer {
 
         // Get the new key's accidentals count (sharps/flats) to help with context-aware note transposition
         val bestKey = CircleOfFifths.getBestKey(newKey.tonicSemitones, newKey.mode)
-        
+
         val newBody = transposeBody(tune.body, semitones, stepDiff, bestKey.accidentalsCount)
-        
+
         // As per architecture: If physical notes changed, clear visualTranspose
         val newMetadata = tune.metadata.copy(visualTranspose = null)
-        
+
         return tune.copy(header = newHeader, body = newBody, metadata = newMetadata)
     }
 
-    private fun transposeHeader(header: TuneHeader, semitones: Int): TuneHeader {
-        return header.copy(key = transposeKey(header.key, semitones))
-    }
+    private fun transposeHeader(
+        header: TuneHeader,
+        semitones: Int,
+    ): TuneHeader = header.copy(key = transposeKey(header.key, semitones))
 
-    private fun transposeKey(key: KeySignature, semitones: Int): KeySignature {
+    private fun transposeKey(
+        key: KeySignature,
+        semitones: Int,
+    ): KeySignature {
         val newTonicSemitones = ((key.tonicSemitones + semitones) % 12 + 12) % 12
         val bestKey = CircleOfFifths.getBestKey(newTonicSemitones, key.mode)
-        
+
         return key.copy(
-            root = KeyRoot(
-                bestKey.tonicStep,
-                CircleOfFifths.semitonesToAccidental(bestKey.tonicAccidental) ?: Accidental.NATURAL
-            )
+            root =
+                KeyRoot(
+                    bestKey.tonicStep,
+                    CircleOfFifths.semitonesToAccidental(bestKey.tonicAccidental) ?: Accidental.NATURAL,
+                ),
         )
     }
 
-    private fun transposeBody(body: TuneBody, semitones: Int, stepDiff: Int, newKeyAccidentals: Int): TuneBody {
-        return body.copy(elements = body.elements.map { transposeElement(it, semitones, stepDiff, newKeyAccidentals) })
-    }
+    private fun transposeBody(
+        body: TuneBody,
+        semitones: Int,
+        stepDiff: Int,
+        newKeyAccidentals: Int,
+    ): TuneBody =
+        body.copy(
+            elements =
+                body.elements.map {
+                    transposeElement(it, semitones, stepDiff, newKeyAccidentals)
+                },
+        )
 
-    private fun transposeElement(element: MusicElement, semitones: Int, stepDiff: Int, newKeyAccidentals: Int): MusicElement {
-        return when (element) {
+    private fun transposeElement(
+        element: MusicElement,
+        semitones: Int,
+        stepDiff: Int,
+        newKeyAccidentals: Int,
+    ): MusicElement =
+        when (element) {
             is NoteElement -> transposeNote(element, semitones, stepDiff, newKeyAccidentals)
             is ChordElement -> element.copy(notes = element.notes.map { transposeNote(it, semitones, stepDiff, newKeyAccidentals) })
             is BarLineElement, is InlineFieldElement, is RestElement, is DirectiveElement -> element
             else -> element
         }
-    }
 
-    private fun transposeNote(note: NoteElement, semitones: Int, stepDiff: Int, newKeyAccidentals: Int): NoteElement {
+    private fun transposeNote(
+        note: NoteElement,
+        semitones: Int,
+        stepDiff: Int,
+        newKeyAccidentals: Int,
+    ): NoteElement {
         val newPitch = transposePitch(note.pitch, semitones, stepDiff, newKeyAccidentals)
         return note.copy(pitch = newPitch, accidental = newPitch.accidental)
     }
 
-    private fun transposePitch(pitch: Pitch, semitones: Int, stepDiff: Int, newKeyAccidentals: Int): Pitch {
+    private fun transposePitch(
+        pitch: Pitch,
+        semitones: Int,
+        stepDiff: Int,
+        newKeyAccidentals: Int,
+    ): Pitch {
         val oldTotalSemitones = pitch.totalSemitones
         val newTotalSemitones = oldTotalSemitones + semitones
-        
+
         // 1. Calculate New Step: First, shift the diatonic step
         val newStepOrdinal = (pitch.step.ordinal + stepDiff) % 7
         val newStep = NoteStep.values()[newStepOrdinal]
-        
+
         // 2. Calculate New Alteration: Then, calculate the necessary accidental to match the target semitone pitch.
         val baseSemitones = CircleOfFifths.stepToSemitones(newStep)
         val diff = newTotalSemitones - baseSemitones
@@ -84,15 +129,16 @@ public object Transposer {
 
         // 3. Context Check: compare against the New Key Signature.
         val keyAccidental = CircleOfFifths.getAccidentalForStep(newStep, newKeyAccidentals)
-        
-        val finalAccidental = if (accidentalSemitones == keyAccidental) {
-            null // The key already provides this accidental
-        } else if (accidentalSemitones == 0) {
-            Accidental.NATURAL
-        } else {
-            CircleOfFifths.semitonesToAccidental(accidentalSemitones)
-        }
-        
+
+        val finalAccidental =
+            if (accidentalSemitones == keyAccidental) {
+                null // The key already provides this accidental
+            } else if (accidentalSemitones == 0) {
+                Accidental.NATURAL
+            } else {
+                CircleOfFifths.semitonesToAccidental(accidentalSemitones)
+            }
+
         return Pitch(newStep, newOctave, finalAccidental)
     }
 }

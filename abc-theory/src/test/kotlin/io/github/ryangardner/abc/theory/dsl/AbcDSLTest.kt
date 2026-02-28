@@ -1,31 +1,36 @@
 package io.github.ryangardner.abc.theory.dsl
-
-import io.github.ryangardner.abc.core.model.*
-import org.junit.jupiter.api.Assertions.*
+import io.github.ryangardner.abc.core.model.BarLineElement
+import io.github.ryangardner.abc.core.model.BarLineType
+import io.github.ryangardner.abc.core.model.ChordElement
+import io.github.ryangardner.abc.core.model.KeyMode
+import io.github.ryangardner.abc.core.model.NoteDuration
+import io.github.ryangardner.abc.core.model.NoteElement
+import io.github.ryangardner.abc.core.model.NoteStep
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 class AbcDSLTest {
-
     @Test
     fun `test abcTune DSL produces correct structure`() {
-        val tune = abcTune {
-            header {
-                reference = 42
-                title = "DSL Test Tune"
-                key = "Dm"
-                meter = "3/4"
-                length = "1/4"
-            }
-            body {
-                note("D", NoteDuration(1, 1))
-                bar()
-                chord("F") {
-                    note("F")
-                    note("A")
-                    note("C")
+        val tune =
+            abcTune {
+                header {
+                    reference = 42
+                    title = "DSL Test Tune"
+                    key = "Dm"
+                    meter = "3/4"
+                    length = "1/4"
+                }
+                body {
+                    note("D", NoteDuration(1, 1))
+                    bar()
+                    chord("F") {
+                        note("F")
+                        note("A")
+                        note("C")
+                    }
                 }
             }
-        }
 
         // Verify Header
         assertEquals(42, tune.header.reference)
@@ -40,7 +45,7 @@ class AbcDSLTest {
         // Verify Body
         val elements = tune.body.elements
         assertEquals(3, elements.size)
-        
+
         val note = elements[0] as NoteElement
         assertEquals(NoteStep.D, note.pitch.step)
 

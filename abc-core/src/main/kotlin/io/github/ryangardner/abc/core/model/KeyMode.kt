@@ -1,11 +1,20 @@
 package io.github.ryangardner.abc.core.model
 
 public enum class KeyMode {
-    MAJOR, MINOR, IONIAN, DORIAN, PHRYGIAN, LYDIAN, MIXOLYDIAN, AEOLIAN, LOCRIAN;
+    MAJOR,
+    MINOR,
+    IONIAN,
+    DORIAN,
+    PHRYGIAN,
+    LYDIAN,
+    MIXOLYDIAN,
+    AEOLIAN,
+    LOCRIAN,
+    ;
 
     public companion object {
-        public fun fromString(mode: String?): KeyMode {
-            return when (mode?.lowercase()) {
+        public fun fromString(mode: String?): KeyMode =
+            when (mode?.lowercase()) {
                 "m", "min", "minor", "aeolian" -> AEOLIAN
                 "maj", "major", "ionian" -> IONIAN
                 "dor", "dorian" -> DORIAN
@@ -15,6 +24,5 @@ public enum class KeyMode {
                 "loc", "locrian" -> LOCRIAN
                 else -> IONIAN
             }
-        }
     }
 }

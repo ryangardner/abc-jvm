@@ -1,55 +1,68 @@
 package io.github.ryangardner.abc.parser
 
-import io.github.ryangardner.abc.core.model.*
-import org.junit.jupiter.api.Assertions.*
+import io.github.ryangardner.abc.core.model.ChordElement
+import io.github.ryangardner.abc.core.model.NoteElement
+import io.github.ryangardner.abc.core.model.RestElement
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 class AnnotationParserTest {
-
     @Test
     fun `test multiple annotations on a note`() {
-        val input = """
+        val input =
+            """
             X: 1
             T: Multiple Annotations Note
             K: C
             "Anno1" "Anno2" C
-        """.trimIndent()
+            """.trimIndent()
 
         val parser = AbcParser()
         val tune = parser.parse(input)
-        val note = tune.body.elements.filterIsInstance<NoteElement>().first()
+        val note =
+            tune.body.elements
+                .filterIsInstance<NoteElement>()
+                .first()
 
         assertEquals(listOf("Anno1", "Anno2"), note.annotations)
     }
 
     @Test
     fun `test multiple annotations on a chord`() {
-        val input = """
+        val input =
+            """
             X: 1
             T: Multiple Annotations Chord
             K: C
             "Cmaj7" "5:3,4:2,3:0,2:0"[CEGB]
-        """.trimIndent()
+            """.trimIndent()
 
         val parser = AbcParser()
         val tune = parser.parse(input)
-        val chord = tune.body.elements.filterIsInstance<ChordElement>().first()
+        val chord =
+            tune.body.elements
+                .filterIsInstance<ChordElement>()
+                .first()
 
         assertEquals(listOf("Cmaj7", "5:3,4:2,3:0,2:0"), chord.annotations)
     }
 
     @Test
     fun `test multiple annotations on a rest`() {
-        val input = """
+        val input =
+            """
             X: 1
             T: Multiple Annotations Rest
             K: C
             "Break" "Tacet" z
-        """.trimIndent()
+            """.trimIndent()
 
         val parser = AbcParser()
         val tune = parser.parse(input)
-        val rest = tune.body.elements.filterIsInstance<RestElement>().first()
+        val rest =
+            tune.body.elements
+                .filterIsInstance<RestElement>()
+                .first()
 
         assertEquals(listOf("Break", "Tacet"), rest.annotations)
     }

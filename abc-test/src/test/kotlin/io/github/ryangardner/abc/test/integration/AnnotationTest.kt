@@ -1,19 +1,22 @@
 package io.github.ryangardner.abc.test.integration
-
-import io.github.ryangardner.abc.core.model.*
+import io.github.ryangardner.abc.core.model.ChordElement
+import io.github.ryangardner.abc.core.model.NoteElement
 import io.github.ryangardner.abc.parser.AbcParser
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertFalse
+import org.junit.jupiter.api.Assertions.assertNotNull
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 
 class AnnotationTest {
-
     @Test
     fun `test note annotations are preserved`() {
-        val input = """
+        val input =
+            """
             X:1
             K:C
             "Am"C "G"D | [CEG]2 |
-        """.trimIndent()
+            """.trimIndent()
 
         val parser = AbcParser()
         val tune = parser.parse(input)
@@ -26,7 +29,7 @@ class AnnotationTest {
         // "G"D
         val note2 = elements.filterIsInstance<NoteElement>()[1]
         assertEquals("G", note2.annotations.first())
-        
+
         // [CEG]2
         // Wait, the chord should also have its annotation if it had one.
         // Let's add an annotation to a chord too.
@@ -34,11 +37,12 @@ class AnnotationTest {
 
     @Test
     fun `test chord annotations are preserved`() {
-        val input = """
+        val input =
+            """
             X:1
             K:C
             "F"[FAC]2 |
-        """.trimIndent()
+            """.trimIndent()
 
         val parser = AbcParser()
         val tune = parser.parse(input)

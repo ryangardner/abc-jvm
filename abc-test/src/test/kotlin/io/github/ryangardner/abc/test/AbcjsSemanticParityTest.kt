@@ -1,14 +1,13 @@
 package io.github.ryangardner.abc.test
-
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import io.github.ryangardner.abc.core.model.*
+import io.github.ryangardner.abc.core.model.Pitch
 import io.github.ryangardner.abc.parser.AbcParser
-import io.github.ryangardner.abc.theory.*
+import io.github.ryangardner.abc.theory.InterpretedNote
+import io.github.ryangardner.abc.theory.InterpretedTune
 import io.github.ryangardner.abc.theory.PitchInterpreter
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assumptions.assumeTrue
-import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
 import org.opentest4j.AssertionFailedError
@@ -18,9 +17,15 @@ import java.nio.file.StandardOpenOption
 import java.util.stream.Stream
 import kotlin.streams.asStream
 
+@Suppress("MaxLineLength", "MagicNumber", "NestedBlockDepth", "ReturnCount", "CyclomaticComplexMethod", "SwallowedException")
 public class AbcjsSemanticParityTest {
-
-    public data class AbcjsBaseline(val name: String, val abcContent: String, val jsonContent: String, val m21JsonContent: String?, val filePath: String) {
+    public data class AbcjsBaseline(
+        val name: String,
+        val abcContent: String,
+        val jsonContent: String,
+        val m21JsonContent: String?,
+        val filePath: String,
+    ) {
         override fun toString(): String = name
     }
 
@@ -30,32 +35,38 @@ public class AbcjsSemanticParityTest {
         assumeTrue(baseline.name != "EMPTY", "Skipping abcjs parity test because no baseline directory was provided")
         val parser = AbcParser()
         val tunes = parser.parseBook(baseline.abcContent)
-        
+
         val gson = Gson()
         val type = object : TypeToken<List<Map<String, Any>>>() {}.type
-        val abcjsTunes: List<Map<String, Any>>? = try { gson.fromJson(baseline.jsonContent, type) } catch (e: Exception) { null }
+        val abcjsTunes: List<Map<String, Any>>? =
+            try {
+                gson.fromJson(baseline.jsonContent, type)
+            } catch (e: Exception) {
+                null
+            }
         if (abcjsTunes == null) {
             println("ERROR: [${baseline.name}] Failed to parse abcjs JSON content (maybe empty?)")
             assumeTrue(false, "Skipping [${baseline.name}] due to empty/malformed abcjs JSON")
             return
         }
 
-        val m21FullResults: List<List<Map<String, Any>>>? = baseline.m21JsonContent?.let { 
-            try { 
-                if (it.trim().startsWith("{")) {
-                    val errMap: Map<String, Any> = gson.fromJson(it, object : TypeToken<Map<String, Any>>() {}.type)
-                    if (errMap.containsKey("error")) {
-                        // println("DEBUG: [${baseline.name}] music21 reported error: ${errMap["error"]}")
-                        return@let null
+        val m21FullResults: List<List<Map<String, Any>>>? =
+            baseline.m21JsonContent?.let {
+                try {
+                    if (it.trim().startsWith("{")) {
+                        val errMap: Map<String, Any> = gson.fromJson(it, object : TypeToken<Map<String, Any>>() {}.type)
+                        if (errMap.containsKey("error")) {
+                            // println("DEBUG: [${baseline.name}] music21 reported error: ${errMap["error"]}")
+                            return@let null
+                        }
                     }
+                    val m21Type = object : TypeToken<List<List<Map<String, Any>>>>() {}.type
+                    gson.fromJson<List<List<Map<String, Any>>>>(it, m21Type)
+                } catch (e: Exception) {
+                    // println("DEBUG: [${baseline.name}] Error parsing music21 JSON: ${e.message}")
+                    null
                 }
-                val m21Type = object : TypeToken<List<List<Map<String, Any>>>>() {}.type
-                gson.fromJson<List<List<Map<String, Any>>>>(it, m21Type)
-            } catch (e: Exception) { 
-                // println("DEBUG: [${baseline.name}] Error parsing music21 JSON: ${e.message}")
-                null 
             }
-        }
 
         assertEquals(abcjsTunes.size, tunes.size, "Tune count mismatch")
 
@@ -71,15 +82,16 @@ public class AbcjsSemanticParityTest {
             }
 
             // TRY COMPARING WITH ABCJS
-            val abcjsError = try {
-                compareWithAbcjs(baseline.name, interpreted, unexpanded, abcjsTune)
-                null
-            } catch (e: AssertionFailedError) {
-                if (System.getProperty("abc.test.debug") == "true") {
-                    println("DEBUG: [${baseline.name}] abcjs mismatch: ${e.message}")
+            val abcjsError =
+                try {
+                    compareWithAbcjs(baseline.name, interpreted, unexpanded, abcjsTune)
+                    null
+                } catch (e: AssertionFailedError) {
+                    if (System.getProperty("abc.test.debug") == "true") {
+                        println("DEBUG: [${baseline.name}] abcjs mismatch: ${e.message}")
+                    }
+                    e
                 }
-                e
-            }
 
             if (abcjsError == null) return@forEachIndexed // Success with abcjs
 
@@ -88,12 +100,12 @@ public class AbcjsSemanticParityTest {
                 // Try comparing music21 against BOTH expanded and unexpanded
                 val m21MatchExpanded = compareWithMusic21(baseline.name, interpreted, m21FullResults)
                 val m21MatchUnexpanded = compareWithMusic21(baseline.name, unexpanded, m21FullResults)
-                
+
                 if (m21MatchExpanded || m21MatchUnexpanded) {
                     // Success with music21! We matched one of the ground truths.
-                    return@forEachIndexed 
+                    return@forEachIndexed
                 } else {
-                    // Mismatched BOTH abcjs and music21. 
+                    // Mismatched BOTH abcjs and music21.
                     // Only fail if THEY agree with each other.
                     if (compareAbcjsWithMusic21(abcjsTune, m21FullResults)) {
                         // Systemic agreement between abcjs and music21 against us.
@@ -113,11 +125,16 @@ public class AbcjsSemanticParityTest {
         }
     }
 
-    private fun compareWithAbcjs(name: String, interpreted: InterpretedTune, unexpanded: InterpretedTune, abcjsTune: Map<String, Any>) {
+    private fun compareWithAbcjs(
+        name: String,
+        interpreted: InterpretedTune,
+        unexpanded: InterpretedTune,
+        abcjsTune: Map<String, Any>,
+    ) {
         @Suppress("UNCHECKED_CAST")
         val abcjsLines = abcjsTune["lines"] as? List<Map<String, Any>> ?: emptyList()
         val coalescedAbcjsVoices = mutableMapOf<Pair<Int, Int>, MutableList<Map<String, Any>>>()
-        
+
         abcjsLines.forEach { line ->
             @Suppress("UNCHECKED_CAST")
             val staffs = line["staff"] as? List<Map<String, Any>>
@@ -129,42 +146,47 @@ public class AbcjsSemanticParityTest {
                 }
             }
         }
-        val allAbcjsVoices = coalescedAbcjsVoices.entries
-            .sortedWith(compareBy({ it.key.first }, { it.key.second }))
-            .map { it.value }
+        val allAbcjsVoices =
+            coalescedAbcjsVoices.entries
+                .sortedWith(compareBy({ it.key.first }, { it.key.second }))
+                .map { it.value }
 
         val sortedInterpretedVoices = interpreted.voices.entries.sortedBy { entry -> entry.key }
         val sortedUnexpandedVoices = unexpanded.voices.entries.sortedBy { entry -> entry.key }
 
         sortedInterpretedVoices.forEachIndexed { voiceIndex, (voiceId, expandedNotes) ->
             val abcjsEventsUnfiltered = if (allAbcjsVoices.size > voiceIndex) allAbcjsVoices[voiceIndex] else emptyList()
-            
+
             @Suppress("UNCHECKED_CAST")
             val midiData = abcjsTune["midiData"] as? Map<String, Any>
+
             @Suppress("UNCHECKED_CAST")
-            val midiTracks = (midiData?.get("tracks") as? List<List<Map<String, Any>?>>)
-                ?: (abcjsTune["midiEvents"] as? List<List<Map<String, Any>?>>)
-            
+            val midiTracks =
+                (midiData?.get("tracks") as? List<List<Map<String, Any>?>>)
+                    ?: (abcjsTune["midiEvents"] as? List<List<Map<String, Any>?>>)
+
             if (System.getProperty("abc.test.debug") == "true") {
-                println("DEBUG: [$name] midiData?=${midiData != null}, midiEvents?=${abcjsTune.containsKey("midiEvents")}, midiTracks size=${midiTracks?.size}")
+                println(
+                    "DEBUG: [$name] midiData?=${midiData != null}, midiEvents?=${abcjsTune.containsKey(
+                        "midiEvents",
+                    )}, midiTracks size=${midiTracks?.size}",
+                )
             }
-            
+
             if (System.getProperty("abc.test.debug") == "true") {
                 midiTracks?.forEachIndexed { i, track ->
                     val noteCount = track?.count { it?.get("cmd") == "note" } ?: 0
                     println("DEBUG: [$name] Track $i noteCount=$noteCount")
                 }
             }
-            
+
             // Try to find the first track with notes if voiceIndex 0 has nothing
             var midiTrack = if (midiTracks != null && midiTracks.size > voiceIndex) midiTracks[voiceIndex] else null
             val hasMidiNotesAtVoiceIndex = midiTrack?.any { trackEntry -> trackEntry?.get("cmd") == "note" } ?: false
-            
+
             if (!hasMidiNotesAtVoiceIndex && midiTracks != null && voiceIndex == 0) {
-               midiTrack = midiTracks.firstOrNull { t -> t?.any { it?.get("cmd") == "note" } ?: false }
+                midiTrack = midiTracks.firstOrNull { t -> t?.any { it?.get("cmd") == "note" } ?: false }
             }
-            
-            val hasMidiNotes = midiTrack?.any { trackEntry -> trackEntry?.get("cmd") == "note" } ?: false
 
             val candidates = mutableListOf<List<Map<String, Any>>>()
 
@@ -172,19 +194,25 @@ public class AbcjsSemanticParityTest {
             midiTracks?.forEachIndexed { trackIdx, track ->
                 val notes = track?.filter { it?.get("cmd") == "note" && it?.get("pitch") != null }?.filterNotNull() ?: emptyList()
                 if (notes.isNotEmpty()) {
-                    val grouped = notes.groupBy { Math.round((it["start"] as Number).toDouble() * 480.0) }
-                        .toSortedMap()
-                        .values
-                        .map { chordEvents ->
-                            mapOf(
-                                "el_type" to "note",
-                                "isMidiTrack" to true,
-                                "duration" to (chordEvents.first()["duration"] as Number).toDouble(),
-                                "midiPitches" to chordEvents.map { trackEntry ->
-                                    mapOf("pitch" to (trackEntry["pitch"] as Number).toInt(), "duration" to (trackEntry["duration"] as Number).toDouble())
-                                }
-                            )
-                        }
+                    val grouped =
+                        notes
+                            .groupBy { Math.round((it["start"] as Number).toDouble() * 480.0) }
+                            .toSortedMap()
+                            .values
+                            .map { chordEvents ->
+                                mapOf(
+                                    "el_type" to "note",
+                                    "isMidiTrack" to true,
+                                    "duration" to (chordEvents.first()["duration"] as Number).toDouble(),
+                                    "midiPitches" to
+                                        chordEvents.map { trackEntry ->
+                                            mapOf(
+                                                "pitch" to (trackEntry["pitch"] as Number).toInt(),
+                                                "duration" to (trackEntry["duration"] as Number).toDouble(),
+                                            )
+                                        },
+                                )
+                            }
                     candidates.add(grouped)
                 }
             }
@@ -194,17 +222,20 @@ public class AbcjsSemanticParityTest {
             abcjsEventsUnfiltered.forEach { event ->
                 if (event == null) return@forEach
                 val elType = event["el_type"] as? String
+
                 @Suppress("UNCHECKED_CAST")
                 val isSpacer = (event["rest"] as? Map<String, Any>)?.get("type") == "spacer"
                 if ((elType == "note" || elType == "rest") && !isSpacer) {
                     @Suppress("UNCHECKED_CAST")
                     val graceNotes = event["gracenotes"] as? List<Map<String, Any>>
                     graceNotes?.forEach { gn ->
-                        flatAbcjsNotation.add(gn.toMutableMap().apply { 
-                            put("el_type", "note")
-                            put("isGrace", true) 
-                            if (!containsKey("duration")) put("duration", 0.0)
-                        })
+                        flatAbcjsNotation.add(
+                            gn.toMutableMap().apply {
+                                put("el_type", "note")
+                                put("isGrace", true)
+                                if (!containsKey("duration")) put("duration", 0.0)
+                            },
+                        )
                     }
                     flatAbcjsNotation.add(event)
                 }
@@ -212,7 +243,14 @@ public class AbcjsSemanticParityTest {
             if (flatAbcjsNotation.isNotEmpty()) candidates.add(flatAbcjsNotation)
 
             // Determine expected counts
-            val unexpandedNotesForVoice = if (sortedUnexpandedVoices.size > voiceIndex) sortedUnexpandedVoices[voiceIndex].value else emptyList()
+            val unexpandedNotesForVoice =
+                if (sortedUnexpandedVoices.size >
+                    voiceIndex
+                ) {
+                    sortedUnexpandedVoices[voiceIndex].value
+                } else {
+                    emptyList()
+                }
 
             // Heuristic for picking candidates: Try matching against Expanded/Unexpanded and with/without Grace notes.
             data class MatchAttempt(
@@ -221,7 +259,7 @@ public class AbcjsSemanticParityTest {
                 val usingUnexpanded: Boolean,
                 val isGraceFiltered: Boolean,
                 val score: Int,
-                val isMidi: Boolean
+                val isMidi: Boolean,
             )
 
             val attempts = mutableListOf<MatchAttempt>()
@@ -231,9 +269,9 @@ public class AbcjsSemanticParityTest {
                     listOf(true, false).forEach { filterGrace ->
                         val baseNotes = if (useUnexpanded) unexpandedNotesForVoice else expandedNotes
                         val ourNotes = if (filterGrace) baseNotes.filter { !it.isGrace } else baseNotes
-                        
+
                         var score = if (candidate.size == ourNotes.size) 1000 else -Math.abs(candidate.size - ourNotes.size)
-                        
+
                         // Tie-breaker: if sizes match, try a quick duration check on the first few elements
                         if (score == 1000 && candidate.isNotEmpty() && ourNotes.isNotEmpty()) {
                             val checkSize = Math.min(10, Math.min(candidate.size, ourNotes.size))
@@ -242,14 +280,14 @@ public class AbcjsSemanticParityTest {
                                 val abcjsDur = (candidate[i]["duration"] as Number).toDouble()
                                 val ourDur = if (isMidi) ourNotes[i].playedDuration.toDouble() else ourNotes[i].duration.toDouble()
                                 val ourSemanticDur = ourNotes[i].semanticDuration.toDouble()
-                                
+
                                 if (Math.abs(abcjsDur - ourDur) < 0.001 || Math.abs(abcjsDur - ourSemanticDur) < 0.001) {
                                     durationMatches++
                                 }
                             }
                             score += durationMatches
                         }
-                        
+
                         // Second tie-breaker: prefer notation over MIDI if scores are otherwise equal
                         if (!isMidi) score += 1
 
@@ -259,7 +297,7 @@ public class AbcjsSemanticParityTest {
             }
 
             val bestMatch = attempts.maxByOrNull { it.score } ?: MatchAttempt(emptyList(), emptyList(), false, false, -1000, false)
-            
+
             val abcjsEvents = bestMatch.abcjsEvents
             val usingUnexpanded = bestMatch.usingUnexpanded
             val isGraceFiltered = bestMatch.isGraceFiltered
@@ -275,32 +313,45 @@ public class AbcjsSemanticParityTest {
             for (noteIndex in 0 until compareSize) {
                 val interpretedNote = finalNotes[noteIndex]
                 val abcjsEvent = abcjsEvents[noteIndex]
-                val context = if (noteIndex > 0) {
-                    val prevNote = currentNotes[noteIndex-1]
-                    " (Prev: ${prevNote.duration}/${prevNote.playedDuration})"
-                } else ""
+                val context =
+                    if (noteIndex > 0) {
+                        val prevNote = currentNotes[noteIndex - 1]
+                        " (Prev: ${prevNote.duration}/${prevNote.playedDuration})"
+                    } else {
+                        ""
+                    }
 
                 val abcjsDuration = (abcjsEvent["duration"] as Number).toDouble()
-                val ourComparisonDuration = if (isMidiBaseline) interpretedNote.playedDuration.toDouble() else interpretedNote.duration.toDouble()
-                
+                val ourComparisonDuration =
+                    if (isMidiBaseline) {
+                        interpretedNote.playedDuration.toDouble()
+                    } else {
+                        interpretedNote.duration
+                            .toDouble()
+                    }
+
                 if (Math.abs(abcjsDuration - ourComparisonDuration) > 0.001) {
                     // Match notation fallback
                     val matchNotation = Math.abs(abcjsDuration - interpretedNote.duration.toDouble()) < 0.001
                     val matchSemantic = Math.abs(abcjsDuration - interpretedNote.semanticDuration.toDouble()) < 0.001
-                    
+
                     if (!matchNotation && !matchSemantic) {
-                        assertEquals(abcjsDuration, ourComparisonDuration, 0.001, 
-                            "[$name] Duration mismatch at event $noteIndex in voice $voiceId$context (${if(usingUnexpanded) "unexpanded" else "expanded"}). abcjsDur: $abcjsDuration, ours: $ourComparisonDuration (semantic: ${interpretedNote.semanticDuration.toDouble()})")
+                        assertEquals(
+                            abcjsDuration,
+                            ourComparisonDuration,
+                            0.001,
+                            "[$name] Duration mismatch at event $noteIndex in voice $voiceId$context (${if (usingUnexpanded) "unexpanded" else "expanded"}). abcjsDur: $abcjsDuration, ours: $ourComparisonDuration (semantic: ${interpretedNote.semanticDuration.toDouble()})",
+                        )
                     }
                 }
-                
+
                 val isAbcjsRest = abcjsEvent["el_type"] == "rest" || abcjsEvent.containsKey("rest")
-                
+
                 if (interpretedNote.isRest) {
                     assertEquals(true, isAbcjsRest, "[$name] Expected rest at event $noteIndex in voice $voiceId$context")
                 } else {
                     assertEquals(false, isAbcjsRest, "[$name] Expected note (got rest) at event $noteIndex in voice $voiceId$context")
-                    
+
                     @Suppress("UNCHECKED_CAST")
                     val abcjsMidiPitchesRaw = abcjsEvent["midiPitches"] as? List<Map<String, Any>> ?: emptyList()
                     val abcjsMidiPitches = abcjsMidiPitchesRaw.mapNotNull { (it["pitch"] as? Number)?.toInt() }
@@ -308,77 +359,115 @@ public class AbcjsSemanticParityTest {
                     val interpretedMidi = interpretedNote.midiPitches
                     val abcjsSorted = abcjsMidiPitches.sorted()
                     val interpretedSorted = interpretedMidi.sorted()
-                    
+
                     if (abcjsSorted != interpretedSorted) {
-                        val isOctaveShift = abcjsSorted.size == interpretedSorted.size && 
-                            abcjsSorted.zip(interpretedSorted).all { (a, b) -> Math.abs(a - b) % 12 == 0 }
-                        
+                        val isOctaveShift =
+                            abcjsSorted.size == interpretedSorted.size &&
+                                abcjsSorted.zip(interpretedSorted).all { (a, b) -> Math.abs(a - b) % 12 == 0 }
+
                         if (!isOctaveShift) {
-                            assertEquals(abcjsSorted, interpretedSorted, "[$name] Pitch mismatch at event $noteIndex in voice $voiceId$context")
+                            assertEquals(
+                                abcjsSorted,
+                                interpretedSorted,
+                                "[$name] Pitch mismatch at event $noteIndex in voice $voiceId$context",
+                            )
                         }
                     }
                 }
             }
-            assertEquals(abcjsEvents.size, finalNotes.size, "[$name] Event count mismatch in voice $voiceId. (picked size ${abcjsEvents.size}, expected ${finalNotes.size}. usingUnexpanded=$usingUnexpanded, isGraceFiltered=$isGraceFiltered)")
+            assertEquals(
+                abcjsEvents.size,
+                finalNotes.size,
+                "[$name] Event count mismatch in voice $voiceId. (picked size ${abcjsEvents.size}, expected ${finalNotes.size}. usingUnexpanded=$usingUnexpanded, isGraceFiltered=$isGraceFiltered)",
+            )
         }
     }
 
-    private fun compareWithMusic21(name: String, interpreted: InterpretedTune, m21Results: List<List<Map<String, Any>>>): Boolean {
+    private fun compareWithMusic21(
+        name: String,
+        interpreted: InterpretedTune,
+        m21Results: List<List<Map<String, Any>>>,
+    ): Boolean {
         val sortedInterpretedVoices = interpreted.voices.entries.sortedBy { entry -> entry.key }
         if (sortedInterpretedVoices.size != m21Results.size) {
-            if (System.getProperty("abc.test.debug") == "true") println("DEBUG: [$name] m21 voice count mismatch: ours=${sortedInterpretedVoices.size}, m21=${m21Results.size}")
+            if (System.getProperty("abc.test.debug") ==
+                "true"
+            ) {
+                println("DEBUG: [$name] m21 voice count mismatch: ours=${sortedInterpretedVoices.size}, m21=${m21Results.size}")
+            }
             return false
         }
-        
+
         sortedInterpretedVoices.forEachIndexed { voiceIndex, (_, notes) ->
-            val m21Events = m21Results[voiceIndex].filter { event ->
-                val duration = (event["duration"] as? Number)?.toDouble() ?: 0.0
-                val isGrace = event["isGrace"] as? Boolean ?: false
-                duration > 0.0 || isGrace
-            }
+            val m21Events =
+                m21Results[voiceIndex].filter { event ->
+                    val duration = (event["duration"] as? Number)?.toDouble() ?: 0.0
+                    val isGrace = event["isGrace"] as? Boolean ?: false
+                    duration > 0.0 || isGrace
+                }
             if (notes.size != m21Events.size) {
-                if (System.getProperty("abc.test.debug") == "true") println("DEBUG: [$name] m21 event count mismatch in voice $voiceIndex: ours=${notes.size}, m21=${m21Events.size}")
+                if (System.getProperty("abc.test.debug") ==
+                    "true"
+                ) {
+                    println("DEBUG: [$name] m21 event count mismatch in voice $voiceIndex: ours=${notes.size}, m21=${m21Events.size}")
+                }
                 return false
             }
-            
+
             notes.forEachIndexed { noteIndex, interpretedNote ->
                 val m21Event = m21Events[noteIndex]
                 val m21Type = m21Event["type"] as? String ?: return false
-                
+
                 if (interpretedNote.isRest) {
                     if (m21Type != "rest") {
-                        if (System.getProperty("abc.test.debug") == "true") println("DEBUG: [$name] m21 mismatch at event $noteIndex: expected rest, got $m21Type")
+                        if (System.getProperty("abc.test.debug") ==
+                            "true"
+                        ) {
+                            println("DEBUG: [$name] m21 mismatch at event $noteIndex: expected rest, got $m21Type")
+                        }
                         return false
                     }
                 } else {
                     if (m21Type != "note" && m21Type != "chord") {
-                        if (System.getProperty("abc.test.debug") == "true") println("DEBUG: [$name] m21 mismatch at event $noteIndex: expected note/chord, got $m21Type")
+                        if (System.getProperty("abc.test.debug") ==
+                            "true"
+                        ) {
+                            println("DEBUG: [$name] m21 mismatch at event $noteIndex: expected note/chord, got $m21Type")
+                        }
                         return false
                     }
-                    
-                    val m21Pitches = if (m21Type == "note") {
-                        listOf((m21Event["pitch"] as Number).toInt())
-                    } else {
-                        @Suppress("UNCHECKED_CAST")
-                        (m21Event["pitches"] as List<Number>).map { it.toInt() }
-                    }
-                    
+
+                    val m21Pitches =
+                        if (m21Type == "note") {
+                            listOf((m21Event["pitch"] as Number).toInt())
+                        } else {
+                            @Suppress("UNCHECKED_CAST")
+                            (m21Event["pitches"] as List<Number>).map { it.toInt() }
+                        }
+
                     val ourPitches = interpretedNote.midiPitches
                     if (ourPitches != m21Pitches && !interpretedNote.isTieContinued) {
-                        val isOctaveShift = m21Pitches.size == ourPitches.size &&
-                            m21Pitches.sorted().zip(ourPitches.sorted()).all { (a, b) -> Math.abs(a - b) % 12 == 0 }
+                        val isOctaveShift =
+                            m21Pitches.size == ourPitches.size &&
+                                m21Pitches.sorted().zip(ourPitches.sorted()).all { (a, b) -> Math.abs(a - b) % 12 == 0 }
                         if (!isOctaveShift) {
-                            if (System.getProperty("abc.test.debug") == "true") println("DEBUG: [$name] m21 pitch mismatch at event $noteIndex: m21=$m21Pitches, ours=$ourPitches")
+                            if (System.getProperty("abc.test.debug") ==
+                                "true"
+                            ) {
+                                println("DEBUG: [$name] m21 pitch mismatch at event $noteIndex: m21=$m21Pitches, ours=$ourPitches")
+                            }
                             return false
                         }
                     }
                 }
-                
+
                 val m21WholeNoteDuration = (m21Event["duration"] as Number).toDouble() * 0.25
                 val ourComparisonDuration = interpretedNote.semanticDuration.toDouble()
                 if (Math.abs(m21WholeNoteDuration - ourComparisonDuration) > 0.001) {
                     if (System.getProperty("abc.test.debug") == "true") {
-                        println("DEBUG: [$name] m21 duration mismatch at event $noteIndex: m21=$m21WholeNoteDuration, ours=$ourComparisonDuration, note=${interpretedNote.pitches}, duration=${interpretedNote.duration}, semanticDuration=${interpretedNote.semanticDuration}, playedDuration=${interpretedNote.playedDuration}")
+                        println(
+                            "DEBUG: [$name] m21 duration mismatch at event $noteIndex: m21=$m21WholeNoteDuration, ours=$ourComparisonDuration, note=${interpretedNote.pitches}, duration=${interpretedNote.duration}, semanticDuration=${interpretedNote.semanticDuration}, playedDuration=${interpretedNote.playedDuration}",
+                        )
                     }
                     return false
                 }
@@ -387,14 +476,18 @@ public class AbcjsSemanticParityTest {
         return true
     }
 
-    private fun compareAbcjsWithMusic21(abcjsTune: Map<String, Any>, m21Results: List<List<Map<String, Any>>>): Boolean {
+    private fun compareAbcjsWithMusic21(
+        abcjsTune: Map<String, Any>,
+        m21Results: List<List<Map<String, Any>>>,
+    ): Boolean {
         @Suppress("UNCHECKED_CAST")
         val midiData = abcjsTune["midiData"] as? Map<String, Any>
+
         @Suppress("UNCHECKED_CAST")
         val midiTracks = midiData?.get("tracks") as? List<List<Map<String, Any>?>> ?: return false
-        
+
         if (midiTracks.size != m21Results.size) return false
-        
+
         midiTracks.forEachIndexed { index, track ->
             val abcjsNoteCount = track?.count { it?.get("cmd") == "note" } ?: 0
             val m21NoteCount = m21Results[index].count { it["type"] == "note" || it["type"] == "chord" }
@@ -403,16 +496,22 @@ public class AbcjsSemanticParityTest {
         return true
     }
 
-    private fun logTroublesome(filename: String, error: String) {
-        val rootDir = if (File(System.getProperty("user.dir")).name == "abc-test") {
-            File(System.getProperty("user.dir")).parentFile
-        } else {
-            File(System.getProperty("user.dir"))
-        }
+    private fun logTroublesome(
+        filename: String,
+        error: String,
+    ) {
+        val rootDir =
+            if (File(System.getProperty("user.dir")).name == "abc-test") {
+                File(System.getProperty("user.dir")).parentFile
+            } else {
+                File(System.getProperty("user.dir"))
+            }
         val batchName = filename.split("/").firstOrNull() ?: "unknown"
         val reportFile = File(rootDir, "reports/troublesome_$batchName.md")
         if (!reportFile.exists()) {
-            reportFile.writeText("# Troublesome Files: $batchName\nBoth abcjs and music21 disagree with our parser OR they disagree with each other.\n\n| File | Error |\n| --- | --- |\n")
+            reportFile.writeText(
+                "# Troublesome Files: $batchName\nBoth abcjs and music21 disagree with our parser OR they disagree with each other.\n\n| File | Error |\n| --- | --- |\n",
+            )
         }
         val entry = "| $filename | $error |\n"
         if (!reportFile.readText().contains(filename)) {
@@ -420,12 +519,16 @@ public class AbcjsSemanticParityTest {
         }
     }
 
-    private fun logDiscrepancy(filename: String, warnings: List<String>) {
-        val rootDir = if (File(System.getProperty("user.dir")).name == "abc-test") {
-            File(System.getProperty("user.dir")).parentFile
-        } else {
-            File(System.getProperty("user.dir"))
-        }
+    private fun logDiscrepancy(
+        filename: String,
+        warnings: List<String>,
+    ) {
+        val rootDir =
+            if (File(System.getProperty("user.dir")).name == "abc-test") {
+                File(System.getProperty("user.dir")).parentFile
+            } else {
+                File(System.getProperty("user.dir"))
+            }
         val batchName = filename.split("/").firstOrNull() ?: "unknown"
         val reportFile = File(rootDir, "reports/abcjs_discrepancies_$batchName.md")
         if (!reportFile.exists()) {
@@ -445,67 +548,67 @@ public class AbcjsSemanticParityTest {
                 val batchDir = File(batchDirProp)
                 val userDir = File(System.getProperty("user.dir"))
                 val projectRoot = if (File(userDir, "abc-test").exists()) userDir else userDir.parentFile
-                
+
                 File(projectRoot, "reports/abcjs_discrepancies_${batchDir.name}.md").delete()
                 File(projectRoot, "reports/troublesome_${batchDir.name}.md").delete()
-                
+
                 return getBaselinesFromDir(batchDir)
             }
             return Stream.of(AbcjsBaseline("EMPTY", "", "", null, ""))
         }
 
-        private fun findProjectRoot(): File {
-            var curr = File(System.getProperty("user.dir"))
-            while (curr.parentFile != null && !File(curr, "pom.xml").exists()) {
-                curr = curr.parentFile
-            }
-            return curr
-        }
-
         private fun getBaselinesFromDir(batchDir: File): Stream<AbcjsBaseline> {
-            val resolvedBatchDir = if (!batchDir.exists() && !batchDir.isAbsolute) {
-                // Try relative to project root if running from module
-                val projectRoot = File(System.getProperty("user.dir")).parentFile
-                File(projectRoot, batchDir.path)
-            } else batchDir
+            val resolvedBatchDir =
+                if (!batchDir.exists() && !batchDir.isAbsolute) {
+                    // Try relative to project root if running from module
+                    val projectRoot = File(System.getProperty("user.dir")).parentFile
+                    File(projectRoot, batchDir.path)
+                } else {
+                    batchDir
+                }
 
             val abcFilesDir = File(resolvedBatchDir, "abc_files")
             val midiJsonDir = File(resolvedBatchDir, "midi_json")
             val m21JsonDir = File(resolvedBatchDir, "music21_json")
-            
+
             val actualAbcDir = if (abcFilesDir.exists()) abcFilesDir else resolvedBatchDir
             val actualJsonDir = if (midiJsonDir.exists()) midiJsonDir else resolvedBatchDir
 
             val filter = System.getProperty("abc.test.filter")
             val files = actualAbcDir.listFiles { f -> f.extension == "abc" }
             if (filter != null) {
-                println("DEBUG: getBaselinesFromDir: actualAbcDir=${actualAbcDir.absolutePath}, filter=$filter, total files=${files?.size ?: 0}")
+                println(
+                    "DEBUG: getBaselinesFromDir: actualAbcDir=${actualAbcDir.absolutePath}, filter=$filter, total files=${files?.size ?: 0}",
+                )
             }
 
-            return (files?.mapNotNull { abcFile ->
-                val jsonFile = File(actualJsonDir, abcFile.nameWithoutExtension + ".json")
-                val m21JsonFile = File(m21JsonDir, abcFile.nameWithoutExtension + ".json")
-                
-                val baselineName = "${batchDir.name}/${abcFile.name}"
-                val filterList = filter?.split(",") ?: emptyList()
-                val matchesFilter = filter == null || filterList.any { baselineName.contains(it) || abcFile.nameWithoutExtension.contains(it) }
-                
-                if (!matchesFilter) return@mapNotNull null
+            return (
+                files
+                    ?.mapNotNull { abcFile ->
+                        val jsonFile = File(actualJsonDir, abcFile.nameWithoutExtension + ".json")
+                        val m21JsonFile = File(m21JsonDir, abcFile.nameWithoutExtension + ".json")
 
-                if (jsonFile.exists()) {
-                    AbcjsBaseline(
-                        baselineName, 
-                        abcFile.readText(), 
-                        jsonFile.readText(), 
-                        if (m21JsonFile.exists()) m21JsonFile.readText() else null,
-                        abcFile.absolutePath
-                    )
-                } else {
-                    if (matchesFilter) println("DEBUG: Found ABC but NO JSON for ${abcFile.name} in ${actualJsonDir.absolutePath}")
-                    null
-                }
-            }?.asSequence() ?: emptySequence())
-                .asStream()
+                        val baselineName = "${batchDir.name}/${abcFile.name}"
+                        val filterList = filter?.split(",") ?: emptyList()
+                        val matchesFilter =
+                            filter == null || filterList.any { baselineName.contains(it) || abcFile.nameWithoutExtension.contains(it) }
+
+                        if (!matchesFilter) return@mapNotNull null
+
+                        if (jsonFile.exists()) {
+                            AbcjsBaseline(
+                                baselineName,
+                                abcFile.readText(),
+                                jsonFile.readText(),
+                                if (m21JsonFile.exists()) m21JsonFile.readText() else null,
+                                abcFile.absolutePath,
+                            )
+                        } else {
+                            if (matchesFilter) println("DEBUG: Found ABC but NO JSON for ${abcFile.name} in ${actualJsonDir.absolutePath}")
+                            null
+                        }
+                    }?.asSequence() ?: emptySequence()
+            ).asStream()
         }
     }
 }

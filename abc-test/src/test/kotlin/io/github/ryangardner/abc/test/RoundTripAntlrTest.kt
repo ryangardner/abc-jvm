@@ -1,8 +1,9 @@
 package io.github.ryangardner.abc.test
-
-import io.github.ryangardner.abc.core.model.*
-import io.github.ryangardner.abc.parser.AbcSerializer
+import io.github.ryangardner.abc.core.model.AbcTune
+import io.github.ryangardner.abc.core.model.MusicElement
+import io.github.ryangardner.abc.core.model.SpacerElement
 import io.github.ryangardner.abc.parser.AbcParser
+import io.github.ryangardner.abc.parser.AbcSerializer
 import io.github.ryangardner.abc.theory.MeasureValidator
 import io.github.ryangardner.abc.theory.PitchInterpreter
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -13,15 +14,18 @@ import java.util.stream.Stream
 import java.util.zip.ZipFile
 import kotlin.streams.asStream
 
+@Suppress("MaxLineLength", "SwallowedException", "ReturnCount", "ThrowsCount")
 public class RoundTripAntlrTest {
-
-    public data class AbcSource(val name: String, val content: String) {
+    public data class AbcSource(
+        val name: String,
+        val content: String,
+    ) {
         override fun toString(): String = name
     }
 
     @ParameterizedTest(name = "ANTLR Round trip: {0}")
     @MethodSource("abcSources")
-    public fun `test antlr parser fidelity`(source: AbcSource): Unit {
+    public fun `test antlr parser fidelity`(source: AbcSource) {
         val parser = AbcParser()
         val serializer = AbcSerializer()
 
@@ -31,43 +35,83 @@ public class RoundTripAntlrTest {
         val serializedBook: String = originalTunes.joinToString("") { serializer.serialize(it) }
         
         val roundTrippedTunes: List<AbcTune> = parser.parseBook(serializedBook)
-        
         assertEquals(originalTunes.size, roundTrippedTunes.size, "[${source.name}] Tune count mismatch")
 
         originalTunes.forEachIndexed { tuneIndex: Int, originalTune: AbcTune ->
             val roundTrippedTune = roundTrippedTunes[tuneIndex]
-            
-            assertEquals(originalTune.header.reference, roundTrippedTune.header.reference, "[${source.name}] Tune $tuneIndex Reference mismatch")
+
+            assertEquals(
+                originalTune.header.reference,
+                roundTrippedTune.header.reference,
+                "[${source.name}] Tune $tuneIndex Reference mismatch",
+            )
             assertEquals(originalTune.header.title, roundTrippedTune.header.title, "[${source.name}] Tune $tuneIndex Title mismatch")
             assertEquals(originalTune.header.key, roundTrippedTune.header.key, "[${source.name}] Tune $tuneIndex Key mismatch")
             assertEquals(originalTune.header.meter, roundTrippedTune.header.meter, "[${source.name}] Tune $tuneIndex Meter mismatch")
             assertEquals(originalTune.header.length, roundTrippedTune.header.length, "[${source.name}] Tune $tuneIndex Length mismatch")
-            
+
             val originalTuneNormalized = originalTune.withoutLocation()
             val roundTrippedTuneNormalized = roundTrippedTune.withoutLocation()
-            
-            val originalBodyNormalized: List<MusicElement> = originalTuneNormalized.body.elements.dropLastWhile { it is SpacerElement && it.text == "\n" }.normalizeSpacers()
-            val roundTrippedBodyNormalized: List<MusicElement> = roundTrippedTuneNormalized.body.elements.dropLastWhile { it is SpacerElement && it.text == "\n" }.normalizeSpacers()
-            
-            assertEquals(originalBodyNormalized.size, roundTrippedBodyNormalized.size, "[${source.name}] Tune $tuneIndex Body size mismatch")
+
+            val originalBodyNormalized: List<MusicElement> =
+                originalTuneNormalized.body.elements
+                    .dropLastWhile {
+                        it is SpacerElement && it.text == "\n"
+                    }.normalizeSpacers()
+            val roundTrippedBodyNormalized: List<MusicElement> =
+                roundTrippedTuneNormalized.body.elements
+                    .dropLastWhile {
+                        it is SpacerElement &&
+                            it.text == "\n"
+                    }.normalizeSpacers()
+
+            assertEquals(
+                originalBodyNormalized.size,
+                roundTrippedBodyNormalized.size,
+                "[${source.name}] Tune $tuneIndex Body size mismatch",
+            )
 
             // Semantic Validation
             val originalInterpreted = PitchInterpreter.interpret(originalTune)
             val roundTrippedInterpreted = PitchInterpreter.interpret(roundTrippedTune)
-            
-            assertEquals(originalInterpreted.voices.size, roundTrippedInterpreted.voices.size, "[${source.name}] Tune $tuneIndex Interpreted voice count mismatch")
-            
+
+            assertEquals(
+                originalInterpreted.voices.size,
+                roundTrippedInterpreted.voices.size,
+                "[${source.name}] Tune $tuneIndex Interpreted voice count mismatch",
+            )
+
             originalInterpreted.voices.forEach { (voiceId, originalNotes) ->
-                val roundTrippedNotes = roundTrippedInterpreted.voices[voiceId] ?: throw AssertionError("Voice $voiceId missing in round-tripped tune")
-                assertEquals(originalNotes.size, roundTrippedNotes.size, "[${source.name}] Tune $tuneIndex Voice $voiceId element count mismatch")
-                
+                val roundTrippedNotes =
+                    roundTrippedInterpreted.voices[voiceId] ?: throw AssertionError("Voice $voiceId missing in round-tripped tune")
+                assertEquals(
+                    originalNotes.size,
+                    roundTrippedNotes.size,
+                    "[${source.name}] Tune $tuneIndex Voice $voiceId element count mismatch",
+                )
+
                 originalNotes.forEachIndexed { noteIndex, originalNote ->
                     val roundTrippedNote = roundTrippedNotes[noteIndex]
-                    assertEquals(originalNote.pitches.map { it.midiNoteNumber }.sorted(), roundTrippedNote.pitches.map { it.midiNoteNumber }.sorted(), "[${source.name}] Tune $tuneIndex Voice $voiceId Note $noteIndex pitch mismatch")
-                    assertEquals(originalNote.duration.toDouble(), roundTrippedNote.duration.toDouble(), 0.001, "[${source.name}] Tune $tuneIndex Voice $voiceId Note $noteIndex duration mismatch")
+                    assertEquals(
+                        originalNote.pitches
+                            .map {
+                                it.midiNoteNumber
+                            }.sorted(),
+                        roundTrippedNote.pitches
+                            .map {
+                                it.midiNoteNumber
+                            }.sorted(),
+                        "[${source.name}] Tune $tuneIndex Voice $voiceId Note $noteIndex pitch mismatch",
+                    )
+                    assertEquals(
+                        originalNote.duration.toDouble(),
+                        roundTrippedNote.duration.toDouble(),
+                        0.001,
+                        "[${source.name}] Tune $tuneIndex Voice $voiceId Note $noteIndex duration mismatch",
+                    )
                 }
             }
-            
+
             // Measure Validation
             MeasureValidator.validate(originalTune)
             MeasureValidator.validate(roundTrippedTune)
@@ -83,15 +127,19 @@ public class RoundTripAntlrTest {
             val projectRoot = if (File(userDir, "abc-test").exists()) userDir else userDir.parentFile
             val home = System.getProperty("user.home")
             val downloads = File(home, "Downloads")
-            
+
             if (!isHeavy) {
                 val dir = File(projectRoot, "abc-test/src/test/resources/sanity-samples")
                 if (!dir.exists()) {
                     return Stream.empty()
                 }
-                return (dir.listFiles { f -> f.extension == "abc" }?.map { 
-                    AbcSource(it.name, it.readText()) 
-                }?.asSequence() ?: emptySequence()).asStream()
+                return (
+                    dir
+                        .listFiles { f -> f.extension == "abc" }
+                        ?.map {
+                            AbcSource(it.name, it.readText())
+                        }?.asSequence() ?: emptySequence()
+                ).asStream()
             }
 
             val zipFiles = downloads.listFiles { f -> f.name.startsWith("abc_notation_batch_") && f.extension == "zip" } ?: emptyArray()
@@ -100,27 +148,31 @@ public class RoundTripAntlrTest {
             val dirNames = unzippedDirs.map { it.name }.toSet()
             val filteredZips = zipFiles.filter { it.name.substringBeforeLast(".") !in dirNames }
 
-            val sequence = sequence {
-                unzippedDirs.sortedBy { it.name }.forEach { dir ->
-                    dir.walkTopDown()
-                        .filter { it.extension == "abc" }
-                        .sortedBy { it.name }
-                        .forEach { file ->
-                            yield(AbcSource("${dir.name}/${file.name}", file.readText()))
-                        }
-                }
-                filteredZips.sortedBy { it.name }.forEach { zipFile ->
-                    ZipFile(zipFile).use { zip ->
-                        zip.entries().asSequence()
-                            .filter { !it.isDirectory && it.name.endsWith(".abc") }
+            val sequence =
+                sequence {
+                    unzippedDirs.sortedBy { it.name }.forEach { dir ->
+                        dir
+                            .walkTopDown()
+                            .filter { it.extension == "abc" }
                             .sortedBy { it.name }
-                            .forEach { entry ->
-                                val content = zip.getInputStream(entry).bufferedReader().readText()
-                                yield(AbcSource("${zipFile.name}/${entry.name}", content))
+                            .forEach { file ->
+                                yield(AbcSource("${dir.name}/${file.name}", file.readText()))
                             }
                     }
+                    filteredZips.sortedBy { it.name }.forEach { zipFile ->
+                        ZipFile(zipFile).use { zip ->
+                            zip
+                                .entries()
+                                .asSequence()
+                                .filter { !it.isDirectory && it.name.endsWith(".abc") }
+                                .sortedBy { it.name }
+                                .forEach { entry ->
+                                    val content = zip.getInputStream(entry).bufferedReader().readText()
+                                    yield(AbcSource("${zipFile.name}/${entry.name}", content))
+                                }
+                        }
+                    }
                 }
-            }
 
             return sequence.take(10000).asStream()
         }
@@ -131,7 +183,7 @@ private fun List<MusicElement>.normalizeSpacers(): List<MusicElement> {
     if (isEmpty()) return emptyList()
     val result = mutableListOf<MusicElement>()
     var currentSpacerText = StringBuilder()
-    
+
     for (element in this) {
         if (element is SpacerElement) {
             currentSpacerText.append(element.text)

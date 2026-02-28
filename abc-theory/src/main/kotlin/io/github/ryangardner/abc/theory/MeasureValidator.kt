@@ -1,36 +1,68 @@
 package io.github.ryangardner.abc.theory
+import io.github.ryangardner.abc.core.model.AbcTune
+import io.github.ryangardner.abc.core.model.BarLineElement
+import io.github.ryangardner.abc.core.model.BarLineType
+import io.github.ryangardner.abc.core.model.BodyHeaderElement
+import io.github.ryangardner.abc.core.model.ChordElement
+import io.github.ryangardner.abc.core.model.HeaderType
+import io.github.ryangardner.abc.core.model.InlineFieldElement
+import io.github.ryangardner.abc.core.model.NoteDuration
+import io.github.ryangardner.abc.core.model.NoteElement
+import io.github.ryangardner.abc.core.model.RestElement
+import io.github.ryangardner.abc.core.model.TimeSignature
+import io.github.ryangardner.abc.core.model.TupletElement
 
-import io.github.ryangardner.abc.core.model.*
-
+@Suppress("MagicNumber", "NestedBlockDepth")
 public object MeasureValidator {
-
     /**
      * Validates that measures in the tune
      * sum up to the expected duration defined by the time signature.
-     * 
+     *
      * @param strict If true, enforces strict adherence to the meter (modulo standard ABC leniency).
      *               If false (default), most partial measures are tolerated and only major discrepancies are reported.
      * @return A list of validation errors/warnings.
      */
-    public fun validate(tune: AbcTune, strict: Boolean = false): List<MeasureError> {
+    public fun validate(
+        tune: AbcTune,
+        strict: Boolean = false,
+    ): List<MeasureError> {
         if (tune.header.meter.isNone) return emptyList()
 
         val ctx = ValidationContext(tune.header.meter, strict)
 
         tune.body.elements.forEach { element ->
             when (element) {
-                is NoteElement -> ctx.processDuration(element.length)
-                is RestElement -> ctx.processDuration(element.duration)
-                is ChordElement -> ctx.processDuration(element.duration)
+                is NoteElement -> {
+                    ctx.processDuration(element.length)
+                }
+
+                is RestElement -> {
+                    ctx.processDuration(element.duration)
+                }
+
+                is ChordElement -> {
+                    ctx.processDuration(element.duration)
+                }
+
                 is TupletElement -> {
                     val p = element.p
                     val q = element.q ?: getDefaultQ(p, ctx.currentMeter)
                     val r = element.r ?: p
                     ctx.activeTuplet = TupletState(q, p, r)
                 }
-                is BarLineElement -> ctx.completeMeasure(element.type)
-                is InlineFieldElement -> handleHeader(ctx, element.fieldType, element.value)
-                is BodyHeaderElement -> handleHeader(ctx, element.key, element.value)
+
+                is BarLineElement -> {
+                    ctx.completeMeasure(element.type)
+                }
+
+                is InlineFieldElement -> {
+                    handleHeader(ctx, element.fieldType, element.value)
+                }
+
+                is BodyHeaderElement -> {
+                    handleHeader(ctx, element.key, element.value)
+                }
+
                 else -> {}
             }
         }
@@ -41,7 +73,11 @@ public object MeasureValidator {
         return ctx.errors
     }
 
-    private fun handleHeader(ctx: ValidationContext, type: HeaderType, value: String) {
+    private fun handleHeader(
+        ctx: ValidationContext,
+        type: HeaderType,
+        value: String,
+    ) {
         val cleanValue = value.split(" ", "%").first().trim()
         when (type) {
             HeaderType.METER -> {
@@ -52,12 +88,20 @@ public object MeasureValidator {
                     ctx.currentMeter = TimeSignature(num, den)
                 }
             }
-            HeaderType.VOICE -> ctx.currentVoiceId = cleanValue
+
+            HeaderType.VOICE -> {
+                ctx.currentVoiceId = cleanValue
+            }
+
             else -> {}
         }
     }
 
-    private fun handleHeader(ctx: ValidationContext, key: String, value: String) {
+    private fun handleHeader(
+        ctx: ValidationContext,
+        key: String,
+        value: String,
+    ) {
         val cleanValue = value.split(" ", "%").first().trim()
         when (key) {
             "M" -> {
@@ -68,12 +112,19 @@ public object MeasureValidator {
                     ctx.currentMeter = TimeSignature(num, den)
                 }
             }
-            "V" -> ctx.currentVoiceId = cleanValue
+
+            "V" -> {
+                ctx.currentVoiceId = cleanValue
+            }
+
             else -> {}
         }
     }
 
-    private fun getDefaultQ(p: Int, meter: TimeSignature): Int {
+    private fun getDefaultQ(
+        p: Int,
+        meter: TimeSignature,
+    ): Int {
         val isCompound = (meter.numerator % 3 == 0 && meter.numerator > 3)
         return when (p) {
             2, 4, 8 -> 3
@@ -86,21 +137,26 @@ public object MeasureValidator {
     private class TupletState(
         val q: Int,
         val p: Int,
-        var remainingNotes: Int
+        var remainingNotes: Int,
     )
 
     private data class HistoricalMeasure(
         val duration: NoteDuration,
-        val barType: BarLineType
+        val barType: BarLineType,
     )
 
-    private class VoiceState(var meter: TimeSignature) {
+    private class VoiceState(
+        var meter: TimeSignature,
+    ) {
         var currentMeasureSum: NoteDuration = NoteDuration.ZERO
         var history: MutableList<HistoricalMeasure> = mutableListOf()
         var activeTuplet: TupletState? = null
     }
 
-    private class ValidationContext(val defaultMeter: TimeSignature, val strict: Boolean) {
+    private class ValidationContext(
+        val defaultMeter: TimeSignature,
+        val strict: Boolean,
+    ) {
         val errors = mutableListOf<MeasureError>()
         var currentVoiceId = "default"
         private val voiceStates = mutableMapOf<String, VoiceState>()
@@ -110,22 +166,27 @@ public object MeasureValidator {
 
         var currentMeter: TimeSignature
             get() = state.meter
-            set(value) { state.meter = value }
+            set(value) {
+                state.meter = value
+            }
 
         var activeTuplet: TupletState?
             get() = state.activeTuplet
-            set(value) { state.activeTuplet = value }
+            set(value) {
+                state.activeTuplet = value
+            }
 
         fun processDuration(baseDuration: NoteDuration) {
             val tuplet = activeTuplet
-            val effectiveDuration = if (tuplet != null && tuplet.remainingNotes > 0) {
-                val scaled = baseDuration.times(tuplet.q, tuplet.p)
-                tuplet.remainingNotes--
-                if (tuplet.remainingNotes == 0) activeTuplet = null
-                scaled
-            } else {
-                baseDuration
-            }
+            val effectiveDuration =
+                if (tuplet != null && tuplet.remainingNotes > 0) {
+                    val scaled = baseDuration.times(tuplet.q, tuplet.p)
+                    tuplet.remainingNotes--
+                    if (tuplet.remainingNotes == 0) activeTuplet = null
+                    scaled
+                } else {
+                    baseDuration
+                }
             state.currentMeasureSum += effectiveDuration
         }
 
@@ -144,7 +205,7 @@ public object MeasureValidator {
                 if (s.history.size > 0) {
                     val expected = s.meter.toNoteDuration()
                     val skipIndices = mutableSetOf<Int>()
-                    
+
                     if (!strict) {
                         // In non-strict mode, we treat all partial measures as "ABC-legit"
                         // unless they are extremely broken (e.g. duration doesn't simplify to anything sane)
@@ -172,12 +233,12 @@ public object MeasureValidator {
                         while (changed) {
                             changed = false
                             for (i in 0 until s.history.size - 1) {
-                                if (skipIndices.contains(i) && skipIndices.contains(i+1)) continue
-                                val sum = s.history[i].duration + s.history[i+1].duration
+                                if (skipIndices.contains(i) && skipIndices.contains(i + 1)) continue
+                                val sum = s.history[i].duration + s.history[i + 1].duration
                                 val ratio = sum.toDouble() / expected.toDouble()
                                 if (Math.abs(ratio - Math.round(ratio)) < 0.0001 && ratio >= 1.0) {
                                     if (skipIndices.add(i)) changed = true
-                                    if (skipIndices.add(i+1)) changed = true
+                                    if (skipIndices.add(i + 1)) changed = true
                                 }
                             }
                         }
@@ -185,7 +246,7 @@ public object MeasureValidator {
                         for (i in 0 until s.history.size) {
                             if (skipIndices.contains(i)) continue
                             val currentBar = s.history[i].barType
-                            val prevBar = if (i > 0) s.history[i-1].barType else BarLineType.SINGLE
+                            val prevBar = if (i > 0) s.history[i - 1].barType else BarLineType.SINGLE
                             if (currentBar != BarLineType.SINGLE || prevBar != BarLineType.SINGLE) {
                                 skipIndices.add(i)
                             }
@@ -206,5 +267,5 @@ public data class MeasureError(
     val measureIndex: Int,
     val actualDuration: NoteDuration,
     val expectedDuration: NoteDuration,
-    val voice: String
+    val voice: String,
 )

@@ -1,6 +1,25 @@
 package io.github.ryangardner.abc.theory
-
-import io.github.ryangardner.abc.core.model.*
+import io.github.ryangardner.abc.core.model.AbcTune
+import io.github.ryangardner.abc.core.model.Accidental
+import io.github.ryangardner.abc.core.model.BarLineElement
+import io.github.ryangardner.abc.core.model.BodyHeaderElement
+import io.github.ryangardner.abc.core.model.ChordElement
+import io.github.ryangardner.abc.core.model.Decoration
+import io.github.ryangardner.abc.core.model.DirectiveElement
+import io.github.ryangardner.abc.core.model.GraceNoteElement
+import io.github.ryangardner.abc.core.model.HeaderType
+import io.github.ryangardner.abc.core.model.InlineFieldElement
+import io.github.ryangardner.abc.core.model.KeySignature
+import io.github.ryangardner.abc.core.model.MusicElement
+import io.github.ryangardner.abc.core.model.NoteDuration
+import io.github.ryangardner.abc.core.model.NoteElement
+import io.github.ryangardner.abc.core.model.NoteStep
+import io.github.ryangardner.abc.core.model.Pitch
+import io.github.ryangardner.abc.core.model.RestElement
+import io.github.ryangardner.abc.core.model.SpacerElement
+import io.github.ryangardner.abc.core.model.TieType
+import io.github.ryangardner.abc.core.model.TimeSignature
+import io.github.ryangardner.abc.core.model.TupletElement
 import io.github.ryangardner.abc.theory.util.InterpretationUtils
 import io.github.ryangardner.abc.theory.util.KeyParserUtil
 import io.github.ryangardner.abc.theory.util.addDurations
@@ -10,7 +29,10 @@ import org.slf4j.LoggerFactory
 
 public data class InterpretedNote(
     public val pitches: List<Pitch>,
-    public val midiPitches: List<Int>, // Absolute MIDI pitches (after transpositions)
+    /**
+     * Absolute MIDI pitches (after transpositions)
+     */
+    public val midiPitches: List<Int>,
     /**
      * The written duration as indicated by the score's notation (e.g., a quarter note).
      * This value corresponds to the visual length of the note symbol on the staff.
@@ -20,16 +42,16 @@ public data class InterpretedNote(
     public val duration: NoteDuration,
     /**
      * The nominal musical duration of the note within the rhythmic grid.
-     * This accounts for tuplets (e.g. 3 notes in the time of 2) to maintain proper 
-     * measure alignment, but provides the "clean" theoretical value before any 
+     * This accounts for tuplets (e.g. 3 notes in the time of 2) to maintain proper
+     * measure alignment, but provides the "clean" theoretical value before any
      * performative interpretation (like grace notes stealing time) is applied.
      * (Matches music21's scaled length).
      */
     public val semanticDuration: NoteDuration,
     /**
      * The performative duration of the note as it would be heard.
-     * This includes both tuplet scaling and "duration stealing" from embellishments 
-     * like grace notes. Different playback engines may have different opinions 
+     * This includes both tuplet scaling and "duration stealing" from embellishments
+     * like grace notes. Different playback engines may have different opinions
      * on how much time an embellishment "steals" from its neighbor.
      * (Matches the duration found in abcjs MIDI tracks).
      */
@@ -39,14 +61,14 @@ public data class InterpretedNote(
      */
     public val isRest: Boolean = false,
     /**
-     * Indicates the note is a grace note (embellishment) which has no nominal 
-     * duration in the rhythmic grid, but may "steal" performative time (playedDuration) 
+     * Indicates the note is a grace note (embellishment) which has no nominal
+     * duration in the rhythmic grid, but may "steal" performative time (playedDuration)
      * from the following main note.
      */
     public val isGrace: Boolean = false,
     /**
      * Indicates that this note is a continuation of a tie from a previous note.
-     * Tied notes represent a single sustained sound across rhythmic boundaries 
+     * Tied notes represent a single sustained sound across rhythmic boundaries
      * rather than separate articulations.
      */
     public val isTieContinued: Boolean = false,
@@ -57,16 +79,21 @@ public data class InterpretedNote(
     /**
      * A list of musical decorations or articulations (e.g., staccato, roll) attached to the note.
      */
-    public val decorations: List<Decoration> = emptyList()
+    public val decorations: List<Decoration> = emptyList(),
 )
 
 public data class InterpretedTune(
     public val voices: Map<String, List<InterpretedNote>>,
-    public val validationErrors: List<String> = emptyList()
+    public val validationErrors: List<String> = emptyList(),
 )
 
-internal data class TupletState(val q: Int, val p: Int, var remainingNotes: Int)
+internal data class TupletState(
+    val q: Int,
+    val p: Int,
+    var remainingNotes: Int,
+)
 
+@Suppress("LongParameterList")
 internal class VoiceState(
     var currentKey: KeySignature,
     var currentMeter: TimeSignature,
@@ -77,10 +104,12 @@ internal class VoiceState(
     var measureDuration: NoteDuration = NoteDuration(0, 1),
     var measureCount: Int = 0,
     var pendingBrokenRhythmMultiplier: Double? = null,
-    var nextBrokenRhythmMultiplier: Double? = null
+    var nextBrokenRhythmMultiplier: Double? = null,
 )
 
-internal class InterpretationSession(val tune: AbcTune) {
+internal class InterpretationSession(
+    val tune: AbcTune,
+) {
     val voices = mutableMapOf<String, MutableList<InterpretedNote>>()
     val validationErrors = mutableListOf<String>()
     val voiceStates = mutableMapOf<String, VoiceState>()
@@ -91,15 +120,14 @@ internal class InterpretationSession(val tune: AbcTune) {
 
     fun currentVoiceState(): VoiceState = getVoiceState(currentVoiceId)
 
-    fun getVoiceState(id: String): VoiceState {
-        return voiceStates.getOrPut(id) {
+    fun getVoiceState(id: String): VoiceState =
+        voiceStates.getOrPut(id) {
             VoiceState(
                 currentKey = tune.header.key,
                 currentMeter = tune.header.meter,
-                midiTranspose = globalMidiTranspose
+                midiTranspose = globalMidiTranspose,
             )
         }
-    }
 
     fun appendNote(note: InterpretedNote) {
         voices.getOrPut(currentVoiceId) { mutableListOf() }.add(note)
@@ -132,30 +160,51 @@ public object PitchInterpreter {
     }
 
     private object HeaderProcessor {
-        fun processGlobalHeaders(session: InterpretationSession, tune: AbcTune) {
+        fun processGlobalHeaders(
+            session: InterpretationSession,
+            tune: AbcTune,
+        ) {
             tune.header.headers.forEach { (id, value) ->
                 when (id) {
-                    "V" -> {
-                        val voiceId = value.split(" ", "\t").first()
-                        val vState = session.getVoiceState(voiceId)
-                        InterpretationUtils.parseCombinedTransposition(value)?.let { vState.midiTranspose = it }
-                    }
-                    "K" -> {
-                        val vState = session.getVoiceState("1")
-                        InterpretationUtils.parseCombinedTransposition(value)?.let { vState.midiTranspose = it }
-                    }
-                    "%%" -> {
-                        if (value.startsWith("MIDI transpose", ignoreCase = true)) {
-                            val transpose = value.split(WHITESPACE_REGEX).last().toIntOrNull() ?: 0
-                            session.globalMidiTranspose = transpose
-                            session.voiceStates.values.forEach { it.midiTranspose = transpose }
-                        }
-                    }
+                    "V" -> processVoiceHeader(session, value)
+                    "K" -> processKeyHeader(session, value)
+                    "%%" -> processDirectiveHeader(session, value)
                 }
             }
         }
 
-        fun handleBodyHeader(session: InterpretationSession, element: BodyHeaderElement) {
+        private fun processVoiceHeader(
+            session: InterpretationSession,
+            value: String,
+        ) {
+            val voiceId = value.split(" ", "\t").first()
+            val vState = session.getVoiceState(voiceId)
+            InterpretationUtils.parseCombinedTransposition(value)?.let { vState.midiTranspose = it }
+        }
+
+        private fun processKeyHeader(
+            session: InterpretationSession,
+            value: String,
+        ) {
+            val vState = session.getVoiceState("1")
+            InterpretationUtils.parseCombinedTransposition(value)?.let { vState.midiTranspose = it }
+        }
+
+        private fun processDirectiveHeader(
+            session: InterpretationSession,
+            value: String,
+        ) {
+            if (value.startsWith("MIDI transpose", ignoreCase = true)) {
+                val transpose = value.split(WHITESPACE_REGEX).last().toIntOrNull() ?: 0
+                session.globalMidiTranspose = transpose
+                session.voiceStates.values.forEach { it.midiTranspose = transpose }
+            }
+        }
+
+        fun handleBodyHeader(
+            session: InterpretationSession,
+            element: BodyHeaderElement,
+        ) {
             val vState = session.currentVoiceState()
             when (element.key) {
                 "V" -> {
@@ -163,36 +212,47 @@ public object PitchInterpreter {
                     val newState = session.getVoiceState(session.currentVoiceId)
                     InterpretationUtils.parseCombinedTransposition(element.value)?.let { newState.midiTranspose = it }
                 }
+
                 "K" -> {
                     vState.currentKey = KeyParserUtil.parse(element.value)
                     InterpretationUtils.parseCombinedTransposition(element.value)?.let { vState.midiTranspose = it }
                 }
+
                 "M" -> {
                     vState.currentMeter = InterpretationUtils.parseMeter(element.value)
                 }
             }
         }
 
-        fun handleInlineField(session: InterpretationSession, element: InlineFieldElement) {
+        fun handleInlineField(
+            session: InterpretationSession,
+            element: InlineFieldElement,
+        ) {
             val vState = session.currentVoiceState()
             when (element.fieldType) {
                 HeaderType.KEY -> {
                     vState.currentKey = KeyParserUtil.parse(element.value)
                     InterpretationUtils.parseCombinedTransposition(element.value)?.let { vState.midiTranspose = it }
                 }
+
                 HeaderType.VOICE -> {
                     session.currentVoiceId = element.value.split(" ", "\t").first()
                     val newState = session.getVoiceState(session.currentVoiceId)
                     InterpretationUtils.parseCombinedTransposition(element.value)?.let { newState.midiTranspose = it }
                 }
+
                 HeaderType.METER -> {
                     vState.currentMeter = InterpretationUtils.parseMeter(element.value)
                 }
+
                 else -> {}
             }
         }
 
-        fun handleDirective(session: InterpretationSession, element: DirectiveElement) {
+        fun handleDirective(
+            session: InterpretationSession,
+            element: DirectiveElement,
+        ) {
             if (element.content.startsWith("MIDI transpose", ignoreCase = true)) {
                 session.currentVoiceState().midiTranspose = element.content.split(WHITESPACE_REGEX).last().toIntOrNull() ?: 0
             }
@@ -202,13 +262,13 @@ public object PitchInterpreter {
     private object TimeCalculator {
         data class DurationResult(
             val semantic: NoteDuration,
-            val played: NoteDuration
+            val played: NoteDuration,
         )
 
         fun calculate(
             baseDuration: NoteDuration,
             tuplet: TupletState?,
-            session: InterpretationSession
+            session: InterpretationSession,
         ): DurationResult {
             val vState = session.currentVoiceState()
             var scaled = baseDuration
@@ -216,7 +276,7 @@ public object PitchInterpreter {
                 scaled = scaled.multiply(tuplet.q, tuplet.p)
                 tuplet.remainingNotes--
             }
-            
+
             if (vState.pendingBrokenRhythmMultiplier != null) {
                 scaled = scaled.scale(vState.pendingBrokenRhythmMultiplier!!)
                 vState.pendingBrokenRhythmMultiplier = null
@@ -224,13 +284,13 @@ public object PitchInterpreter {
                 scaled = scaled.scale(vState.nextBrokenRhythmMultiplier!!)
                 vState.nextBrokenRhythmMultiplier = null
             }
-            
+
             return DurationResult(scaled, scaled) // semantic is same as played (before grace stealing)
         }
 
         fun handleGraceStealing(
             session: InterpretationSession,
-            playedDuration: NoteDuration
+            playedDuration: NoteDuration,
         ): NoteDuration {
             var adjustedPlayed = playedDuration
             val vState = session.currentVoiceState()
@@ -251,7 +311,7 @@ public object PitchInterpreter {
     internal object PitchResolver {
         internal fun resolve(
             note: NoteElement,
-            session: InterpretationSession
+            session: InterpretationSession,
         ): Pitch {
             val vState = session.currentVoiceState()
             val interpretedPitch = interpretBasePitch(note, vState.currentKey, vState.activeAccidentals)
@@ -271,39 +331,55 @@ public object PitchInterpreter {
          * @param activeAccidentals A map of step to accidental active in the current measure
          * @return The absolute pitch
          */
-        internal fun interpretBasePitch(note: NoteElement, key: KeySignature, activeAccidentals: Map<Pair<NoteStep, Int>, Accidental>): Pitch {
+        internal fun interpretBasePitch(
+            note: NoteElement,
+            key: KeySignature,
+            activeAccidentals: Map<Pair<NoteStep, Int>, Accidental>,
+        ): Pitch {
             val step = note.pitch.step
             val octave = note.pitch.octave
             val explicitAccidental = note.pitch.accidental ?: note.accidental
 
-            val interpretedAccidental = if (explicitAccidental != null) {
-                explicitAccidental
-            } else if (activeAccidentals.containsKey(step to octave)) {
-                activeAccidentals[step to octave]
-            } else {
-                val fromKey = getAccidentalFromKey(step, key)
-                interpretedAccidentalFromKey(step, octave, fromKey)
-                fromKey
-            }
+            val interpretedAccidental =
+                if (explicitAccidental != null) {
+                    explicitAccidental
+                } else if (activeAccidentals.containsKey(step to octave)) {
+                    activeAccidentals[step to octave]
+                } else {
+                    val fromKey = getAccidentalFromKey(step, key)
+                    interpretedAccidentalFromKey(step, octave, fromKey)
+                    fromKey
+                }
 
             interpretedAccidentalDebug(step, octave, interpretedAccidental)
 
             return note.pitch.copy(accidental = interpretedAccidental)
         }
 
-        private fun interpretedAccidentalFromKey(step: NoteStep, octave: Int, fromKey: Accidental?) {
+        private fun interpretedAccidentalFromKey(
+            step: NoteStep,
+            octave: Int,
+            fromKey: Accidental?,
+        ) {
             if (logger.isDebugEnabled) {
                 logger.debug("Pitch $step at octave $octave using accidental from key: $fromKey")
             }
         }
 
-        private fun interpretedAccidentalDebug(step: NoteStep, octave: Int, interpretedAccidental: Accidental?) {
+        private fun interpretedAccidentalDebug(
+            step: NoteStep,
+            octave: Int,
+            interpretedAccidental: Accidental?,
+        ) {
             if (logger.isDebugEnabled) {
                 logger.debug("Pitch $step at octave $octave interpreted accidental: $interpretedAccidental")
             }
         }
 
-        private fun getAccidentalFromKey(step: NoteStep, key: KeySignature): Accidental? {
+        private fun getAccidentalFromKey(
+            step: NoteStep,
+            key: KeySignature,
+        ): Accidental? {
             val candidate = CircleOfFifths.getBestKey(key)
             val k = candidate.accidentalsCount
 
@@ -315,14 +391,14 @@ public object PitchInterpreter {
     private object TieResolver {
         data class TieResult(
             val tiedFrom: Pair<String, Int>?,
-            val adjustedMidiPitches: List<Int>
+            val adjustedMidiPitches: List<Int>,
         )
 
         fun resolve(
             session: InterpretationSession,
             midiPitches: List<Int>,
             hasExplicitAccidental: Boolean,
-            isChord: Boolean = false
+            isChord: Boolean = false,
         ): TieResult {
             val vState = session.currentVoiceState()
             val voiceId = session.currentVoiceId
@@ -336,9 +412,10 @@ public object PitchInterpreter {
             if (!isChord && tiedFrom == null && !hasExplicitAccidental) {
                 // Fuzzy matching for single notes
                 val midiPitch = midiPitches[0]
-                val heuristicMatch = openTies.entries.find { (key, _) ->
-                    key.first == voiceId && key.second.size == 1 && Math.abs(key.second[0] - midiPitch) <= 2
-                }
+                val heuristicMatch =
+                    openTies.entries.find { (key, _) ->
+                        key.first == voiceId && key.second.size == 1 && Math.abs(key.second[0] - midiPitch) <= 2
+                    }
                 if (heuristicMatch != null) {
                     tiedFrom = heuristicMatch.value
                     adjustedMidi = listOf(heuristicMatch.key.second[0])
@@ -354,11 +431,12 @@ public object PitchInterpreter {
         return interpretElements(tune, expandedElements)
     }
 
-    public fun interpretUnexpanded(tune: AbcTune): InterpretedTune {
-        return interpretElements(tune, tune.body.elements)
-    }
+    public fun interpretUnexpanded(tune: AbcTune): InterpretedTune = interpretElements(tune, tune.body.elements)
 
-    private fun interpretElements(tune: AbcTune, elements: List<MusicElement>): InterpretedTune {
+    private fun interpretElements(
+        tune: AbcTune,
+        elements: List<MusicElement>,
+    ): InterpretedTune {
         val session = InterpretationSession(tune)
         HeaderProcessor.processGlobalHeaders(session, tune)
         session.getVoiceState(session.currentVoiceId)
@@ -366,122 +444,202 @@ public object PitchInterpreter {
         elements.forEachIndexed { idx, element ->
             val vState = session.currentVoiceState()
             when (element) {
-                is BodyHeaderElement -> HeaderProcessor.handleBodyHeader(session, element)
-                is InlineFieldElement -> HeaderProcessor.handleInlineField(session, element)
-                is DirectiveElement -> HeaderProcessor.handleDirective(session, element)
+                is BodyHeaderElement -> {
+                    HeaderProcessor.handleBodyHeader(session, element)
+                }
+
+                is InlineFieldElement -> {
+                    HeaderProcessor.handleInlineField(session, element)
+                }
+
+                is DirectiveElement -> {
+                    HeaderProcessor.handleDirective(session, element)
+                }
+
                 is TupletElement -> {
-                    val p = element.p
-                    val isCompound = (vState.currentMeter.numerator % 3 == 0 && vState.currentMeter.numerator > 3)
-                    val q = element.q ?: when (p) {
-                        2 -> 3
-                        3 -> 2
-                        4 -> 3
-                        5 -> if (isCompound) 3 else 2
-                        6 -> 2
-                        7 -> if (isCompound) 3 else 2
-                        8 -> 3
-                        9 -> 2
-                        else -> 2
-                    }
-                    val r = element.r ?: p
-                    vState.activeTuplet = TupletState(q, p, r)
+                    handleTuplet(element, vState)
                 }
+
                 is GraceNoteElement -> {
-                    element.notes.forEach { note ->
-                        val interpretedPitch = PitchResolver.resolve(note, session)
-                        val midiPitch = interpretedPitch.midiNoteNumber + vState.midiTranspose
-                        vState.pendingGraceNotes.add(InterpretedNote(
-                            pitches = listOf(interpretedPitch),
-                            midiPitches = listOf(midiPitch),
-                            duration = note.length,
-                            semanticDuration = NoteDuration(0, 1),
-                            playedDuration = note.length,
-                            isGrace = true
-                        ))
-                    }
+                    handleGraceNote(element, vState, session)
                 }
+
                 is NoteElement -> {
-                    val interpretedPitch = PitchResolver.resolve(element, session)
-                    val midiPitch = interpretedPitch.midiNoteNumber + vState.midiTranspose
-                    val hasExplicitAccidental = element.pitch.accidental != null || element.accidental != null
-
-                    checkForBrokenRhythm(elements, idx, session)
-
-                    processMusicEvent(
-                        session,
-                        listOf(interpretedPitch),
-                        listOf(midiPitch),
-                        element.length,
-                        element.ties,
-                        hasExplicitAccidental,
-                        element.annotations,
-                        element.decorations
-                    )
+                    handleNote(element, idx, vState, session, elements)
                 }
+
                 is ChordElement -> {
-                    val interpretedPitches = element.notes.map { PitchResolver.resolve(it, session) }
-                    val midiPitches = interpretedPitches.map { it.midiNoteNumber + vState.midiTranspose }
-                    val hasTieOut = element.notes.firstOrNull()?.ties?.let { it == TieType.START || it == TieType.BOTH } ?: false
-                    val tieType = if (hasTieOut) TieType.START else TieType.NONE
-
-                    checkForBrokenRhythm(elements, idx, session)
-
-                    processMusicEvent(
-                        session,
-                        interpretedPitches,
-                        midiPitches,
-                        element.duration,
-                        tieType,
-                        false, // Chords don't use fuzzy accidental matching in current logic
-                        element.annotations,
-                        element.decorations,
-                        isChord = true
-                    )
+                    handleChord(element, idx, vState, session, elements)
                 }
+
                 is RestElement -> {
-                    checkForBrokenRhythm(elements, idx, session)
-                    val timing = TimeCalculator.calculate(element.duration, vState.activeTuplet, session)
-                    if (vState.activeTuplet?.remainingNotes == 0) vState.activeTuplet = null
+                    handleRest(element, idx, vState, session, elements)
+                }
 
-                    session.appendNote(InterpretedNote(
-                        pitches = emptyList(),
-                        midiPitches = emptyList(),
-                        duration = element.duration,
-                        semanticDuration = timing.semantic,
-                        playedDuration = timing.played,
-                        isRest = true,
-                        annotations = element.annotations,
-                        decorations = element.decorations
-                    ))
-                }
                 is BarLineElement -> {
-                    vState.activeAccidentals.clear()
-                    val expectedTotal = NoteDuration(vState.currentMeter.numerator, vState.currentMeter.denominator)
-                    if (vState.measureDuration.numerator != 0 && vState.measureDuration != expectedTotal) {
-                        if (!(vState.measureCount == 0 && vState.measureDuration.toDouble() < expectedTotal.toDouble())) {
-                            session.validationErrors.add("Voice ${session.currentVoiceId} Measure ${vState.measureCount + 1}: Rhythmic mismatch. Expected $expectedTotal, found ${vState.measureDuration}")
-                        }
-                    }
-                    vState.measureCount++
-                    vState.measureDuration = NoteDuration(0, 1)
+                    handleBarLine(vState, session)
                 }
+
                 else -> {}
             }
         }
         return InterpretedTune(session.voices, session.validationErrors)
     }
 
-    private fun checkForBrokenRhythm(elements: List<MusicElement>, currentIdx: Int, session: InterpretationSession) {
+    @Suppress("MagicNumber")
+    private fun handleTuplet(
+        element: TupletElement,
+        vState: VoiceState,
+    ) {
+        val p = element.p
+        val isCompound = (vState.currentMeter.numerator % 3 == 0 && vState.currentMeter.numerator > 3)
+        val q =
+            element.q ?: when (p) {
+                2 -> 3
+                3 -> 2
+                4 -> 3
+                5 -> if (isCompound) 3 else 2
+                6 -> 2
+                7 -> if (isCompound) 3 else 2
+                8 -> 3
+                9 -> 2
+                else -> 2
+            }
+        val r = element.r ?: p
+        vState.activeTuplet = TupletState(q, p, r)
+    }
+
+    private fun handleGraceNote(
+        element: GraceNoteElement,
+        vState: VoiceState,
+        session: InterpretationSession,
+    ) {
+        element.notes.forEach { note ->
+            val interpretedPitch = PitchResolver.resolve(note, session)
+            val midiPitch = interpretedPitch.midiNoteNumber + vState.midiTranspose
+            vState.pendingGraceNotes.add(
+                InterpretedNote(
+                    pitches = listOf(interpretedPitch),
+                    midiPitches = listOf(midiPitch),
+                    duration = note.length,
+                    semanticDuration = NoteDuration(0, 1),
+                    playedDuration = note.length,
+                    isGrace = true,
+                ),
+            )
+        }
+    }
+
+    private fun handleNote(
+        element: NoteElement,
+        idx: Int,
+        vState: VoiceState,
+        session: InterpretationSession,
+        elements: List<MusicElement>,
+    ) {
+        val interpretedPitch = PitchResolver.resolve(element, session)
+        val midiPitch = interpretedPitch.midiNoteNumber + vState.midiTranspose
+        val hasExplicitAccidental = element.pitch.accidental != null || element.accidental != null
+
+        checkForBrokenRhythm(elements, idx, session)
+
+        processMusicEvent(
+            session,
+            listOf(interpretedPitch),
+            listOf(midiPitch),
+            element.length,
+            element.ties,
+            hasExplicitAccidental,
+            element.annotations,
+            element.decorations,
+        )
+    }
+
+    private fun handleChord(
+        element: ChordElement,
+        idx: Int,
+        vState: VoiceState,
+        session: InterpretationSession,
+        elements: List<MusicElement>,
+    ) {
+        val interpretedPitches = element.notes.map { PitchResolver.resolve(it, session) }
+        val midiPitches = interpretedPitches.map { it.midiNoteNumber + vState.midiTranspose }
+        val hasTieOut =
+            element.notes
+                .firstOrNull()
+                ?.ties
+                ?.let { it == TieType.START || it == TieType.BOTH } ?: false
+        val tieType = if (hasTieOut) TieType.START else TieType.NONE
+
+        checkForBrokenRhythm(elements, idx, session)
+
+        processMusicEvent(
+            session,
+            interpretedPitches,
+            midiPitches,
+            element.duration,
+            tieType,
+            false, // Chords don't use fuzzy accidental matching in current logic
+            element.annotations,
+            element.decorations,
+            isChord = true,
+        )
+    }
+
+    private fun handleRest(
+        element: RestElement,
+        idx: Int,
+        vState: VoiceState,
+        session: InterpretationSession,
+        elements: List<MusicElement>,
+    ) {
+        checkForBrokenRhythm(elements, idx, session)
+        val timing = TimeCalculator.calculate(element.duration, vState.activeTuplet, session)
+        if (vState.activeTuplet?.remainingNotes == 0) vState.activeTuplet = null
+
+        session.appendNote(
+            InterpretedNote(
+                pitches = emptyList(),
+                midiPitches = emptyList(),
+                duration = element.duration,
+                semanticDuration = timing.semantic,
+                playedDuration = timing.played,
+                isRest = true,
+                annotations = element.annotations,
+                decorations = element.decorations,
+            ),
+        )
+    }
+
+    private fun handleBarLine(
+        vState: VoiceState,
+        session: InterpretationSession,
+    ) {
+        vState.activeAccidentals.clear()
+        val expectedTotal = NoteDuration(vState.currentMeter.numerator, vState.currentMeter.denominator)
+        if (vState.measureDuration.numerator != 0 && vState.measureDuration != expectedTotal) {
+            if (!(vState.measureCount == 0 && vState.measureDuration.toDouble() < expectedTotal.toDouble())) {
+                session.validationErrors.add(
+                    "Voice ${session.currentVoiceId} Measure ${vState.measureCount + 1}: Rhythmic mismatch. Expected $expectedTotal, found ${vState.measureDuration}",
+                )
+            }
+        }
+        vState.measureCount++
+        vState.measureDuration = NoteDuration(0, 1)
+    }
+
+    private fun checkForBrokenRhythm(
+        elements: List<MusicElement>,
+        currentIdx: Int,
+        session: InterpretationSession,
+    ) {
         val vState = session.currentVoiceState()
         val current = elements[currentIdx]
-        
-        // 1. Check if the current element already has the broken rhythm property (from AbcParser)
-        val directBroken = when (current) {
-            is NoteElement -> current.brokenRhythm
-            is ChordElement -> current.brokenRhythm
-            is RestElement -> current.brokenRhythm
-            else -> null
-        }
+
+        val directBroken =
+            (current as? NoteElement)?.brokenRhythm
+                ?: (current as? ChordElement)?.brokenRhythm
+                ?: (current as? RestElement)?.brokenRhythm
 
         if (directBroken != null) {
             println("DEBUG: Found direct broken rhythm '$directBroken' at idx $currentIdx")
@@ -490,36 +648,38 @@ public object PitchInterpreter {
         }
 
         // 2. Peek ahead for broken rhythm symbols in spacers (legacy/fallback)
-        for (i in currentIdx + 1 until elements.size) {
-            val el = elements[i]
-            if (el is SpacerElement) {
-                val text = el.text.trim()
-                if (text.isNotEmpty() && (text.all { it == '>' } || text.all { it == '<' })) {
-                    println("DEBUG: Found peeked broken rhythm '$text' at idx $i")
-                    applyBrokenRhythm(text, vState)
-                    return
-                }
-                if (text.isNotEmpty()) break // Some other spacer, stop looking
-            } else if (el is NoteElement || el is RestElement || el is ChordElement) {
-                break // Found next note without seeing broken rhythm
+        val nextEl =
+            elements.subList(currentIdx + 1, elements.size).firstOrNull {
+                it !is SpacerElement || it.text.trim().isNotEmpty()
+            }
+        if (nextEl is SpacerElement) {
+            val text = nextEl.text.trim()
+            if (text.all { it == '>' } || text.all { it == '<' }) {
+                println("DEBUG: Found peeked broken rhythm '$text' at idx ${elements.indexOf(nextEl)}")
+                applyBrokenRhythm(text, vState)
             }
         }
     }
 
-    private fun applyBrokenRhythm(text: String, vState: VoiceState) {
+    private fun applyBrokenRhythm(
+        text: String,
+        vState: VoiceState,
+    ) {
         val dots = text.length
-        val m1 = if (text.startsWith(">")) {
-            (Math.pow(2.0, dots.toDouble() + 1) - 1) / Math.pow(2.0, dots.toDouble())
-        } else {
-            1.0 / Math.pow(2.0, dots.toDouble())
-        }
+        val m1 =
+            if (text.startsWith(">")) {
+                (Math.pow(2.0, dots.toDouble() + 1) - 1) / Math.pow(2.0, dots.toDouble())
+            } else {
+                1.0 / Math.pow(2.0, dots.toDouble())
+            }
         val m2 = 2.0 - m1
-        
+
         println("DEBUG: Applying multipliers m1=$m1, m2=$m2")
         vState.pendingBrokenRhythmMultiplier = m1
         vState.nextBrokenRhythmMultiplier = m2
     }
 
+    @Suppress("LongParameterList")
     private fun processMusicEvent(
         session: InterpretationSession,
         pitches: List<Pitch>,
@@ -529,7 +689,7 @@ public object PitchInterpreter {
         hasExplicitAccidental: Boolean,
         annotations: List<String>,
         decorations: List<Decoration>,
-        isChord: Boolean = false
+        isChord: Boolean = false,
     ) {
         val vState = session.currentVoiceState()
         val timing = TimeCalculator.calculate(baseDuration, vState.activeTuplet, session)
@@ -544,18 +704,21 @@ public object PitchInterpreter {
         if (tieResult.tiedFrom != null) {
             val originalList = session.voices[tieResult.tiedFrom.first]!!
             val originalNote = originalList[tieResult.tiedFrom.second]
-            originalList[tieResult.tiedFrom.second] = originalNote.copy(
-                playedDuration = addDurations(originalNote.playedDuration, playedDuration),
-                semanticDuration = addDurations(originalNote.semanticDuration, timing.semantic)
+            originalList[tieResult.tiedFrom.second] =
+                originalNote.copy(
+                    playedDuration = addDurations(originalNote.playedDuration, playedDuration),
+                    semanticDuration = addDurations(originalNote.semanticDuration, timing.semantic),
+                )
+            voiceList.add(
+                InterpretedNote(
+                    pitches = emptyList(),
+                    midiPitches = emptyList(),
+                    duration = baseDuration,
+                    semanticDuration = timing.semantic,
+                    playedDuration = playedDuration,
+                    isTieContinued = true,
+                ),
             )
-            voiceList.add(InterpretedNote(
-                pitches = emptyList(),
-                midiPitches = emptyList(),
-                duration = baseDuration,
-                semanticDuration = timing.semantic,
-                playedDuration = playedDuration,
-                isTieContinued = true
-            ))
 
             val actualTieKey = session.currentVoiceId to tieResult.adjustedMidiPitches.sorted()
             if (tieType == TieType.START || tieType == TieType.BOTH) {
@@ -565,15 +728,17 @@ public object PitchInterpreter {
             }
         } else {
             val newNoteIndex = voiceList.size
-            voiceList.add(InterpretedNote(
-                pitches = pitches,
-                midiPitches = midiPitches,
-                duration = baseDuration,
-                semanticDuration = timing.semantic,
-                playedDuration = playedDuration,
-                annotations = annotations,
-                decorations = decorations
-            ))
+            voiceList.add(
+                InterpretedNote(
+                    pitches = pitches,
+                    midiPitches = midiPitches,
+                    duration = baseDuration,
+                    semanticDuration = timing.semantic,
+                    playedDuration = playedDuration,
+                    annotations = annotations,
+                    decorations = decorations,
+                ),
+            )
             if (tieType == TieType.START || tieType == TieType.BOTH) {
                 val tieKey = session.currentVoiceId to midiPitches.sorted()
                 session.openTies[tieKey] = session.currentVoiceId to newNoteIndex

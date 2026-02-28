@@ -12,7 +12,7 @@ public object DatasetDownloader {
     private const val DATASET_DIR: String = "abc-dataset"
 
     @JvmStatic
-    public fun main(args: Array<String>): Unit {
+    public fun main(args: Array<String>) {
         if (args.isEmpty()) {
             downloadAndExtract(1)
             downloadAndExtract(2)
@@ -52,7 +52,7 @@ public object DatasetDownloader {
         val zipFileName = "$batchName.zip"
         val url = URL("$BASE_URL$zipFileName")
         val outputDir = File(DATASET_DIR, batchName)
-        
+
         if (outputDir.exists() && outputDir.list()?.isNotEmpty() == true) {
             println("Dataset $batchName already exists. Skipping download.")
             return outputDir
@@ -60,10 +60,10 @@ public object DatasetDownloader {
 
         outputDir.mkdirs()
         println("Downloading $url ...")
-        
+
         val connection = url.openConnection()
         connection.connect()
-        
+
         ZipInputStream(BufferedInputStream(connection.getInputStream())).use { zis ->
             extract(zis, outputDir)
         }

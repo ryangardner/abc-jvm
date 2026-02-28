@@ -1,6 +1,9 @@
 package io.github.ryangardner.abc.test
-
 import io.github.ryangardner.abc.parser.AbcParser
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertFalse
+import org.junit.jupiter.api.Assertions.assertNotNull
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import java.io.File
 
@@ -11,7 +14,7 @@ class InspectTune {
         if (!file.exists()) return
         val parser = AbcParser()
         val tune = parser.parse(file.readText())
-        
+
         println("--- AST ELEMENTS ---")
         tune.body.elements.forEachIndexed { i, e ->
             println("[$i] ${e.javaClass.simpleName} : $e")

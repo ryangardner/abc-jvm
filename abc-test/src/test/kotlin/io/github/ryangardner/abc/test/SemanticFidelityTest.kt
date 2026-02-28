@@ -1,30 +1,31 @@
 package io.github.ryangardner.abc.test
-
 import io.github.ryangardner.abc.parser.AbcParser
 import io.github.ryangardner.abc.theory.MeasureValidator
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertFalse
+import org.junit.jupiter.api.Assertions.assertNotNull
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
 import java.io.File
-import org.junit.jupiter.api.Assertions.assertTrue
 
 public class SemanticFidelityTest {
-
     public companion object {
         private var datasetDir: File? = null
         private val isHeavy: Boolean = System.getProperty("test.profile") == "heavy"
 
         @JvmStatic
         @BeforeAll
-        public fun setup(): Unit {
+        public fun setup() {
             if (isHeavy) {
                 datasetDir = DatasetDownloader.downloadAndExtract(1)
             }
         }
 
         @JvmStatic
-        public fun abcFiles(): List<File> {
-            return if (isHeavy) {
+        public fun abcFiles(): List<File> =
+            if (isHeavy) {
                 val allFiles = mutableListOf<File>()
                 datasetDir?.walkTopDown()?.forEach {
                     if (it.extension == "abc") {
@@ -45,20 +46,20 @@ public class SemanticFidelityTest {
                     }
                 }
             }
-        }
     }
 
     @ParameterizedTest(name = "Semantic validation: {0}")
     @MethodSource("abcFiles")
-    public fun `test measure durations`(file: File): Unit {
+    public fun `test measure durations`(file: File) {
         val parser = AbcParser()
         val originalAbc = file.readText()
-        val tunes = try {
-            parser.parseBook(originalAbc)
-        } catch (e: Exception) {
-            // Ignore tunes we can't even parse for now
-            return
-        }
+        val tunes =
+            try {
+                parser.parseBook(originalAbc)
+            } catch (e: Exception) {
+                // Ignore tunes we can't even parse for now
+                return
+            }
 
         tunes.forEachIndexed { tuneIndex, tune ->
             // In semantic fidelity test, we use non-strict mode because ABC allows partial measures.
