@@ -3,6 +3,7 @@ import io.github.ryangardner.abc.core.model.BarLineElement
 import io.github.ryangardner.abc.core.model.BarLineType
 import io.github.ryangardner.abc.core.model.ChordElement
 import io.github.ryangardner.abc.core.model.KeyMode
+import io.github.ryangardner.abc.core.model.DurationMultiplier
 import io.github.ryangardner.abc.core.model.NoteDuration
 import io.github.ryangardner.abc.core.model.NoteElement
 import io.github.ryangardner.abc.core.model.NoteStep
@@ -22,7 +23,7 @@ class AbcDSLTest {
                     length = "1/4"
                 }
                 body {
-                    note("D", NoteDuration(1, 1))
+                    note("D", DurationMultiplier(1, 1))
                     bar()
                     chord("F") {
                         note("F")

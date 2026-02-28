@@ -35,3 +35,8 @@ build/
 tools/abcjs-exporter/node_modules/
 
 abc-dataset/
+
+### Desloppify ###
+.desloppify/
+scorecard.png
+*.py

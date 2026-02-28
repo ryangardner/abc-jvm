@@ -1,7 +1,21 @@
 package io.github.ryangardner.abc.core.model
 
 /**
- * Represents a note duration as a rational number (numerator/denominator).
+ * Represents a raw grammatical multiplier or divisor from the ABC syntax (e.g. "3/2" or "/4")
+ * before it is resolved into an absolute NoteDuration using the default L: length.
+ */
+public data class DurationMultiplier(
+    public val numerator: Int,
+    public val denominator: Int,
+) {
+    public companion object {
+        public val DEFAULT: DurationMultiplier = DurationMultiplier(1, 1)
+        public val HALF: DurationMultiplier = DurationMultiplier(1, 2)
+    }
+}
+
+/**
+ * Represents an absolute note duration as a rational number (numerator/denominator).
  */
 @Suppress("MagicNumber")
 public data class NoteDuration(

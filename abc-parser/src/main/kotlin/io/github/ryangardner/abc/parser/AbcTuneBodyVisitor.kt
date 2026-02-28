@@ -6,9 +6,11 @@ import io.github.ryangardner.abc.antlr.ABCParserBaseVisitor
 import io.github.ryangardner.abc.core.model.Accidental
 import io.github.ryangardner.abc.core.model.BarLineElement
 import io.github.ryangardner.abc.core.model.BodyHeaderElement
+import io.github.ryangardner.abc.core.model.BrokenRhythmMarkerElement
 import io.github.ryangardner.abc.core.model.ChordElement
 import io.github.ryangardner.abc.core.model.Decoration
 import io.github.ryangardner.abc.core.model.DirectiveElement
+import io.github.ryangardner.abc.core.model.DurationMultiplier
 import io.github.ryangardner.abc.core.model.GraceNoteElement
 import io.github.ryangardner.abc.core.model.HeaderType
 import io.github.ryangardner.abc.core.model.InlineFieldElement
@@ -50,9 +52,7 @@ internal class AbcTuneBodyVisitor(
     val header: TuneHeader,
 ) : ABCParserBaseVisitor<Unit>() {
     val elements = mutableListOf<MusicElement>()
-    private var currentDefaultLength = header.length
     private var currentMeter = header.meter
-    private var hasExplicitLength = header.headers.any { it.first == "L" }
 
     private val isStrict: Boolean =
         try {
@@ -111,16 +111,12 @@ internal class AbcTuneBodyVisitor(
     override fun visitTuplet(ctx: ABCParser.TupletContext) {
         val line = ctx.start.line
         val col = ctx.start.charPositionInLine
-        val text =
-            ctx
-                .tuplet_element()
-                .TUPLET_START()
-                .text
-                .substring(1) // remove (
-        val parts = text.split(":")
-        val p = parts.getOrNull(0)?.toIntOrNull() ?: 3
-        val q = parts.getOrNull(1)?.toIntOrNull()
-        val r = parts.getOrNull(2)?.toIntOrNull()
+        
+        val tupletElement = ctx.tuplet_element()
+        val p = tupletElement.p?.text?.toIntOrNull() ?: 3
+        val q = tupletElement.q?.text?.toIntOrNull()
+        val r = tupletElement.r?.text?.toIntOrNull()
+        
         elements.add(TupletElement(p, q, r, line = line, column = col))
     }
 
@@ -129,9 +125,9 @@ internal class AbcTuneBodyVisitor(
         val line = ctx.start.line
         val col = ctx.start.charPositionInLine
         val explicitLengthCtx = chordCtx.note_length()
-        var explicitChordMultiplier: NoteDuration? = null
+        var explicitChordMultiplier: DurationMultiplier? = null
         if (explicitLengthCtx != null) {
-            explicitChordMultiplier = ParserUtils.calculateDuration(explicitLengthCtx.text, NoteDuration(1, 1))
+            explicitChordMultiplier = ParserUtils.parseDurationMultiplier(explicitLengthCtx.text)
         }
 
         val notes = mutableListOf<NoteElement>()
@@ -164,7 +160,15 @@ internal class AbcTuneBodyVisitor(
                     override fun visitChordNote(ctx: ABCParser.ChordNoteContext) {
                         var note = buildNote(ctx.note_element())
                         if (explicitChordMultiplier != null) {
-                            note = note.copy(length = note.length * explicitChordMultiplier!!)
+                            // If the note has no multiplier, use the chord's
+                            if (note.durationMultiplier == DurationMultiplier.DEFAULT) {
+                                note = note.copy(durationMultiplier = explicitChordMultiplier!!)
+                            } else {
+                                // Multiply note's multiplier by chord's explicit multiplier
+                                val newNum = note.durationMultiplier.numerator * explicitChordMultiplier!!.numerator
+                                val newDen = note.durationMultiplier.denominator * explicitChordMultiplier!!.denominator
+                                note = note.copy(durationMultiplier = DurationMultiplier(newNum, newDen))
+                            }
                         }
                         // Apply any note-level annotation found inside the chord
                         if (pendingAnnotations.isNotEmpty()) {
@@ -198,15 +202,17 @@ internal class AbcTuneBodyVisitor(
             elementCtx.accept(chordItemVisitor)
         }
 
-        val duration = notes.firstOrNull()?.length ?: currentDefaultLength
+        val durationMultiplier = notes.firstOrNull()?.durationMultiplier ?: DurationMultiplier.DEFAULT
 
         // Combine all decorations: from pending + from grammar + from inside chord
+        allDecorations.addAll(pendingDecorations)
+        
         elements.add(
             ChordElement(
                 notes,
-                duration,
+                durationMultiplier,
                 annotations = allChordAnnotations,
-                decorations = allDecorations + pendingDecorations,
+                decorations = allDecorations,
                 line = line,
                 column = col,
             ),
@@ -241,8 +247,8 @@ internal class AbcTuneBodyVisitor(
             val type = HeaderType.entries.find { it.key == key } ?: HeaderType.UNKNOWN
 
             if (type == HeaderType.LENGTH) {
-                currentDefaultLength = ParserUtils.parseLength(value)
-                hasExplicitLength = true
+                // We no longer track L: implicitly in the parser state. 
+                // It's processed downstream by MeasureQuantizer.
             }
 
             elements.add(InlineFieldElement(type, value, line = line, column = col))
@@ -285,32 +291,7 @@ internal class AbcTuneBodyVisitor(
 
     override fun visitBrokenRhythm(ctx: ABCParser.BrokenRhythmContext) {
         val text = ctx.broken_rhythm_alt()?.text ?: ""
-
-        val lastRhythmicIndex =
-            elements.indices.reversed().firstOrNull {
-                val el = elements[it]
-                el !is SpacerElement && el !is BarLineElement && el !is SlurElement
-            }
-
-        var applied = false
-        if (lastRhythmicIndex != null) {
-            val el = elements[lastRhythmicIndex]
-            if (el is NoteElement) {
-                elements[lastRhythmicIndex] = el.copy(brokenRhythm = text)
-                applied = true
-            } else if (el is RestElement) {
-                elements[lastRhythmicIndex] = el.copy(brokenRhythm = text)
-                applied = true
-            } else if (el is ChordElement) {
-                elements[lastRhythmicIndex] = el.copy(brokenRhythm = text)
-                applied = true
-            }
-        }
-
-        if (!applied) {
-            // Fallback if no preceding rhythmic element
-            elements.add(SpacerElement(text, ctx.start.line, ctx.start.charPositionInLine))
-        }
+        elements.add(BrokenRhythmMarkerElement(text, ctx.start.line, ctx.start.charPositionInLine))
     }
 
     override fun visitSpace(ctx: ABCParser.SpaceContext) {
@@ -389,17 +370,11 @@ internal class AbcTuneBodyVisitor(
 
             when (id) {
                 "L" -> {
-                    currentDefaultLength = ParserUtils.parseLength(value)
-                    hasExplicitLength = true
+                    // Do nothing in parser
                 }
 
                 "M" -> {
                     currentMeter = ParserUtils.parseMeter(value)
-                    // Reset Default Length logic when Meter changes in body,
-                    // ONLY if we don't have an explicit L: in this tune.
-                    if (!hasExplicitLength) {
-                        currentDefaultLength = calculateDefaultLength(currentMeter)
-                    }
                 }
 
                 "P" -> {
@@ -443,10 +418,7 @@ internal class AbcTuneBodyVisitor(
         elements.add(extractTextBlock(children))
     }
 
-    private fun calculateDefaultLength(meter: TimeSignature): NoteDuration {
-        if (meter.isNone) return NoteDuration(1, 8)
-        return if (meter.toDouble() < 0.75) NoteDuration(1, 16) else NoteDuration(1, 8)
-    }
+    // Default Length logic removed; shifted to MeasureQuantizer/Timeline
 
     private fun buildNote(ctx: ABCParser.Note_elementContext): NoteElement {
         val line = ctx.start.line
@@ -463,13 +435,13 @@ internal class AbcTuneBodyVisitor(
 
         val accidental = extractAccidental(ctx)
         val noteLength = ctx.note_length()
-        val duration = noteLength?.let { ParserUtils.calculateDuration(it.text, currentDefaultLength) } ?: currentDefaultLength
+        val durationMultiplier = noteLength?.let { ParserUtils.parseDurationMultiplier(it.text) } ?: DurationMultiplier.DEFAULT
         val tie = if (ctx.tie() != null) TieType.START else TieType.NONE
         val decorations = ctx.decoration_alt()?.mapNotNull { ParserUtils.parseDecoration(it) } ?: emptyList()
 
         return NoteElement(
             Pitch(step, octave, accidental),
-            duration,
+            durationMultiplier,
             tie,
             decorations = decorations,
             accidental = accidental,
@@ -524,19 +496,19 @@ internal class AbcTuneBodyVisitor(
         val line = ctx.start.line
         val col = ctx.start.charPositionInLine
         val restChar = ctx.REST().text
-        val duration =
+        val durationMultiplier =
             if (restChar.equals("Z", ignoreCase = false)) {
-                val measureDuration = NoteDuration.simplify(currentMeter.numerator.toLong(), currentMeter.denominator.toLong())
+                // Multi-measure rests (Z) are preserved structurally. 
+                // The fraction acts as a measure count (e.g. Z4 implies 4 measures).
                 ctx.note_length()?.let {
-                    val multiplier = ParserUtils.calculateDuration(it.text, NoteDuration(1, 1))
-                    measureDuration * multiplier
-                } ?: measureDuration
+                    ParserUtils.parseDurationMultiplier(it.text)
+                } ?: DurationMultiplier.DEFAULT
             } else {
-                ctx.note_length()?.let { ParserUtils.calculateDuration(it.text, currentDefaultLength) } ?: currentDefaultLength
+                ctx.note_length()?.let { ParserUtils.parseDurationMultiplier(it.text) } ?: DurationMultiplier.DEFAULT
             }
         val isHidden = restChar.equals("x", ignoreCase = true)
         val decorations = ctx.decoration_alt()?.mapNotNull { ParserUtils.parseDecoration(it) } ?: emptyList()
-        return RestElement(duration, isHidden, decorations, line = line, column = col)
+        return RestElement(durationMultiplier, isHidden, decorations, line = line, column = col)
     }
 
     private fun extractTextBlock(children: List<org.antlr.v4.runtime.tree.ParseTree>): TextBlockElement {

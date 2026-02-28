@@ -6,6 +6,7 @@ import io.github.ryangardner.abc.core.model.BarLineType
 import io.github.ryangardner.abc.core.model.KeyMode
 import io.github.ryangardner.abc.core.model.KeyRoot
 import io.github.ryangardner.abc.core.model.KeySignature
+import io.github.ryangardner.abc.core.model.DurationMultiplier
 import io.github.ryangardner.abc.core.model.NoteDuration
 import io.github.ryangardner.abc.core.model.NoteElement
 import io.github.ryangardner.abc.core.model.NoteStep
@@ -24,17 +25,17 @@ class RepeatExpanderTest {
         // C D E F |: G A B c :| C4 |]
         val elements =
             listOf(
-                NoteElement(Pitch(NoteStep.C, 4), NoteDuration(1, 4)),
-                NoteElement(Pitch(NoteStep.D, 4), NoteDuration(1, 4)),
-                NoteElement(Pitch(NoteStep.E, 4), NoteDuration(1, 4)),
-                NoteElement(Pitch(NoteStep.F, 4), NoteDuration(1, 4)),
+                NoteElement(Pitch(NoteStep.C, 4), DurationMultiplier(1, 4)),
+                NoteElement(Pitch(NoteStep.D, 4), DurationMultiplier(1, 4)),
+                NoteElement(Pitch(NoteStep.E, 4), DurationMultiplier(1, 4)),
+                NoteElement(Pitch(NoteStep.F, 4), DurationMultiplier(1, 4)),
                 BarLineElement(BarLineType.REPEAT_START),
-                NoteElement(Pitch(NoteStep.G, 4), NoteDuration(1, 4)),
-                NoteElement(Pitch(NoteStep.A, 4), NoteDuration(1, 4)),
-                NoteElement(Pitch(NoteStep.B, 4), NoteDuration(1, 4)),
-                NoteElement(Pitch(NoteStep.C, 5), NoteDuration(1, 4)),
+                NoteElement(Pitch(NoteStep.G, 4), DurationMultiplier(1, 4)),
+                NoteElement(Pitch(NoteStep.A, 4), DurationMultiplier(1, 4)),
+                NoteElement(Pitch(NoteStep.B, 4), DurationMultiplier(1, 4)),
+                NoteElement(Pitch(NoteStep.C, 5), DurationMultiplier(1, 4)),
                 BarLineElement(BarLineType.REPEAT_END),
-                NoteElement(Pitch(NoteStep.C, 4), NoteDuration(1, 1)),
+                NoteElement(Pitch(NoteStep.C, 4), DurationMultiplier(1, 1)),
                 BarLineElement(BarLineType.FINAL),
             )
 
@@ -69,15 +70,15 @@ class RepeatExpanderTest {
         // C D E F | G A B c :|
         val elements =
             listOf(
-                NoteElement(Pitch(NoteStep.C, 4), NoteDuration(1, 4)),
-                NoteElement(Pitch(NoteStep.D, 4), NoteDuration(1, 4)),
-                NoteElement(Pitch(NoteStep.E, 4), NoteDuration(1, 4)),
-                NoteElement(Pitch(NoteStep.F, 4), NoteDuration(1, 4)),
+                NoteElement(Pitch(NoteStep.C, 4), DurationMultiplier(1, 4)),
+                NoteElement(Pitch(NoteStep.D, 4), DurationMultiplier(1, 4)),
+                NoteElement(Pitch(NoteStep.E, 4), DurationMultiplier(1, 4)),
+                NoteElement(Pitch(NoteStep.F, 4), DurationMultiplier(1, 4)),
                 BarLineElement(BarLineType.SINGLE),
-                NoteElement(Pitch(NoteStep.G, 4), NoteDuration(1, 4)),
-                NoteElement(Pitch(NoteStep.A, 4), NoteDuration(1, 4)),
-                NoteElement(Pitch(NoteStep.B, 4), NoteDuration(1, 4)),
-                NoteElement(Pitch(NoteStep.C, 5), NoteDuration(1, 4)),
+                NoteElement(Pitch(NoteStep.G, 4), DurationMultiplier(1, 4)),
+                NoteElement(Pitch(NoteStep.A, 4), DurationMultiplier(1, 4)),
+                NoteElement(Pitch(NoteStep.B, 4), DurationMultiplier(1, 4)),
+                NoteElement(Pitch(NoteStep.C, 5), DurationMultiplier(1, 4)),
                 BarLineElement(BarLineType.REPEAT_END),
             )
 
@@ -126,19 +127,19 @@ class RepeatExpanderTest {
         val partA =
             listOf(
                 PartElement("A"),
-                NoteElement(Pitch(NoteStep.C, 4), NoteDuration(1, 4)),
-                NoteElement(Pitch(NoteStep.D, 4), NoteDuration(1, 4)),
-                NoteElement(Pitch(NoteStep.E, 4), NoteDuration(1, 4)),
-                NoteElement(Pitch(NoteStep.F, 4), NoteDuration(1, 4)),
+                NoteElement(Pitch(NoteStep.C, 4), DurationMultiplier(1, 4)),
+                NoteElement(Pitch(NoteStep.D, 4), DurationMultiplier(1, 4)),
+                NoteElement(Pitch(NoteStep.E, 4), DurationMultiplier(1, 4)),
+                NoteElement(Pitch(NoteStep.F, 4), DurationMultiplier(1, 4)),
                 BarLineElement(BarLineType.SINGLE),
             )
         val partB =
             listOf(
                 PartElement("B"),
-                NoteElement(Pitch(NoteStep.G, 4), NoteDuration(1, 4)),
-                NoteElement(Pitch(NoteStep.A, 4), NoteDuration(1, 4)),
-                NoteElement(Pitch(NoteStep.B, 4), NoteDuration(1, 4)),
-                NoteElement(Pitch(NoteStep.C, 5), NoteDuration(1, 4)),
+                NoteElement(Pitch(NoteStep.G, 4), DurationMultiplier(1, 4)),
+                NoteElement(Pitch(NoteStep.A, 4), DurationMultiplier(1, 4)),
+                NoteElement(Pitch(NoteStep.B, 4), DurationMultiplier(1, 4)),
+                NoteElement(Pitch(NoteStep.C, 5), DurationMultiplier(1, 4)),
                 BarLineElement(BarLineType.SINGLE),
             )
         val tune = AbcTune(header, TuneBody(partA + partB), TuneMetadata())
@@ -168,9 +169,9 @@ class RepeatExpanderTest {
                 "2.1",
                 "(AB)2C",
             )
-        val partA = listOf(PartElement("A"), NoteElement(Pitch(NoteStep.C, 4), NoteDuration(1, 4)))
-        val partB = listOf(PartElement("B"), NoteElement(Pitch(NoteStep.D, 4), NoteDuration(1, 4)))
-        val partC = listOf(PartElement("C"), NoteElement(Pitch(NoteStep.E, 4), NoteDuration(1, 4)))
+        val partA = listOf(PartElement("A"), NoteElement(Pitch(NoteStep.C, 4), DurationMultiplier(1, 4)))
+        val partB = listOf(PartElement("B"), NoteElement(Pitch(NoteStep.D, 4), DurationMultiplier(1, 4)))
+        val partC = listOf(PartElement("C"), NoteElement(Pitch(NoteStep.E, 4), DurationMultiplier(1, 4)))
 
         val tune = AbcTune(header, TuneBody(partA + partB + partC), TuneMetadata())
         val expanded = RepeatExpander.expand(tune)

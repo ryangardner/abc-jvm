@@ -3,11 +3,13 @@ import io.github.ryangardner.abc.core.model.AbcTune
 import io.github.ryangardner.abc.core.model.BarLineElement
 import io.github.ryangardner.abc.core.model.BodyHeaderElement
 import io.github.ryangardner.abc.core.model.ChordElement
+import io.github.ryangardner.abc.core.model.DurationMultiplier
 import io.github.ryangardner.abc.core.model.HeaderType
 import io.github.ryangardner.abc.core.model.InlineFieldElement
 import io.github.ryangardner.abc.core.model.MusicElement
 import io.github.ryangardner.abc.core.model.NoteDuration
 import io.github.ryangardner.abc.core.model.NoteElement
+import io.github.ryangardner.abc.core.model.OverlayElement
 import io.github.ryangardner.abc.core.model.RestElement
 import io.github.ryangardner.abc.core.model.SpacerElement
 import io.github.ryangardner.abc.core.model.TimeSignature
@@ -45,23 +47,59 @@ public object MeasureQuantizer {
      * @return A list of [Measure] objects.
      */
     public fun quantize(tune: AbcTune): List<Measure> {
+        val repairedTune = RepairEngine.resolveBrokenRhythms(tune)
         val measures = mutableListOf<Measure>()
-        val defaultMeter = if (tune.header.meter.isNone) TimeSignature(4, 4) else tune.header.meter
+        val defaultMeter = if (repairedTune.header.meter.isNone) TimeSignature(4, 4) else repairedTune.header.meter
         var currentMeter = defaultMeter
+        var currentDefaultLength = repairedTune.header.length
+        var hasExplicitLength = repairedTune.header.headers.any { it.first == "L" }
         var targetDuration = NoteDuration(currentMeter.numerator, currentMeter.denominator)
 
         var currentMeasureIndex = 1
         var currentMeasureElements = mutableListOf<MusicElement>()
         var currentMeasureDuration = NoteDuration(0, 1)
 
-        tune.body.elements.forEach { element ->
+        val calculateDuration = { multiplier: DurationMultiplier ->
+            NoteDuration.simplify(
+                multiplier.numerator.toLong() * currentDefaultLength.numerator,
+                multiplier.denominator.toLong() * currentDefaultLength.denominator
+            )
+        }
+
+        repairedTune.body.elements.forEach { element ->
             when (element) {
-                is NoteElement, is RestElement, is ChordElement -> {
-                    val duration = element.duration
+                is NoteElement -> {
+                    val duration = calculateDuration(element.durationMultiplier)
                     val newDuration = currentMeasureDuration + duration
 
-                    // Use a small epsilon for floating point comparison if needed,
-                    // but rational arithmetic in NoteDuration should be exact.
+                    if (newDuration.toDouble() > targetDuration.toDouble() + 0.000001) {
+                        measures.add(Measure(currentMeasureIndex++, currentMeasureElements.toList(), currentMeter, currentMeasureDuration))
+                        currentMeasureElements = mutableListOf(element)
+                        currentMeasureDuration = duration
+                    } else {
+                        currentMeasureElements.add(element)
+                        currentMeasureDuration = newDuration
+                    }
+                }
+                
+                is RestElement -> {
+                    val duration = calculateDuration(element.durationMultiplier)
+                    val newDuration = currentMeasureDuration + duration
+
+                    if (newDuration.toDouble() > targetDuration.toDouble() + 0.000001) {
+                        measures.add(Measure(currentMeasureIndex++, currentMeasureElements.toList(), currentMeter, currentMeasureDuration))
+                        currentMeasureElements = mutableListOf(element)
+                        currentMeasureDuration = duration
+                    } else {
+                        currentMeasureElements.add(element)
+                        currentMeasureDuration = newDuration
+                    }
+                }
+
+                is ChordElement -> {
+                    val duration = calculateDuration(element.durationMultiplier)
+                    val newDuration = currentMeasureDuration + duration
+
                     if (newDuration.toDouble() > targetDuration.toDouble() + 0.000001) {
                         measures.add(Measure(currentMeasureIndex++, currentMeasureElements.toList(), currentMeter, currentMeasureDuration))
                         currentMeasureElements = mutableListOf(element)
@@ -81,18 +119,41 @@ public object MeasureQuantizer {
                 }
 
                 is InlineFieldElement -> {
-                    if (element.fieldType == HeaderType.METER) {
-                        // For quantization, we need to know the meter.
-                        // A more complete implementation would parse the value here.
+                    if (element.fieldType == HeaderType.LENGTH) {
+                        val parts = element.value.split("/")
+                        if (parts.size == 2) {
+                            currentDefaultLength = NoteDuration(parts[0].toIntOrNull() ?: 1, parts[1].toIntOrNull() ?: 8)
+                            hasExplicitLength = true
+                        }
                     }
                     currentMeasureElements.add(element)
                 }
 
                 is BodyHeaderElement -> {
-                    if (element.key == "M") {
-                        // Update meter
+                    if (element.key == "L") {
+                        val parts = element.value.split("/")
+                        if (parts.size == 2) {
+                            currentDefaultLength = NoteDuration(parts[0].toIntOrNull() ?: 1, parts[1].toIntOrNull() ?: 8)
+                            hasExplicitLength = true
+                        }
+                    } else if (element.key == "M") {
+                        val cleanText = element.value.substringBefore("%").trim()
+                        val mparts = cleanText.split("/")
+                        if (mparts.size >= 2) {
+                            currentMeter = TimeSignature(mparts[0].trim().toIntOrNull() ?: 4, mparts[1].trim().toIntOrNull() ?: 4)
+                            targetDuration = NoteDuration(currentMeter.numerator, currentMeter.denominator)
+                            if (!hasExplicitLength) {
+                                currentDefaultLength = if (currentMeter.toDouble() < 0.75) NoteDuration(1, 16) else NoteDuration(1, 8)
+                            }
+                        }
                     }
                     currentMeasureElements.add(element)
+                }
+
+                is OverlayElement -> {
+                    currentMeasureElements.add(element)
+                    // Reset the duration cursor for parallel stacking
+                    currentMeasureDuration = NoteDuration(0, 1)
                 }
 
                 else -> {

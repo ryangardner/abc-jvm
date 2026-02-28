@@ -5,6 +5,7 @@ import io.github.ryangardner.abc.core.model.BarLineElement
 import io.github.ryangardner.abc.core.model.BarLineType
 import io.github.ryangardner.abc.core.model.ChordElement
 import io.github.ryangardner.abc.core.model.MusicElement
+import io.github.ryangardner.abc.core.model.DurationMultiplier
 import io.github.ryangardner.abc.core.model.NoteDuration
 import io.github.ryangardner.abc.core.model.NoteElement
 import io.github.ryangardner.abc.core.model.NoteStep
@@ -26,7 +27,7 @@ import io.github.ryangardner.abc.theory.util.KeyParserUtil
  *         key = "G"
  *     }
  *     body {
- *         note("G", NoteDuration(1, 4))
+ *         note("G", DurationMultiplier(1, 4))
  *         bar()
  *     }
  * }
@@ -132,12 +133,12 @@ public class BodyBuilder {
      */
     public fun note(
         step: String,
-        duration: NoteDuration = NoteDuration(1, 1),
+        durationMultiplier: DurationMultiplier = DurationMultiplier(1, 1),
         octave: Int = 4,
         accidental: Accidental? = null,
     ) {
         val noteStep = NoteStep.valueOf(step.uppercase())
-        elements.add(NoteElement(Pitch(noteStep, octave, accidental), duration))
+        elements.add(NoteElement(Pitch(noteStep, octave, accidental), durationMultiplier))
     }
 
     /**
@@ -160,7 +161,7 @@ public class BodyBuilder {
         block: ChordBuilder.() -> Unit,
     ) {
         val builder = ChordBuilder().apply(block)
-        elements.add(ChordElement(builder.notes, NoteDuration(1, 1), annotations.toList()))
+        elements.add(ChordElement(builder.notes, DurationMultiplier(1, 1), annotations.toList()))
     }
 }
 
@@ -180,7 +181,7 @@ public class ChordBuilder {
         accidental: Accidental? = null,
     ) {
         val noteStep = NoteStep.valueOf(step.uppercase())
-        notes.add(NoteElement(Pitch(noteStep, octave, accidental), NoteDuration(1, 1)))
+        notes.add(NoteElement(Pitch(noteStep, octave, accidental), DurationMultiplier(1, 1)))
     }
 }
 

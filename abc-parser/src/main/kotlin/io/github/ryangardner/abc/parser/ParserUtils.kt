@@ -5,6 +5,7 @@ import io.github.ryangardner.abc.antlr.ABCParser
 import io.github.ryangardner.abc.core.model.Accidental
 import io.github.ryangardner.abc.core.model.BarLineType
 import io.github.ryangardner.abc.core.model.Decoration
+import io.github.ryangardner.abc.core.model.DurationMultiplier
 import io.github.ryangardner.abc.core.model.NoteDuration
 import io.github.ryangardner.abc.core.model.TimeSignature
 import org.antlr.v4.runtime.tree.TerminalNode
@@ -79,28 +80,36 @@ internal object ParserUtils {
             else -> BarLineType.SINGLE
         }
 
-    fun calculateDuration(
-        text: String,
-        defaultLength: NoteDuration,
-    ): NoteDuration {
-        val num: Int
-        val den: Int
+    fun parseDurationMultiplier(text: String): DurationMultiplier {
+        if (text.isEmpty()) return DurationMultiplier.DEFAULT
+
+        // Count slashes to determine power-of-two denominators, e.g. // -> 4, /// -> 8
         val slashCount = text.count { it == '/' }
-        if (slashCount > 0) {
-            val parts = text.split("/")
-            num = if (parts[0].isEmpty()) 1 else parts[0].toIntOrNull() ?: 1
-            val explicitDen = if (parts.size > 1 && parts[1].isNotEmpty()) parts[1].toIntOrNull() else null
-            den =
-                if (explicitDen != null) {
-                    explicitDen * Math.pow(2.0, (slashCount - 1).toDouble()).toInt()
-                } else {
-                    Math.pow(2.0, slashCount.toDouble()).toInt()
-                }
-        } else {
-            num = text.toIntOrNull() ?: 1
-            den = 1
+        
+        if (slashCount == 0) {
+            // No slashes: simply parsing the numerator
+            val num = text.toIntOrNull() ?: 1
+            return DurationMultiplier(num, 1)
         }
-        return NoteDuration.simplify(num.toLong() * defaultLength.numerator, den.toLong() * defaultLength.denominator)
+
+        // At this point we know there's at least one slash
+        val parts = text.split("/", limit = 2)
+        val numStr = parts[0].trim()
+        val num = if (numStr.isEmpty()) 1 else (numStr.toIntOrNull() ?: 1)
+        
+        // Parts[1] contains whatever is after the first slash.
+        // It might be empty, might be more slashes, might be a number.
+        val remainderStr = if (parts.size > 1) parts[1].replace("/", "").trim() else ""
+        
+        val explicitDen = remainderStr.toIntOrNull()
+        
+        val den = if (explicitDen != null) {
+            explicitDen * Math.pow(2.0, (slashCount - 1).toDouble()).toInt()
+        } else {
+            Math.pow(2.0, slashCount.toDouble()).toInt()
+        }
+        
+        return DurationMultiplier(num, den)
     }
 
     fun parseDecoration(ctx: ABCParser.Decoration_altContext): Decoration? {

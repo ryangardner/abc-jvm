@@ -1,6 +1,7 @@
 package io.github.ryangardner.abc.theory
 import io.github.ryangardner.abc.core.model.Accidental
 import io.github.ryangardner.abc.core.model.KeyMode
+import io.github.ryangardner.abc.core.model.DurationMultiplier
 import io.github.ryangardner.abc.core.model.NoteDuration
 import io.github.ryangardner.abc.core.model.NoteElement
 import io.github.ryangardner.abc.core.model.NoteStep
@@ -17,7 +18,7 @@ public class DorianKeyTest {
         assertEquals(KeyMode.DORIAN, key.mode)
         assertEquals(NoteStep.G, key.root.step)
 
-        val note = NoteElement(Pitch(NoteStep.B, 4, null), NoteDuration(1, 8))
+        val note = NoteElement(Pitch(NoteStep.B, 4, null), DurationMultiplier(1, 8))
         val interpreted = PitchInterpreter.PitchResolver.interpretBasePitch(note, key, emptyMap())
         assertEquals(Accidental.FLAT, interpreted.accidental)
     }

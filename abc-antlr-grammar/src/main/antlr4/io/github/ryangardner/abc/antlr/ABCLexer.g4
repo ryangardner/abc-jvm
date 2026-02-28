@@ -153,7 +153,7 @@ mode MUSIC_MODE;
     BAR_REP_START   : '|:' ;
     BAR_SINGLE      : '|' ;
 
-    TUPLET_START : '(' [0-9]+ (':' [0-9]* (':' [0-9]*)?)? ;
+
     SLUR_START   : '(' ;
     SLUR_END     : ')' ;
     

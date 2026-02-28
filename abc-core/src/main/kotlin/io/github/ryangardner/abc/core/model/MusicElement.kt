@@ -1,10 +1,8 @@
 package io.github.ryangardner.abc.core.model
 
 public sealed interface MusicElement {
-    public val duration: NoteDuration
     public val line: Int
     public val column: Int
-    public val brokenRhythm: String? get() = null
 
     public fun withoutLocation(): MusicElement
 }
@@ -13,17 +11,14 @@ public data class NoteElement
     @JvmOverloads
     constructor(
         public val pitch: Pitch,
-        public val length: NoteDuration,
+        public val durationMultiplier: DurationMultiplier = DurationMultiplier.DEFAULT,
         public val ties: TieType = TieType.NONE,
         public val decorations: List<Decoration> = emptyList(),
         public val accidental: Accidental? = null,
         public val annotations: List<String> = emptyList(),
-        override val brokenRhythm: String? = null,
         override val line: Int = -1,
         override val column: Int = -1,
     ) : MusicElement {
-        override val duration: NoteDuration get() = length
-
         override fun withoutLocation(): NoteElement = copy(line = -1, column = -1)
     }
 
@@ -32,10 +27,9 @@ public data class ChordElement
     @JvmOverloads
     constructor(
         public val notes: List<NoteElement>,
-        override val duration: NoteDuration,
+        public val durationMultiplier: DurationMultiplier = DurationMultiplier.DEFAULT,
         public val annotations: List<String> = emptyList(),
         public val decorations: List<Decoration> = emptyList(),
-        override val brokenRhythm: String? = null,
         override val line: Int = -1,
         override val column: Int = -1,
     ) : MusicElement {
@@ -50,8 +44,6 @@ public data class BarLineElement
         override val line: Int = -1,
         override val column: Int = -1,
     ) : MusicElement {
-        override val duration: NoteDuration = NoteDuration(0, 1)
-
         override fun withoutLocation(): BarLineElement = copy(line = -1, column = -1)
     }
 
@@ -63,19 +55,16 @@ public data class InlineFieldElement
         override val line: Int = -1,
         override val column: Int = -1,
     ) : MusicElement {
-        override val duration: NoteDuration = NoteDuration(0, 1)
-
         override fun withoutLocation(): InlineFieldElement = copy(line = -1, column = -1)
     }
 
 public data class RestElement
     @JvmOverloads
     constructor(
-        override val duration: NoteDuration,
+        public val durationMultiplier: DurationMultiplier = DurationMultiplier.DEFAULT,
         public val isInvisible: Boolean = false, // x or X
         public val decorations: List<Decoration> = emptyList(),
         public val annotations: List<String> = emptyList(),
-        override val brokenRhythm: String? = null,
         override val line: Int = -1,
         override val column: Int = -1,
     ) : MusicElement {
@@ -89,8 +78,6 @@ public data class DirectiveElement
         override val line: Int = -1,
         override val column: Int = -1,
     ) : MusicElement {
-        override val duration: NoteDuration = NoteDuration(0, 1)
-
         override fun withoutLocation(): DirectiveElement = copy(line = -1, column = -1)
     }
 
@@ -123,8 +110,6 @@ public data class SymbolLineElement
         override val line: Int = -1,
         override val column: Int = -1,
     ) : MusicElement {
-        override val duration: NoteDuration = NoteDuration(0, 1)
-
         override fun withoutLocation(): SymbolLineElement = copy(line = -1, column = -1)
     }
 
@@ -135,8 +120,6 @@ public data class TextBlockElement
         override val line: Int = -1,
         override val column: Int = -1,
     ) : MusicElement {
-        override val duration: NoteDuration = NoteDuration(0, 1)
-
         override fun withoutLocation(): TextBlockElement = copy(line = -1, column = -1)
     }
 
@@ -148,8 +131,6 @@ public data class BodyHeaderElement
         override val line: Int = -1,
         override val column: Int = -1,
     ) : MusicElement {
-        override val duration: NoteDuration = NoteDuration(0, 1)
-
         override fun withoutLocation(): BodyHeaderElement = copy(line = -1, column = -1)
     }
 
@@ -160,8 +141,6 @@ public data class SlurElement
         override val line: Int = -1,
         override val column: Int = -1,
     ) : MusicElement {
-        override val duration: NoteDuration = NoteDuration(0, 1)
-
         override fun withoutLocation(): SlurElement = copy(line = -1, column = -1)
     }
 
@@ -174,8 +153,6 @@ public data class TupletElement
         override val line: Int = -1,
         override val column: Int = -1,
     ) : MusicElement {
-        override val duration: NoteDuration = NoteDuration(0, 1)
-
         override fun withoutLocation(): TupletElement = copy(line = -1, column = -1)
     }
 
@@ -188,8 +165,6 @@ public data class GraceNoteElement
         override val line: Int = -1,
         override val column: Int = -1,
     ) : MusicElement {
-        override val duration: NoteDuration = NoteDuration(0, 1)
-
         override fun withoutLocation(): GraceNoteElement = copy(line = -1, column = -1, notes = notes.map { it.withoutLocation() })
     }
 
@@ -200,8 +175,6 @@ public data class SpacerElement
         override val line: Int = -1,
         override val column: Int = -1,
     ) : MusicElement {
-        override val duration: NoteDuration = NoteDuration(0, 1)
-
         override fun withoutLocation(): SpacerElement = copy(line = -1, column = -1)
     }
 
@@ -211,8 +184,6 @@ public data class OverlayElement
         override val line: Int = -1,
         override val column: Int = -1,
     ) : MusicElement {
-        override val duration: NoteDuration = NoteDuration(0, 1)
-
         override fun withoutLocation(): OverlayElement = copy(line = -1, column = -1)
     }
 
@@ -223,8 +194,6 @@ public data class LyricElement
         override val line: Int = -1,
         override val column: Int = -1,
     ) : MusicElement {
-        override val duration: NoteDuration = NoteDuration(0, 1)
-
         override fun withoutLocation(): LyricElement = copy(line = -1, column = -1)
     }
 
@@ -236,8 +205,6 @@ public data class VariantElement
         override val line: Int = -1,
         override val column: Int = -1,
     ) : MusicElement {
-        override val duration: NoteDuration = NoteDuration(0, 1)
-
         override fun withoutLocation(): VariantElement = copy(line = -1, column = -1)
     }
 
@@ -248,7 +215,15 @@ public data class PartElement
         override val line: Int = -1,
         override val column: Int = -1,
     ) : MusicElement {
-        override val duration: NoteDuration = NoteDuration(0, 1)
-
         override fun withoutLocation(): PartElement = copy(line = -1, column = -1)
+    }
+
+public data class BrokenRhythmMarkerElement
+    @JvmOverloads
+    constructor(
+        public val type: String,
+        override val line: Int = -1,
+        override val column: Int = -1,
+    ) : MusicElement {
+        override fun withoutLocation(): BrokenRhythmMarkerElement = copy(line = -1, column = -1)
     }

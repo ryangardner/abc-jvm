@@ -4,6 +4,7 @@ import io.github.ryangardner.abc.core.model.Accidental
 import io.github.ryangardner.abc.core.model.KeyMode
 import io.github.ryangardner.abc.core.model.KeyRoot
 import io.github.ryangardner.abc.core.model.KeySignature
+import io.github.ryangardner.abc.core.model.DurationMultiplier
 import io.github.ryangardner.abc.core.model.NoteDuration
 import io.github.ryangardner.abc.core.model.NoteElement
 import io.github.ryangardner.abc.core.model.NoteStep
@@ -34,7 +35,7 @@ public class TransposerTest {
             )
         val body =
             TuneBody(
-                elements = notes.map { NoteElement(it, NoteDuration(1, 8)) },
+                elements = notes.map { NoteElement(it, DurationMultiplier(1, 8)) },
             )
         return AbcTune(header, body, TuneMetadata())
     }

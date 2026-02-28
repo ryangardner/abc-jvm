@@ -111,8 +111,12 @@ broken_rhythm_alt
 
 tie : HYPHEN ;
 
+tuplet_digit
+    : DIGIT+
+    ;
+
 tuplet_element
-    : TUPLET_START
+    : SLUR_START p=tuplet_digit (COLON q=tuplet_digit? (COLON r=tuplet_digit?)?)?
     ;
     
 chord_alt

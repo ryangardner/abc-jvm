@@ -47,11 +47,19 @@ python3 tools/music21-exporter/m21_validator.py \
 
 ### Semantic Parity with abcjs
 Run the `AbcjsSemanticParityTest` to compare the JVM parser output against the baselines.
-```bash
-# Run a specific batch
-mvn test -pl abc-test -Dtest=AbcjsSemanticParityTest \
+To run the batch parity check yourself:
+
+1. **Ensure you have the test data downloaded and extracted.**
+2. **Compile the latest code across all modules:**
+   ```bash
+   mvn clean install -DskipTests
+   ```
+   *(This ensures changes in modules like `abc-parser` or `abc-theory` are properly linked when running tests in `abc-test`.)*
+3. **Run the parity test suite:**
+   ```bash
+   mvn test -pl abc-test -Dtest=AbcjsSemanticParityTest \
   -Dabc.test.batchDir="abc-dataset/abc_notation_batch_001"
-```
+   ```
 
 ### Filtering Tests
 You can filter to a specific tune for debugging:

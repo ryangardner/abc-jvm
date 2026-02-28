@@ -1,3 +1,10 @@
+# /// script
+# requires-python = ">=3.10"
+# dependencies = [
+#     "music21",
+# ]
+# ///
+
 import music21
 import json
 import sys

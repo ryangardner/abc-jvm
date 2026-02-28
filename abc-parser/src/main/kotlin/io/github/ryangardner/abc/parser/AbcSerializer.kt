@@ -5,6 +5,7 @@ import io.github.ryangardner.abc.core.model.Accidental
 import io.github.ryangardner.abc.core.model.BarLineElement
 import io.github.ryangardner.abc.core.model.BarLineType
 import io.github.ryangardner.abc.core.model.BodyHeaderElement
+import io.github.ryangardner.abc.core.model.BrokenRhythmMarkerElement
 import io.github.ryangardner.abc.core.model.ChordElement
 import io.github.ryangardner.abc.core.model.DirectiveElement
 import io.github.ryangardner.abc.core.model.GraceNoteElement
@@ -13,6 +14,7 @@ import io.github.ryangardner.abc.core.model.InlineFieldElement
 import io.github.ryangardner.abc.core.model.KeyMode
 import io.github.ryangardner.abc.core.model.LyricElement
 import io.github.ryangardner.abc.core.model.MusicElement
+import io.github.ryangardner.abc.core.model.DurationMultiplier
 import io.github.ryangardner.abc.core.model.NoteDuration
 import io.github.ryangardner.abc.core.model.NoteElement
 import io.github.ryangardner.abc.core.model.OverlayElement
@@ -192,6 +194,10 @@ public class AbcSerializer {
                 "${element.prefix}${element.variants.joinToString(",")}"
             }
 
+            is BrokenRhythmMarkerElement -> {
+                element.type
+            }
+
             else -> {
                 ""
             }
@@ -256,9 +262,8 @@ public class AbcSerializer {
                 append("\"$annotation\"")
             }
             append(serializePitch(note.pitch))
-            append(serializeDuration(note.length))
+            append(serializeDurationMultiplier(note.durationMultiplier))
             if (note.ties == TieType.START) append("-")
-            note.brokenRhythm?.let { append(it) }
         }
 
     private fun serializePitch(pitch: Pitch): String =
@@ -312,20 +317,12 @@ public class AbcSerializer {
             }
         }
 
-    private fun serializeDuration(duration: NoteDuration): String {
-        val num = duration.numerator * currentDefaultLength.denominator
-        val den = duration.denominator * currentDefaultLength.numerator
-
-        if (num == den) return ""
-
-        val common = gcd(num.toInt(), den.toInt()).toLong()
-        val sNum = num / common
-        val sDen = den / common
-
+    private fun serializeDurationMultiplier(multiplier: DurationMultiplier): String {
         return when {
-            sDen == 1L -> "$sNum"
-            sNum == 1L -> "/$sDen"
-            else -> "$sNum/$sDen"
+            multiplier.numerator == 1 && multiplier.denominator == 1 -> "" // Default length
+            multiplier.numerator == 1 && multiplier.denominator > 1 -> "/${multiplier.denominator}"
+            multiplier.denominator == 1 -> "${multiplier.numerator}"
+            else -> "${multiplier.numerator}/${multiplier.denominator}"
         }
     }
 
@@ -367,9 +364,8 @@ public class AbcSerializer {
             chord.notes.forEach { append(serializeNote(it)) }
             append("]")
             if (chord.notes.isEmpty()) {
-                append(serializeDuration(chord.duration))
+                append(serializeDurationMultiplier(chord.durationMultiplier))
             }
-            chord.brokenRhythm?.let { append(it) }
         }
 
     private fun serializeBarLine(bar: BarLineElement): String =
@@ -407,8 +403,7 @@ public class AbcSerializer {
                 append("\"$annotation\"")
             }
             append(if (rest.isInvisible) "x" else "z")
-            append(serializeDuration(rest.duration))
-            rest.brokenRhythm?.let { append(it) }
+            append(serializeDurationMultiplier(rest.durationMultiplier))
         }
 
     private fun serializeSymbolLine(line: SymbolLineElement): String =

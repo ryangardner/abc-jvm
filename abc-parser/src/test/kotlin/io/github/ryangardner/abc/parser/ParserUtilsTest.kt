@@ -1,5 +1,6 @@
 package io.github.ryangardner.abc.parser
 
+import io.github.ryangardner.abc.core.model.DurationMultiplier
 import io.github.ryangardner.abc.core.model.NoteDuration
 import io.github.ryangardner.abc.core.model.TimeSignature
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -43,37 +44,35 @@ class ParserUtilsTest {
     }
 
     @Test
-    fun testCalculateDurationBasic() {
-        val defaultLength = NoteDuration(1, 8)
-
-        // "2" means 2 * defaultLength = 1/4
-        val dur1 = ParserUtils.calculateDuration("2", defaultLength)
-        assertEquals(NoteDuration(1, 4), dur1)
+    fun testParseDurationMultiplierBasic() {
+        val dur1 = ParserUtils.parseDurationMultiplier("2")
+        assertEquals(DurationMultiplier(2, 1), dur1)
     }
 
     @Test
-    fun testCalculateDurationImplicitNumerator() {
-        val defaultLength = NoteDuration(1, 4)
+    fun testParseDurationMultiplierImplicitNumerator() {
+        val dur1 = ParserUtils.parseDurationMultiplier("/")
+        assertEquals(DurationMultiplier(1, 2), dur1)
 
-        // "/" means 1/2 of defaultLength = 1/8
-        val dur1 = ParserUtils.calculateDuration("/", defaultLength)
-        assertEquals(NoteDuration(1, 8), dur1)
-
-        // "//" means 1/4 of defaultLength = 1/16
-        val dur2 = ParserUtils.calculateDuration("//", defaultLength)
-        assertEquals(NoteDuration(1, 16), dur2)
+        val dur2 = ParserUtils.parseDurationMultiplier("//")
+        assertEquals(DurationMultiplier(1, 4), dur2)
     }
 
     @Test
-    fun testCalculateDurationExplicitDenominator() {
-        val defaultLength = NoteDuration(1, 4)
+    fun testParseDurationMultiplierExplicitDenominator() {
+        val dur1 = ParserUtils.parseDurationMultiplier("3/2")
+        assertEquals(DurationMultiplier(3, 2), dur1)
 
-        // "3/2" means (3/2) * defaultLength = 3/8
-        val dur1 = ParserUtils.calculateDuration("3/2", defaultLength)
-        assertEquals(NoteDuration(3, 8), dur1)
+        val dur2 = ParserUtils.parseDurationMultiplier("/4")
+        assertEquals(DurationMultiplier(1, 4), dur2)
+        
+        val dur3 = ParserUtils.parseDurationMultiplier("3")
+        assertEquals(DurationMultiplier(3, 1), dur3)
+        
+        val dur4 = ParserUtils.parseDurationMultiplier("3/")
+        assertEquals(DurationMultiplier(3, 2), dur4)
 
-        // "/4" means (1/4) * defaultLength = 1/16
-        val dur2 = ParserUtils.calculateDuration("/4", defaultLength)
-        assertEquals(NoteDuration(1, 16), dur2)
+        val dur5 = ParserUtils.parseDurationMultiplier("3//")
+        assertEquals(DurationMultiplier(3, 4), dur5)
     }
 }

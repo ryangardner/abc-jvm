@@ -22,7 +22,7 @@ class MeasureQuantizerTest {
         val tune = AbcParser().parse(input)
         println("DEBUG: Tune elements: ${tune.body.elements.size}")
         tune.body.elements.forEachIndexed { i, e ->
-            println("DEBUG: [$i] ${e.javaClass.simpleName} duration=${e.duration.toDouble()} ($e)")
+            println("DEBUG: [$i] ${e.javaClass.simpleName} ($e)")
         }
         val measures = MeasureQuantizer.quantize(tune)
         println("DEBUG: Measures: ${measures.size}")
@@ -51,5 +51,23 @@ class MeasureQuantizerTest {
         val measures = MeasureQuantizer.quantize(tune)
 
         assertEquals(2, measures.size)
+    }
+
+    @Test
+    fun `test quantize handles voice overlays`() {
+        val input = "X:1\nK:C\nL:1/4\nC D & E F | G A |"
+        val tune = AbcParser().parse(input)
+        val measures = MeasureQuantizer.quantize(tune)
+
+        assertEquals(2, measures.size)
+        // Measure 1 should contain 5 elements: C, D, &, E, F
+        // However, NoteElements might be adjacent to SpacerElements, let's just assert on NoteElements and Overlays
+        val m1Notes = measures[0].elements.filterIsInstance<NoteElement>()
+        assertEquals(4, m1Notes.size) // C, D, E, F
+        assertEquals(1, measures[0].elements.filterIsInstance<io.github.ryangardner.abc.core.model.OverlayElement>().size)
+        // Because of the &, the cumulative duration of the measure mathematically is going to be max(0.5, 0.5) if we were tracking max,
+        // but since we only track a single cursor which gets reset, the final 'currentMeasureDuration' will just be the duration
+        // of the last layer (which is 0.5 for 'E F'). Wait, 'C D & E F' -> C (0.25) D (0.25) & (resets to 0) E (0.25) F (0.25) => total duration 0.5.
+        // Wait, C (1/4) D (1/4) is 0.5 in 4/4 if L=1/4.
     }
 }

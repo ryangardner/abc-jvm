@@ -28,20 +28,20 @@ public object MeasureValidator {
     ): List<MeasureError> {
         if (tune.header.meter.isNone) return emptyList()
 
-        val ctx = ValidationContext(tune.header.meter, strict)
+        val ctx = ValidationContext(tune.header.meter, tune.header.length, strict)
 
         tune.body.elements.forEach { element ->
             when (element) {
                 is NoteElement -> {
-                    ctx.processDuration(element.length)
+                    ctx.processDuration(ctx.calculateDuration(element.durationMultiplier))
                 }
 
                 is RestElement -> {
-                    ctx.processDuration(element.duration)
+                    ctx.processDuration(ctx.calculateDuration(element.durationMultiplier))
                 }
 
                 is ChordElement -> {
-                    ctx.processDuration(element.duration)
+                    ctx.processDuration(ctx.calculateDuration(element.durationMultiplier))
                 }
 
                 is TupletElement -> {
@@ -89,6 +89,15 @@ public object MeasureValidator {
                 }
             }
 
+            HeaderType.LENGTH -> {
+                val parts = cleanValue.split("/")
+                if (parts.size == 2) {
+                    val num = parts[0].toIntOrNull() ?: 1
+                    val den = parts[1].toIntOrNull() ?: 8
+                    ctx.currentLength = NoteDuration(num, den)
+                }
+            }
+
             HeaderType.VOICE -> {
                 ctx.currentVoiceId = cleanValue
             }
@@ -110,6 +119,15 @@ public object MeasureValidator {
                     val num = parts[0].toIntOrNull() ?: 4
                     val den = parts[1].toIntOrNull() ?: 4
                     ctx.currentMeter = TimeSignature(num, den)
+                }
+            }
+
+            "L" -> {
+                val parts = cleanValue.split("/")
+                if (parts.size == 2) {
+                    val num = parts[0].toIntOrNull() ?: 1
+                    val den = parts[1].toIntOrNull() ?: 8
+                    ctx.currentLength = NoteDuration(num, den)
                 }
             }
 
@@ -155,10 +173,12 @@ public object MeasureValidator {
 
     private class ValidationContext(
         val defaultMeter: TimeSignature,
+        val defaultLength: NoteDuration,
         val strict: Boolean,
     ) {
         val errors = mutableListOf<MeasureError>()
         var currentVoiceId = "default"
+        var currentLength = defaultLength
         private val voiceStates = mutableMapOf<String, VoiceState>()
 
         private val state: VoiceState
@@ -175,6 +195,12 @@ public object MeasureValidator {
             set(value) {
                 state.activeTuplet = value
             }
+
+        fun calculateDuration(multiplier: io.github.ryangardner.abc.core.model.DurationMultiplier): NoteDuration =
+            NoteDuration.simplify(
+                multiplier.numerator.toLong() * currentLength.numerator,
+                multiplier.denominator.toLong() * currentLength.denominator
+            )
 
         fun processDuration(baseDuration: NoteDuration) {
             val tuplet = activeTuplet

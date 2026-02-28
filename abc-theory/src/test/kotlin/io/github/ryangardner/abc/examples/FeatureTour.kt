@@ -1,4 +1,5 @@
 package io.github.ryangardner.abc.examples
+import io.github.ryangardner.abc.core.model.DurationMultiplier
 import io.github.ryangardner.abc.core.model.NoteDuration
 import io.github.ryangardner.abc.theory.MeasureQuantizer
 import io.github.ryangardner.abc.theory.PitchInterpreter
@@ -19,11 +20,11 @@ fun main() {
                 meter = "4/4"
             }
             body {
-                note("G", NoteDuration(1, 4))
-                note("A", NoteDuration(1, 4))
+                note("G", DurationMultiplier(1, 4))
+                note("A", DurationMultiplier(1, 4))
                 bar() // Measure 1 is short (2 beats)
-                note("B", NoteDuration(1, 2))
-                note("C", NoteDuration(1, 2))
+                note("B", DurationMultiplier(1, 2))
+                note("C", DurationMultiplier(1, 2))
                 bar() // Measure 2 is correct (4 beats)
             }
         }
