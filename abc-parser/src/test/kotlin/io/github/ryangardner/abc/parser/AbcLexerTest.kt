@@ -203,8 +203,8 @@ class AbcLexerTest {
         val tokens = lexMusic(input)
 
         val expected = listOf(
-            "TUPLET_START", "NOTE_PITCH", "NOTE_PITCH", "NOTE_PITCH", "SPACE",
-            "TUPLET_START", "NOTE_PITCH", "NOTE_PITCH", "NOTE_PITCH"
+            "SLUR_START", "DIGIT", "NOTE_PITCH", "NOTE_PITCH", "NOTE_PITCH", "SPACE",
+            "SLUR_START", "DIGIT", "COLON", "DIGIT", "COLON", "DIGIT", "NOTE_PITCH", "NOTE_PITCH", "NOTE_PITCH"
         )
         assertEquals(expected, tokens)
     }
