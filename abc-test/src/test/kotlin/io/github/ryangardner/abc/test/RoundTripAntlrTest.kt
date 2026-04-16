@@ -31,9 +31,9 @@ public class RoundTripAntlrTest {
 
         val originalAbc = source.content
         val originalTunes: List<AbcTune> = parser.parseBook(originalAbc)
-        
+
         val serializedBook: String = originalTunes.joinToString("") { serializer.serialize(it) }
-        
+
         val roundTrippedTunes: List<AbcTune> = parser.parseBook(serializedBook)
         assertEquals(originalTunes.size, roundTrippedTunes.size, "[${source.name}] Tune count mismatch")
 

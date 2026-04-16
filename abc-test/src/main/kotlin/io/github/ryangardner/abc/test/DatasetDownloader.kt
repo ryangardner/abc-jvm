@@ -23,7 +23,10 @@ public object DatasetDownloader {
         }
     }
 
-    internal fun extract(zis: ZipInputStream, outputDir: File) {
+    internal fun extract(
+        zis: ZipInputStream,
+        outputDir: File,
+    ) {
         val canonicalOutputDir = outputDir.canonicalPath
         var entry = zis.nextEntry
         while (entry != null) {

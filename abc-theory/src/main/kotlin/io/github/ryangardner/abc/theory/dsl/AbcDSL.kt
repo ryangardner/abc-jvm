@@ -4,8 +4,8 @@ import io.github.ryangardner.abc.core.model.Accidental
 import io.github.ryangardner.abc.core.model.BarLineElement
 import io.github.ryangardner.abc.core.model.BarLineType
 import io.github.ryangardner.abc.core.model.ChordElement
-import io.github.ryangardner.abc.core.model.MusicElement
 import io.github.ryangardner.abc.core.model.DurationMultiplier
+import io.github.ryangardner.abc.core.model.MusicElement
 import io.github.ryangardner.abc.core.model.NoteDuration
 import io.github.ryangardner.abc.core.model.NoteElement
 import io.github.ryangardner.abc.core.model.NoteStep

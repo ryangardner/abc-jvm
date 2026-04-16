@@ -199,7 +199,7 @@ public object MeasureValidator {
         fun calculateDuration(multiplier: io.github.ryangardner.abc.core.model.DurationMultiplier): NoteDuration =
             NoteDuration.simplify(
                 multiplier.numerator.toLong() * currentLength.numerator,
-                multiplier.denominator.toLong() * currentLength.denominator
+                multiplier.denominator.toLong() * currentLength.denominator,
             )
 
         fun processDuration(baseDuration: NoteDuration) {

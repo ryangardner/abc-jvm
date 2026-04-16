@@ -28,17 +28,19 @@ public class AbcjsSemanticParityTest {
     ) {
         override fun toString(): String = name
     }
-    private val EXPECTED_FAILURES = setOf(
-        "abc_notation_batch_001/tune_000346.abc", // abcjs leaks L:1/16 from V:3 to V:4
-        "abc_notation_batch_009/tune_013648.abc"  // abcjs applies -2 octave transposition for clef=bass
-    )
+
+    private val EXPECTED_FAILURES =
+        setOf(
+            "abc_notation_batch_001/tune_000346.abc", // abcjs leaks L:1/16 from V:3 to V:4
+            "abc_notation_batch_009/tune_013648.abc", // abcjs applies -2 octave transposition for clef=bass
+        )
 
     @ParameterizedTest(name = "abcjs parity: {0}")
     @MethodSource("baselineSources")
     public fun `test semantic parity with abcjs`(baseline: AbcjsBaseline) {
         assumeTrue(baseline.name != "EMPTY", "Skipping abcjs parity test because no baseline directory was provided")
         assumeTrue(!EXPECTED_FAILURES.contains(baseline.name), "Skipping known edge-case divergence: \${baseline.name}")
-        
+
         val parser = AbcParser()
         val tunes = parser.parseBook(baseline.abcContent)
 
@@ -566,7 +568,7 @@ public class AbcjsSemanticParityTest {
                     val batchName = "abc_notation_batch_%03d".format(i)
                     // The datasets are located in $projectRoot/abc-dataset/ (inside abc-jvm, not outside)
                     val batchDir = File(projectRoot, "abc-dataset/$batchName")
-                    
+
                     if (batchDir.exists()) {
                         println("DEBUG: Found batch folder: ${batchDir.absolutePath}")
                         File(projectRoot, "reports/abcjs_discrepancies_${batchDir.name}.md").delete()
@@ -574,7 +576,7 @@ public class AbcjsSemanticParityTest {
                         combinedStream = Stream.concat(combinedStream, getBaselinesFromDir(batchDir))
                     }
                 }
-                
+
                 // If the dataset directory doesn't exist, fallback to EMPTY so CI doesn't hard-fail
                 val finalStream = combinedStream.toList()
                 if (finalStream.isEmpty()) {

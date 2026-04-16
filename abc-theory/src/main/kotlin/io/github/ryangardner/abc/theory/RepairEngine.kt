@@ -2,11 +2,11 @@ package io.github.ryangardner.abc.theory
 import io.github.ryangardner.abc.core.model.AbcTune
 import io.github.ryangardner.abc.core.model.BarLineElement
 import io.github.ryangardner.abc.core.model.BarLineType
-import io.github.ryangardner.abc.core.model.MusicElement
+import io.github.ryangardner.abc.core.model.BrokenRhythmMarkerElement
 import io.github.ryangardner.abc.core.model.ChordElement
 import io.github.ryangardner.abc.core.model.DurationMultiplier
+import io.github.ryangardner.abc.core.model.MusicElement
 import io.github.ryangardner.abc.core.model.NoteElement
-import io.github.ryangardner.abc.core.model.BrokenRhythmMarkerElement
 import io.github.ryangardner.abc.core.model.RestElement
 import io.github.ryangardner.abc.core.model.TuneBody
 import kotlin.math.abs
@@ -117,23 +117,30 @@ public object RepairEngine {
     private fun scaleDuration(
         element: MusicElement,
         factor: Double,
-    ): MusicElement {
-        return when (element) {
-            is NoteElement ->
+    ): MusicElement =
+        when (element) {
+            is NoteElement -> {
                 element.copy(
                     durationMultiplier = scaleMultiplier(element.durationMultiplier, factor),
                 )
-            is RestElement ->
+            }
+
+            is RestElement -> {
                 element.copy(
                     durationMultiplier = scaleMultiplier(element.durationMultiplier, factor),
                 )
-            is ChordElement ->
+            }
+
+            is ChordElement -> {
                 element.copy(
                     durationMultiplier = scaleMultiplier(element.durationMultiplier, factor),
                 )
-            else -> element
+            }
+
+            else -> {
+                element
+            }
         }
-    }
 
     private fun scaleMultiplier(
         multiplier: DurationMultiplier,

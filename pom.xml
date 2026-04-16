@@ -172,6 +172,13 @@
                         </goals>
                     </execution>
                 </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>io.gitlab.arturbosch.detekt</groupId>
+                        <artifactId>detekt-rules-libraries</artifactId>
+                        <version>${detekt.version}</version>
+                    </dependency>
+                </dependencies>
             </plugin>
         </plugins>
     </build>

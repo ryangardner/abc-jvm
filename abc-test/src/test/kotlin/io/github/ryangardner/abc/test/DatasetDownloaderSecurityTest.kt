@@ -12,7 +12,6 @@ import java.util.zip.ZipOutputStream
 import kotlin.test.assertFailsWith
 
 class DatasetDownloaderSecurityTest {
-
     @TempDir
     lateinit var tempDir: File
 

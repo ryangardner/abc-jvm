@@ -8,13 +8,13 @@ import io.github.ryangardner.abc.core.model.BodyHeaderElement
 import io.github.ryangardner.abc.core.model.BrokenRhythmMarkerElement
 import io.github.ryangardner.abc.core.model.ChordElement
 import io.github.ryangardner.abc.core.model.DirectiveElement
+import io.github.ryangardner.abc.core.model.DurationMultiplier
 import io.github.ryangardner.abc.core.model.GraceNoteElement
 import io.github.ryangardner.abc.core.model.HeaderType
 import io.github.ryangardner.abc.core.model.InlineFieldElement
 import io.github.ryangardner.abc.core.model.KeyMode
 import io.github.ryangardner.abc.core.model.LyricElement
 import io.github.ryangardner.abc.core.model.MusicElement
-import io.github.ryangardner.abc.core.model.DurationMultiplier
 import io.github.ryangardner.abc.core.model.NoteDuration
 import io.github.ryangardner.abc.core.model.NoteElement
 import io.github.ryangardner.abc.core.model.OverlayElement
@@ -317,28 +317,19 @@ public class AbcSerializer {
             }
         }
 
-    private fun serializeDurationMultiplier(multiplier: DurationMultiplier): String {
-        return when {
-            multiplier.numerator == 1 && multiplier.denominator == 1 -> "" // Default length
+    private fun serializeDurationMultiplier(multiplier: DurationMultiplier): String =
+        when {
+            multiplier.numerator == 1 && multiplier.denominator == 1 -> ""
+
+            // Default length
             multiplier.numerator == 1 && multiplier.denominator > 1 -> "/${multiplier.denominator}"
+
             multiplier.denominator == 1 -> "${multiplier.numerator}"
+
             else -> "${multiplier.numerator}/${multiplier.denominator}"
         }
-    }
 
-    private fun gcd(
-        a: Int,
-        b: Int,
-    ): Int {
-        var x = Math.abs(a)
-        var y = Math.abs(b)
-        while (y != 0) {
-            val temp = y
-            y = x % y
-            x = temp
-        }
-        return x
-    }
+
 
     private fun serializeChord(chord: ChordElement): String =
         buildString {

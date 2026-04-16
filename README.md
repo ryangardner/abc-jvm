@@ -32,6 +32,8 @@ The project is organized as a multi-module Maven project:
 
 > **Note:** This library is not yet available in Maven Central. We are prioritizing publication, but for now, you must install it to your local Maven repository.
 
+> **⚠️ Binary Compatibility:** The AST model in `abc-core` currently uses Kotlin `data class` for all public types. While this provides a great developer experience (`copy()`, destructuring, pattern matching), it means that **binary compatibility is not guaranteed between versions**. Adding, removing, or reordering properties will break compiled consumers. Before publishing to Maven Central, these will be migrated to regular classes with explicit `equals`/`hashCode`/`toString` implementations to ensure stable binary compatibility.
+
 1.  Clone the repository:
     ```bash
     git clone https://github.com/ryangardner/abc-jvm.git
@@ -119,17 +121,17 @@ To ensure the highest possible fidelity, we validate our parser against a datase
 
 | Batch | Total Tunes | Passed | Skipped | Success % (Non-Skipped) |
 | :--- | :--- | :--- | :--- | :--- |
-| **001** | 1000 | 957 | 43 | 100% |
-| **002** | 1000 | 951 | 49 | 100% |
-| **003** | 1000 | 927 | 73 | 100% |
-| **004** | 1000 | 926 | 74 | 100% |
-| **005** | 1000 | 956 | 44 | 100% |
-| **006** | 1000 | 930 | 70 | 100% |
-| **007** | 1000 | 909 | 91 | 100% |
-| **008** | 1000 | 946 | 54 | 100% |
-| **009** | 1000 | 948 | 52 | 100% |
-| **010** | 1000 | 929 | 71 | 100% |
-| **Total** | **10,000** | **9,379** | **621** | **100%** |
+| **001** | 1000 | 959 | 41 | 100% |
+| **002** | 1000 | 963 | 37 | 100% |
+| **003** | 1000 | 949 | 51 | 100% |
+| **004** | 1000 | 960 | 40 | 100% |
+| **005** | 1000 | 969 | 31 | 100% |
+| **006** | 1000 | 953 | 47 | 100% |
+| **007** | 1000 | 965 | 35 | 100% |
+| **008** | 1000 | 958 | 42 | 100% |
+| **009** | 1000 | 966 | 34 | 100% |
+| **010** | 1000 | 963 | 37 | 100% |
+| **Total** | **10,000** | **9,605** | **395** | **100%** |
 
 ### Why are some tunes skipped?
 

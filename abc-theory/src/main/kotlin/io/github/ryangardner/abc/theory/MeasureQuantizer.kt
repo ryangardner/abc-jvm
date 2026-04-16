@@ -62,7 +62,7 @@ public object MeasureQuantizer {
         val calculateDuration = { multiplier: DurationMultiplier ->
             NoteDuration.simplify(
                 multiplier.numerator.toLong() * currentDefaultLength.numerator,
-                multiplier.denominator.toLong() * currentDefaultLength.denominator
+                multiplier.denominator.toLong() * currentDefaultLength.denominator,
             )
         }
 
@@ -81,7 +81,7 @@ public object MeasureQuantizer {
                         currentMeasureDuration = newDuration
                     }
                 }
-                
+
                 is RestElement -> {
                     val duration = calculateDuration(element.durationMultiplier)
                     val newDuration = currentMeasureDuration + duration

@@ -10,7 +10,6 @@ import org.junit.jupiter.params.provider.CsvSource
 import org.junit.jupiter.params.provider.ValueSource
 
 class AbcLexerTest {
-
     private fun lex(input: String): List<String> {
         val charStream = CharStreams.fromString(input)
         val lexer = ABCLexer(charStream)
@@ -40,67 +39,94 @@ class AbcLexerTest {
         val input = "X:1\nT:Test Tune\nK:C\n"
         val tokens = lex(input)
 
-        val expected = listOf(
-            "X_REF_START", "FIELD_CONTENT", "NEWLINE",
-            "FIELD_ID", "FIELD_CONTENT", "NEWLINE",
-            "KEY_FIELD", "FIELD_CONTENT", "NEWLINE"
-        )
+        val expected =
+            listOf(
+                "X_REF_START",
+                "FIELD_CONTENT",
+                "NEWLINE",
+                "FIELD_ID",
+                "FIELD_CONTENT",
+                "NEWLINE",
+                "KEY_FIELD",
+                "FIELD_CONTENT",
+                "NEWLINE",
+            )
 
         assertEquals(expected, tokens)
     }
 
     @Test
     fun `test header with comments`() {
-        val input = """
+        val input =
+            """
             X:1
             % This is a comment
             T:Tune Title
             M:4/4
             K:D
-        """.trimIndent() + "\n"
+            """.trimIndent() + "\n"
 
         val tokens = lex(input)
 
-        val expected = listOf(
-            "X_REF_START", "FIELD_CONTENT", "NEWLINE",
-            "NEWLINE", // Newline after comment
-            "FIELD_ID", "FIELD_CONTENT", "NEWLINE",
-            "FIELD_ID", "FIELD_CONTENT", "NEWLINE",
-            "KEY_FIELD", "FIELD_CONTENT", "NEWLINE"
-        )
+        val expected =
+            listOf(
+                "X_REF_START",
+                "FIELD_CONTENT",
+                "NEWLINE",
+                "NEWLINE", // Newline after comment
+                "FIELD_ID",
+                "FIELD_CONTENT",
+                "NEWLINE",
+                "FIELD_ID",
+                "FIELD_CONTENT",
+                "NEWLINE",
+                "KEY_FIELD",
+                "FIELD_CONTENT",
+                "NEWLINE",
+            )
 
         assertEquals(expected, tokens)
     }
 
     @Test
     fun `test header stylesheet directives`() {
-        val input = """
+        val input =
+            """
             X:1
             %%landscape
             T:Tune
             K:C
-        """.trimIndent() + "\n"
+            """.trimIndent() + "\n"
 
         val tokens = lex(input)
 
-        val expected = listOf(
-            "X_REF_START", "FIELD_CONTENT", "NEWLINE",
-            "STYLESHEET",
-            "FIELD_ID", "FIELD_CONTENT", "NEWLINE",
-            "KEY_FIELD", "FIELD_CONTENT", "NEWLINE"
-        )
+        val expected =
+            listOf(
+                "X_REF_START",
+                "FIELD_CONTENT",
+                "NEWLINE",
+                "STYLESHEET",
+                "FIELD_ID",
+                "FIELD_CONTENT",
+                "NEWLINE",
+                "KEY_FIELD",
+                "FIELD_CONTENT",
+                "NEWLINE",
+            )
 
         assertEquals(expected, tokens)
     }
 
     @ParameterizedTest
-    @ValueSource(strings = [
-        "M:4/4",
-        "L:1/8",
-        "C:Composer Name",
-        "R:Reel",
-        "Z:Transcriber"
-    ])
+    @ValueSource(
+        strings = [
+            "M:4/4",
+            "L:1/8",
+            "C:Composer Name",
+            "R:Reel",
+            "Z:Transcriber",
+        ],
+    )
     fun `test various header fields`(fieldLine: String) {
         val input = "X:1\n$fieldLine\nK:C\n"
         val tokens = lex(input)
@@ -113,11 +139,20 @@ class AbcLexerTest {
         val input = "X:1\nK:C\nCDEFG"
         val tokens = lex(input)
 
-        val expected = listOf(
-            "X_REF_START", "FIELD_CONTENT", "NEWLINE",
-            "KEY_FIELD", "FIELD_CONTENT", "NEWLINE",
-            "NOTE_PITCH", "NOTE_PITCH", "NOTE_PITCH", "NOTE_PITCH", "NOTE_PITCH"
-        )
+        val expected =
+            listOf(
+                "X_REF_START",
+                "FIELD_CONTENT",
+                "NEWLINE",
+                "KEY_FIELD",
+                "FIELD_CONTENT",
+                "NEWLINE",
+                "NOTE_PITCH",
+                "NOTE_PITCH",
+                "NOTE_PITCH",
+                "NOTE_PITCH",
+                "NOTE_PITCH",
+            )
         assertEquals(expected, tokens)
     }
 
@@ -126,11 +161,21 @@ class AbcLexerTest {
         val inputWithNewline = "X:1\nT:Long Title \\\n Continued\nK:C\n"
         val tokensWithNewline = lex(inputWithNewline)
 
-         assertEquals(listOf(
-            "X_REF_START", "FIELD_CONTENT", "NEWLINE",
-            "FIELD_ID", "FIELD_CONTENT", "FIELD_CONTENT", "NEWLINE",
-            "KEY_FIELD", "FIELD_CONTENT", "NEWLINE"
-        ), tokensWithNewline)
+        assertEquals(
+            listOf(
+                "X_REF_START",
+                "FIELD_CONTENT",
+                "NEWLINE",
+                "FIELD_ID",
+                "FIELD_CONTENT",
+                "FIELD_CONTENT",
+                "NEWLINE",
+                "KEY_FIELD",
+                "FIELD_CONTENT",
+                "NEWLINE",
+            ),
+            tokensWithNewline,
+        )
     }
 
     // --- MUSIC MODE TESTS ---
@@ -140,14 +185,26 @@ class AbcLexerTest {
         val input = "C c C, c' C,, c''"
         val tokens = lexMusic(input)
         // Space is WS_MUSIC -> SPACE
-        val expected = listOf(
-            "NOTE_PITCH", "SPACE",
-            "NOTE_PITCH", "SPACE",
-            "NOTE_PITCH", "OCTAVE_DOWN", "SPACE",
-            "NOTE_PITCH", "OCTAVE_UP", "SPACE",
-            "NOTE_PITCH", "OCTAVE_DOWN", "OCTAVE_DOWN", "SPACE",
-            "NOTE_PITCH", "OCTAVE_UP", "OCTAVE_UP"
-        )
+        val expected =
+            listOf(
+                "NOTE_PITCH",
+                "SPACE",
+                "NOTE_PITCH",
+                "SPACE",
+                "NOTE_PITCH",
+                "OCTAVE_DOWN",
+                "SPACE",
+                "NOTE_PITCH",
+                "OCTAVE_UP",
+                "SPACE",
+                "NOTE_PITCH",
+                "OCTAVE_DOWN",
+                "OCTAVE_DOWN",
+                "SPACE",
+                "NOTE_PITCH",
+                "OCTAVE_UP",
+                "OCTAVE_UP",
+            )
         assertEquals(expected, tokens)
     }
 
@@ -156,15 +213,29 @@ class AbcLexerTest {
         val input = "^C _D =E ^^F __G ^/A _/B"
         val tokens = lexMusic(input)
 
-        val expected = listOf(
-            "ACC_SHARP", "NOTE_PITCH", "SPACE",
-            "ACC_FLAT", "NOTE_PITCH", "SPACE",
-            "ACC_NATURAL", "NOTE_PITCH", "SPACE",
-            "ACC_SHARP_DBL", "NOTE_PITCH", "SPACE",
-            "ACC_FLAT_DBL", "NOTE_PITCH", "SPACE",
-            "ACC_SHARP_HALF", "NOTE_PITCH", "SPACE",
-            "ACC_FLAT_HALF", "NOTE_PITCH"
-        )
+        val expected =
+            listOf(
+                "ACC_SHARP",
+                "NOTE_PITCH",
+                "SPACE",
+                "ACC_FLAT",
+                "NOTE_PITCH",
+                "SPACE",
+                "ACC_NATURAL",
+                "NOTE_PITCH",
+                "SPACE",
+                "ACC_SHARP_DBL",
+                "NOTE_PITCH",
+                "SPACE",
+                "ACC_FLAT_DBL",
+                "NOTE_PITCH",
+                "SPACE",
+                "ACC_SHARP_HALF",
+                "NOTE_PITCH",
+                "SPACE",
+                "ACC_FLAT_HALF",
+                "NOTE_PITCH",
+            )
         assertEquals(expected, tokens)
     }
 
@@ -173,12 +244,17 @@ class AbcLexerTest {
         val input = "z z4 x X"
         val tokens = lexMusic(input)
 
-        val expected = listOf(
-            "REST", "SPACE",
-            "REST", "DIGIT", "SPACE", // z4
-            "REST", "SPACE",
-            "REST"
-        )
+        val expected =
+            listOf(
+                "REST",
+                "SPACE",
+                "REST",
+                "DIGIT",
+                "SPACE", // z4
+                "REST",
+                "SPACE",
+                "REST",
+            )
         assertEquals(expected, tokens)
     }
 
@@ -190,9 +266,12 @@ class AbcLexerTest {
         "'[|', BAR_THICK_THIN",
         "'|:', BAR_REP_START",
         "':|', BAR_REP_END",
-        "'::', BAR_REP_DBL"
+        "'::', BAR_REP_DBL",
     )
-    fun `test bar lines`(barText: String, tokenName: String) {
+    fun `test bar lines`(
+        barText: String,
+        tokenName: String,
+    ) {
         val tokens = lexMusic(barText)
         assertEquals(listOf(tokenName), tokens)
     }
@@ -202,10 +281,24 @@ class AbcLexerTest {
         val input = "(3ABC (3:2:4DEF"
         val tokens = lexMusic(input)
 
-        val expected = listOf(
-            "SLUR_START", "DIGIT", "NOTE_PITCH", "NOTE_PITCH", "NOTE_PITCH", "SPACE",
-            "SLUR_START", "DIGIT", "COLON", "DIGIT", "COLON", "DIGIT", "NOTE_PITCH", "NOTE_PITCH", "NOTE_PITCH"
-        )
+        val expected =
+            listOf(
+                "SLUR_START",
+                "DIGIT",
+                "NOTE_PITCH",
+                "NOTE_PITCH",
+                "NOTE_PITCH",
+                "SPACE",
+                "SLUR_START",
+                "DIGIT",
+                "COLON",
+                "DIGIT",
+                "COLON",
+                "DIGIT",
+                "NOTE_PITCH",
+                "NOTE_PITCH",
+                "NOTE_PITCH",
+            )
         assertEquals(expected, tokens)
     }
 
@@ -214,12 +307,24 @@ class AbcLexerTest {
         val input = "A>B A<B A>>B A<<B"
         val tokens = lexMusic(input)
 
-        val expected = listOf(
-            "NOTE_PITCH", "BROKEN_RHYTHM_RIGHT", "NOTE_PITCH", "SPACE",
-            "NOTE_PITCH", "BROKEN_RHYTHM_LEFT", "NOTE_PITCH", "SPACE",
-            "NOTE_PITCH", "BROKEN_RHYTHM_RIGHT", "NOTE_PITCH", "SPACE",
-            "NOTE_PITCH", "BROKEN_RHYTHM_LEFT", "NOTE_PITCH"
-        )
+        val expected =
+            listOf(
+                "NOTE_PITCH",
+                "BROKEN_RHYTHM_RIGHT",
+                "NOTE_PITCH",
+                "SPACE",
+                "NOTE_PITCH",
+                "BROKEN_RHYTHM_LEFT",
+                "NOTE_PITCH",
+                "SPACE",
+                "NOTE_PITCH",
+                "BROKEN_RHYTHM_RIGHT",
+                "NOTE_PITCH",
+                "SPACE",
+                "NOTE_PITCH",
+                "BROKEN_RHYTHM_LEFT",
+                "NOTE_PITCH",
+            )
         assertEquals(expected, tokens)
     }
 
@@ -228,33 +333,42 @@ class AbcLexerTest {
     @Test
     fun `test lyrics mode`() {
         val tokensInBody = lexMusic("w: This is a lyric line\n")
-        val expected = listOf(
-            "FIELD_ID", "FIELD_CONTENT", "NEWLINE"
-        )
+        val expected =
+            listOf(
+                "FIELD_ID",
+                "FIELD_CONTENT",
+                "NEWLINE",
+            )
         assertEquals(expected, tokensInBody)
     }
 
     @Test
     fun `test text block mode`() {
-        val input = """
+        val input =
+            """
             X:1
             %%begintext
             This is free text.
             It can contain anything.
             %%endtext
             K:C
-        """.trimIndent() + "\n"
+            """.trimIndent() + "\n"
 
         val tokens = lex(input)
 
-        val expected = listOf(
-            "X_REF_START", "FIELD_CONTENT", "NEWLINE",
-            "HEADER_TEXT_BLOCK_START",
-            "TEXT_BLOCK_CONTENT",
-            "TEXT_BLOCK_END",
-            "NEWLINE",
-            "KEY_FIELD", "FIELD_CONTENT", "NEWLINE"
-        )
+        val expected =
+            listOf(
+                "X_REF_START",
+                "FIELD_CONTENT",
+                "NEWLINE",
+                "HEADER_TEXT_BLOCK_START",
+                "TEXT_BLOCK_CONTENT",
+                "TEXT_BLOCK_END",
+                "NEWLINE",
+                "KEY_FIELD",
+                "FIELD_CONTENT",
+                "NEWLINE",
+            )
 
         assertEquals(expected, tokens)
     }
@@ -263,14 +377,15 @@ class AbcLexerTest {
     fun `test symbol line mode`() {
         val tokensWithNewline = lexMusic("s: !f! \"Am\" * |\n")
 
-        val expected = listOf(
-            "MUSIC_SYMBOL_LINE",
-            "SYMBOL_DECO",
-            "SYMBOL_CHORD",
-            "SYMBOL_SKIP",
-            "SYMBOL_BAR",
-            "NEWLINE"
-        )
+        val expected =
+            listOf(
+                "MUSIC_SYMBOL_LINE",
+                "SYMBOL_DECO",
+                "SYMBOL_CHORD",
+                "SYMBOL_SKIP",
+                "SYMBOL_BAR",
+                "NEWLINE",
+            )
 
         assertEquals(expected, tokensWithNewline)
     }
@@ -280,13 +395,17 @@ class AbcLexerTest {
         val input = "[M:6/8] CDEF"
         val tokens = lexMusic(input)
 
-        val expected = listOf(
-            "INLINE_FIELD_START",
-            "INLINE_FIELD_CONTENT",
-            "INLINE_FIELD_END",
-            "SPACE",
-            "NOTE_PITCH", "NOTE_PITCH", "NOTE_PITCH", "NOTE_PITCH"
-        )
+        val expected =
+            listOf(
+                "INLINE_FIELD_START",
+                "INLINE_FIELD_CONTENT",
+                "INLINE_FIELD_END",
+                "SPACE",
+                "NOTE_PITCH",
+                "NOTE_PITCH",
+                "NOTE_PITCH",
+                "NOTE_PITCH",
+            )
 
         assertEquals(expected, tokens)
     }
@@ -301,11 +420,18 @@ class AbcLexerTest {
         // "Am7" -> CHORD_START, CHORD_CONTENT, CHORD_END
         // [CEG] -> BRACKET_START, NOTE_PITCH, NOTE_PITCH, NOTE_PITCH, BRACKET_END
 
-        val expected = listOf(
-            "CHORD_START", "CHORD_CONTENT", "CHORD_END",
-            "SPACE",
-            "BRACKET_START", "NOTE_PITCH", "NOTE_PITCH", "NOTE_PITCH", "BRACKET_END"
-        )
+        val expected =
+            listOf(
+                "CHORD_START",
+                "CHORD_CONTENT",
+                "CHORD_END",
+                "SPACE",
+                "BRACKET_START",
+                "NOTE_PITCH",
+                "NOTE_PITCH",
+                "NOTE_PITCH",
+                "BRACKET_END",
+            )
 
         assertEquals(expected, tokens)
     }
@@ -315,14 +441,24 @@ class AbcLexerTest {
         val input = "!trill! +crescendo+ ~ . u v"
         val tokens = lexMusic(input)
 
-        val expected = listOf(
-            "DECORATION_START", "BANG_DECO_CONTENT", "DECORATION_END", "SPACE",
-            "PLUS_DECORATION", "PLUS_DECO_CONTENT", "PLUS_DECORATION_END", "SPACE",
-            "ROLL", "SPACE",
-            "STACCATO", "SPACE",
-            "UPBOW", "SPACE",
-            "DOWNBOW"
-        )
+        val expected =
+            listOf(
+                "DECORATION_START",
+                "BANG_DECO_CONTENT",
+                "DECORATION_END",
+                "SPACE",
+                "PLUS_DECORATION",
+                "PLUS_DECO_CONTENT",
+                "PLUS_DECORATION_END",
+                "SPACE",
+                "ROLL",
+                "SPACE",
+                "STACCATO",
+                "SPACE",
+                "UPBOW",
+                "SPACE",
+                "DOWNBOW",
+            )
 
         assertEquals(expected, tokens)
     }

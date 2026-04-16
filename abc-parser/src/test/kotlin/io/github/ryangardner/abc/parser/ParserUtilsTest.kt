@@ -65,10 +65,10 @@ class ParserUtilsTest {
 
         val dur2 = ParserUtils.parseDurationMultiplier("/4")
         assertEquals(DurationMultiplier(1, 4), dur2)
-        
+
         val dur3 = ParserUtils.parseDurationMultiplier("3")
         assertEquals(DurationMultiplier(3, 1), dur3)
-        
+
         val dur4 = ParserUtils.parseDurationMultiplier("3/")
         assertEquals(DurationMultiplier(3, 2), dur4)
 

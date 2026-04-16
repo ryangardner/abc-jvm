@@ -3,7 +3,6 @@ package io.github.ryangardner.abc.parser
 import io.github.ryangardner.abc.antlr.ABCLexer
 import io.github.ryangardner.abc.antlr.ABCParser
 import io.github.ryangardner.abc.core.model.Accidental
-import io.github.ryangardner.abc.core.model.BarLineType
 import io.github.ryangardner.abc.core.model.Decoration
 import io.github.ryangardner.abc.core.model.DurationMultiplier
 import io.github.ryangardner.abc.core.model.NoteDuration
@@ -63,29 +62,36 @@ internal object ParserUtils {
             else -> null
         }
 
-    fun parseBarLineType(tokenType: Int): BarLineType =
-        when (tokenType) {
-            ABCLexer.BAR_SINGLE -> BarLineType.SINGLE
-            ABCLexer.BAR_THIN_DOUBLE -> BarLineType.DOUBLE
-            ABCLexer.BAR_THIN_THICK -> BarLineType.FINAL
-            ABCLexer.BAR_THICK_THIN -> BarLineType.DOUBLE
-            ABCLexer.BAR_REP_START -> BarLineType.REPEAT_START
-            ABCLexer.BAR_REP_END -> BarLineType.REPEAT_END
-            ABCLexer.BAR_REP_END_ALT -> BarLineType.REPEAT_END
-            ABCLexer.BAR_REP_END_TUNE -> BarLineType.REPEAT_END
-            ABCLexer.BAR_REP_DBL_ALT -> BarLineType.REPEAT_BOTH
-            ABCLexer.BAR_REP_DBL -> BarLineType.REPEAT_BOTH
-            ABCLexer.BAR_REP_DBL_TUNE -> BarLineType.REPEAT_BOTH
-            ABCLexer.BAR_THICK_THICK -> BarLineType.DOUBLE
-            else -> BarLineType.SINGLE
-        }
+    fun parseDurationMultiplier(ctx: ABCParser.Note_lengthContext?): DurationMultiplier {
+        if (ctx == null) return DurationMultiplier.DEFAULT
+
+        // Use the labels defined in the grammar: num=DIGIT+, slashes=SLASH+, den=DIGIT*
+        val numText = ctx.num?.text
+        val slashesText = ctx.slashes?.text
+        val denText = ctx.den?.text
+
+        val num = numText?.toIntOrNull() ?: 1
+        val slashCount = slashesText?.length ?: 0
+
+        if (slashCount == 0) return DurationMultiplier(num, 1)
+
+        val explicitDen = denText?.toIntOrNull()
+        val den =
+            if (explicitDen != null) {
+                explicitDen * Math.pow(2.0, (slashCount - 1).toDouble()).toInt()
+            } else {
+                Math.pow(2.0, slashCount.toDouble()).toInt()
+            }
+
+        return DurationMultiplier(num, den)
+    }
 
     fun parseDurationMultiplier(text: String): DurationMultiplier {
         if (text.isEmpty()) return DurationMultiplier.DEFAULT
 
         // Count slashes to determine power-of-two denominators, e.g. // -> 4, /// -> 8
         val slashCount = text.count { it == '/' }
-        
+
         if (slashCount == 0) {
             // No slashes: simply parsing the numerator
             val num = text.toIntOrNull() ?: 1
@@ -96,19 +102,20 @@ internal object ParserUtils {
         val parts = text.split("/", limit = 2)
         val numStr = parts[0].trim()
         val num = if (numStr.isEmpty()) 1 else (numStr.toIntOrNull() ?: 1)
-        
+
         // Parts[1] contains whatever is after the first slash.
         // It might be empty, might be more slashes, might be a number.
         val remainderStr = if (parts.size > 1) parts[1].replace("/", "").trim() else ""
-        
+
         val explicitDen = remainderStr.toIntOrNull()
-        
-        val den = if (explicitDen != null) {
-            explicitDen * Math.pow(2.0, (slashCount - 1).toDouble()).toInt()
-        } else {
-            Math.pow(2.0, slashCount.toDouble()).toInt()
-        }
-        
+
+        val den =
+            if (explicitDen != null) {
+                explicitDen * Math.pow(2.0, (slashCount - 1).toDouble()).toInt()
+            } else {
+                Math.pow(2.0, slashCount.toDouble()).toInt()
+            }
+
         return DurationMultiplier(num, den)
     }
 

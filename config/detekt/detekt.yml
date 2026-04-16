@@ -23,3 +23,16 @@ style:
     active: false
   MaxLineLength:
     active: false
+
+libraries:
+  active: true
+  # TODO: Before publishing to Maven Central, migrate public data classes in abc-core
+  # to regular classes with explicit equals/hashCode/toString for binary compatibility.
+  # See: https://jakewharton.com/public-api-challenges-in-kotlin/
+  ForbiddenPublicDataClass:
+    active: false
+  LibraryCodeMustSpecifyReturnType:
+    active: true
+  # Disabled: abc-jvm is a library — public entities are the API surface.
+  LibraryEntitiesShouldNotBePublic:
+    active: false

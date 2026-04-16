@@ -1,7 +1,7 @@
 package io.github.ryangardner.abc.theory
 import io.github.ryangardner.abc.core.model.Accidental
-import io.github.ryangardner.abc.core.model.KeyMode
 import io.github.ryangardner.abc.core.model.DurationMultiplier
+import io.github.ryangardner.abc.core.model.KeyMode
 import io.github.ryangardner.abc.core.model.NoteDuration
 import io.github.ryangardner.abc.core.model.NoteElement
 import io.github.ryangardner.abc.core.model.NoteStep
