@@ -73,6 +73,10 @@ public data class InterpretedNote(
      */
     public val isTieContinued: Boolean = false,
     /**
+     * Absolute MIDI pitches that are continuations of a tie from a previous note.
+     */
+    public val continuedMidiPitches: List<Int> = emptyList(),
+    /**
      * A list of optional annotations (e.g., chord symbols like "Am") attached to the note.
      */
     public val annotations: List<String> = emptyList(),
@@ -134,12 +138,12 @@ internal class InterpretationSession(
     }
 
     fun getCurrentVoiceList(): MutableList<InterpretedNote> = voices.getOrPut(currentVoiceId) { mutableListOf() }
-    
+
     fun calculateDuration(multiplier: io.github.ryangardner.abc.core.model.DurationMultiplier): NoteDuration {
         val defaultLen = currentVoiceState().currentDefaultLength
         return NoteDuration.simplify(
             multiplier.numerator.toLong() * defaultLen.numerator,
-            multiplier.denominator.toLong() * defaultLen.denominator
+            multiplier.denominator.toLong() * defaultLen.denominator,
         )
     }
 }
@@ -229,7 +233,7 @@ public object PitchInterpreter {
                 "M" -> {
                     vState.currentMeter = InterpretationUtils.parseMeter(element.value)
                 }
-                
+
                 "L" -> {
                     val parts = element.value.split("/")
                     if (parts.size == 2) {
@@ -259,7 +263,7 @@ public object PitchInterpreter {
                 HeaderType.METER -> {
                     vState.currentMeter = InterpretationUtils.parseMeter(element.value)
                 }
-                
+
                 HeaderType.LENGTH -> {
                     val parts = element.value.split("/")
                     if (parts.size == 2) {
@@ -276,7 +280,10 @@ public object PitchInterpreter {
             element: DirectiveElement,
         ) {
             if (element.content.startsWith("MIDI transpose", ignoreCase = true)) {
-                session.currentVoiceState().midiTranspose = element.content.split(WHITESPACE_REGEX).last().toIntOrNull() ?: 0
+                session.currentVoiceState().midiTranspose = element.content
+                    .split(WHITESPACE_REGEX)
+                    .last()
+                    .toIntOrNull() ?: 0
             }
         }
     }
@@ -404,7 +411,7 @@ public object PitchInterpreter {
 
     private object TieResolver {
         data class TieResult(
-            val tiedFrom: Pair<String, Int>?,
+            val resolvedPitches: Map<Int, Pair<String, Int>>,
             val adjustedMidiPitches: List<Int>,
         )
 
@@ -414,28 +421,40 @@ public object PitchInterpreter {
             hasExplicitAccidental: Boolean,
             isChord: Boolean = false,
         ): TieResult {
-            val vState = session.currentVoiceState()
             val voiceId = session.currentVoiceId
             val openTies = session.openTies
 
-            val sortedMidi = midiPitches.sorted()
-            val tieKey = voiceId to sortedMidi
-            var tiedFrom = openTies[tieKey]
-            var adjustedMidi = midiPitches
+            val resolved = mutableMapOf<Int, Pair<String, Int>>()
+            val adjusted = midiPitches.toMutableList()
 
-            if (!isChord && tiedFrom == null && !hasExplicitAccidental) {
-                // Fuzzy matching for single notes
-                val midiPitch = midiPitches[0]
-                val heuristicMatch =
-                    openTies.entries.find { (key, _) ->
-                        key.first == voiceId && key.second.size == 1 && Math.abs(key.second[0] - midiPitch) <= 2
+            // 1. Try exact match for the whole set (e.g. [CEG] tied to [CEG])
+            val sortedMidi = midiPitches.sorted()
+            val fullTieKey = voiceId to sortedMidi
+            val fullTiedFrom = openTies[fullTieKey]
+
+            if (fullTiedFrom != null) {
+                midiPitches.forEach { resolved[it] = fullTiedFrom }
+            } else {
+                // 2. Try individual pitch matches
+                midiPitches.forEachIndexed { index, midiPitch ->
+                    val singleTieKey = voiceId to listOf(midiPitch)
+                    val tiedFrom = openTies[singleTieKey]
+                    if (tiedFrom != null) {
+                        resolved[midiPitch] = tiedFrom
+                    } else if (!isChord && !hasExplicitAccidental) {
+                        // Heuristic fuzzy match for single notes only
+                        val heuristicMatch = openTies.entries.find { (key, _) ->
+                            key.first == voiceId && key.second.size == 1 && Math.abs(key.second[0] - midiPitch) <= 2
+                        }
+                        if (heuristicMatch != null) {
+                            resolved[midiPitch] = heuristicMatch.value
+                            adjusted[index] = heuristicMatch.key.second[0]
+                        }
                     }
-                if (heuristicMatch != null) {
-                    tiedFrom = heuristicMatch.value
-                    adjustedMidi = listOf(heuristicMatch.key.second[0])
                 }
             }
-            return TieResult(tiedFrom, adjustedMidi)
+
+            return TieResult(resolved, adjusted)
         }
     }
 
@@ -482,15 +501,15 @@ public object PitchInterpreter {
                 }
 
                 is NoteElement -> {
-                    handleNote(element, idx, vState, session, elements)
+                    handleNote(element, vState, session)
                 }
 
                 is ChordElement -> {
-                    handleChord(element, idx, vState, session, elements)
+                    handleChord(element, vState, session)
                 }
 
                 is RestElement -> {
-                    handleRest(element, idx, vState, session, elements)
+                    handleRest(element, vState, session)
                 }
 
                 is BarLineElement -> {
@@ -550,10 +569,8 @@ public object PitchInterpreter {
 
     private fun handleNote(
         element: NoteElement,
-        idx: Int,
         vState: VoiceState,
         session: InterpretationSession,
-        elements: List<MusicElement>,
     ) {
         val interpretedPitch = PitchResolver.resolve(element, session)
         val midiPitch = interpretedPitch.midiNoteNumber + vState.midiTranspose
@@ -563,51 +580,50 @@ public object PitchInterpreter {
 
         processMusicEvent(
             session,
-            listOf(interpretedPitch),
-            listOf(midiPitch),
-            noteDuration,
-            element.ties,
-            hasExplicitAccidental,
-            element.annotations,
-            element.decorations,
+            MusicEventContext(
+                pitches = listOf(interpretedPitch),
+                midiPitches = listOf(midiPitch),
+                baseDuration = noteDuration,
+                tieType = element.ties,
+                pitchTies = listOf(element.ties),
+                hasExplicitAccidental = hasExplicitAccidental,
+                annotations = element.annotations,
+                decorations = element.decorations,
+            ),
         )
     }
 
     private fun handleChord(
         element: ChordElement,
-        idx: Int,
         vState: VoiceState,
         session: InterpretationSession,
-        elements: List<MusicElement>,
     ) {
         val interpretedPitches = element.notes.map { PitchResolver.resolve(it, session) }
         val midiPitches = interpretedPitches.map { it.midiNoteNumber + vState.midiTranspose }
-        val hasTieOut =
-            element.notes
-                .firstOrNull()
-                ?.ties
-                ?.let { it == TieType.START || it == TieType.BOTH } ?: false
+        val pitchTies = element.notes.map { it.ties }
+        val hasTieOut = pitchTies.any { it == TieType.START || it == TieType.BOTH }
         val tieType = if (hasTieOut) TieType.START else TieType.NONE
 
         processMusicEvent(
             session,
-            interpretedPitches,
-            midiPitches,
-            session.calculateDuration(element.durationMultiplier),
-            tieType,
-            false, // Chords don't use fuzzy accidental matching in current logic
-            element.annotations,
-            element.decorations,
-            isChord = true,
+            MusicEventContext(
+                pitches = interpretedPitches,
+                midiPitches = midiPitches,
+                baseDuration = session.calculateDuration(element.durationMultiplier),
+                tieType = tieType,
+                pitchTies = pitchTies,
+                hasExplicitAccidental = false,
+                annotations = element.annotations,
+                decorations = element.decorations,
+                isChord = true,
+            ),
         )
     }
 
     private fun handleRest(
         element: RestElement,
-        idx: Int,
         vState: VoiceState,
         session: InterpretationSession,
-        elements: List<MusicElement>,
     ) {
         val restDuration = session.calculateDuration(element.durationMultiplier)
         val timing = TimeCalculator.calculate(restDuration, vState.activeTuplet, session)
@@ -644,18 +660,30 @@ public object PitchInterpreter {
         vState.measureDuration = NoteDuration(0, 1)
     }
 
-    @Suppress("LongParameterList")
+    private data class MusicEventContext(
+        val pitches: List<Pitch>,
+        val midiPitches: List<Int>,
+        val baseDuration: NoteDuration,
+        val tieType: TieType,
+        val pitchTies: List<TieType>,
+        val hasExplicitAccidental: Boolean,
+        val annotations: List<String>,
+        val decorations: List<Decoration>,
+        val isChord: Boolean = false,
+    )
+
     private fun processMusicEvent(
         session: InterpretationSession,
-        pitches: List<Pitch>,
-        midiPitches: List<Int>,
-        baseDuration: NoteDuration,
-        tieType: TieType,
-        hasExplicitAccidental: Boolean,
-        annotations: List<String>,
-        decorations: List<Decoration>,
-        isChord: Boolean = false,
+        event: MusicEventContext,
     ) {
+        val pitches = event.pitches
+        val midiPitches = event.midiPitches
+        val baseDuration = event.baseDuration
+        val tieType = event.tieType
+        val hasExplicitAccidental = event.hasExplicitAccidental
+        val annotations = event.annotations
+        val decorations = event.decorations
+        val isChord = event.isChord
         val vState = session.currentVoiceState()
         val timing = TimeCalculator.calculate(baseDuration, vState.activeTuplet, session)
         if (vState.activeTuplet?.remainingNotes == 0) vState.activeTuplet = null
@@ -664,49 +692,79 @@ public object PitchInterpreter {
         val playedDuration = TimeCalculator.handleGraceStealing(session, timing.played)
         val voiceList = session.getCurrentVoiceList()
 
-        val tieResult = TieResolver.resolve(session, midiPitches, hasExplicitAccidental, isChord)
+        val tieResult = TieResolver.resolve(session, midiPitches, hasExplicitAccidental, event.isChord)
+        val resolvedPitches = tieResult.resolvedPitches
+        val adjustedMidiPitches = tieResult.adjustedMidiPitches
 
-        if (tieResult.tiedFrom != null) {
-            val originalList = session.voices[tieResult.tiedFrom.first]!!
-            val originalNote = originalList[tieResult.tiedFrom.second]
-            originalList[tieResult.tiedFrom.second] =
-                originalNote.copy(
-                    playedDuration = addDurations(originalNote.playedDuration, playedDuration),
-                    semanticDuration = addDurations(originalNote.semanticDuration, timing.semantic),
-                )
-            voiceList.add(
-                InterpretedNote(
-                    pitches = emptyList(),
-                    midiPitches = emptyList(),
-                    duration = baseDuration,
-                    semanticDuration = timing.semantic,
-                    playedDuration = playedDuration,
-                    isTieContinued = true,
-                ),
-            )
+        val newPitches = mutableListOf<Pitch>()
+        val newMidiPitches = mutableListOf<Int>()
+        val continuedMidiPitches = mutableListOf<Int>()
 
-            val actualTieKey = session.currentVoiceId to tieResult.adjustedMidiPitches.sorted()
-            if (tieType == TieType.START || tieType == TieType.BOTH) {
-                session.openTies[actualTieKey] = tieResult.tiedFrom
+        val extendedEvents = mutableSetOf<Pair<String, Int>>()
+        adjustedMidiPitches.forEachIndexed { index, midiPitch ->
+            val tiedFrom = resolvedPitches[midiPitch]
+            if (tiedFrom != null) {
+                continuedMidiPitches.add(midiPitch)
+                // Extend the original note (only once per source event)
+                if (extendedEvents.add(tiedFrom)) {
+                    val originalList = session.voices[tiedFrom.first]!!
+                    val originalNote = originalList[tiedFrom.second]
+                    originalList[tiedFrom.second] = originalNote.copy(
+                        playedDuration = addDurations(originalNote.playedDuration, playedDuration),
+                        semanticDuration = addDurations(originalNote.semanticDuration, timing.semantic)
+                    )
+                }
             } else {
-                session.openTies.remove(actualTieKey)
+                newMidiPitches.add(midiPitch)
+                newPitches.add(pitches[index])
+            }
+        }
+
+        val newNoteIndex = voiceList.size
+        val isFullContinuation = newMidiPitches.isEmpty() && continuedMidiPitches.isNotEmpty()
+
+        voiceList.add(
+            InterpretedNote(
+                pitches = newPitches,
+                midiPitches = newMidiPitches,
+                continuedMidiPitches = continuedMidiPitches,
+                duration = baseDuration,
+                semanticDuration = timing.semantic,
+                playedDuration = playedDuration,
+                isRest = false,
+                isGrace = false,
+                isTieContinued = isFullContinuation,
+                annotations = annotations,
+                decorations = decorations,
+            )
+        )
+
+        // Handle opening ties for the NEXT event
+        // We must remove ties that were resolved but NOT re-started
+        // And add ties that are START or BOTH
+        
+        // 1. Remove all resolved ties from openTies
+        resolvedPitches.values.toSet().forEach { tiedFrom ->
+            session.openTies.entries.removeIf { it.value == tiedFrom }
+        }
+
+        // 2. Add new ties
+        if (event.isChord) {
+            // Add individual note ties
+            adjustedMidiPitches.forEachIndexed { index, midiPitch ->
+                val pTie = event.pitchTies[index]
+                if (pTie == TieType.START || pTie == TieType.BOTH) {
+                    session.openTies[session.currentVoiceId to listOf(midiPitch)] = session.currentVoiceId to newNoteIndex
+                }
+            }
+            // If the WHOLE chord is tied (chord-level tie), also add a chord tie key for backward compatibility/fuzzy matching
+            if (event.tieType == TieType.START || event.tieType == TieType.BOTH) {
+                session.openTies[session.currentVoiceId to adjustedMidiPitches.sorted()] = session.currentVoiceId to newNoteIndex
             }
         } else {
-            val newNoteIndex = voiceList.size
-            voiceList.add(
-                InterpretedNote(
-                    pitches = pitches,
-                    midiPitches = midiPitches,
-                    duration = baseDuration,
-                    semanticDuration = timing.semantic,
-                    playedDuration = playedDuration,
-                    annotations = annotations,
-                    decorations = decorations,
-                ),
-            )
-            if (tieType == TieType.START || tieType == TieType.BOTH) {
-                val tieKey = session.currentVoiceId to midiPitches.sorted()
-                session.openTies[tieKey] = session.currentVoiceId to newNoteIndex
+            // Single note
+            if (event.tieType == TieType.START || event.tieType == TieType.BOTH) {
+                session.openTies[session.currentVoiceId to adjustedMidiPitches.sorted()] = session.currentVoiceId to newNoteIndex
             }
         }
     }

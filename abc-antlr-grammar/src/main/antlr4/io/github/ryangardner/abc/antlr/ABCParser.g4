@@ -101,9 +101,12 @@ octave_modifier
     ;
 
 note_length
-    : DIGIT+ (SLASH+ DIGIT*)?
-    | SLASH+ DIGIT*
+    : num=number (slashes=slash_seq den=number?)?
+    | slashes=slash_seq den=number?
     ;
+
+number : DIGIT+ ;
+slash_seq : SLASH+ ;
 
 broken_rhythm_alt
     : BROKEN_RHYTHM_LEFT | BROKEN_RHYTHM_RIGHT
@@ -120,7 +123,7 @@ tuplet_element
     ;
     
 chord_alt
-    : (decoration_alt | annotation_alt)* BRACKET_START chord_element* BRACKET_END note_length?
+    : (decoration_alt | annotation_alt)* BRACKET_START chord_element* BRACKET_END note_length? tie?
     ;
 
 
@@ -151,18 +154,18 @@ slur_start_alt : SLUR_START ;
 slur_end_alt : SLUR_END ;
 
 barline
-    : BAR_THIN_DOUBLE    # Bar
-    | BAR_THIN_THICK     # Bar
-    | BAR_THICK_THIN     # Bar
-    | BAR_THICK_THICK    # Bar
-    | BAR_REP_START      # Bar
-    | BAR_REP_END        # Bar
-    | BAR_REP_END_ALT    # Bar
-    | BAR_REP_END_TUNE   # Bar
-    | BAR_REP_DBL        # Bar
-    | BAR_REP_DBL_ALT    # Bar
-    | BAR_REP_DBL_TUNE   # Bar
-    | BAR_SINGLE         # Bar
+    : BAR_THIN_DOUBLE    # BarThinDouble
+    | BAR_THIN_THICK     # BarFinal
+    | BAR_THICK_THIN     # BarDouble
+    | BAR_THICK_THICK    # BarThickDouble
+    | BAR_REP_START      # BarRepStart
+    | BAR_REP_END        # BarRepEnd
+    | BAR_REP_END_ALT    # BarRepEndAlt
+    | BAR_REP_END_TUNE   # BarRepEndTune
+    | BAR_REP_DBL        # BarRepDbl
+    | BAR_REP_DBL_ALT    # BarRepDblAlt
+    | BAR_REP_DBL_TUNE   # BarRepDblTune
+    | BAR_SINGLE         # BarSingle
     | variant            # VariantBar
     ;
 

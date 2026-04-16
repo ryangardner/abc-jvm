@@ -5,6 +5,7 @@ import io.github.ryangardner.abc.antlr.ABCParser
 import io.github.ryangardner.abc.antlr.ABCParserBaseVisitor
 import io.github.ryangardner.abc.core.model.Accidental
 import io.github.ryangardner.abc.core.model.BarLineElement
+import io.github.ryangardner.abc.core.model.BarLineType
 import io.github.ryangardner.abc.core.model.BodyHeaderElement
 import io.github.ryangardner.abc.core.model.BrokenRhythmMarkerElement
 import io.github.ryangardner.abc.core.model.ChordElement
@@ -111,12 +112,12 @@ internal class AbcTuneBodyVisitor(
     override fun visitTuplet(ctx: ABCParser.TupletContext) {
         val line = ctx.start.line
         val col = ctx.start.charPositionInLine
-        
+
         val tupletElement = ctx.tuplet_element()
         val p = tupletElement.p?.text?.toIntOrNull() ?: 3
         val q = tupletElement.q?.text?.toIntOrNull()
         val r = tupletElement.r?.text?.toIntOrNull()
-        
+
         elements.add(TupletElement(p, q, r, line = line, column = col))
     }
 
@@ -127,7 +128,7 @@ internal class AbcTuneBodyVisitor(
         val explicitLengthCtx = chordCtx.note_length()
         var explicitChordMultiplier: DurationMultiplier? = null
         if (explicitLengthCtx != null) {
-            explicitChordMultiplier = ParserUtils.parseDurationMultiplier(explicitLengthCtx.text)
+            explicitChordMultiplier = ParserUtils.parseDurationMultiplier(explicitLengthCtx)
         }
 
         val notes = mutableListOf<NoteElement>()
@@ -206,10 +207,18 @@ internal class AbcTuneBodyVisitor(
 
         // Combine all decorations: from pending + from grammar + from inside chord
         allDecorations.addAll(pendingDecorations)
-        
+
+        var finalNotes = notes.toList()
+        if (chordCtx.tie() != null) {
+            finalNotes = finalNotes.map { note ->
+                val newTie = if (note.ties == TieType.END) TieType.BOTH else TieType.START
+                note.copy(ties = newTie)
+            }
+        }
+
         elements.add(
             ChordElement(
-                notes,
+                finalNotes,
                 durationMultiplier,
                 annotations = allChordAnnotations,
                 decorations = allDecorations,
@@ -247,7 +256,7 @@ internal class AbcTuneBodyVisitor(
             val type = HeaderType.entries.find { it.key == key } ?: HeaderType.UNKNOWN
 
             if (type == HeaderType.LENGTH) {
-                // We no longer track L: implicitly in the parser state. 
+                // We no longer track L: implicitly in the parser state.
                 // It's processed downstream by MeasureQuantizer.
             }
 
@@ -336,14 +345,42 @@ internal class AbcTuneBodyVisitor(
         }
     }
 
-    override fun visitBar(ctx: ABCParser.BarContext) {
-        val firstChild = ctx.getChild(0)
-        if (firstChild is TerminalNode) {
-            val tokenType = firstChild.symbol.type
-            val type = ParserUtils.parseBarLineType(tokenType)
-            elements.add(BarLineElement(type, line = ctx.start.line, column = ctx.start.charPositionInLine))
-        }
+    private fun emitBarLine(
+        type: BarLineType,
+        ctx: org.antlr.v4.runtime.ParserRuleContext,
+    ) {
+        elements.add(
+            BarLineElement(
+                type = type,
+                line = ctx.start.line,
+                column = ctx.start.charPositionInLine,
+            ),
+        )
     }
+
+    override fun visitBarSingle(ctx: ABCParser.BarSingleContext) = emitBarLine(BarLineType.SINGLE, ctx)
+
+    override fun visitBarThinDouble(ctx: ABCParser.BarThinDoubleContext) = emitBarLine(BarLineType.DOUBLE, ctx)
+
+    override fun visitBarFinal(ctx: ABCParser.BarFinalContext) = emitBarLine(BarLineType.FINAL, ctx)
+
+    override fun visitBarDouble(ctx: ABCParser.BarDoubleContext) = emitBarLine(BarLineType.DOUBLE, ctx)
+
+    override fun visitBarThickDouble(ctx: ABCParser.BarThickDoubleContext) = emitBarLine(BarLineType.DOUBLE, ctx)
+
+    override fun visitBarRepStart(ctx: ABCParser.BarRepStartContext) = emitBarLine(BarLineType.REPEAT_START, ctx)
+
+    override fun visitBarRepEnd(ctx: ABCParser.BarRepEndContext) = emitBarLine(BarLineType.REPEAT_END, ctx)
+
+    override fun visitBarRepEndAlt(ctx: ABCParser.BarRepEndAltContext) = emitBarLine(BarLineType.REPEAT_END, ctx)
+
+    override fun visitBarRepEndTune(ctx: ABCParser.BarRepEndTuneContext) = emitBarLine(BarLineType.REPEAT_END, ctx)
+
+    override fun visitBarRepDbl(ctx: ABCParser.BarRepDblContext) = emitBarLine(BarLineType.REPEAT_BOTH, ctx)
+
+    override fun visitBarRepDblAlt(ctx: ABCParser.BarRepDblAltContext) = emitBarLine(BarLineType.REPEAT_BOTH, ctx)
+
+    override fun visitBarRepDblTune(ctx: ABCParser.BarRepDblTuneContext) = emitBarLine(BarLineType.REPEAT_BOTH, ctx)
 
     override fun visitVariantBar(ctx: ABCParser.VariantBarContext) {
         ctx.variant()?.let { visitVariant(it) }
@@ -435,7 +472,7 @@ internal class AbcTuneBodyVisitor(
 
         val accidental = extractAccidental(ctx)
         val noteLength = ctx.note_length()
-        val durationMultiplier = noteLength?.let { ParserUtils.parseDurationMultiplier(it.text) } ?: DurationMultiplier.DEFAULT
+        val durationMultiplier = ParserUtils.parseDurationMultiplier(noteLength)
         val tie = if (ctx.tie() != null) TieType.START else TieType.NONE
         val decorations = ctx.decoration_alt()?.mapNotNull { ParserUtils.parseDecoration(it) } ?: emptyList()
 
@@ -498,13 +535,13 @@ internal class AbcTuneBodyVisitor(
         val restChar = ctx.REST().text
         val durationMultiplier =
             if (restChar.equals("Z", ignoreCase = false)) {
-                // Multi-measure rests (Z) are preserved structurally. 
+                // Multi-measure rests (Z) are preserved structurally.
                 // The fraction acts as a measure count (e.g. Z4 implies 4 measures).
                 ctx.note_length()?.let {
-                    ParserUtils.parseDurationMultiplier(it.text)
+                    ParserUtils.parseDurationMultiplier(it)
                 } ?: DurationMultiplier.DEFAULT
             } else {
-                ctx.note_length()?.let { ParserUtils.parseDurationMultiplier(it.text) } ?: DurationMultiplier.DEFAULT
+                ParserUtils.parseDurationMultiplier(ctx.note_length())
             }
         val isHidden = restChar.equals("x", ignoreCase = true)
         val decorations = ctx.decoration_alt()?.mapNotNull { ParserUtils.parseDecoration(it) } ?: emptyList()
